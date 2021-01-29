@@ -23,8 +23,7 @@ public class InventoryDisplay : MonoBehaviour
     {
         GameObject temp = GameObject.Find("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
-        Debug.Log(tracker);
-        Debug.Log(tracker.discovered("banana"));
+        
         foreach(Display display in ingredientDisplays){
             display.Deactivate();
         }

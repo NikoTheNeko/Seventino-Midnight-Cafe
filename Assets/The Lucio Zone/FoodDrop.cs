@@ -8,11 +8,9 @@ public class FoodDrop : MonoBehaviour
     public int warmth;
     public int flavor;
     public int texture;
-    private string ingredientName;
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.GetComponent<Image>().sprite = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>().getPic(ingredientName);
     }
 
     // Update is called once per frame
@@ -31,5 +29,21 @@ public class FoodDrop : MonoBehaviour
 
     public int getTexture(){
         return texture;
+    }
+    
+    public void setWarmth(int input){
+        warmth = input;
+    }
+
+    public void setFlavor(int input){
+        flavor = input;
+    }
+
+    public void setTexture(int input){
+        texture = input;
+    }
+
+    public void setImage(Sprite ingredient){
+        this.gameObject.GetComponent<Image>().sprite = ingredient;
     }
 }

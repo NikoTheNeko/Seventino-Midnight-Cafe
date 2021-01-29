@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class InventoryTracker : MonoBehaviour
 {
     #region Public Variables
-    [Header("In Scene References")]
     [Tooltip("Takes in a Sprite and a name associated with that Sprite. The name should be the same as key used in inventoryDict. Place in order of appearance in inventory menu.")]
     public List<IngredientImage> ingredientPictures = new List<IngredientImage>();
-    
+    [Tooltip("Spawnable Food prefab")]
+    public GameObject foodObject;
     #endregion
     //dictionary of objects being stored
     //key is name of ingredient
@@ -111,10 +111,6 @@ public class InventoryTracker : MonoBehaviour
         else{
             inventoryDict[ingredient] = 1;
         }
-
-        // if(ingredient == "Carrot"){
-        //     SceneManager.LoadScene(2);
-        // }
     }
 
     //returns true if dictionary already has given key
@@ -123,6 +119,8 @@ public class InventoryTracker : MonoBehaviour
         return inventoryDict.ContainsKey(ingredient);
     }
 
+    //returns the Sprite of the image of the given ingredient
+    //returns null if the ingredient name isn't found
     public Sprite getPic(string ingredient){
         foreach(IngredientImage image in ingredientPictures){
             if(image.name == ingredient){
@@ -132,8 +130,15 @@ public class InventoryTracker : MonoBehaviour
         return null;
     }
     
-    public void GoHome(){
-        SceneManager.LoadScene(0);
+    //spawns a foodObject at the given coordinates with the sprite of the given ingredient
+    //returns false if the object wasn't spawned
+    public bool spawnFood(string ingredient, Vector3 coords){
+        if(discovered(ingredient)){
+            GameObject food = Instantiate(foodObject, coords, Quaternion.identity);
+            food.GetComponent<FoodDrop>().setImage(getPic(ingredient));
+            return true;
+        }
+        return false;
     }
 }
 
