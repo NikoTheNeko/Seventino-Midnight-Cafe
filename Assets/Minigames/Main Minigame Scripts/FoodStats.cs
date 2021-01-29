@@ -105,4 +105,41 @@ public class FoodStats : MonoBehaviour{
 
     #endregion
 
+    #region Check Stats
+
+    
+    /**
+        This function checks the values and returns if it is in the range specified.
+    **/
+    public bool CheckValues(int TextureTarget,int WarmthTarget,int FlavorTarget,int GraceRange){
+        bool TexturePass = false;
+        bool WarmthPass = false;
+        bool FlavorPass = false;
+
+        TexturePass = IsInRange(TextureVal, TextureTarget, GraceRange);
+        WarmthPass = IsInRange(WarmthVal, WarmthTarget, GraceRange);
+        FlavorPass = IsInRange(FlavorVal, FlavorTarget, GraceRange);
+
+        if(TexturePass && WarmthPass && FlavorPass){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+        Helper function for Check Values. This just goes in and calculates everything
+        so I don't have to copy and paste it over and over again
+    **/
+    private bool IsInRange(int ValueCheck, int Target, int Range){
+        if(ValueCheck >= (Target - Range) && ValueCheck <= (Target + Range)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    #endregion
+
 }

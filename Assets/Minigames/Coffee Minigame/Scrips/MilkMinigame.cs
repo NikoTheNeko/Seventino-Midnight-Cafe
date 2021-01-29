@@ -10,6 +10,8 @@ public class MilkMinigame : MonoBehaviour{
     [Header("Minigame Objects and Variables")]
     [Tooltip("The amount you will add to Warmth")]    
     public int AddAmount = 10;
+    [Tooltip("Pouring SFX")]
+    public AudioSource PouringSFX;
 
     [Header("UI and Stat Manager")]
     [Tooltip("This is the manager for the stats so we can update them")]
@@ -49,9 +51,10 @@ public class MilkMinigame : MonoBehaviour{
 
         StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + AddAmount);
 
-        if(Input.GetButtonDown("Use"))
+        if(Input.GetButtonDown("Use")){
             StatManager.GetComponent<FoodStats>().AddWarmth(AddAmount);
-
+            PouringSFX.Play();
+        }
         CookingManager.GetComponent<CookingController>().MinigameFinished();
     }
     #endregion

@@ -25,11 +25,16 @@ public class FinalMInigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(MinigameActive){
-            Instructions.text = "Congrats! You made a coffee. Look at Remy Rattatouie he is happy and stuck free him from his funko prison. Jazz 5";
+            if(StatManager.GetComponent<FoodStats>().CheckValues(50,50,50,10)){
+                Instructions.text = "Congrats! You made a coffee! Look at Remy Rattatouie he is happy!";
+            } else {
+                Instructions.text = "This coffee is boring. It's not bad but it kinda ain't great.";
+            }
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
         
     }
+
 
     
     #region Cooking Controller Actions

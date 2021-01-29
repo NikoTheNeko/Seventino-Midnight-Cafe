@@ -8,7 +8,11 @@ public class PouringMinigame : MonoBehaviour{
     #region Public Variables
 
     [Header("Minigame Objects and Variables")]
+    [Tooltip("How long the minigame will last")]
     public float TimerCount = 5f;
+
+    [Tooltip("Pouring SFX")]
+    public AudioSource PouringSFX;
 
     [Header("UI and Stat Manager")]
     [Tooltip("This is the manager for the stats so we can update them")]
@@ -45,6 +49,7 @@ public class PouringMinigame : MonoBehaviour{
         }
 
         if(MinigameCompleted){
+            PouringSFX.Stop();
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
     }
@@ -52,10 +57,13 @@ public class PouringMinigame : MonoBehaviour{
     private void CheckPouring(){
         if(Input.GetButton("Use")){
             if(TimerCount > 0){
+                PouringSFX.mute = false;
                 TimerCount -= Time.deltaTime;
             } else {
                 MinigameCompleted = true;
             }
+        } else if(Input.GetButtonUp("Use")){
+            PouringSFX.mute = true;
         }
     }
 
@@ -66,7 +74,7 @@ public class PouringMinigame : MonoBehaviour{
         if(MinigameCompleted == false){
             Instructions.text = "Hold space to pour the coffee!! Just pretend for now!!!";
         } else {
-           Instructions.text = "You did it binch! Click Next to move onto the next step!";
+           Instructions.text = "You did it! Click Next to move onto the next step!";
         }
     }
 

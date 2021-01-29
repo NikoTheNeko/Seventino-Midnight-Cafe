@@ -9,6 +9,12 @@ public class GrinderMinigame : MonoBehaviour{
     [Tooltip("This is the transform for the Grinder Selector bit of the grinder")]
     public Transform GrinderSelection;
 
+    [Tooltip("The SFX for the Grinder")]
+    public AudioSource GrinderSFX;
+
+    [Tooltip("SFX for the Grinder Clicking")]
+    public AudioSource SelectionSFX;
+
     [Header("Minigame Objects and Variables")]
     [Tooltip("This is how fast the Griender Selector moves")]
     public float GrinderSelectMoveSpeed = .125f;
@@ -110,6 +116,7 @@ public class GrinderMinigame : MonoBehaviour{
 
         //If the minigame is completed
         if(MinigameCompleted){
+            GrinderSFX.Stop();
             if(GroundsPS.isPlaying)
                 GroundsPS.Stop();
             CookingManager.GetComponent<CookingController>().MinigameFinished();
@@ -128,11 +135,15 @@ public class GrinderMinigame : MonoBehaviour{
             Does a simple check left/right to see and if it too big or small dont change
         **/
         if(Input.GetButtonDown("Right")){
-            if(GrindSize < 10)
+            if(GrindSize < 10){
+                SelectionSFX.Play();
                 GrindSize++;
+            }
         } else if (Input.GetButtonDown("Left")){
-            if(GrindSize > 1)
+            if(GrindSize > 1){
+                SelectionSFX.Play();
                 GrindSize--;
+            }
         }
 
     }
@@ -173,6 +184,7 @@ public class GrinderMinigame : MonoBehaviour{
         }
 
         if(Input.GetButton("Use")){
+            GrinderSFX.mute = false;
             ShowGrounds = true;
             if(GrindTime > 0){
                 GrindTime -= Time.deltaTime;
@@ -181,6 +193,7 @@ public class GrinderMinigame : MonoBehaviour{
             }
 
         } else if(Input.GetButtonUp("Use")){
+            GrinderSFX.mute = true;
             ShowGrounds = false;
         }
 
@@ -200,9 +213,9 @@ public class GrinderMinigame : MonoBehaviour{
     **/
     private void UpdateInstructions(){
         if(MinigameCompleted == false){
-            Instructions.text = "Press left and right to adjust the grind size.\n Hold Space to grind!";
+            Instructions.text = "Press left and right to adjust the grind size.\nHold Space to grind!";
         } else {
-           Instructions.text = "You did it binch! Click Next to move onto the next step!";
+           Instructions.text = "You did it! Click Next to move onto the next step!";
         }
     }
     #endregion
