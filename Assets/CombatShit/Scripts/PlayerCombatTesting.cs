@@ -65,6 +65,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Animator knifeAnim;
     private Animator flamethrowerAnim;
     public ParticleSystem flameParticles;
+    public ParticleSystem smokeParticles;
 
     private void Awake()
     {
@@ -245,6 +246,9 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetBool("IsFiring", true); 
             var em = flameParticles.emission;
             em.enabled = true;
+
+            var em2 = smokeParticles.emission;
+            em2.enabled = true;
             if (!flameParticles.isPlaying)
             {
                 
@@ -260,6 +264,9 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetBool("IsFiring", false);
             var em = flameParticles.emission;
             em.enabled = false;
+
+            var em2 = smokeParticles.emission;
+            em2.enabled = false;
             //flameParticles.Stop();
         }
         //flamethrowerAnim;
