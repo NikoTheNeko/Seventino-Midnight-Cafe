@@ -9,7 +9,7 @@ public class InventoryTracker : MonoBehaviour
 {
     #region Public Variables
     [Tooltip("Takes in a Sprite and a name associated with that Sprite. The name should be the same as key used in inventoryDict. Place in order of appearance in inventory menu.")]
-    public List<IngredientImage> ingredientPictures = new List<IngredientImage>();
+    public List<Ingredient> ingredientPictures = new List<Ingredient>();
     [Tooltip("Spawnable Food prefab")]
     public GameObject foodObject;
     #endregion
@@ -22,6 +22,7 @@ public class InventoryTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //destroys self if it is a duplicate
         GameObject[] search = GameObject.FindGameObjectsWithTag("InventoryTracker");
         if(search.Length > 1){
             Destroy(this.gameObject);
@@ -119,12 +120,13 @@ public class InventoryTracker : MonoBehaviour
         return inventoryDict.ContainsKey(ingredient);
     }
 
-    //returns the Sprite of the image of the given ingredient
-    //returns null if the ingredient name isn't found
-    public Sprite getPic(string ingredient){
-        foreach(IngredientImage image in ingredientPictures){
-            if(image.name == ingredient){
-                return image.picture;
+    //returns a reference to a ingredient object
+    //returns null if ingredient not found
+    public Ingredient getIngredient(string ingredientName){
+        
+        foreach(Ingredient ingredient in ingredientPictures){
+            if(ingredient.name == ingredientName){
+                return ingredient;
             }
         }
         return null;
@@ -135,7 +137,9 @@ public class InventoryTracker : MonoBehaviour
     public bool spawnFood(string ingredient, Vector3 coords){
         if(discovered(ingredient)){
             GameObject food = Instantiate(foodObject, coords, Quaternion.identity);
-            food.GetComponent<FoodDrop>().setImage(getPic(ingredient));
+            Ingredient temp = getIngredient(ingredient);
+            food.GetComponent<FoodDrop>().setImage(temp.picture);
+            food.GetComponent<FoodDrop>().setValues(temp.warmth, temp.flavor, temp.texture);
             return true;
         }
         return false;
@@ -143,8 +147,11 @@ public class InventoryTracker : MonoBehaviour
 }
 
 [System.Serializable]
-public class IngredientImage{
+public class Ingredient{
     public Sprite picture;
     public string name;
+    public int texture;
+    public int warmth;
+    public int flavor;
 }
 

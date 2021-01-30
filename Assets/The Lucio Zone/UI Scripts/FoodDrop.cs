@@ -43,6 +43,13 @@ public class FoodDrop : MonoBehaviour
         texture = input;
     }
 
+    //the apple factory
+    public void setValues(int iWarmth, int iFlavor, int iTexture){
+        warmth = iWarmth;
+        flavor = iFlavor;
+        texture = iTexture;
+    }
+
     public void setImage(Sprite ingredient){
         this.gameObject.GetComponent<Image>().sprite = ingredient;
     }
