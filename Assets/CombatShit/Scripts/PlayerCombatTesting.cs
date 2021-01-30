@@ -64,6 +64,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Animator shotgunAnim;
     private Animator knifeAnim;
     private Animator flamethrowerAnim;
+    public ParticleSystem flameParticles;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         shotgunAnim = gunAnchor.Find("Shotgun").GetComponent<Animator>();
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
+        //flameParticles = gunAnchor.Find("Flambethrower").Find("Flames").GetComponent<ParticleSystem>();
         aimGunEndPoint = gunAnchor.Find("GunEndPoint");
         state = State.Normal;
     }
@@ -232,14 +234,21 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponTwo()
     {
-        if(Input.GetMouseButtonDown(0))
+        var emission = flameParticles.emission;
+        if (Input.GetMouseButtonDown(0))
         {
             flamethrowerAnim.SetTrigger("Fire");
         }
         if(Input.GetMouseButton(0))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
-            flamethrowerAnim.SetBool("IsFiring", true);
+            flamethrowerAnim.SetBool("IsFiring", true); 
+            var em = flameParticles.emission;
+            em.enabled = true;
+            if (!flameParticles.isPlaying)
+            {
+                
+            }
             OnShoot?.Invoke(this, new OnShootEventArgs
             {
                 gunEndPointPosition = aimGunEndPoint.position,
@@ -249,6 +258,9 @@ public class PlayerCombatTesting : MonoBehaviour{
         else
         {
             flamethrowerAnim.SetBool("IsFiring", false);
+            var em = flameParticles.emission;
+            em.enabled = false;
+            //flameParticles.Stop();
         }
         //flamethrowerAnim;
     }
