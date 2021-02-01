@@ -51,6 +51,6 @@ public class FoodDrop : MonoBehaviour
     }
 
     public void setImage(Sprite ingredient){
-        this.gameObject.GetComponent<Image>().sprite = ingredient;
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = ingredient;
     }
 }
