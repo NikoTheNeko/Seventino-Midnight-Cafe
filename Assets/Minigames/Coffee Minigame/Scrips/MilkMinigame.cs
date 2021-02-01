@@ -35,8 +35,10 @@ public class MilkMinigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(MinigameActive){
+            StatManager.GetComponent<FoodStats>().ShowPlus(1);
             RunMinigame();
         } else {
+            StatManager.GetComponent<FoodStats>().HidePlus(1);           
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
         }
     }

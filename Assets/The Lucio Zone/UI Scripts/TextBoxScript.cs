@@ -64,7 +64,7 @@ public class TextBoxScript : MonoBehaviour
         }
 
         //if user presses "x" text will speed up or go to next part of dialogue
-        if(Input.GetKeyDown(KeyCode.X)){
+        if(Input.GetButtonDown("Use")){
             SpeedUp();
         }
 

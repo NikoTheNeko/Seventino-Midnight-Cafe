@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuButtonManager : MonoBehaviour{
 
     public void YesIDoTheCooking(){
-        SceneManager.LoadScene("Coffee Revamp", LoadSceneMode.Single);
+        SceneManager.LoadScene("Coffee Minigame", LoadSceneMode.Single);
     }
 
     public void GoToSceneExplore(){

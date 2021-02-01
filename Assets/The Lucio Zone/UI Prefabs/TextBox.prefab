@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 8393995175115614463}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -98.86, y: 16.57}
-  m_SizeDelta: {x: 178.18921, y: 33.410477}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -483.1, y: 368.4}
+  m_SizeDelta: {x: 552.4873, y: 103.59137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9022803336778875411
 CanvasRenderer:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -67,18 +67,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 77
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 80
+    m_MaxSize: 77
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Name
 --- !u!1 &8393995173597887215
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,10 +111,10 @@ RectTransform:
   m_Father: {fileID: 8393995175115614463}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00019836426}
-  m_SizeDelta: {x: 0.00024414062, y: -0.00033569336}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 144.3}
+  m_SizeDelta: {x: 1643.9911, y: 408.65436}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8393995173597887212
 CanvasRenderer:
@@ -188,8 +188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.1, y: -0.7}
-  m_SizeDelta: {x: 348.08264, y: 92.36157}
+  m_AnchoredPosition: {x: -9.1, y: 135.97}
+  m_SizeDelta: {x: 1239.0193, y: 271.93646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8393995174229017874
 CanvasRenderer:
@@ -221,18 +221,23 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 63
+    m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Here is a long text chunk so we can see how much words we can fit into
+    one go. Honestly, I don't know what I'm doing with my life. Sometimes I just
+    laugh at farts and then everyone questions why I do. But you know what? I don't
+    care. I wanna laugh at farts and I just think that they're funny as fuck. Just
+    a lil toot sometimes can really brighten my mood. It may be childish but you
+    know what it's pretty harmless and I'm happy about that. Anyways I'm pretty full.
 --- !u!1 &8393995175115614400
 GameObject:
   m_ObjectHideFlags: 0

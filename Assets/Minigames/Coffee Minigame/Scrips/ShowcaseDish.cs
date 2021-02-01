@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FinalMInigame : MonoBehaviour{
+public class ShowcaseDish : MonoBehaviour{
 
     [Header("UI and Stat Manager")]
     [Tooltip("This is the manager for the stats so we can update them")]
@@ -15,6 +15,20 @@ public class FinalMInigame : MonoBehaviour{
     [Tooltip("This is the instructions so players know what to fuckin do")]
     public Text Instructions;
 
+    [Tooltip("Audio for the plate")]
+    public AudioSource PlateSFX;
+
+    [Header("Visual Novel Segment")]
+    [Tooltip("The Canvas for the VN")]
+    public GameObject CookingUI;
+    [Tooltip("The Canvas for the minigame")]
+    public GameObject VNUI;
+    [Tooltip("The Good Ending")]
+    public GameObject GoodEnding;
+    [Tooltip("The Best Ending")]
+    public GameObject BestEnding;
+
+
     private bool MinigameActive = false;
 
     // Start is called before the first frame update
@@ -25,10 +39,19 @@ public class FinalMInigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(MinigameActive){
+            Instructions.text = "Congrats! You made a coffee! Press space to serve the dish!";
             if(StatManager.GetComponent<FoodStats>().CheckValues(50,50,50,10)){
-                Instructions.text = "Congrats! You made a coffee! Look at Remy Rattatouie he is happy!";
+                if(Input.GetButtonDown("Use")){
+                    VNUI.SetActive(true);
+                    CookingUI.SetActive(false);
+                    BestEnding.SetActive(true);
+                }
             } else {
-                Instructions.text = "This coffee is boring. It's not bad but it kinda ain't great.";
+                if(Input.GetButtonDown("Use")){
+                    VNUI.SetActive(true);
+                    CookingUI.SetActive(false);
+                    GoodEnding.SetActive(true);
+                }
             }
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
@@ -41,6 +64,7 @@ public class FinalMInigame : MonoBehaviour{
     //ActivateMinigame gets called to activate the minigame so it can actually run
     public void ActivateMinigame(){
         MinigameActive = true;
+        PlateSFX.Play();
     }
 
     //DeactivateMinigame turns the minigame off so you can't play it

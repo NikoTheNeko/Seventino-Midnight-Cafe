@@ -37,6 +37,12 @@ public class FoodStats : MonoBehaviour{
     public Slider FlavorProgress;
     public Slider FlavorPreview;
 
+    [Header("Plus UI")]
+    public Transform[] ShowLocations = new Transform[3];
+    public Transform[] HideLocations = new Transform[3];
+    public Transform[] Pluses = new Transform[3];
+    public float TransitionSpeed = 0.25f;
+
     #endregion
 
     #endregion
@@ -88,6 +94,8 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     #region Preview Bars
+    //All of these updates the lighter brown preview bar to indicate how much you will add onto the dish.
+    //They're all called by the minigames
 
     public void UpdateTexturePreview(int amount){
         TexturePreview.value = amount;
@@ -102,6 +110,36 @@ public class FoodStats : MonoBehaviour{
     }
 
     #endregion
+
+    #endregion
+
+    #region Plus Indicators
+    /**
+        The array is ordered in this order
+        0 - Texture
+        1 - Warmth
+        2 - Flavor
+    **/
+
+    /**
+        This move the plus to show what is being affected
+    **/
+    public void ShowPlus(int StatNum){
+        Vector3 PlusLocation = Pluses[StatNum].position;
+        Vector3 ShowLocationsVec = ShowLocations[StatNum].position;
+        Vector3 NewLoc = Vector3.Lerp(PlusLocation, ShowLocationsVec, TransitionSpeed);
+        Pluses[StatNum].position = NewLoc;
+    }
+
+    /**
+        This hides the plus
+    **/
+    public void HidePlus(int StatNum){
+        Vector3 PlusLocation = Pluses[StatNum].position;
+        Vector3 HideLocationsVec = HideLocations[StatNum].position;
+        Vector3 NewLoc = Vector3.Lerp(PlusLocation, HideLocationsVec, TransitionSpeed);
+        Pluses[StatNum].position = NewLoc;
+    }
 
     #endregion
 

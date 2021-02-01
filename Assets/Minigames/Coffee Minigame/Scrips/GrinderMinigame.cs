@@ -106,6 +106,7 @@ public class GrinderMinigame : MonoBehaviour{
     private void RunMinigame(){
         //If the minigame is NOT completed
         if(!MinigameCompleted){
+            StatManager.GetComponent<FoodStats>().ShowPlus(0);
             if(CanChangeGrind){
                 AdjustSelection();
                 MoveGrindSelection();
@@ -116,6 +117,7 @@ public class GrinderMinigame : MonoBehaviour{
 
         //If the minigame is completed
         if(MinigameCompleted){
+            StatManager.GetComponent<FoodStats>().HidePlus(0);
             GrinderSFX.Stop();
             if(GroundsPS.isPlaying)
                 GroundsPS.Stop();

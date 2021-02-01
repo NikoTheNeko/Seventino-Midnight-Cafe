@@ -38,8 +38,10 @@ public class SyrupScript : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(MinigameActive){
+            StatManager.GetComponent<FoodStats>().ShowPlus(2);
             RunMinigame();
         } else {
+            StatManager.GetComponent<FoodStats>().HidePlus(2);
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
         }
     }
