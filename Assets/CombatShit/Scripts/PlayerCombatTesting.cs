@@ -66,6 +66,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Animator flamethrowerAnim;
     public ParticleSystem flameParticles;
     public ParticleSystem smokeParticles;
+    public LayerMask enemyLayer;
 
     private void Awake()
     {
@@ -75,7 +76,6 @@ public class PlayerCombatTesting : MonoBehaviour{
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
         //flameParticles = gunAnchor.Find("Flambethrower").Find("Flames").GetComponent<ParticleSystem>();
-        aimGunEndPoint = gunAnchor.Find("GunEndPoint");
         state = State.Normal;
     }
 
@@ -223,6 +223,9 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (Input.GetMouseButtonDown(0))
         {
+            aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
+            Vector3 shootPoint = aimGunEndPoint.position;
+            KnifeHandler.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
             knifeAnim.SetTrigger("Fire");
             OnShoot?.Invoke(this, new OnShootEventArgs
