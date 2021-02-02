@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Ricky_UI_Things/Scenes/TitleScreen.unity
+    guid: c1f8da59863d81b40ae9e92331aadee7
+  - enabled: 1
+    path: Assets/Ricky_UI_Things/Scenes/SceneSelection.unity
+    guid: 2343bb26869a1104f91d7e5b582c087a
+  - enabled: 1
     path: Assets/Minigames/Coffee Minigame/Coffee Minigame.unity
     guid: 3856330b6f57d044a810135481616f1f
   m_configObjects: {}
