@@ -38,6 +38,7 @@ public class ShowcaseDish : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+
         if(MinigameActive){
             Instructions.text = "Congrats! You made a coffee! Press space to serve the dish!";
             if(StatManager.GetComponent<FoodStats>().CheckValues(50,50,50,10)){
@@ -45,14 +46,19 @@ public class ShowcaseDish : MonoBehaviour{
                     VNUI.SetActive(true);
                     CookingUI.SetActive(false);
                     BestEnding.SetActive(true);
+                    BestEnding.GetComponent<TextBoxScript>().ActivateObjects();
                 }
             } else {
                 if(Input.GetButtonDown("Use")){
                     VNUI.SetActive(true);
                     CookingUI.SetActive(false);
                     GoodEnding.SetActive(true);
+                    GoodEnding.GetComponent<TextBoxScript>().ActivateObjects();
                 }
             }
+            BestEnding.GetComponent<TextBoxScript>().ActivateObjects();
+            GoodEnding.GetComponent<TextBoxScript>().ActivateObjects();
+
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
         
