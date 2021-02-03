@@ -7,7 +7,7 @@ public class WaitgoBack : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(Input.GetKey(KeyCode.Escape))
-            SceneManager.LoadScene("SceneSelection", LoadSceneMode.Single);
+            SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
     }
 
 }

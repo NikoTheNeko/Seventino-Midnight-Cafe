@@ -40,7 +40,7 @@ public class ShowcaseDish : MonoBehaviour{
     void Update(){
 
         if(MinigameActive){
-            Instructions.text = "Congrats! You made a coffee! Press space to serve the dish!";
+            Instructions.text = "Congrats! You made a coffee! Press space to serve the dish! Then when you're done click Remy Ratatooty to finish";
             if(StatManager.GetComponent<FoodStats>().CheckValues(50,50,50,10)){
                 if(Input.GetButtonDown("Use")){
                     VNUI.SetActive(true);
@@ -56,8 +56,6 @@ public class ShowcaseDish : MonoBehaviour{
                     GoodEnding.GetComponent<TextBoxScript>().ActivateObjects();
                 }
             }
-            BestEnding.GetComponent<TextBoxScript>().ActivateObjects();
-            GoodEnding.GetComponent<TextBoxScript>().ActivateObjects();
 
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
