@@ -8,6 +8,7 @@ public class FoodDrop : MonoBehaviour
     public int warmth;
     public int flavor;
     public int texture;
+    public string name;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,13 +45,21 @@ public class FoodDrop : MonoBehaviour
     }
 
     //the apple factory
-    public void setValues(int iWarmth, int iFlavor, int iTexture){
+    public void setValues(int iWarmth, int iFlavor, int iTexture, string iName){
         warmth = iWarmth;
         flavor = iFlavor;
         texture = iTexture;
+        name = iName;
     }
 
     public void setImage(Sprite ingredient){
         this.gameObject.GetComponent<SpriteRenderer>().sprite = ingredient;
+    }
+
+    void OnTriggerEnter(Collider other){
+        InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        tracker.add(name, 1);
+        Debug.Log(name + " amount = " + tracker.getAmount(name));
+        Destroy(this.gameObject);
     }
 }

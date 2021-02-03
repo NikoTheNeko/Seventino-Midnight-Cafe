@@ -35,7 +35,7 @@ public class TextBoxScript : MonoBehaviour
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
     private Dialogue dialogue;
-    private bool activated;
+    public bool activated;
 
     #endregion
 
@@ -162,7 +162,7 @@ public class TextBoxScript : MonoBehaviour
 
     //Activates all of the visual elements
     //Basically let's program know it should start to display
-    void ActivateObjects(){
+    public void ActivateObjects(){
         textbox.gameObject.SetActive(true);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(true);
@@ -174,7 +174,7 @@ public class TextBoxScript : MonoBehaviour
     }
 
     //Turns all visual elements inactive and prevents program from progressing
-    void DeactivateObjects(){
+    public void DeactivateObjects(){
         textbox.gameObject.SetActive(false);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(false);

@@ -21,7 +21,7 @@ public class InventoryDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject temp = GameObject.Find("InventoryTracker");
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
         
         foreach(Display display in ingredientDisplays){

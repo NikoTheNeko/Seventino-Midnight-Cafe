@@ -139,7 +139,7 @@ public class InventoryTracker : MonoBehaviour
             GameObject food = Instantiate(foodObject, coords, Quaternion.identity);
             Ingredient temp = getIngredient(ingredient);
             food.GetComponent<FoodDrop>().setImage(temp.picture);
-            food.GetComponent<FoodDrop>().setValues(temp.warmth, temp.flavor, temp.texture);
+            food.GetComponent<FoodDrop>().setValues(temp.warmth, temp.flavor, temp.texture, ingredient);
             return true;
         }
         return false;
