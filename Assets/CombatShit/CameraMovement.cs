@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Camera Smooth Speed")]
     [Tooltip("Camera can go slurp but slowly")]
-    public float SmoothSpeed = 0.125f;
+    public float cameraMoveSpeed = 2.25f;
     
     [Header("Camera Offset")]
     [Tooltip("Offsets the camera just a bit")]
@@ -63,7 +63,6 @@ public class CameraMovement : MonoBehaviour
 
         Vector3 cameraMoveDir = (cameraFollowPosition - transform.position).normalized;
         float distance = Vector3.Distance(cameraFollowPosition, transform.position);
-        float cameraMoveSpeed = 2.25f;
 
         if (distance > 0)
         {
