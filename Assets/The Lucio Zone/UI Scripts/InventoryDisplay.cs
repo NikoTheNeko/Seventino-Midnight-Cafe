@@ -8,6 +8,7 @@ public class InventoryDisplay : MonoBehaviour
     #region Public Variables
     [Tooltip("Texts and Images for displaying the inventory. ")]
     public List<Display> ingredientDisplays = new List<Display>();
+    public GameObject test;
     #endregion
 
     #region Private Variables
@@ -20,10 +21,9 @@ public class InventoryDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject temp = GameObject.Find("InventoryTracker");
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
-        Debug.Log(tracker);
-        Debug.Log(tracker.discovered("banana"));
+        
         foreach(Display display in ingredientDisplays){
             display.Deactivate();
         }
@@ -34,11 +34,11 @@ public class InventoryDisplay : MonoBehaviour
     {
         displayIngredients();
         checkForMouseOver();
-        move();
-        if(Input.GetKeyDown(KeyCode.I)){
-            Debug.Log("I depressed " + Time.time + " " + onScreen);
-            onScreen = !onScreen;
-        }
+        // move();
+        // if(Input.GetKeyDown(KeyCode.I)){
+        //     Debug.Log("I depressed " + Time.time + " " + onScreen);
+        //     onScreen = !onScreen;
+        // }
         Debug.Log("y = " + this.gameObject.transform.position.y);
     }
 
