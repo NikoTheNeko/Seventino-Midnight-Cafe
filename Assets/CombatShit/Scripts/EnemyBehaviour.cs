@@ -27,7 +27,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public Rigidbody2D rb;
 
     public string enemyState = "idle";
-    private int health = 1;
+    public int health = 100;
     private Vector3 spawnPos;
     public int idleTimer;
     public int walkTimer;
@@ -82,7 +82,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        checkDead();
         checkCombat();
     }
 
@@ -137,10 +136,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             enemyState = "combat";
         }
-        else
-        {
-            enemyState = "idle";
-        }
     }
 
     Vector3 PickRandomPoint () {
@@ -168,12 +163,15 @@ public class EnemyBehaviour : MonoBehaviour {
         else
         {
             idleTimer = (int)Random.Range(1, 4);
+            Debug.LogError("Change to walk");
             enemyState = "walkAround";
         }
     }
 
     private void EnemyWalk()
     {
+
+        Debug.LogError("walk start");
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, PickRandomPoint(), OnPathComplete);
@@ -209,5 +207,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public void TakeDamage(int amount){
         health -= amount;
+        Debug.Log("DAMAGED I REPEAT DAMAGED");
+        checkDead();
     }
 }
