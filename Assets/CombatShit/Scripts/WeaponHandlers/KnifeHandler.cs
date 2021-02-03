@@ -14,6 +14,7 @@ public class KnifeHandler : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 100000, enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
+            EnemyBehaviour target = enemy.GetComponent<EnemyBehaviour>();
             enemy.GetComponent<EnemyBehaviour>().TakeDamage(10);
         }
     }

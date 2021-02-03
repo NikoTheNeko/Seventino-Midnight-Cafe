@@ -33192,7 +33192,7 @@ MonoBehaviour:
   seeker: {fileID: 259604986}
   rb: {fileID: 259604984}
   enemyState: idle
-  health: 100
+  health: 20
   idleTimer: 0
   walkTimer: 0
 --- !u!4 &259604988
@@ -50402,32 +50402,32 @@ PrefabInstance:
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.9356775
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.450532
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.084214
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
         type: 3}
