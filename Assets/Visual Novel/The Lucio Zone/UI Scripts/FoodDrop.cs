@@ -57,7 +57,7 @@ public class FoodDrop : MonoBehaviour
     }
 
     // void OnCollisionEnter(Collision collision){
-    void OnTriggerEnter(Collider other){
+    void OnTriggerEnter2D(Collider2D other){
         Debug.Log("collided");
         InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         tracker.add(name, 1);
