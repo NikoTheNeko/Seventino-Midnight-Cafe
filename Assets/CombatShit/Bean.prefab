@@ -59,9 +59,12 @@ MonoBehaviour:
   seeker: {fileID: 4093114622488494251}
   rb: {fileID: 4093114622488494249}
   enemyState: idle
-  health: 20
+  health: 50
   idleTimer: 0
   walkTimer: 0
+  sprites:
+  - {fileID: 4093114623653981104}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4093114622488494248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +253,12 @@ PrefabInstance:
 --- !u!4 &4093114623653981107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2130441598346989802, guid: d3d2288f2d653764e8707f984bdfbdee,
+    type: 3}
+  m_PrefabInstance: {fileID: 2692434908599171929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4093114623653981104 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2130441598346989801, guid: d3d2288f2d653764e8707f984bdfbdee,
     type: 3}
   m_PrefabInstance: {fileID: 2692434908599171929}
   m_PrefabAsset: {fileID: 0}
