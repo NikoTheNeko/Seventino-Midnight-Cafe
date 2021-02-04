@@ -32,6 +32,9 @@ public class EnemyBehaviour : MonoBehaviour {
     public int idleTimer;
     public int walkTimer;
 
+    public SpriteRenderer[] sprites;
+    public Color hurtColor;
+
     private void Start()
     {
         idleTimer = 1;
@@ -206,8 +209,24 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     public void TakeDamage(int amount){
+
+        StartCoroutine(FlashColor());
+
         health -= amount;
         Debug.Log("DAMAGED I REPEAT DAMAGED");
         checkDead();
+    }
+
+    IEnumerator FlashColor()
+    {
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].color = hurtColor;
+        }
+        yield return new WaitForSeconds(0.05f);
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].color = Color.white;
+        }
     }
 }
