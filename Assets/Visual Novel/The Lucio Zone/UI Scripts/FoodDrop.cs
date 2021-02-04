@@ -56,7 +56,9 @@ public class FoodDrop : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().sprite = ingredient;
     }
 
+    // void OnCollisionEnter(Collision collision){
     void OnTriggerEnter(Collider other){
+        Debug.Log("collided");
         InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         tracker.add(name, 1);
         Debug.Log(name + " amount = " + tracker.getAmount(name));

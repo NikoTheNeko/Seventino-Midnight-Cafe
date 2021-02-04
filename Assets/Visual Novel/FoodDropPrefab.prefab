@@ -33,7 +33,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.3, y: 1.8}
+  m_AnchoredPosition: {x: 13.5, y: 8.9}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &3610473238562846525
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8694265af8b9adf40b84fbeaed3a3911, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d3868ac202ffc043a95031dec16cbe2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8925882766541580791}
   - component: {fileID: 2689669193169216594}
   - component: {fileID: 1536657439357886464}
-  - component: {fileID: 1972755072859022789}
+  - component: {fileID: 8954876084205907105}
   m_Layer: 5
   m_Name: FoodDropPrefab
   m_TagString: Untagged
@@ -115,7 +115,7 @@ RectTransform:
   m_GameObject: {fileID: 4347659211473776143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0076879635, y: 0.0076879635, z: 0.0076879635}
+  m_LocalScale: {x: 0.0033190476, y: 0.0033190476, z: 0.0033190476}
   m_Children:
   - {fileID: 4825745769487164292}
   m_Father: {fileID: 0}
@@ -149,8 +149,8 @@ MonoBehaviour:
   warmth: 0
   flavor: 0
   texture: 0
-  name: 
---- !u!58 &1972755072859022789
+  name: bingus
+--- !u!58 &8954876084205907105
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,4 +165,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 84.25
+  m_Radius: 75.6

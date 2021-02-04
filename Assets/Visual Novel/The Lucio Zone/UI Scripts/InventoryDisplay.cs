@@ -8,7 +8,6 @@ public class InventoryDisplay : MonoBehaviour
     #region Public Variables
     [Tooltip("Texts and Images for displaying the inventory. ")]
     public List<Display> ingredientDisplays = new List<Display>();
-    public GameObject test;
     #endregion
 
     #region Private Variables
@@ -39,7 +38,7 @@ public class InventoryDisplay : MonoBehaviour
         //     Debug.Log("I depressed " + Time.time + " " + onScreen);
         //     onScreen = !onScreen;
         // }
-        Debug.Log("y = " + this.gameObject.transform.position.y);
+        //Debug.Log("y = " + this.gameObject.transform.position.y);
     }
 
     //Displays all discovered ingredients on given display objects
