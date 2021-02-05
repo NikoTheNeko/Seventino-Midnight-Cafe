@@ -407,6 +407,8 @@ GameObject:
   - component: {fileID: 8750332564712034752}
   - component: {fileID: 8750332564712034753}
   - component: {fileID: 8750332564712034754}
+  - component: {fileID: 1524157419}
+  - component: {fileID: 1524157418}
   m_Layer: 0
   m_Name: Flambethrower
   m_TagString: Untagged
@@ -500,6 +502,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1524157419
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8750332564712034815}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 11.706868, y: -0.22854495}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.32, y: 1.74}
+    newSize: {x: 1.76, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19, y: 6}
+  m_EdgeRadius: 0
+--- !u!114 &1524157418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8750332564712034815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5a19cd08caa1049a8e9600d26090f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTakeDamage: 1
+  flames: {fileID: 1524157419}
+  interpolationFramesCount: 30
 --- !u!1 &8750332565155649751
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8750332565155649751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.38, y: 0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8750332564304915190}
@@ -563,6 +606,7 @@ GameObject:
   - component: {fileID: 8750332565268564411}
   - component: {fileID: 8750332565268564415}
   - component: {fileID: 8750332565268564414}
+  - component: {fileID: 2465958862636384786}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -626,7 +670,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 133
-  m_Sprite: {fileID: 21300000, guid: 8ce69893ccdf0264d8adf6fbb9bdaa53, type: 3}
+  m_Sprite: {fileID: -3519683216845664490, guid: 544ce1f9735a53c45aa7c89266a2cdc5,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -698,6 +743,25 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02650547, y: -0.0096280575}
   m_Size: {x: 0.66583157, y: 1.4120778}
   m_Direction: 0
+--- !u!95 &2465958862636384786
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8750332565268564410}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9177af1c245848843916ceef39e629dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8750332564279179498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -853,7 +917,7 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
-      value: 0.49908447
+      value: 0.4311759
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -863,12 +927,12 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
-      value: -2
+      value: -2.8129826
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
-      value: -2
+      value: -2.8129826
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -958,7 +1022,7 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -1065,6 +1129,16 @@ PrefabInstance:
       propertyPath: VelocityModule.x.maxCurve.m_Curve.Array.data[1].value
       value: -0.8108101
       objectReference: {fileID: 0}
+    - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.2285563
+      objectReference: {fileID: 0}
     - target: {fileID: 693238217074852949, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -1077,15 +1151,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb35ff80bd7fa9f468e181b7245f5099, type: 3}
---- !u!4 &8138441476919819425 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
-    type: 3}
-  m_PrefabInstance: {fileID: 8750332564279179498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8138441476919819454 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+    type: 3}
+  m_PrefabInstance: {fileID: 8750332564279179498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8138441476919819425 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
     type: 3}
   m_PrefabInstance: {fileID: 8750332564279179498}
   m_PrefabAsset: {fileID: 0}
@@ -1204,7 +1278,7 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 300
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -1349,7 +1423,7 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 20
+      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -1570,7 +1644,7 @@ PrefabInstance:
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
@@ -1598,6 +1672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.size3D
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 693238217074852949, guid: cb35ff80bd7fa9f468e181b7245f5099,
         type: 3}
