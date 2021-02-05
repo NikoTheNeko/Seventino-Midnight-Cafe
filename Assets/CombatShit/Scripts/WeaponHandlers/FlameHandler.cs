@@ -15,7 +15,7 @@ public class FlameHandler : MonoBehaviour
     public int interpolationFramesCount = 30;
     private int elapsedFrames = 0;
 
-    void OnCollisionStay2D(Collision2D enemy)
+    private void OnTriggerStay2D(Collider2D enemy)
     {
         Debug.Log("fujck");
         if (enemy.gameObject.tag == "enemy")
@@ -30,7 +30,7 @@ public class FlameHandler : MonoBehaviour
     IEnumerator WaitForSeconds()
     {
         canTakeDamage = false;
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(0.1f);
         canTakeDamage = true;
     }
     public void ActivateFlame()
