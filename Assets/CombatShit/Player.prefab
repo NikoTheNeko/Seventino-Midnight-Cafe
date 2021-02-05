@@ -170,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8750332564070299955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.243, y: 0.319, z: -6.414063}
+  m_LocalPosition: {x: 2.25, y: 0.35, z: -6.414063}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 8750332563838930197}
@@ -660,7 +660,7 @@ MonoBehaviour:
   smokeParticles: {fileID: 8138441475566685345}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2097152
 --- !u!50 &8750332565268564415
 Rigidbody2D:
   serializedVersion: 4

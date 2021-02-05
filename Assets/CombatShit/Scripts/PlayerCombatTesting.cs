@@ -67,6 +67,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public ParticleSystem flameParticles;
     public ParticleSystem smokeParticles;
     public LayerMask enemyLayer;
+    private FlameHandler flameo;
 
     private void Awake()
     {
@@ -74,6 +75,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         rigidbody2D = GetComponent<Rigidbody2D>();
         shotgunAnim = gunAnchor.Find("Shotgun").GetComponent<Animator>();
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
+        flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
         //flameParticles = gunAnchor.Find("Flambethrower").Find("Flames").GetComponent<ParticleSystem>();
         state = State.Normal;
@@ -242,11 +244,12 @@ public class PlayerCombatTesting : MonoBehaviour{
         if (Input.GetMouseButtonDown(0))
         {
             flamethrowerAnim.SetTrigger("Fire");
+            flameo.ActivateFlame();
         }
         if(Input.GetMouseButton(0))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
-            flamethrowerAnim.SetBool("IsFiring", true); 
+            flamethrowerAnim.SetBool("IsFiring", true);
             var em = flameParticles.emission;
             em.enabled = true;
 
@@ -265,6 +268,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         else
         {
             flamethrowerAnim.SetBool("IsFiring", false);
+            flameo.DeactivateFlame();
             var em = flameParticles.emission;
             em.enabled = false;
 

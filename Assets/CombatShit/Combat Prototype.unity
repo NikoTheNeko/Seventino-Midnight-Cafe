@@ -33079,7 +33079,7 @@ GameObject:
   - component: {fileID: 259604989}
   m_Layer: 21
   m_Name: Bean
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33195,6 +33195,8 @@ MonoBehaviour:
   health: 20
   idleTimer: 0
   walkTimer: 0
+  sprites: []
+  hurtColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &259604988
 Transform:
   m_ObjectHideFlags: 0
@@ -45923,6 +45925,53 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!1 &1524157417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8750332564712034815, guid: 8fb02bce31242a34d88c8da68ad84344,
+    type: 3}
+  m_PrefabInstance: {fileID: 8750332564760014624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1524157418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524157417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5a19cd08caa1049a8e9600d26090f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTakeDamage: 1
+  flames: {fileID: 1524157419}
+  interpolationFramesCount: 30
+--- !u!61 &1524157419
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524157417}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 11.706868, y: -0.22854495}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.32, y: 1.74}
+    newSize: {x: 1.76, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19, y: 6}
+  m_EdgeRadius: 0
 --- !u!114 &1531190123
 MonoBehaviour:
   m_ObjectHideFlags: 0

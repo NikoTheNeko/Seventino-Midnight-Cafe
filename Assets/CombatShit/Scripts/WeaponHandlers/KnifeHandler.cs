@@ -11,10 +11,9 @@ public class KnifeHandler : MonoBehaviour
 
     public static void Swing(Vector3 attackPoint, float attackRange, LayerMask enemyLayer)
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 100000, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 1.5f, enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
-            EnemyBehaviour target = enemy.GetComponent<EnemyBehaviour>();
             enemy.GetComponent<EnemyBehaviour>().TakeDamage(10);
         }
     }
