@@ -33195,8 +33195,9 @@ MonoBehaviour:
   health: 20
   idleTimer: 0
   walkTimer: 0
-  sprites: []
-  hurtColor: {r: 0, g: 0, b: 0, a: 0}
+  sprites:
+  - {fileID: 1224102268}
+  hurtColor: {r: 0.6226415, g: 0.08071158, b: 0, a: 1}
 --- !u!4 &259604988
 Transform:
   m_ObjectHideFlags: 0
@@ -43772,6 +43773,12 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
+--- !u!212 &1224102268 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2130441598346989801, guid: d3d2288f2d653764e8707f984bdfbdee,
+    type: 3}
+  m_PrefabInstance: {fileID: 2130441599332727304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!213 &1232769866
 Sprite:
   m_ObjectHideFlags: 0
