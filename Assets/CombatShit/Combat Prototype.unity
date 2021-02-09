@@ -45131,7 +45131,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.25
+  orthographic size: 4
   m_Depth: 4.32
   m_CullingMask:
     serializedVersion: 2
@@ -45174,7 +45174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1716528797}
-  SmoothSpeed: 0.125
+  SmoothSpeed: 1
   Offset: {x: 0, y: 0, z: -1}
 --- !u!213 &1285886894
 Sprite:
