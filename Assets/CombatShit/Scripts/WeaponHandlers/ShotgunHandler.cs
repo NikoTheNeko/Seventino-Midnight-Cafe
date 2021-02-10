@@ -1,41 +1,71 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
 public class ShotgunHandler : MonoBehaviour
 {
-    private Material weaponTracerMaterial;
-    public static void RayShoot(Vector3 EndPoint, Vector3 ShootDir)
+    public List<LineRenderer> tracers = new List<LineRenderer>(5);
+    [SerializeField] private Material weaponTracerMaterial;
+    [SerializeField] public SpriteRenderer muzzleFlash;
+    public Action<LineRenderer> turnOff;
+
+    public void RayShoot(Vector3 EndPoint, Vector3 ShootDir)
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(EndPoint, ShootDir);
-        //WeaponTracer.Create()
-        if (raycastHit2D.collider != null)
-        {
-            EnemyBehaviour target = raycastHit2D.collider.GetComponent<EnemyBehaviour>();
-            if (target != null)
+        foreach (LineRenderer tracer in tracers) {
+            float angle = UnityEngine.Random.Range(-5f, 5f);
+            Vector3 newShootDir = (Quaternion.Euler(0f, 0f, angle) * ShootDir);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(EndPoint, newShootDir);
+            CreateWeaponTracer(EndPoint, EndPoint, newShootDir, tracer);
+            CreateShootFlash();
+            if (raycastHit2D.collider != null)
             {
-                target.TakeDamage(5);
+                EnemyBehaviour target = raycastHit2D.collider.GetComponent<EnemyBehaviour>();
+                if (target != null)
+                {
+                    target.TakeDamage(5);
+                }
             }
         }
     }
 
-    public void CreateWeaponTracer(Vector3 fromPosition, Vector3 targetPosition)
+    public void CreateWeaponTracer(Vector3 fromPosition, Vector3 targetPosition, Vector3 targetNormal, LineRenderer tracer)
     {
-        Vector3 dir = (targetPosition - fromPosition).normalized;
-        //float eulerZ = GetAngleFromVectorFloat(dir) - 90;
-        float distance = Vector3.Distance(fromPosition, targetPosition);
-        Vector3 spawnPos = fromPosition + dir * distance * .5f;
-        Material tmpMaterial = new Material(weaponTracerMaterial);
-        tmpMaterial.SetTextureScale("_MainTex", new Vector2(1f, distance / 256f));
-        //World_Mesh worldMesh = World_Mesh.Create(spawnPos, eulerZ, 6f, distance, tmpMaterial, null, 10000);
-        /*
-        float timer = .1f;
-        Time -= Time.deltaTime;
-        if(timer <= 0)
-        {
-            worldMesh.DestroySelf();
-            return true;
-        }*/
+        targetNormal = targetNormal * Camera.main.orthographicSize * 2.1f;
+        tracer.enabled = true;
+        tracer.SetPosition(0, fromPosition);
+        tracer.SetPosition(1, targetPosition + targetNormal);
+        StartCoroutine(KillTrace(0.08f, tracer));
+
+    }
+    IEnumerator KillTrace(float time, LineRenderer tracer)
+    {
+        yield return new WaitForSeconds(time);
+        tracer.enabled = false;
+    }
+
+    private void CreateShootFlash()
+    {
+        muzzleFlash.enabled = true;
+        StartCoroutine(killFlash(0.03f, muzzleFlash));
+    }
+
+    IEnumerator killFlash(float time, SpriteRenderer muzzleFlash)
+    {
+        yield return new WaitForSeconds(time);
+        muzzleFlash.enabled = false;
+    }
+
+    public static void ShakeCamera(float intensity, float timer)
+    {
+        Vector3 lastCameraMovement = Vector3.zero;
+        FunctionUpdater.Create(delegate () {
+            timer -= Time.unscaledDeltaTime;
+            Vector3 randomMovement = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized * intensity;
+            Camera.main.transform.position = Camera.main.transform.position - lastCameraMovement + randomMovement;
+            lastCameraMovement = randomMovement;
+            return timer <= 0f;
+        }, "CAMERA_SHAKE");
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCombatTesting : MonoBehaviour{
-
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs
     {
@@ -67,6 +66,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     public ParticleSystem flameParticles;
     public ParticleSystem smokeParticles;
     public LayerMask enemyLayer;
+    private FlameHandler flameo;
+    public ShotgunHandler shuggun;
 
     private void Awake()
     {
@@ -74,6 +75,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         rigidbody2D = GetComponent<Rigidbody2D>();
         shotgunAnim = gunAnchor.Find("Shotgun").GetComponent<Animator>();
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
+        flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
         //flameParticles = gunAnchor.Find("Flambethrower").Find("Flames").GetComponent<ParticleSystem>();
         state = State.Normal;
@@ -228,11 +230,6 @@ public class PlayerCombatTesting : MonoBehaviour{
             KnifeHandler.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
             knifeAnim.SetTrigger("Fire");
-            OnShoot?.Invoke(this, new OnShootEventArgs
-            {
-                gunEndPointPosition = aimGunEndPoint.position,
-                shootPosition = GetMouseWorldPosition()
-            });
         }
     }
 
@@ -242,32 +239,27 @@ public class PlayerCombatTesting : MonoBehaviour{
         if (Input.GetMouseButtonDown(0))
         {
             flamethrowerAnim.SetTrigger("Fire");
+            flameo.ActivateFlame();
         }
         if(Input.GetMouseButton(0))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
-            flamethrowerAnim.SetBool("IsFiring", true); 
+            flamethrowerAnim.SetBool("IsFiring", true);
             var em = flameParticles.emission;
             em.enabled = true;
-
             var em2 = smokeParticles.emission;
             em2.enabled = true;
             if (!flameParticles.isPlaying)
             {
                 
             }
-            OnShoot?.Invoke(this, new OnShootEventArgs
-            {
-                gunEndPointPosition = aimGunEndPoint.position,
-                shootPosition = GetMouseWorldPosition()
-            });
         }
         else
         {
             flamethrowerAnim.SetBool("IsFiring", false);
+            flameo.DeactivateFlame();
             var em = flameParticles.emission;
             em.enabled = false;
-
             var em2 = smokeParticles.emission;
             em2.enabled = false;
             //flameParticles.Stop();
@@ -283,21 +275,13 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootPoint = aimGunEndPoint.position;
             Vector3 mousePosition = GetMouseWorldPosition();
             Vector3 shootDir = (mousePosition - transform.position).normalized;
-            ShotgunHandler.RayShoot(shootPoint, shootDir);
+            shuggun.RayShoot(shootPoint, shootDir);
             shotgunAnim.SetTrigger("Shoot");
-            OnShoot?.Invoke(this, new OnShootEventArgs
-            {
-                gunEndPointPosition = aimGunEndPoint.position,
-                shootPosition = GetMouseWorldPosition()
-            });
         }
         //spawn pellets from gun end point, need to construct prefabs for projectiles
     }
 
-    private void PlayerShootProjectiles_OnShoot(object sender, OnShootEventArgs e)
-    {
-
-    }
+    
     
 
     /**

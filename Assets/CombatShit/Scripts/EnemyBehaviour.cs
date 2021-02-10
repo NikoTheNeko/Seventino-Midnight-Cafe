@@ -40,8 +40,6 @@ public class EnemyBehaviour : MonoBehaviour {
         idleTimer = 1;
         walkTimer = 3;
         spawnPos = transform.position;
-        //seeker = transform.GetChild(0).GetComponent<Seeker>();
-        //rb = transform.GetChild(0).GetComponent<Rigidbody2D>();
         rb = transform.GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         seeker.StartPath(rb.position, rb.position, OnPathComplete);
