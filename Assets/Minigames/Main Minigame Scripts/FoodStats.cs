@@ -75,15 +75,25 @@ public class FoodStats : MonoBehaviour{
             FlavorVal = 100;
     }
 
+    //Takes ingredient from inventory and adds stats to dish
+    public bool AddIngredient(string ingredient){
+        if(tracker.subtract(ingredient, 1)){
+            Ingredient additive = tracker.getIngredient(ingredient);
+            AddTexture(additive.texture);
+            AddWarmth(additive.warmth);
+            AddFlavor(additive.flavor);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     #endregion
 
     private void Start(){
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        Ingredient beans = tracker.getIngredient("Brown Beans");
-        AddTexture(beans.texture);
-        AddWarmth(beans.warmth);
-        AddFlavor(beans.flavor);
-        tracker.subtract("Brown Beans", 1);
+        AddIngredient("Brown Beans");
 
     }
 
