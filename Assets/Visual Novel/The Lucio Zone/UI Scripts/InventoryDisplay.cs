@@ -33,12 +33,10 @@ public class InventoryDisplay : MonoBehaviour
     {
         displayIngredients();
         checkForMouseOver();
-        // move();
-        // if(Input.GetKeyDown(KeyCode.I)){
-        //     Debug.Log("I depressed " + Time.time + " " + onScreen);
-        //     onScreen = !onScreen;
-        // }
-        //Debug.Log("y = " + this.gameObject.transform.position.y);
+        move();
+        if(Input.GetKeyDown(KeyCode.I)){
+            onScreen = !onScreen;
+        }
     }
 
     //Displays all discovered ingredients on given display objects
@@ -75,12 +73,12 @@ public class InventoryDisplay : MonoBehaviour
 
     private void move(){
         if(onScreen){
-            if(this.gameObject.transform.position.y < 450){
+            if(this.gameObject.transform.position.y < 150){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
             }
         }
         else if(!onScreen){
-            if(this.gameObject.transform.position.y > 0){
+            if(this.gameObject.transform.position.y > -100){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
             }
         }
