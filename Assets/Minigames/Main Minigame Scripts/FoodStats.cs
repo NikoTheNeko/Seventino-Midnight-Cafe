@@ -47,6 +47,7 @@ public class FoodStats : MonoBehaviour{
 
     #endregion
 
+    private InventoryTracker tracker;
     #region Add to stat functions
     /**
     All the functions below here are meant to only add values by getting the component
@@ -75,6 +76,16 @@ public class FoodStats : MonoBehaviour{
     }
 
     #endregion
+
+    private void Start(){
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        Ingredient beans = tracker.getIngredient("Brown Beans");
+        AddTexture(beans.texture);
+        AddWarmth(beans.warmth);
+        AddFlavor(beans.flavor);
+        tracker.subtract("Brown Beans", 1);
+
+    }
 
     private void Update() {
         //tempDisplay();

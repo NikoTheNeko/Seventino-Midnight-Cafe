@@ -46,14 +46,14 @@ public class InventoryDisplay : MonoBehaviour
     private void displayIngredients(){
         int ingredient = 0;
         int display = 0;
-        while(ingredient < tracker.ingredientPictures.Count && display < ingredientDisplays.Count){
+        while(ingredient < tracker.ingredients.Count && display < ingredientDisplays.Count){
 
             //if the player has discovered an ingredient display it
-            if(tracker.discovered(tracker.ingredientPictures[ingredient].name)){
+            if(tracker.discovered(tracker.ingredients[ingredient].name)){
                 ingredientDisplays[display].Activate();
-                ingredientDisplays[display].image.sprite = tracker.ingredientPictures[ingredient].picture;
-                ingredientDisplays[display].name.text = tracker.ingredientPictures[ingredient].name;
-                ingredientDisplays[display].amount.text = "x" +  tracker.getAmount(tracker.ingredientPictures[ingredient].name).ToString();
+                ingredientDisplays[display].image.sprite = tracker.ingredients[ingredient].picture;
+                ingredientDisplays[display].name.text = tracker.ingredients[ingredient].name;
+                ingredientDisplays[display].amount.text = "x" +  tracker.getAmount(tracker.ingredients[ingredient].name).ToString();
                 display++;
             }
             ingredient++;

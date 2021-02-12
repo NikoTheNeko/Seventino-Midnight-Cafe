@@ -9,7 +9,7 @@ public class InventoryTracker : MonoBehaviour
 {
     #region Public Variables
     [Tooltip("Takes in a Sprite and a name associated with that Sprite. The name should be the same as key used in inventoryDict. Place in order of appearance in inventory menu.")]
-    public List<Ingredient> ingredientPictures = new List<Ingredient>();
+    public List<Ingredient> ingredients = new List<Ingredient>();
     [Tooltip("Spawnable Food prefab")]
     public GameObject foodObject;
     #endregion
@@ -124,7 +124,7 @@ public class InventoryTracker : MonoBehaviour
     //returns null if ingredient not found
     public Ingredient getIngredient(string ingredientName){
         
-        foreach(Ingredient ingredient in ingredientPictures){
+        foreach(Ingredient ingredient in ingredients){
             if(ingredient.name == ingredientName){
                 return ingredient;
             }
