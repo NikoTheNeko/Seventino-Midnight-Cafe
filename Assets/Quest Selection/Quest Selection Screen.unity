@@ -400,7 +400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -28.7, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &156679944
@@ -3851,6 +3851,11 @@ PrefabInstance:
       propertyPath: characterInformation.Array.data[1].image
       value: 
       objectReference: {fileID: 78303054}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: textFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 9dbe88bcb9de7ca44ba07e05a3cc0745, type: 3}
     - target: {fileID: 8393995175115614400, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_Name
