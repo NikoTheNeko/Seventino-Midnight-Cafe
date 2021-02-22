@@ -29,6 +29,8 @@ public class EnemyBehaviour : MonoBehaviour {
     public string enemyState = "idle";
     public int health = 100;
     private Vector3 spawnPos;
+
+    public int idleIndex = 0;
     public int idleTimer;
     public int walkTimer;
 
@@ -53,21 +55,14 @@ public class EnemyBehaviour : MonoBehaviour {
             case "idle":
                 EnemyIdle();
                 break;
-
-            case "walkAround":
-                EnemyWalk();
-                break;
-
             case "combat":
                 EnemyCombat();
                 break;
-
             case "escape":
                 EnemyEscape();
                 break;
-
-            case "goHome":
-                EnemyGoHome();
+            case "pathBack":
+                EnemyPathBack();
                 break;
         }
     }
@@ -148,15 +143,30 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void EnemyIdle()
     {
+        if (Vector3.Distance(transform.position, spawnPos) > 20)
+        {
+            enemyState = "pathBack";
+        }
+        if (idleIndex == 1)
+        {
+            Waiter();
+        }
+        if(idleIndex == 2)
+        {
+            Walker();
+        }
+        else
+        {
+            idleIndex = Random.Range(1, 2);
+        }
+    }
+
+    private void Waiter()
+    {
         if(seeker.IsDone()) 
         {
             seeker.StartPath(rb.position, rb.position, OnPathComplete);
         }
-        /*if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath))
-        {
-            ai.destination = ai.position;
-            ai.SearchPath();
-        }*/
         if (idleTimer > 0)
         {
             idleTimer--;
@@ -164,23 +174,17 @@ public class EnemyBehaviour : MonoBehaviour {
         else
         {
             idleTimer = (int)Random.Range(1, 4);
-            Debug.LogError("Change to walk");
-            enemyState = "walkAround";
+            idleIndex = 0;
         }
     }
 
-    private void EnemyWalk()
+    private void Walker()
     {
-
         Debug.LogError("walk start");
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, PickRandomPoint(), OnPathComplete);
         }
-        /*if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath)) {
-            ai.destination = PickRandomPoint();
-            ai.SearchPath();
-        }*/
         if (walkTimer > 0)
         {
             walkTimer--;
@@ -189,21 +193,43 @@ public class EnemyBehaviour : MonoBehaviour {
         else
         {
             walkTimer = (int)Random.Range(1, 2);
-            enemyState = "idle";
+            idleIndex = 0;
         }
     }
     private void EnemyCombat()
     {
+        if(!LoS())
+        {
+            enemyState = "idle";
+        }
         if(seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
     }
+
+    public bool LoS()
+    {
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, target.position);
+        if (raycastHit2D.collider != null)
+        {
+            PlayerCombatTesting target = raycastHit2D.collider.GetComponent<PlayerCombatTesting>();
+            if (target != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     private void EnemyEscape()
     {
     }
-    private void EnemyGoHome()
+    private void EnemyPathBack()
     {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, spawnPos, OnPathComplete);
+        }
     }
 
     public void TakeDamage(int amount){
