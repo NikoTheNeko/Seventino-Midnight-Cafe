@@ -327,6 +327,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
+      propertyPath: textFiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
       propertyPath: characterInformation.Array.data[0].name
       value: Chef
       objectReference: {fileID: 0}
@@ -360,6 +375,132 @@ PrefabInstance:
       propertyPath: textFile.Array.data[0]
       value: 
       objectReference: {fileID: 4900000, guid: 42a712e8dc722054a9e4a099b68cbaba, type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: textFiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 42a712e8dc722054a9e4a099b68cbaba, type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[0].emotion
+      value: neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[0].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f28a733b01f818d43ba8237dd4e2bc5f,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 859677cc26e62dc4aaa08d1852e9fa5c,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[1].emotion
+      value: angry
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: e7f3f9f5d4416644c91abe5870ec3795,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[2].emotion
+      value: happy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 588c2c397943a6644acc8dba2db47693,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[3].emotion
+      value: sad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f972e21b98fd6264c820a289fb83418a,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].emotion
+      value: surprised
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[0].emotion
+      value: neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[0].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 7274019a720edb94f81d00599d880638,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[1].emotion
+      value: confident
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 65b8a257f0cd6264a91a92d3ff60d00e,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 9cd94ed1360865a44a83da6f78825f27,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[2].emotion
+      value: frustrated
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 00c56a5b45692b34e9f004eabe18e09a,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[3].emotion
+      value: happy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[4].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f1906cce3b973f847a848052f85361ff,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[4].emotion
+      value: sad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[5].emotion
+      value: surprised
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[5].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ddfd77b6fabb51439d5e681d3184ecf,
+        type: 3}
     - target: {fileID: 4498526707756374804, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12796,6 +12937,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
+      propertyPath: textFiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
       propertyPath: characterInformation.Array.data[0].name
       value: Chef
       objectReference: {fileID: 0}
@@ -12829,6 +12985,132 @@ PrefabInstance:
       propertyPath: textFile.Array.data[0]
       value: 
       objectReference: {fileID: 4900000, guid: 7ac0ae3c461d76e4dafc66cec336cece, type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: textFiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 7ac0ae3c461d76e4dafc66cec336cece, type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[0].emotion
+      value: neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[0].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f28a733b01f818d43ba8237dd4e2bc5f,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[1].emotion
+      value: angry
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 859677cc26e62dc4aaa08d1852e9fa5c,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: e7f3f9f5d4416644c91abe5870ec3795,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[2].emotion
+      value: happy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 588c2c397943a6644acc8dba2db47693,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[3].emotion
+      value: sad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f972e21b98fd6264c820a289fb83418a,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].emotion
+      value: surprised
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[0].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 7274019a720edb94f81d00599d880638,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[0].emotion
+      value: neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 65b8a257f0cd6264a91a92d3ff60d00e,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[1].emotion
+      value: confident
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 9cd94ed1360865a44a83da6f78825f27,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[2].emotion
+      value: frustrated
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 00c56a5b45692b34e9f004eabe18e09a,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[3].emotion
+      value: happy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[4].image
+      value: 
+      objectReference: {fileID: 21300000, guid: f1906cce3b973f847a848052f85361ff,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[4].emotion
+      value: sad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[5].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ddfd77b6fabb51439d5e681d3184ecf,
+        type: 3}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: characterInformation.Array.data[1].emotions.Array.data[5].emotion
+      value: surprised
+      objectReference: {fileID: 0}
     - target: {fileID: 4498526707756374804, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.y

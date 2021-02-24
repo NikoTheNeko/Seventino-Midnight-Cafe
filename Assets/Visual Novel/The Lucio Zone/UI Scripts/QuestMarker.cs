@@ -7,18 +7,25 @@ public class QuestMarker : MonoBehaviour
 {
     public GameObject marker;
     public TextBoxScript textbox;
+    public GameObject trigger;
 
     private bool pickedUp = false;
     // Start is called before the first frame update
     void Start()
     {
         marker.SetActive(false);
+        trigger.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("activated = " + textbox.activated);
+        Debug.Log("pickedUp = " + pickedUp);
+        if(pickedUp && !textbox.activated){
+            Debug.Log("triggered");
+            trigger.SetActive(true);
+        }
     }
 
 
@@ -31,10 +38,12 @@ public class QuestMarker : MonoBehaviour
     }
     
     void OnTriggerStay2D(Collider2D other){
-        if(Input.GetButton("Use") && !pickedUp && !textbox.activated){
+        Debug.Log("colliding");
+        if(Input.GetButton("Use")){
             // Time.timeScale = 0f;
+            Debug.Log("entered the Lucio Zone");
             textbox.ActivateObjects();
-            pickedUp = !pickedUp;
+            pickedUp = true;
         }
     }
 }
