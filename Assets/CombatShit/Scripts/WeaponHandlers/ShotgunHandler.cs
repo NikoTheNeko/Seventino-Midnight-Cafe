@@ -24,7 +24,7 @@ public class ShotgunHandler : MonoBehaviour
                 EnemyBehaviour target = raycastHit2D.collider.GetComponent<EnemyBehaviour>();
                 if (target != null)
                 {
-                    target.TakeDamage(5);
+                    target.TakeDamage(5, DamageEnum.Flavor);
                 }
             }
         }
