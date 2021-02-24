@@ -149,9 +149,9 @@ public class TextBoxScript : MonoBehaviour
         Color32 temp = target.color;
 
         if(temp.r > 60){
-            temp.r -= 1;
-            temp.g -= 1;
-            temp.b -= 1;
+            temp.r -= 10;
+            temp.g -= 10;
+            temp.b -= 10;
 
             target.transform.localScale -= new Vector3(0.0005f * target.transform.localScale.x, 0.0005f * target.transform.localScale.y, 0);
         }
@@ -167,9 +167,9 @@ public class TextBoxScript : MonoBehaviour
         target.sprite = emotion;
         
         if(temp.r < 255){
-            temp.r += 1;
-            temp.g += 1;
-            temp.b += 1;
+            temp.r += 10;
+            temp.g += 10;
+            temp.b += 10;
 
             target.transform.localScale += new Vector3(0.0005f * target.transform.localScale.x, 0.0005f * target.transform.localScale.y, 0);
         }
