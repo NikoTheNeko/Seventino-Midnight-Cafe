@@ -16,7 +16,9 @@ public class GrinderMinigame : MonoBehaviour{
     public AudioSource SelectionSFX;
 
     [Header("Minigame Objects and Variables")]
-    [Tooltip("This is how fast the Griender Selector moves")]
+    [Tooltip("This is the distance it will travel")]
+    public float GrinderDistance = 0.25f;
+    [Tooltip("This is how fast the Grinder Selector moves")]
     public float GrinderSelectMoveSpeed = .125f;
 
     [Tooltip("This adjusts how long a player has to hold to grind")]
@@ -156,7 +158,7 @@ public class GrinderMinigame : MonoBehaviour{
         using the GrinderSelectMoveSpeed Variable
     **/
     private void MoveGrindSelection(){
-        float newXPos = GrinderLocationX + (0.6f * (GrindSize - 1));
+        float newXPos = GrinderLocationX + (GrinderDistance * (GrindSize - 1));
         Vector3 NewLocation = new Vector3(newXPos, GrinderLocationY, 0);
 
         Vector3 MovementVector = new Vector3(GrinderSelectMoveSpeed, 0, 0);
