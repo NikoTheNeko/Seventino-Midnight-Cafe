@@ -23,7 +23,7 @@ public class FlameHandler : MonoBehaviour
             if (canTakeDamage)
             {
                 StartCoroutine(WaitForSeconds());
-                enemy.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(1);
+                enemy.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(1, DamageEnum.Fire);
             }
         }
     }

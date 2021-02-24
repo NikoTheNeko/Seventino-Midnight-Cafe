@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-//public enum DamageEnum { Slice, Fire, Flavor }
+public enum DamageEnum { Slice, Fire, Flavor }
 public class EnemyBehaviour : MonoBehaviour {
     public AIPath aiPath;
 
@@ -34,6 +34,8 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
+
+    public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
 
     private void Start()
     {
@@ -126,6 +128,9 @@ public class EnemyBehaviour : MonoBehaviour {
         if (health < 0)
         {
             Debug.Log("Holy fuck I'm DEAD! LmaOO!!!");
+            Debug.Log("Total Fire Damage: " + totalFireDamage);
+            Debug.Log("Total Flavor Damage: " + totalFlavorDamage);
+            Debug.Log("Total Slice Damage: " + totalSliceDamage);
             Destroy(gameObject);
         }
     }
@@ -206,12 +211,26 @@ public class EnemyBehaviour : MonoBehaviour {
     {
     }
 
-    public void TakeDamage(int amount){
+    public void TakeDamage(int amount, DamageEnum damageType){
 
         StartCoroutine(FlashColor());
 
         health -= amount;
-        Debug.Log("DAMAGED I REPEAT DAMAGED");
+        // Debug.Log("DAMAGED I REPEAT DAMAGED");
+
+        switch (damageType)
+        {
+            case DamageEnum.Fire:
+                totalFireDamage += amount;
+                break;
+            case DamageEnum.Flavor:
+                totalFlavorDamage += amount;
+                break;
+            case DamageEnum.Slice:
+                totalSliceDamage += amount;
+                break;
+        }
+
         checkDead();
     }
 

@@ -33192,12 +33192,15 @@ MonoBehaviour:
   seeker: {fileID: 259604986}
   rb: {fileID: 259604984}
   enemyState: idle
-  health: 20
+  health: 100
   idleTimer: 0
   walkTimer: 0
   sprites:
   - {fileID: 1224102268}
   hurtColor: {r: 0.6226415, g: 0.08071158, b: 0, a: 1}
+  totalFireDamage: 0
+  totalFlavorDamage: 0
+  totalSliceDamage: 0
 --- !u!4 &259604988
 Transform:
   m_ObjectHideFlags: 0
