@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: scrollSpeed
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: textFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 42a712e8dc722054a9e4a099b68cbaba, type: 3}
     - target: {fileID: 4498526707756374804, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2616,6 +2621,11 @@ PrefabInstance:
       propertyPath: scrollSpeed
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 4069018750773556883, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: textFile.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 7ac0ae3c461d76e4dafc66cec336cece, type: 3}
     - target: {fileID: 4498526707756374804, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.y

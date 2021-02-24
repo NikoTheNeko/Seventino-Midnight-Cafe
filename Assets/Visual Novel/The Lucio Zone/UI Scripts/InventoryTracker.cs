@@ -12,6 +12,7 @@ public class InventoryTracker : MonoBehaviour
     public List<Ingredient> ingredientPictures = new List<Ingredient>();
     [Tooltip("Spawnable Food prefab")]
     public GameObject foodObject;
+
     #endregion
     //dictionary of objects being stored
     //key is name of ingredient
