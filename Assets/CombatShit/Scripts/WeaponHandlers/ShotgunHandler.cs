@@ -25,6 +25,7 @@ public class ShotgunHandler : MonoBehaviour
                 if (target != null)
                 {
                     target.TakeDamage(5, DamageEnum.Flavor);
+                    CameraShake.instance.ShakeCamera(.5f, .02f);
                 }
             }
         }
