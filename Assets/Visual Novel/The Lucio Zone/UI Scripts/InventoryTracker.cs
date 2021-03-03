@@ -12,13 +12,9 @@ public class InventoryTracker : MonoBehaviour
     public List<Ingredient> ingredientPictures = new List<Ingredient>();
     [Tooltip("Spawnable Food prefab")]
     public GameObject foodObject;
+    public List<FoodDrop> inventory = new List<FoodDrop>();
 
     #endregion
-    //dictionary of objects being stored
-    //key is name of ingredient
-    //value is number of ingredient in inventory
-    private Dictionary<string, int> inventoryDict = new Dictionary<string, int>();
-    
 
     // Start is called before the first frame update
     void Start()
@@ -40,86 +36,71 @@ public class InventoryTracker : MonoBehaviour
 
     //returns the amount of an ingredient
     //returns -1 if the ingredient has not been discovered
-    public int getAmount(string ingredient){
-        if(inventoryDict.ContainsKey(ingredient)){
-            return inventoryDict[ingredient];
-        }
-        else{
-            return -1;
-        }
-    }
+    // public int getAmount(string ingredient){
+    //     if(inventoryDict.ContainsKey(ingredient)){
+    //         return inventoryDict[ingredient];
+    //     }
+    //     else{
+    //         return -1;
+    //     }
+    // }
 
     //subtracts modifier from amount in inventory linked to key
     //returns true if subtraction successful
     //returns false if there aren't enough ingredients or ingredient doesn't exist
-    public bool subtract(string ingredient, int modifier){
-        //check if ingredient has been found
-        if(inventoryDict.ContainsKey(ingredient)){
-            int temp = inventoryDict[ingredient];
-            temp -= modifier;
-            if(temp < 0){
-                return false;
-            }
-            //can't subtract
-            else{
-                inventoryDict[ingredient] = temp;
-                return true;
-            }
-        }
-        else{
-            return false;
-        }
-    }
+    // public bool subtract(string ingredient, int modifier){
+    //     //check if ingredient has been found
+    //     if(inventoryDict.ContainsKey(ingredient)){
+    //         int temp = inventoryDict[ingredient];
+    //         temp -= modifier;
+    //         if(temp < 0){
+    //             return false;
+    //         }
+    //         //can't subtract
+    //         else{
+    //             inventoryDict[ingredient] = temp;
+    //             return true;
+    //         }
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
 
     //adds modifier to amount in inventory linked to key
     //returns true if addition succesful
     //returns false if addition couldn't be done
-    public bool add(string ingredient, int modifier){
-        //check if ingredient has been found
-        if(inventoryDict.ContainsKey(ingredient)){
-            int temp = inventoryDict[ingredient];
-            temp += modifier;
-            
-            //if addition results in a negative return false
-            if(temp < 0){
-                return false;
-            }
-            //else do addition
-            else{
-                inventoryDict[ingredient] = temp;
-                return true;
-            }
-        }
-        //adds ingredient to inventoryDict, discovering ingredient
-        else{
-            inventoryDict[ingredient] = modifier;
-            return false;
-        }
+    public void add(FoodDrop food){
+        inventory.Add(food);
+    }
+
+    public void remove(FoodDrop food){
+        inventory.Remove(food);
     }
 
     //Adds 1 to the amount of the ingredient indicated by key
-    public void addOne(string ingredient){
-        //check if ingredient has been found
-        if(inventoryDict.ContainsKey(ingredient)){
-            int temp = inventoryDict[ingredient];
-            temp += 1;
-            if(temp < 0){
+    // public void addOne(string ingredient){
+    //     //check if ingredient has been found
+    //     if(inventoryDict.ContainsKey(ingredient)){
+    //         int temp = inventoryDict[ingredient];
+    //         temp += 1;
+    //         if(temp < 0){
 
-            }
-            else{
-                inventoryDict[ingredient] = temp;
-            }
-        }
-        else{
-            inventoryDict[ingredient] = 1;
-        }
-    }
+    //         }
+    //         else{
+    //             inventoryDict[ingredient] = temp;
+    //         }
+    //     }
+    //     else{
+    //         inventoryDict[ingredient] = 1;
+    //     }
+    // }
 
     //returns true if dictionary already has given key
     //returns false if key not found
-    public bool discovered(string ingredient){
-        return inventoryDict.ContainsKey(ingredient);
-    }
+    // public bool discovered(string ingredient){
+    //     return inventoryDict.ContainsKey(ingredient);
+    // }
 
     //returns a reference to a ingredient object
     //returns null if ingredient not found
@@ -135,14 +116,8 @@ public class InventoryTracker : MonoBehaviour
     
     //spawns a foodObject at the given coordinates with the sprite of the given ingredient
     //returns false if the object wasn't spawned
-    public bool spawnFood(string ingredient, Vector3 coords){
-        if(discovered(ingredient)){
-            GameObject food = Instantiate(foodObject, coords, Quaternion.identity);
-            Ingredient temp = getIngredient(ingredient);
-            food.GetComponent<FoodDrop>().setImage(temp.picture);
-            food.GetComponent<FoodDrop>().setValues(temp.warmth, temp.flavor, temp.texture, ingredient);
-            return true;
-        }
+    public bool spawnFood(Sprite image, int warmth, int flavor, int texture, Vector3 coords){
+        
         return false;
     }
 }

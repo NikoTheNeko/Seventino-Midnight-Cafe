@@ -17,7 +17,8 @@ public class TextBoxScript : MonoBehaviour
     public Text nameText;
 
     [Tooltip("Input file for dialogue. Should be written in json style")]
-    public TextAsset[] textFiles;
+    public TextAsset[] questText;
+    public TextAsset[] idleText;
 
     [Tooltip("Name and image of character. Name of character must exactly match name given in textFile")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
@@ -27,7 +28,7 @@ public class TextBoxScript : MonoBehaviour
 
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
-    
+    public bool activated;
     #endregion
 
     #region Private Variables
@@ -39,7 +40,7 @@ public class TextBoxScript : MonoBehaviour
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
     private string emotion; //holds the emotion of the current speaker in a non-philisophical type way
     private Dialogue dialogue;
-    public bool activated;
+    
     private int curDialogue = 0; //temp variable for counting which dialogue is being looked at. recommend putting on inventory for persistent data
 
     #endregion
@@ -47,8 +48,9 @@ public class TextBoxScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogue = JsonUtility.FromJson<Dialogue>(textFiles[curDialogue].text);     
+        dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);     
         textbox.text = "";
+        curDialogue++;
 
         //deactivate all of the visual elements
         DeactivateObjects();
@@ -64,6 +66,7 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("CurDialog = " + curDialogue);
         //if there are letters to add and required amount of time has passed
         if(Time.time > timer && letter < message.Length && activated){
             AddLetter();
@@ -77,6 +80,7 @@ public class TextBoxScript : MonoBehaviour
         //runs through given list of speaker images, darkens all non current speakers
         foreach(CharacterData data in characterInformation){
             if(data.name == currentSpeaker){
+                Debug.Log(emotion);
                 Sprite temp = data.getEmotion(emotion);
                 LightenImage(data.image, temp);
             }
@@ -86,17 +90,14 @@ public class TextBoxScript : MonoBehaviour
         }
     }
 
-    //speed up or move to next message
+    //method called when Use is pressed
+    //has variety of effects based on context
     void SpeedUp(){
 
         //speed up scrolling rate
         if(!speedUp && activated){
             scrollSpeed /= 9;
             speedUp = true;
-        }
-
-        if(!activated){
-            ActivateObjects();
         }
 
         //move to next message in dialogue if end of message has been reached
@@ -115,11 +116,18 @@ public class TextBoxScript : MonoBehaviour
             textbox.text = "";
         }
 
-        //if the end of the dialogue has been reached add progress to NarrativeTracker and end dialogue
-        if(loops >= dialogue.dialogueSegments.Length && letter >= message.Length && curDialogue < textFiles.Length){
+        //if end of final dialogue has been reached
+        if(curDialogue >= questText.Length && loops >= dialogue.dialogueSegments.Length && letter >= message.Length){
+            Debug.Log("called it");
             DeactivateObjects();
+        }
+
+        //if the end of the dialogue has been reached add progress to NarrativeTracker and end dialogue
+        if(loops >= dialogue.dialogueSegments.Length && letter >= message.Length && curDialogue < questText.Length){
+            DeactivateObjects();
+            dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);
             curDialogue++;
-            dialogue = JsonUtility.FromJson<Dialogue>(textFiles[curDialogue].text);
+
 
             loops = 0;
             letter = 0;
@@ -208,7 +216,19 @@ public class TextBoxScript : MonoBehaviour
         activated = false;
     }
 
+    public void SetDialogue(TextAsset text){
+        dialogue = JsonUtility.FromJson<Dialogue>(text.text);
+        loops = 0;
+        letter = 0;
+        speedUp = false;
+        textbox.text = "";
+        scrollSpeed = 0.0625f;
+        message = dialogue.dialogueSegments[loops].text;
+        currentSpeaker = dialogue.dialogueSegments[loops].speaker;
+        emotion = dialogue.dialogueSegments[loops].emotion;
+    }
 }
+
 
 [System.Serializable]
 //Relevant display data. Has fields for name of the character and the in-scene image of them.

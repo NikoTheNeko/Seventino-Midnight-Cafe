@@ -9,6 +9,7 @@ public class FoodDrop : MonoBehaviour
     public int flavor;
     public int texture;
     public string name;
+    public Sprite image;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +62,7 @@ public class FoodDrop : MonoBehaviour
         Debug.Log("collided");
         if(other.gameObject.tag == "Player"){
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-            tracker.add(name, 1);
+            tracker.add(this.gameObject.GetComponent<FoodDrop>());
             Destroy(this.gameObject);
         }
         
