@@ -17,10 +17,10 @@ public class EnemyBehaviour : MonoBehaviour {
     public float nextWaypointDistance = 3f;
 
     public float attackRange;
-    IAstarAI ai;
+    public IAstarAI ai;
 
-    Path path;
-    int currentWaypoint = 0;
+    public Path path;
+    public int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
     public Seeker seeker;
@@ -28,19 +28,23 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public string enemyState = "idle";
     public int health = 100;
-    private Vector3 spawnPos;
+    public Vector3 spawnPos;
 
     public int idleIndex = 0;
     public int idleTimer;
     public int walkTimer;
+    public int losTimer;
+    public int biteTimer;
+    public int shotgunTimer;
+    public int machineTimer;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
 
     private void Start()
     {
-        idleTimer = 1;
-        walkTimer = 3;
+        idleTimer = 300;
+        walkTimer = 800;
         spawnPos = transform.position;
         rb = transform.GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
@@ -48,24 +52,6 @@ public class EnemyBehaviour : MonoBehaviour {
         ai = GetComponent<IAstarAI>();
     }
 
-    void UpdatePath() 
-    {
-        switch (enemyState)
-        {
-            case "idle":
-                EnemyIdle();
-                break;
-            case "combat":
-                EnemyCombat();
-                break;
-            case "escape":
-                EnemyEscape();
-                break;
-            case "pathBack":
-                EnemyPathBack();
-                break;
-        }
-    }
 
     void OnPathComplete(Path p)
     {
@@ -74,11 +60,6 @@ public class EnemyBehaviour : MonoBehaviour {
             path = p;
             currentWaypoint = 0;
         }
-    }
-
-    // Update is called once per frame
-    void Update(){
-        checkCombat();
     }
 
     private void FixedUpdate()
@@ -126,87 +107,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     //maybe add aggro timer?
     //generally needs unfucking
-    private void checkCombat()
-    {
-        if (Vector3.Distance(transform.position, target.transform.position) < attackRange)
-        {
-            enemyState = "combat";
-        }
-    }
 
-    Vector3 PickRandomPoint () {
-        Vector3 point = Random.insideUnitSphere * 4;
-        point.z = transform.position.z;
-        point += ai.position;
-        return point;
-    }
-
-    private void EnemyIdle()
-    {
-        if (Vector3.Distance(transform.position, spawnPos) > 20)
-        {
-            enemyState = "pathBack";
-        }
-        if (idleIndex == 1)
-        {
-            Waiter();
-        }
-        if(idleIndex == 2)
-        {
-            Walker();
-        }
-        else
-        {
-            idleIndex = Random.Range(1, 2);
-        }
-    }
-
-    private void Waiter()
-    {
-        if(seeker.IsDone()) 
-        {
-            seeker.StartPath(rb.position, rb.position, OnPathComplete);
-        }
-        if (idleTimer > 0)
-        {
-            idleTimer--;
-        }
-        else
-        {
-            idleTimer = (int)Random.Range(1, 4);
-            idleIndex = 0;
-        }
-    }
-
-    private void Walker()
-    {
-        Debug.LogError("walk start");
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, PickRandomPoint(), OnPathComplete);
-        }
-        if (walkTimer > 0)
-        {
-            walkTimer--;
-            //move
-        }
-        else
-        {
-            walkTimer = (int)Random.Range(1, 2);
-            idleIndex = 0;
-        }
-    }
-    private void EnemyCombat()
-    {
-        if(!LoS())
-        {
-            enemyState = "idle";
-        }
-        if(seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-        }
-    }
 
     public bool LoS()
     {
