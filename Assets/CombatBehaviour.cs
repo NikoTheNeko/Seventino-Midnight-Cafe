@@ -16,11 +16,6 @@ public class CombatBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (enemy.seeker.IsDone())
-        {
-            enemy.seeker.StartPath(enemy.rb.position, enemy.target.position, OnPathComplete);
-        }
-        /*
         if (Vector3.Distance(enemy.transform.position, enemy.target.transform.position) > 10)
         {
             if (enemy.seeker.IsDone())
@@ -56,7 +51,7 @@ public class CombatBehaviour : StateMachineBehaviour
         {
             animator.SetTrigger("idle");
             animator.ResetTrigger("combat");
-        }*/
+        }
     }
 
     private void Bite()

@@ -10,17 +10,11 @@ public class IdleBehaviour : StateMachineBehaviour
    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
    {
         enemy = animator.GetComponent<EnemyBehaviour>();
+        //InvokeRepeating("Walk", 0f, 0.5f);
+   }
 
-    }
-
-   // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-   {
-        if (Vector3.Distance(enemy.transform.position, enemy.spawnPos) > 20 && enemy.idleTimer == 0)
-        {
-            animator.SetTrigger("pathBack");
-            animator.ResetTrigger("idle");
-        }
+    void Walk()
+    {
         if (enemy.idleIndex == 1)
         {
             Waiter();
@@ -32,6 +26,16 @@ public class IdleBehaviour : StateMachineBehaviour
         else
         {
             enemy.idleIndex = Random.Range(1, 2);
+        }
+    }
+
+   // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+   override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+   {
+        if (Vector3.Distance(enemy.transform.position, enemy.spawnPos) > 20 && enemy.idleTimer == 0)
+        {
+            animator.SetTrigger("pathBack");
+            animator.ResetTrigger("idle");
         }
         if(LineOfSight() && InRange())
         {
