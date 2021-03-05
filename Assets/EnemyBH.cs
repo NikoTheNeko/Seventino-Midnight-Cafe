@@ -117,19 +117,19 @@ public class EnemyBH : MonoBehaviour {
             currentWaypoint++;
         }
         
-        if(rb.velocity.x >= 500f)
+        if(ai.desiredVelocity.x >= .01f)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             //transform.localScale = theScale;
-            //enemyGFX.localScale = new Vector3(-1, 1, 1);
+            enemyGFX.localScale = new Vector3(-0.25f, 0.25f, 1);
         }
-        else if (rb.velocity.x <= 500f)
+        else if (ai.desiredVelocity.x <= .01f)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             //transform.localScale = theScale;
-            //enemyGFX.localScale = new Vector3(1, 1, 1);
+            enemyGFX.localScale = new Vector3(0.25f, 0.25f, 1);
         }
     }
 
