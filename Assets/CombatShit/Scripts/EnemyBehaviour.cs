@@ -37,8 +37,12 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
 
+    private InventoryTracker tracker;
+
     private void Start()
     {
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
         idleTimer = 1;
         walkTimer = 3;
         spawnPos = transform.position;
@@ -127,6 +131,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         if (health < 0)
         {
+            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
             Debug.Log("Holy fuck I'm DEAD! LmaOO!!!");
             Debug.Log("Total Fire Damage: " + totalFireDamage);
             Debug.Log("Total Flavor Damage: " + totalFlavorDamage);

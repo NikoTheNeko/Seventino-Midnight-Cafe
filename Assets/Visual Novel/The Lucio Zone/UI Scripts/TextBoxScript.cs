@@ -23,12 +23,11 @@ public class TextBoxScript : MonoBehaviour
     [Tooltip("Name and image of character. Name of character must exactly match name given in textFile")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
-    //public CharacterExpressions[] expressions;
-    //public CharacterExpressions chefExpressions;
+    public AudioSource audio;
 
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
-    public bool activated;
+    public bool activated = false;
     #endregion
 
     #region Private Variables
@@ -147,6 +146,11 @@ public class TextBoxScript : MonoBehaviour
     //increment letter counter and set next time to add letter
     void AddLetter(){
         textbox.text += message[letter];
+        switch(message[letter]){
+            case 'a':
+            audio.Play();
+            break;
+        }
         letter++;
         timer = Time.time + scrollSpeed;
     }
