@@ -35,6 +35,7 @@ public class EnemyBH : MonoBehaviour {
     public int losTimer = 3;
     public Vector3 originVec;
     public Vector3 flipVec;
+    public Vector3 destVec;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -110,24 +111,24 @@ public class EnemyBH : MonoBehaviour {
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-        rb.AddForce(force);
+        //rb.AddForce(force);
         if(distance < nextWaypointDistance)
         {
             currentWaypoint++;
         }
         
-        if(rb.velocity.x >= 0.01f)
+        if(rb.velocity.x >= 500f)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
-            transform.localScale = theScale;
+            //transform.localScale = theScale;
             //enemyGFX.localScale = new Vector3(-1, 1, 1);
         }
-        else if (rb.velocity.x <= 0.01f)
+        else if (rb.velocity.x <= 500f)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
-            transform.localScale = theScale;
+            //transform.localScale = theScale;
             //enemyGFX.localScale = new Vector3(1, 1, 1);
         }
     }
@@ -162,25 +163,28 @@ public class EnemyBH : MonoBehaviour {
 
     private void EnemyIdle()
     {
-        if (idleIndex == 1)
-        {
-            Waiter();
-        }
-        if (idleIndex == 2)
-        {
-            Walker();
-        }
-        else
-        {
-            idleIndex = Random.Range(1, 2);
-        }
         if (Vector3.Distance(transform.position, spawnPos) > 20 && idleTimer == 0)
         {
             enemyState = ("pathBack");
         }
-        if(LineOfSight() && InRange())
+        if (LineOfSight() && InRange())
         {
             enemyState = ("combat");
+        }
+        if (idleIndex == 1)
+        {
+            Debug.Log("waiter");
+            Waiter();
+        }
+        if (idleIndex == 2)
+        {
+            Debug.Log("walker");
+            Walker();
+        }
+        else
+        {
+            Debug.Log("switch");
+            idleIndex = (int) Random.Range(1, 3);
         }
     }
 
@@ -226,21 +230,26 @@ public class EnemyBH : MonoBehaviour {
         }
         else
         {
+            Debug.Log(Vector3.Distance(transform.position, target.transform.position));
             return false;
         }
     }
     
     private bool LineOfSight()
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, target.position);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(target.position, transform.position);
+        Debug.DrawLine(transform.position, target.position, Color.white, 2.5f);
         if (raycastHit2D.collider != null)
         {
-            if (raycastHit2D.transform == target)
+            Debug.Log("Collider hit!");
+            if (raycastHit2D.transform.tag == "Player")
             {
+                Debug.Log("LineOfSight");
                 return true;
             }
             else
             {
+                Debug.Log("no see me dum dum");
                 return false;
             }
         }

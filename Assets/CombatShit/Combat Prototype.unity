@@ -45754,6 +45754,51 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7677941295430313340, guid: 07135db479d55734fa9686e63d73df69, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+--- !u!1 &1505906073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1505906075}
+  - component: {fileID: 1505906074}
+  m_Layer: 0
+  m_Name: BeanPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1505906074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505906073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66dde8b81adcbc24f9e0584ad1690636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledBeans: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
+    type: 3}
+--- !u!4 &1505906075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505906073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -29.031876, y: -23.579248, z: -640.06525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!213 &1511265836
 Sprite:
   m_ObjectHideFlags: 0
@@ -49254,11 +49299,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2049477842}
   - component: {fileID: 2049477841}
+  - component: {fileID: 2049477843}
   - component: {fileID: 2049477840}
   - component: {fileID: 2049477839}
   - component: {fileID: 2049477838}
   - component: {fileID: 2049477837}
-  - component: {fileID: 2049477843}
   m_Layer: 0
   m_Name: BlankMonster
   m_TagString: Untagged
@@ -49312,7 +49357,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2049477839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49395,7 +49440,7 @@ MonoBehaviour:
   enemyGFX: {fileID: 2082286890}
   speed: 200
   nextWaypointDistance: 3
-  attackRange: 0
+  attackRange: 3
   seeker: {fileID: 2049477840}
   rb: {fileID: 2049477838}
   enemyState: idle
@@ -49406,6 +49451,7 @@ MonoBehaviour:
   losTimer: 3
   originVec: {x: 0, y: 0, z: 0}
   flipVec: {x: 0, y: 0, z: 0}
+  destVec: {x: 0, y: 0, z: 0}
   sprites: []
   hurtColor: {r: 1, g: 0, b: 0, a: 0}
   totalFireDamage: 0
@@ -49435,11 +49481,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049477836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c50aa7e11bd81a48b45b3ba3f41dbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 1716528797}
+  beansAmount: 3
+  startAngle: 0
+  endAngle: 90
 --- !u!1 &2065469887
 GameObject:
   m_ObjectHideFlags: 0
@@ -49522,8 +49569,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082286889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.05, y: -0.1, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2049477842}
   m_RootOrder: 0
@@ -51245,6 +51292,11 @@ PrefabInstance:
     - target: {fileID: 8750332565268564410, guid: 8fb02bce31242a34d88c8da68ad84344,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750332565268564410, guid: 8fb02bce31242a34d88c8da68ad84344,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8750332565268564411, guid: 8fb02bce31242a34d88c8da68ad84344,
