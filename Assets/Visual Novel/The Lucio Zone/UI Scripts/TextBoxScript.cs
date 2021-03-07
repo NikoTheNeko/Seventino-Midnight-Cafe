@@ -24,6 +24,7 @@ public class TextBoxScript : MonoBehaviour
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
+    public AudioClip[] clips;
 
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
@@ -65,7 +66,6 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("CurDialog = " + curDialogue);
         //if there are letters to add and required amount of time has passed
         if(Time.time > timer && letter < message.Length && activated){
             AddLetter();
@@ -79,7 +79,6 @@ public class TextBoxScript : MonoBehaviour
         //runs through given list of speaker images, darkens all non current speakers
         foreach(CharacterData data in characterInformation){
             if(data.name == currentSpeaker){
-                Debug.Log(emotion);
                 Sprite temp = data.getEmotion(emotion);
                 LightenImage(data.image, temp);
             }
@@ -95,7 +94,7 @@ public class TextBoxScript : MonoBehaviour
 
         //speed up scrolling rate
         if(!speedUp && activated){
-            scrollSpeed /= 9;
+            scrollSpeed /= 5;
             speedUp = true;
         }
 
@@ -146,11 +145,19 @@ public class TextBoxScript : MonoBehaviour
     //increment letter counter and set next time to add letter
     void AddLetter(){
         textbox.text += message[letter];
-        switch(message[letter]){
-            case 'a':
-            audio.Play();
-            break;
+        int loc = char.ToUpper(message[letter]) - 65;
+        if(loc < 0){
+            loc = 26;
         }
+        else if(loc > 25){
+            loc = 26;
+        }
+        // if(loc != 0){
+        //     loc = 0;
+        // }
+        Debug.Log(clips[loc]);
+        audio.PlayOneShot(clips[loc]);
+
         letter++;
         timer = Time.time + scrollSpeed;
     }
