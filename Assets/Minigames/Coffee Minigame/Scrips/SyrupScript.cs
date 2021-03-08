@@ -11,6 +11,7 @@ public class SyrupScript : MonoBehaviour{
     public int AddAmount = 10;
     [Tooltip("Syrup SFX")]
     public AudioSource SyrupSFX;
+    public Animator Animation;
 
     [Header("UI and Stat Manager")]
     [Tooltip("This is the manager for the stats so we can update them")]
@@ -57,12 +58,22 @@ public class SyrupScript : MonoBehaviour{
         StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + AddAmount);
 
         if(Input.GetButtonDown("Use")){
+            Animation.SetBool("Pressed", true);
             StatManager.GetComponent<FoodStats>().AddFlavor(AddAmount);
             SyrupSFX.Play();
         }
 
         CookingManager.GetComponent<CookingController>().MinigameFinished();
     }
+    #endregion
+
+    #region Animation Controls
+
+    public void PressedFinished()
+    {
+        Animation.SetBool("Pressed", false);
+    }
+
     #endregion
 
     #region Cooking Controller Actions
