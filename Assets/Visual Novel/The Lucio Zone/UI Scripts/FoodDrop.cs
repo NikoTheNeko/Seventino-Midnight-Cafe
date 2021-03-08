@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class FoodDrop : MonoBehaviour
 {
+    public int texture;
     public int warmth;
     public int flavor;
-    public int texture;
     public string name;
     public Sprite image;
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public class FoodDrop : MonoBehaviour
     }
 
     //the apple factory
-    public void setValues(int iWarmth, int iFlavor, int iTexture, string iName){
+    public void setValues(int iTexture, int iWarmth, int iFlavor, string iName){
         warmth = iWarmth;
         flavor = iFlavor;
         texture = iTexture;
@@ -55,6 +55,7 @@ public class FoodDrop : MonoBehaviour
 
     public void setImage(Sprite ingredient){
         this.gameObject.GetComponent<SpriteRenderer>().sprite = ingredient;
+        image = ingredient;
     }
 
     // void OnCollisionEnter(Collision collision){

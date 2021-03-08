@@ -11,7 +11,7 @@ public class InventoryTracker : MonoBehaviour
     [Tooltip("Takes in a Sprite and a name associated with that Sprite. The name should be the same as key used in inventoryDict. Place in order of appearance in inventory menu.")]
     public List<Ingredient> ingredientPictures = new List<Ingredient>();
     [Tooltip("Spawnable Food prefab")]
-    public GameObject foodObject;
+    public FoodDrop foodObject;
     public List<FoodDrop> inventory = new List<FoodDrop>();
 
     #endregion
@@ -116,8 +116,11 @@ public class InventoryTracker : MonoBehaviour
     
     //spawns a foodObject at the given coordinates with the sprite of the given ingredient
     //returns false if the object wasn't spawned
-    public bool spawnFood(Sprite image, int warmth, int flavor, int texture, Vector3 coords){
+    public bool spawnFood(string name, int texture, int warmth, int flavor, Vector3 coords){
         
+        FoodDrop dropped = Instantiate(foodObject, coords, Quaternion.identity);
+        dropped.setImage(getIngredient(name).picture);
+        dropped.setValues(texture, warmth, flavor, name);
         return false;
     }
 }
@@ -126,8 +129,5 @@ public class InventoryTracker : MonoBehaviour
 public class Ingredient{
     public Sprite picture;
     public string name;
-    public int texture;
-    public int warmth;
-    public int flavor;
 }
 

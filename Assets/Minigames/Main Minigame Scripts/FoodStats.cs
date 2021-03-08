@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ public class FoodStats : MonoBehaviour{
 
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
     public int FlavorVal = 0;
+
+    private InventoryTracker tracker;
 
     #endregion
 
@@ -46,6 +49,20 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     #endregion
+
+    public void Start(){
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
+
+        FoodDrop importFood = tracker.inventory[0];
+
+        TextureVal = importFood.getTexture();
+        WarmthVal = importFood.getWarmth();
+        FlavorVal = importFood.getFlavor();
+
+        tracker.remove(tracker.inventory[0]);
+
+    }
 
     #region Add to stat functions
     /**

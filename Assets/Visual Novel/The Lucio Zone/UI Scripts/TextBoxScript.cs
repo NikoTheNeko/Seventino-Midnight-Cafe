@@ -20,15 +20,15 @@ public class TextBoxScript : MonoBehaviour
     public TextAsset[] questText;
     public TextAsset[] idleText;
 
-    [Tooltip("Name and image of character. Name of character must exactly match name given in textFile")]
+    [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
-    //public CharacterExpressions[] expressions;
-    //public CharacterExpressions chefExpressions;
+    public AudioSource audio;
+    public AudioClip[] clips;
 
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
-    public bool activated;
+    public bool activated = false;
     #endregion
 
     #region Private Variables
@@ -66,7 +66,6 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("CurDialog = " + curDialogue);
         //if there are letters to add and required amount of time has passed
         if(Time.time > timer && letter < message.Length && activated){
             AddLetter();
@@ -80,7 +79,6 @@ public class TextBoxScript : MonoBehaviour
         //runs through given list of speaker images, darkens all non current speakers
         foreach(CharacterData data in characterInformation){
             if(data.name == currentSpeaker){
-                Debug.Log(emotion);
                 Sprite temp = data.getEmotion(emotion);
                 LightenImage(data.image, temp);
             }
@@ -96,7 +94,7 @@ public class TextBoxScript : MonoBehaviour
 
         //speed up scrolling rate
         if(!speedUp && activated){
-            scrollSpeed /= 9;
+            scrollSpeed /= 5;
             speedUp = true;
         }
 
@@ -147,6 +145,19 @@ public class TextBoxScript : MonoBehaviour
     //increment letter counter and set next time to add letter
     void AddLetter(){
         textbox.text += message[letter];
+        int loc = char.ToUpper(message[letter]) - 65;
+        if(loc < 0){
+            loc = 26;
+        }
+        else if(loc > 25){
+            loc = 26;
+        }
+        // if(loc != 0){
+        //     loc = 0;
+        // }
+        //Debug.Log(clips[loc]);
+        audio.PlayOneShot(clips[loc]);
+
         letter++;
         timer = Time.time + scrollSpeed;
     }
@@ -216,6 +227,8 @@ public class TextBoxScript : MonoBehaviour
         activated = false;
     }
 
+    //set dialogue to given TextAsset, resets variables
+    //then activates self
     public void SetDialogue(TextAsset text){
         dialogue = JsonUtility.FromJson<Dialogue>(text.text);
         loops = 0;
@@ -226,6 +239,7 @@ public class TextBoxScript : MonoBehaviour
         message = dialogue.dialogueSegments[loops].text;
         currentSpeaker = dialogue.dialogueSegments[loops].speaker;
         emotion = dialogue.dialogueSegments[loops].emotion;
+        ActivateObjects();
     }
 }
 
