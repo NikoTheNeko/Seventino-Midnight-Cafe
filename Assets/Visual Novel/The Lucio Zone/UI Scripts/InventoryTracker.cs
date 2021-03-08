@@ -13,6 +13,7 @@ public class InventoryTracker : MonoBehaviour
     [Tooltip("Spawnable Food prefab")]
     public FoodDrop foodObject;
     public List<FoodDrop> inventory = new List<FoodDrop>();
+    
 
     #endregion
 
