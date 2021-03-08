@@ -45,6 +45,8 @@ public class EnemyBH : MonoBehaviour {
 
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
 
+    private InventoryTracker tracker;
+
     private void Start()
     {
         idleTimer = 1;
@@ -58,6 +60,9 @@ public class EnemyBH : MonoBehaviour {
         originVec = transform.localScale;
         flipVec = originVec;
         flipVec.x *= -1;
+
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
     }
 
     void UpdatePath() 
@@ -140,6 +145,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (health < 0)
         {
+            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
             Destroy(gameObject);
         }
     }
@@ -397,7 +403,7 @@ public class EnemyBH : MonoBehaviour {
         {
             sprites[i].color = hurtColor;
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < sprites.Length; i++)
         {
             sprites[i].color = Color.white;

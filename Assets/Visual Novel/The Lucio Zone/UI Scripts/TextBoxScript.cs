@@ -155,7 +155,7 @@ public class TextBoxScript : MonoBehaviour
         // if(loc != 0){
         //     loc = 0;
         // }
-        Debug.Log(clips[loc]);
+        //Debug.Log(clips[loc]);
         audio.PlayOneShot(clips[loc]);
 
         letter++;

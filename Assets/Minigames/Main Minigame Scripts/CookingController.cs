@@ -30,7 +30,7 @@ public class CookingController : MonoBehaviour
     #region Private Variables
 
     //Minigame Number keeps track of the minigames that go through each thing.
-    private int MinigameNumber = 0;
+    public int MinigameNumber = 0;
 
     //This variable checks to send the activation messages so it's not constantly being called
     private bool ActivationMessageSent = false;
