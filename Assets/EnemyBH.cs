@@ -38,6 +38,7 @@ public class EnemyBH : MonoBehaviour {
     public Vector3 destVec;
     private bool canAttack = true;
     public LayerMask playerLayer;
+    public GameObject SeedShot;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -277,13 +278,13 @@ public class EnemyBH : MonoBehaviour {
         int atkIndex = Ranges();
         switch (atkIndex)
         {
-            case 0:
+            case 1:
                 Bite();
                 break;
-            case 1:
+            case 2:
                 ShotgunBeans();
                 break;
-            case 2:
+            case 3:
                 MachineBeans();
                 break;
         }
@@ -297,8 +298,17 @@ public class EnemyBH : MonoBehaviour {
 
     private int Ranges()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) < 30)
+        if (Vector3.Distance(transform.position, target.transform.position) < 3)
         {
+            return 1;
+        }
+        else if (Vector3.Distance(transform.position, target.transform.position) < 15)
+        {
+            return 2;
+        }
+        else if (Vector3.Distance(transform.position, target.transform.position) < 30)
+        {
+            return 3;
         }
         return 0;
     }
@@ -327,12 +337,22 @@ public class EnemyBH : MonoBehaviour {
 
     private void ShotgunBeans()
     {
-
+        if (canAttack)
+        {
+            canAttack = false;
+            Instantiate(SeedShot, transform.position, Quaternion.identity);
+            StartCoroutine(ResetAttack(1f));
+        }
     }
 
     private void MachineBeans()
     {
-
+        if (canAttack)
+        {
+            canAttack = false;
+            Instantiate(SeedShot, transform.position, Quaternion.identity);
+            StartCoroutine(ResetAttack(1f));
+        }
     }
 
     private void EnemyEnrage()

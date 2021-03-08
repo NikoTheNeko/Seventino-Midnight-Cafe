@@ -334,6 +334,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         if (health < 0)
         {
             Destroy(gameObject);
+            Application.Quit();
         }
     }
 }
