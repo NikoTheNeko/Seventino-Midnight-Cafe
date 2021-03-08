@@ -16,6 +16,7 @@ public class KnifeHandler : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyBH>().TakeDamage(10, Slice);
+            CameraShake.instance.ShakeCamera(.25f, .03f);
         }
     }
 }

@@ -24,6 +24,7 @@ public class FlameHandler : MonoBehaviour
             {
                 StartCoroutine(WaitForSeconds());
                 enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(1, Fire);
+                CameraShake.instance.ShakeCamera(.2f, .015f);
             }
         }
     }
