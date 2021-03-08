@@ -140,10 +140,6 @@ public class EnemyBH : MonoBehaviour {
     {
         if (health < 0)
         {
-            Debug.Log("Holy fuck I'm DEAD! LmaOO!!!");
-            Debug.Log("Total Fire Damage: " + totalFireDamage);
-            Debug.Log("Total Flavor Damage: " + totalFlavorDamage);
-            Debug.Log("Total Slice Damage: " + totalSliceDamage);
             Destroy(gameObject);
         }
     }
@@ -237,7 +233,6 @@ public class EnemyBH : MonoBehaviour {
     private bool LineOfSight()
     {
         RaycastHit2D raycastHit2D = Physics2D.Raycast(target.position, transform.position);
-        Debug.DrawLine(transform.position, target.position, Color.white, 2.5f);
         if (raycastHit2D.collider != null)
         {
             if (raycastHit2D.transform.tag == "Player")
@@ -319,10 +314,8 @@ public class EnemyBH : MonoBehaviour {
         {
             canAttack = false;
             Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
-            Debug.Log(hit.Length);
             foreach (Collider2D player in hit)
             {
-                Debug.Log("collided");
                 player.GetComponent<PlayerCombatTesting>().PlayerHit(10);
             }
             StartCoroutine(ResetAttack(1f));

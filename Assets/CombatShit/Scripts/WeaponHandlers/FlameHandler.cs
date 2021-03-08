@@ -18,7 +18,6 @@ public class FlameHandler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D enemy)
     {
-        Debug.Log("fujck");
         if (enemy.gameObject.tag == "enemy")
         {
             if (canTakeDamage)
