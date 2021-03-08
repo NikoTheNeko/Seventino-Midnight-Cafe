@@ -49310,7 +49310,7 @@ GameObject:
   - component: {fileID: 2049477839}
   - component: {fileID: 2049477838}
   - component: {fileID: 2049477837}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: BlankMonster
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -49461,7 +49461,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 4194304
-  sprites: []
+  sprites:
+  - {fileID: 2082286891}
   hurtColor: {r: 1, g: 0, b: 0, a: 0}
   totalFireDamage: 0
   totalFlavorDamage: 0

@@ -175,17 +175,14 @@ public class EnemyBH : MonoBehaviour {
         }
         if (idleIndex == 1)
         {
-            Debug.Log("waiter");
             Waiter();
         }
         if (idleIndex == 2)
         {
-            Debug.Log("walker");
             Walker();
         }
         else
         {
-            Debug.Log("switch");
             idleIndex = (int) Random.Range(1, 3);
         }
     }
@@ -232,7 +229,6 @@ public class EnemyBH : MonoBehaviour {
         }
         else
         {
-            Debug.Log(Vector3.Distance(transform.position, target.transform.position));
             return false;
         }
     }
@@ -243,15 +239,12 @@ public class EnemyBH : MonoBehaviour {
         Debug.DrawLine(transform.position, target.position, Color.white, 2.5f);
         if (raycastHit2D.collider != null)
         {
-            Debug.Log("Collider hit!");
             if (raycastHit2D.transform.tag == "Player")
             {
-                Debug.Log("LineOfSight");
                 return true;
             }
             else
             {
-                Debug.Log("no see me dum dum");
                 return false;
             }
         }
@@ -315,9 +308,11 @@ public class EnemyBH : MonoBehaviour {
         if(canAttack)
         {
             canAttack = false;
-            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1.5f, playerLayer);
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
+            Debug.Log(hit.Length);
             foreach (Collider2D player in hit)
             {
+                Debug.Log("collided");
                 player.GetComponent<PlayerCombatTesting>().PlayerHit(10);
             }
             StartCoroutine(ResetAttack(1f));
