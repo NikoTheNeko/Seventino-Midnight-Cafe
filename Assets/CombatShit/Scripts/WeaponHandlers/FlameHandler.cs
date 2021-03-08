@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyBH.DamageEnum;
 
 public class FlameHandler : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class FlameHandler : MonoBehaviour
             if (canTakeDamage)
             {
                 StartCoroutine(WaitForSeconds());
-                enemy.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(1);
+                enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(1, Fire);
             }
         }
     }

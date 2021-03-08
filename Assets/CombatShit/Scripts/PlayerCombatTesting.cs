@@ -29,6 +29,11 @@ public class PlayerCombatTesting : MonoBehaviour{
     [Tooltip("Seasoning Shot")]
     public GameObject sShot;
 
+
+    public int health = 10;
+    public SpriteRenderer[] sprites;
+    public Color hurtColor;
+
     #endregion
 
     #region Private Varirables
@@ -251,7 +256,6 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 mousePosition = GetMouseWorldPosition();
             Vector3 shootDir = (mousePosition - transform.position).normalized;
             shuggun.RayShoot(shootPoint, shootDir);
-            shotgunAnim.SetTrigger("Shoot");
         }
         //spawn pellets from gun end point, need to construct prefabs for projectiles
     }
@@ -299,4 +303,37 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
+
+
+    public void PlayerHit(int amount)
+    {
+
+        StartCoroutine(FlashColor());
+
+        health -= amount;
+
+        checkDead();
+    }
+
+
+    IEnumerator FlashColor()
+    {
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].color = hurtColor;
+        }
+        yield return new WaitForSeconds(0.05f);
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].color = Color.white;
+        }
+    }
+
+    private void checkDead()
+    {
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

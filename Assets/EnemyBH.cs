@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public enum DamageEnum { Slice, Fire, Flavor }
 public class EnemyBH : MonoBehaviour {
     public AIPath aiPath;
+    public enum DamageEnum { Slice, Fire, Flavor }
 
     //public Collider2D enemyHitbox;
     public Collider2D knifeHit;
@@ -36,6 +36,8 @@ public class EnemyBH : MonoBehaviour {
     public Vector3 originVec;
     public Vector3 flipVec;
     public Vector3 destVec;
+    private bool canAttack = true;
+    public LayerMask playerLayer;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -310,7 +312,22 @@ public class EnemyBH : MonoBehaviour {
 
     private void Bite()
     {
-        //reset other atk timers
+        if(canAttack)
+        {
+            canAttack = false;
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1.5f, playerLayer);
+            foreach (Collider2D player in hit)
+            {
+                player.GetComponent<PlayerCombatTesting>().PlayerHit(10);
+            }
+            StartCoroutine(ResetAttack(1f));
+        }
+    }
+
+    IEnumerator ResetAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canAttack = true;
     }
 
     private void ShotgunBeans()
