@@ -17,14 +17,18 @@ public class TextBoxScript : MonoBehaviour
     public Text nameText;
 
     [Tooltip("Input file for dialogue. Should be written in json style")]
-    public TextAsset textFile;
+    public TextAsset[] questText;
+    public TextAsset[] idleText;
 
     [Tooltip("Name and image of character. Name of character must exactly match name given in textFile")]
-    public List<CharacterData> characterInformation = new List<CharacterData>();
+    public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
+
+    //public CharacterExpressions[] expressions;
+    //public CharacterExpressions chefExpressions;
 
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
-    
+    public bool activated;
     #endregion
 
     #region Private Variables
@@ -34,16 +38,19 @@ public class TextBoxScript : MonoBehaviour
     private string message; //text part of the dialogue currently being shown
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
+    private string emotion; //holds the emotion of the current speaker in a non-philisophical type way
     private Dialogue dialogue;
-    public bool activated;
+    
+    private int curDialogue = 0; //temp variable for counting which dialogue is being looked at. recommend putting on inventory for persistent data
 
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        dialogue = JsonUtility.FromJson<Dialogue>(textFile.text);        
+        dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);     
         textbox.text = "";
+        curDialogue++;
 
         //deactivate all of the visual elements
         DeactivateObjects();
@@ -51,6 +58,7 @@ public class TextBoxScript : MonoBehaviour
         //setting up variables for first part of dialogue
         message = dialogue.dialogueSegments[loops].text;
         currentSpeaker = dialogue.dialogueSegments[loops].speaker;
+        emotion = dialogue.dialogueSegments[loops].emotion;
         loops ++;
         ChangeName();
     }
@@ -58,6 +66,7 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("CurDialog = " + curDialogue);
         //if there are letters to add and required amount of time has passed
         if(Time.time > timer && letter < message.Length && activated){
             AddLetter();
@@ -71,7 +80,9 @@ public class TextBoxScript : MonoBehaviour
         //runs through given list of speaker images, darkens all non current speakers
         foreach(CharacterData data in characterInformation){
             if(data.name == currentSpeaker){
-                LightenImage(data.image);
+                Debug.Log(emotion);
+                Sprite temp = data.getEmotion(emotion);
+                LightenImage(data.image, temp);
             }
             else{
                 DarkenImage(data.image);
@@ -79,7 +90,8 @@ public class TextBoxScript : MonoBehaviour
         }
     }
 
-    //speed up or move to next message
+    //method called when Use is pressed
+    //has variety of effects based on context
     void SpeedUp(){
 
         //speed up scrolling rate
@@ -88,28 +100,45 @@ public class TextBoxScript : MonoBehaviour
             speedUp = true;
         }
 
-        if(!activated){
-            ActivateObjects();
-        }
-
         //move to next message in dialogue if end of message has been reached
         if(letter >= message.Length && loops < dialogue.dialogueSegments.Length){
             //set unique variables up for next message
             message = dialogue.dialogueSegments[loops].text;
             currentSpeaker = dialogue.dialogueSegments[loops].speaker;
+            emotion = dialogue.dialogueSegments[loops].emotion;
             ChangeName();
             loops++;
 
             //reset general variables
             speedUp = false;
-            scrollSpeed *= 9;
+            scrollSpeed = 0.0625f;
             letter = 0;
             textbox.text = "";
         }
 
-        //if the end of the dialogue has been reached add progress to NarrativeTracker and end dialogue
-        if(loops >= dialogue.dialogueSegments.Length && letter >= message.Length){
+        //if end of final dialogue has been reached
+        if(curDialogue >= questText.Length && loops >= dialogue.dialogueSegments.Length && letter >= message.Length){
+            Debug.Log("called it");
             DeactivateObjects();
+        }
+
+        //if the end of the dialogue has been reached add progress to NarrativeTracker and end dialogue
+        if(loops >= dialogue.dialogueSegments.Length && letter >= message.Length && curDialogue < questText.Length){
+            DeactivateObjects();
+            dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);
+            curDialogue++;
+
+
+            loops = 0;
+            letter = 0;
+            speedUp = false;
+            textbox.text = "";
+            scrollSpeed = 0.0625f;
+            message = dialogue.dialogueSegments[loops].text;
+            currentSpeaker = dialogue.dialogueSegments[loops].speaker;
+            emotion = dialogue.dialogueSegments[loops].emotion;
+            ChangeName();
+            loops++;
         }
         
     }
@@ -127,9 +156,9 @@ public class TextBoxScript : MonoBehaviour
         Color32 temp = target.color;
 
         if(temp.r > 60){
-            temp.r -= 1;
-            temp.g -= 1;
-            temp.b -= 1;
+            temp.r -= 10;
+            temp.g -= 10;
+            temp.b -= 10;
 
             target.transform.localScale -= new Vector3(0.0005f * target.transform.localScale.x, 0.0005f * target.transform.localScale.y, 0);
         }
@@ -139,13 +168,15 @@ public class TextBoxScript : MonoBehaviour
 
 
     //lightens input image and increases size
-    void LightenImage(Image target){
+    void LightenImage(Image target, Sprite emotion){
         Color32 temp = target.color;
+        //CharacterEmotion emotion = expressions[speaker][]
+        target.sprite = emotion;
         
         if(temp.r < 255){
-            temp.r += 1;
-            temp.g += 1;
-            temp.b += 1;
+            temp.r += 10;
+            temp.g += 10;
+            temp.b += 10;
 
             target.transform.localScale += new Vector3(0.0005f * target.transform.localScale.x, 0.0005f * target.transform.localScale.y, 0);
         }
@@ -185,7 +216,19 @@ public class TextBoxScript : MonoBehaviour
         activated = false;
     }
 
+    public void SetDialogue(TextAsset text){
+        dialogue = JsonUtility.FromJson<Dialogue>(text.text);
+        loops = 0;
+        letter = 0;
+        speedUp = false;
+        textbox.text = "";
+        scrollSpeed = 0.0625f;
+        message = dialogue.dialogueSegments[loops].text;
+        currentSpeaker = dialogue.dialogueSegments[loops].speaker;
+        emotion = dialogue.dialogueSegments[loops].emotion;
+    }
 }
+
 
 [System.Serializable]
 //Relevant display data. Has fields for name of the character and the in-scene image of them.
@@ -193,7 +236,25 @@ public class CharacterData
 {
     public string name;
     public Image image;
-    
+    public CharacterEmotion[] emotions;
+
+    public Sprite getEmotion(string name){
+        foreach(CharacterEmotion emotion in emotions){
+            if (emotion.emotion == name){
+                return emotion.image;
+            }
+        }
+        return emotions[0].image;
+    }
+
+    //emotion for a character
+    //identified using emotion
+    [System.Serializable]
+    public class CharacterEmotion
+    {
+        public string emotion;
+        public Sprite image;
+    }
 }
 
 [System.Serializable]
@@ -202,6 +263,7 @@ public class dialogueSegment
 {
    public string text;
    public string speaker;
+   public string emotion;
 }
 
 [System.Serializable]
@@ -209,6 +271,6 @@ public class dialogueSegment
 public class Dialogue
 {
     public dialogueSegment[] dialogueSegments;
-   // public string progression;
+    // public string progression;
     //public string target;
 }

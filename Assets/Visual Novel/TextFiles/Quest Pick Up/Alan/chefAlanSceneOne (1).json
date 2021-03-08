@@ -1,0 +1,30 @@
+{
+	"dialogueSegments":
+	[
+		{
+			"text": "A customer! What can I get for you? Wait, welcome to the Seventino Midnight Cafe! I am Chef, your chef and barista!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "I’d love to try that brew you have right there. The smell caught me while I was walking outside, it was hard to ignore. Alan, by the way. I haven’t ever seen this place before, is it new?",
+			"speaker": "Alan",
+			"emotion": "confident"
+		},
+		{
+			"text": "New to you, my friend, and that’s all the matters! This roast right here is actually my first attempt at a new recipe I’ve been perfecting. Care to be my trial run Alan?",
+			"speaker": "Chef",
+			"emotion": "sad"
+		},
+		{	
+			"text": "Well if it tastes as good as it smells, I think that’ll be alright. What’s in it?",
+			"speaker": "Alan",
+			"emotion": "happy"
+		},
+		{
+			"text": "Oh, just a few ingredients from out in the wilderness! I know exactly what I need and how much of it I need. Sit tight, I’ll be back in a jif!",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		}
+	]
+}

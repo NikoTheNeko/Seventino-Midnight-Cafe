@@ -104,7 +104,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("loading poopfuck");
         Time.timeScale = 1f;
         IsPaused = false;
-        SceneManager.LoadScene("Quest Selection Screen");
+        SceneManager.LoadScene("Cafe Walk Around");
     }
 
     public void TitleScreen()
