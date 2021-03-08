@@ -9,6 +9,8 @@ public class QuestMarker : MonoBehaviour
     public TextBoxScript textbox;
     public GameObject trigger;
     bool entered = false;
+    public TextAsset questText;
+    public TextAsset[] idleText;
 
     private bool pickedUp = false;
     // Start is called before the first frame update

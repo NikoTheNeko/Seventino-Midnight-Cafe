@@ -20,7 +20,7 @@ public class TextBoxScript : MonoBehaviour
     public TextAsset[] questText;
     public TextAsset[] idleText;
 
-    [Tooltip("Name and image of character. Name of character must exactly match name given in textFile")]
+    [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
@@ -227,6 +227,8 @@ public class TextBoxScript : MonoBehaviour
         activated = false;
     }
 
+    //set dialogue to given TextAsset, resets variables
+    //then activates self
     public void SetDialogue(TextAsset text){
         dialogue = JsonUtility.FromJson<Dialogue>(text.text);
         loops = 0;
@@ -237,6 +239,7 @@ public class TextBoxScript : MonoBehaviour
         message = dialogue.dialogueSegments[loops].text;
         currentSpeaker = dialogue.dialogueSegments[loops].speaker;
         emotion = dialogue.dialogueSegments[loops].emotion;
+        ActivateObjects();
     }
 }
 

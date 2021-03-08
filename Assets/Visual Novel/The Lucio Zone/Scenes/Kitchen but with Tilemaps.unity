@@ -2469,6 +2469,14 @@ MonoBehaviour:
   marker: {fileID: 401030612}
   textbox: {fileID: 414640887}
   trigger: {fileID: 841691555}
+  questText: {fileID: 0}
+  idleText:
+  - {fileID: 4900000, guid: 034e410f53614ed449d2723d8b47097f, type: 3}
+  - {fileID: 4900000, guid: d9c70551860d58246aab8ec764b02bf0, type: 3}
+  - {fileID: 4900000, guid: abafb369baf2a1d4291d55256e398b2d, type: 3}
+  - {fileID: 4900000, guid: 17693def9b3628f47b25543b908f0b0c, type: 3}
+  - {fileID: 4900000, guid: c85f94cc62ab2d842b1335139ba08a50, type: 3}
+  - {fileID: 4900000, guid: 213f8852208762741b41360bf0b28ffc, type: 3}
 --- !u!61 &1166500852
 BoxCollider2D:
   m_ObjectHideFlags: 0
