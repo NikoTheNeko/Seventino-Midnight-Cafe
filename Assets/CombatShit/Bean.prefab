@@ -60,6 +60,7 @@ MonoBehaviour:
   rb: {fileID: 7677941295430313343}
   enemyState: idle
   health: 20
+  idleIndex: 0
   idleTimer: 0
   walkTimer: 0
   sprites:
