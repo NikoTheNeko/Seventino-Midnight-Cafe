@@ -17,10 +17,10 @@ public class EnemyBehaviour : MonoBehaviour {
     public float nextWaypointDistance = 3f;
 
     public float attackRange;
-    IAstarAI ai;
+    public IAstarAI ai;
 
-    Path path;
-    int currentWaypoint = 0;
+    public Path path;
+    public int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
     public Seeker seeker;
@@ -28,9 +28,15 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public string enemyState = "idle";
     public int health = 100;
-    private Vector3 spawnPos;
+    public Vector3 spawnPos;
+
+    public int idleIndex = 0;
     public int idleTimer;
     public int walkTimer;
+    public int losTimer;
+    public int biteTimer;
+    public int shotgunTimer;
+    public int machineTimer;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -43,8 +49,8 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
-        idleTimer = 1;
-        walkTimer = 3;
+        idleTimer = 300;
+        walkTimer = 800;
         spawnPos = transform.position;
         rb = transform.GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
@@ -52,31 +58,6 @@ public class EnemyBehaviour : MonoBehaviour {
         ai = GetComponent<IAstarAI>();
     }
 
-    void UpdatePath() 
-    {
-        switch (enemyState)
-        {
-            case "idle":
-                EnemyIdle();
-                break;
-
-            case "walkAround":
-                EnemyWalk();
-                break;
-
-            case "combat":
-                EnemyCombat();
-                break;
-
-            case "escape":
-                EnemyEscape();
-                break;
-
-            case "goHome":
-                EnemyGoHome();
-                break;
-        }
-    }
 
     void OnPathComplete(Path p)
     {
@@ -85,11 +66,6 @@ public class EnemyBehaviour : MonoBehaviour {
             path = p;
             currentWaypoint = 0;
         }
-    }
-
-    // Update is called once per frame
-    void Update(){
-        checkCombat();
     }
 
     private void FixedUpdate()
@@ -141,79 +117,30 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     //maybe add aggro timer?
     //generally needs unfucking
-    private void checkCombat()
-    {
-        if (Vector3.Distance(transform.position, target.transform.position) < attackRange)
-        {
-            enemyState = "combat";
-        }
-    }
 
-    Vector3 PickRandomPoint () {
-        Vector3 point = Random.insideUnitSphere * 4;
-        point.z = transform.position.z;
-        point += ai.position;
-        return point;
-    }
 
-    private void EnemyIdle()
+    public bool LoS()
     {
-        if(seeker.IsDone()) 
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, target.position);
+        if (raycastHit2D.collider != null)
         {
-            seeker.StartPath(rb.position, rb.position, OnPathComplete);
+            PlayerCombatTesting target = raycastHit2D.collider.GetComponent<PlayerCombatTesting>();
+            if (target != null)
+            {
+                return true;
+            }
         }
-        /*if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath))
-        {
-            ai.destination = ai.position;
-            ai.SearchPath();
-        }*/
-        if (idleTimer > 0)
-        {
-            idleTimer--;
-        }
-        else
-        {
-            idleTimer = (int)Random.Range(1, 4);
-            Debug.LogError("Change to walk");
-            enemyState = "walkAround";
-        }
-    }
-
-    private void EnemyWalk()
-    {
-
-        Debug.LogError("walk start");
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, PickRandomPoint(), OnPathComplete);
-        }
-        /*if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath)) {
-            ai.destination = PickRandomPoint();
-            ai.SearchPath();
-        }*/
-        if (walkTimer > 0)
-        {
-            walkTimer--;
-            //move
-        }
-        else
-        {
-            walkTimer = (int)Random.Range(1, 2);
-            enemyState = "idle";
-        }
-    }
-    private void EnemyCombat()
-    {
-        if(seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-        }
+        return false;
     }
     private void EnemyEscape()
     {
     }
-    private void EnemyGoHome()
+    private void EnemyPathBack()
     {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, spawnPos, OnPathComplete);
+        }
     }
 
     public void TakeDamage(int amount, DamageEnum damageType){

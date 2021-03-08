@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyBH.DamageEnum;
 
 public class FlameHandler : MonoBehaviour
 {
@@ -17,13 +18,12 @@ public class FlameHandler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D enemy)
     {
-        //Debug.Log("fujck");
         if (enemy.gameObject.tag == "enemy")
         {
             if (canTakeDamage)
             {
                 StartCoroutine(WaitForSeconds());
-                enemy.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(1, DamageEnum.Fire);
+                enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(1, Fire);
                 CameraShake.instance.ShakeCamera(.2f, .015f);
             }
         }

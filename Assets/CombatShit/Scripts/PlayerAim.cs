@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-    
+    public PlayerCombatTesting player;
     private Transform gunAnchor;
     private void Awake()
     {
@@ -24,6 +24,10 @@ public class PlayerAim : MonoBehaviour
 
         Vector3 aimDirection = (mousePosition - transform.position).normalized;
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        if(!player.facingRight)
+        {
+            angle += 180f;
+        }
         gunAnchor.eulerAngles = new Vector3(0, 0, angle);
     }
 
