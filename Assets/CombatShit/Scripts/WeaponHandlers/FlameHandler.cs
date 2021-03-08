@@ -17,13 +17,14 @@ public class FlameHandler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D enemy)
     {
-        Debug.Log("fujck");
+        //Debug.Log("fujck");
         if (enemy.gameObject.tag == "enemy")
         {
             if (canTakeDamage)
             {
                 StartCoroutine(WaitForSeconds());
                 enemy.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(1, DamageEnum.Fire);
+                CameraShake.instance.ShakeCamera(.2f, .015f);
             }
         }
     }
