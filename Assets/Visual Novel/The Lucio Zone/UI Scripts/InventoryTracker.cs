@@ -12,7 +12,7 @@ public class InventoryTracker : MonoBehaviour
     public List<IngredientPicture> ingredientPictures = new List<IngredientPicture>();
     [Tooltip("Spawnable Food prefab")]
     public FoodDrop foodObject;
-    public List<FoodDrop> inventory = new List<FoodDrop>();
+    public List<Ingredient> inventory = new List<Ingredient>();
     
 
     #endregion
@@ -39,11 +39,13 @@ public class InventoryTracker : MonoBehaviour
     //returns true if addition succesful
     //returns false if addition couldn't be done
     public void add(FoodDrop food){
-        inventory.Add(food);
+        Ingredient temp = new Ingredient(food);
+        inventory.Add(temp);
     }
 
     public void remove(FoodDrop food){
-        inventory.Remove(food);
+        Ingredient temp = new Ingredient(food);
+        inventory.Remove(temp);
     }
 
     //returns a reference to a ingredient object
@@ -73,5 +75,23 @@ public class InventoryTracker : MonoBehaviour
 public class IngredientPicture{
     public Sprite picture;
     public string name;
+}
+
+[System.Serializable]
+public class Ingredient{
+    public Sprite image;
+    public string name;
+    public int texture;
+    public int warmth;
+    public int flavor;
+
+    public Ingredient(FoodDrop food){
+        image = food.image;
+        name = food.name;
+        int[] vars = food.getValues();
+        texture = vars[0];
+        warmth = vars[1];
+        flavor = vars[2];
+    }
 }
 

@@ -49,7 +49,7 @@ public class InventoryDisplay : MonoBehaviour
     private void displayIngredients(){
         int display = 0;
 
-        foreach(FoodDrop food in tracker.inventory){
+        foreach(Ingredient food in tracker.inventory){
             if(display > ingredientDisplays.Count){
                 break;
             }
