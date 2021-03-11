@@ -53,6 +53,10 @@ public class FoodDrop : MonoBehaviour
         name = iName;
     }
 
+    public int[] getValues(){
+        return new int[] {texture, warmth, flavor};
+    }
+
     public void setImage(Sprite ingredient){
         this.gameObject.GetComponent<SpriteRenderer>().sprite = ingredient;
         image = ingredient;
@@ -60,7 +64,6 @@ public class FoodDrop : MonoBehaviour
 
     // void OnCollisionEnter(Collision collision){
     void OnTriggerEnter2D(Collider2D other){
-        Debug.Log("collided");
         if(other.gameObject.tag == "Player"){
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
             tracker.add(this.gameObject.GetComponent<FoodDrop>());

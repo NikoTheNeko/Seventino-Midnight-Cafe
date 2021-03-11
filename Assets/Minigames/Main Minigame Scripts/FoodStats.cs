@@ -55,6 +55,9 @@ public class FoodStats : MonoBehaviour{
         tracker = temp.GetComponent<InventoryTracker>();
 
         Ingredient importFood = tracker.inventory[0];
+        // UnityEngine.Debug.Log(importFood.texture);
+
+        // FoodDrop importFood = tracker.inventory[0];
 
         TextureVal = importFood.texture;
         WarmthVal = importFood.warmth;
