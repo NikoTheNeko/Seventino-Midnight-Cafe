@@ -54,13 +54,13 @@ public class FoodStats : MonoBehaviour{
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
 
-        FoodDrop importFood = tracker.inventory[0];
+        Ingredient importFood = tracker.inventory[0];
 
-        TextureVal = importFood.getTexture();
-        WarmthVal = importFood.getWarmth();
-        FlavorVal = importFood.getFlavor();
+        TextureVal = importFood.texture;
+        WarmthVal = importFood.warmth;
+        FlavorVal = importFood.flavor;
 
-        tracker.remove(tracker.inventory[0]);
+        // tracker.remove(tracker.inventory[0]);
 
     }
 
