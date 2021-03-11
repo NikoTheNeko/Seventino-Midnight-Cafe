@@ -10,6 +10,8 @@ public class InventoryDisplay : MonoBehaviour
     public List<Display> ingredientDisplays = new List<Display>();
     public GameObject mouseFollower;
     public Text followerText;
+    public GameObject onScreenAnchor;
+    public GameObject offScreenAnchor;
     #endregion
 
     #region Private Variables
@@ -81,12 +83,12 @@ public class InventoryDisplay : MonoBehaviour
 
     private void move(){
         if(onScreen){
-            if(this.gameObject.transform.position.y < 250){
+            if(this.gameObject.transform.position.y < onScreenAnchor.transform.position.y){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
             }
         }
         else if(!onScreen){
-            if(this.gameObject.transform.position.y > 80){
+            if(this.gameObject.transform.position.y > offScreenAnchor.transform.position.y){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
             }
         }
