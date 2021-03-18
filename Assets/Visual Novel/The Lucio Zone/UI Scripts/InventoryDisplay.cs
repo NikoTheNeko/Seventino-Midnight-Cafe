@@ -55,7 +55,7 @@ public class InventoryDisplay : MonoBehaviour
             if(display > ingredientDisplays.Count){
                 break;
             }
-            ingredientDisplays[display].image.sprite = food.image;
+            ingredientDisplays[display].image.sprite = tracker.getIngredient(food.name).picture;
             ingredientDisplays[display].Activate();
             ingredientDisplays[display].setVars(food.texture, food.warmth, food.flavor, food.name);
             display++;
@@ -74,9 +74,9 @@ public class InventoryDisplay : MonoBehaviour
                 textActive = true;
                 //info should be displayed here
                 followerText.text = "Name: " + target.name + 
-                                    "\nFlavor: " + target.flavor + 
                                     "\nTexture: " + target.texture + 
-                                    "\nWarmth: " + target.warmth;
+                                    "\nWarmth: " + target.warmth + 
+                                    "\nFlavor: " + target.flavor;
             }
         }
     }

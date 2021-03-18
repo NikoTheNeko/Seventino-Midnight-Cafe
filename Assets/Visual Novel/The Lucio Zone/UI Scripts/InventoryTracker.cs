@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 
 public class InventoryTracker : MonoBehaviour
@@ -69,6 +71,35 @@ public class InventoryTracker : MonoBehaviour
         dropped.setValues(texture, warmth, flavor, name);
         return false;
     }
+
+    public void save(){
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/savedData.shit";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        
+        SaveData data = new SaveData(inventory);
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public void load(){
+
+        string path = Application.persistentDataPath + "/savedData.shit";
+        if(File.Exists(path)){
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            SaveData load = formatter.Deserialize(stream) as SaveData;
+
+            inventory.Clear();
+            foreach(Ingredient ingredient in load.inventorySave){
+                inventory.Add(ingredient);
+            }
+        }
+        else{
+            Debug.LogError("save file not found");
+        }
+    }
 }
 
 [System.Serializable]
@@ -79,14 +110,12 @@ public class IngredientPicture{
 
 [System.Serializable]
 public class Ingredient{
-    public Sprite image;
     public string name;
     public int texture;
     public int warmth;
     public int flavor;
 
     public Ingredient(FoodDrop food){
-        image = food.image;
         name = food.name;
         int[] vars = food.getValues();
         texture = vars[0];
