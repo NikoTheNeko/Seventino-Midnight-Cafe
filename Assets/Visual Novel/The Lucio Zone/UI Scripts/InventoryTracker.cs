@@ -74,7 +74,7 @@ public class InventoryTracker : MonoBehaviour
 
     public void save(){
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/savedData.shit";
+        string path = Application.persistentDataPath + "/savedData.smc";
         FileStream stream = new FileStream(path, FileMode.Create);
         
         SaveData data = new SaveData(inventory);
@@ -84,7 +84,7 @@ public class InventoryTracker : MonoBehaviour
 
     public void load(){
 
-        string path = Application.persistentDataPath + "/savedData.shit";
+        string path = Application.persistentDataPath + "/savedData.smc";
         if(File.Exists(path)){
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
