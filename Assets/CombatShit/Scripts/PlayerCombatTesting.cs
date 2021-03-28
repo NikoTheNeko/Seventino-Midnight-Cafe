@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombatTesting : MonoBehaviour{
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -33,6 +34,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
+    public Slider healthBar;
+    public Slider staminaBar;
 
     #endregion
 
@@ -44,10 +47,13 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //weapon select 1: Knife
                 //              2: Flambethrower
                 //              3: Pepper shotgun
+                
+    private float stamina;
 
     #endregion
     private void Start()
     {
+        
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -85,10 +91,17 @@ public class PlayerCombatTesting : MonoBehaviour{
         flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
         state = State.Normal;
+        stamina = 100f;
     }
 
     // Update is called once per frame
     void Update(){
+        if(stamina < 100){
+            stamina += 0.01f;
+        }
+        Debug.Log("health: " + health);
+        healthBar.value = health;
+        staminaBar.value = stamina;
         
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
@@ -140,6 +153,8 @@ public class PlayerCombatTesting : MonoBehaviour{
                     rollDirection = lastMovedDirection;
                     rollSpeed = 20f;
                     state = State.Rolling;
+                    stamina -= 10;
+                    Debug.Log(stamina);
                 }
                 break;
             // Currently in a rolling state.
