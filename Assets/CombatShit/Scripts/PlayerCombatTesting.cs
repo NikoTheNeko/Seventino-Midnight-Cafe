@@ -96,10 +96,12 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        //stamina regen
         if(stamina < 100){
             stamina += 0.01f;
         }
-        Debug.Log("health: " + health);
+
+        //health and stamina display
         healthBar.value = health;
         staminaBar.value = stamina;
         
