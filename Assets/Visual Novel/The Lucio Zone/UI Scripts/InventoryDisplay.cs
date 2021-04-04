@@ -15,8 +15,8 @@ public class InventoryDisplay : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int OffsetX = 50; //amount of leeway in x axis
-    private int OffsetY = 50; //amount of leeway in y axis
+    private int OffsetX = 40; //amount of leeway in x axis
+    private int OffsetY = 40; //amount of leeway in y axis
     private InventoryTracker tracker;
     private bool onScreen = false;
     private bool textActive = false;

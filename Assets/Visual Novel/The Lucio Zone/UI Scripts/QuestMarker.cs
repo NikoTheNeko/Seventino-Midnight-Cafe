@@ -26,9 +26,20 @@ public class QuestMarker : MonoBehaviour
         if(pickedUp && !textbox.activated){
             trigger.SetActive(true);
         }
-        if(entered && Input.GetButton("Use") && !pickedUp){
-            pickedUp = true;
-            textbox.ActivateObjects();
+        Debug.Log("activated: " + textbox.activated);
+
+        if(entered && Input.GetButtonDown("Use") && !textbox.activated){
+            
+            if(!pickedUp){
+                pickedUp = true;
+                textbox.SetDialogue(questText);
+            }
+            else if(pickedUp){
+                TextAsset temp = idleText[(int)Random.Range(0, idleText.Length)];
+                Debug.Log(temp.text);
+                textbox.SetDialogue(temp);
+            }
+            
         }
     }
 
