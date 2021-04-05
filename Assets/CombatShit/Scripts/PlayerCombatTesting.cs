@@ -102,8 +102,11 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
 
         //health and stamina display
-        healthBar.value = health;
-        staminaBar.value = stamina;
+        if(healthBar != null){
+            healthBar.value = health;
+            staminaBar.value = stamina;
+        }
+        
         
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
