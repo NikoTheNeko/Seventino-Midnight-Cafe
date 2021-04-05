@@ -15,6 +15,11 @@ public class InventoryTracker : MonoBehaviour
     [Tooltip("Spawnable Food prefab")]
     public FoodDrop foodObject;
     public List<Ingredient> inventory = new List<Ingredient>();
+
+    public TextAsset[] TextFiles;
+
+    public List<Dialogue> dialogues;
+    public int dialogueProg = 0;
     
 
     #endregion
@@ -28,6 +33,10 @@ public class InventoryTracker : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        foreach(TextAsset asset in TextFiles){
+            dialogues.Add(JsonUtility.FromJson<Dialogue>(asset.text));
+        }
         
     }
 
@@ -104,8 +113,8 @@ public class InventoryTracker : MonoBehaviour
 
 [System.Serializable]
 public class IngredientPicture{
-    public Sprite picture;
     public string name;
+    public Sprite picture;
 }
 
 [System.Serializable]

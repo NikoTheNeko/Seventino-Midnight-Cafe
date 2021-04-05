@@ -16,10 +16,6 @@ public class TextBoxScript : MonoBehaviour
     [Tooltip("Text for the name of the speaker")]
     public Text nameText;
 
-    // [Tooltip("Input file for dialogue. Should be written in json style")]
-    // public TextAsset[] questText;
-    // public TextAsset[] idleText;
-
     [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
@@ -77,8 +73,6 @@ public class TextBoxScript : MonoBehaviour
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
-                Debug.Log("current speaker: " + currentSpeaker);
-                // Debug.Log("data.name: " + data.name);
                 if(data.name == currentSpeaker){
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
@@ -119,9 +113,8 @@ public class TextBoxScript : MonoBehaviour
             textbox.text = "";
         }
 
-        //if end of final has been reached
+        //if end of dialogue has been reached
         if(loops >= dialogue.dialogueSegments.Length - 1 && letter >= message.Length){
-            Debug.Log("called it");
             DeactivateObjects();
         }
         
@@ -151,7 +144,6 @@ public class TextBoxScript : MonoBehaviour
     //darkens input image and decreases size
     void DarkenImage(Image target){
         Color32 temp = target.color;
-        Debug.Log("darkening " + target.name);
 
         if(temp.r > 60){
             temp.r -= 10;
@@ -168,7 +160,6 @@ public class TextBoxScript : MonoBehaviour
     //lightens input image and increases size
     //also changes sprite to input emotion
     void LightenImage(Image target, Sprite emotion){
-        Debug.Log(target.name);
         Color32 temp = target.color;
         target.sprite = emotion;
         
@@ -178,10 +169,6 @@ public class TextBoxScript : MonoBehaviour
             temp.b += 10;
 
             target.transform.localScale += new Vector3(0.005f * target.transform.localScale.x, 0.005f * target.transform.localScale.y, 0);
-            Debug.Log("lightening");
-            if(target.name == "Alan"){
-                Debug.Log(temp);
-            }
         }
         target.transform.SetAsLastSibling();
         textboxImage.transform.parent.SetAsLastSibling(); 
@@ -221,9 +208,9 @@ public class TextBoxScript : MonoBehaviour
 
     //set dialogue to given TextAsset, resets variables
     //then activates self
-    public void SetDialogue(TextAsset text){
+    public void SetDialogue(Dialogue text){
 
-        dialogue = JsonUtility.FromJson<Dialogue>(text.text);
+        dialogue = text;
         loops = 0;
         letter = 0;
         speedUp = false;
@@ -278,6 +265,7 @@ public class dialogueSegment
 public class Dialogue
 {
     public dialogueSegment[] dialogueSegments;
+    public string subject;
     // public string progression;
     //public string target;
 }

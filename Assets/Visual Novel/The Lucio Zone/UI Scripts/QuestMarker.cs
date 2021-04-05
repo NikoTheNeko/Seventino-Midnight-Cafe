@@ -11,18 +11,25 @@ public class QuestMarker : MonoBehaviour
     bool entered = false;
     public TextAsset questText;
     public TextAsset[] idleText;
+    InventoryTracker tracker;
+    Dialogue curDialogue;
+    public string subject;
 
     private bool pickedUp = false;
     // Start is called before the first frame update
     void Start()
     {
+        
         marker.SetActive(false);
         trigger.SetActive(false);
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        curDialogue = tracker.dialogues[tracker.dialogueProg];
         if(pickedUp && !textbox.activated){
             trigger.SetActive(true);
         }
@@ -30,14 +37,13 @@ public class QuestMarker : MonoBehaviour
 
         if(entered && Input.GetButtonDown("Use") && !textbox.activated){
             
-            if(!pickedUp){
+            if(!pickedUp && curDialogue.subject == subject){
                 pickedUp = true;
-                textbox.SetDialogue(questText);
+                textbox.SetDialogue(curDialogue);
             }
-            else if(pickedUp){
+            else{
                 TextAsset temp = idleText[(int)Random.Range(0, idleText.Length)];
-                Debug.Log(temp.text);
-                textbox.SetDialogue(temp);
+                textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text));
             }
             
         }
@@ -53,14 +59,4 @@ public class QuestMarker : MonoBehaviour
         marker.SetActive(false);
         entered = false;
     }
-    
-    // void OnTriggerStay2D(Collider2D other){
-    //     Debug.Log("colliding");
-    //     if(Input.GetButton("Use")){
-    //         // Time.timeScale = 0f;
-    //         Debug.Log("entered the Lucio Zone");
-    //         textbox.ActivateObjects();
-    //         pickedUp = true;
-    //     }
-    // }
 }

@@ -1,0 +1,51 @@
+{
+	"dialogueSegments":
+	[
+		{
+			"text": "Rose! Is that you? I finally opened my own restaurant!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "That you did little guy. You’re all grown up now. Brewing your first coffee as well I see.",
+			"speaker": "Rose",
+			"emotion": "smirk"
+		},
+		{
+			"text": "Yeah! Wanna try it? Your restaurant always had the best coffee.",
+			"speaker": "Chef",
+			"emotion": "sad"
+		},
+		{	
+			"text": "If you insist, little guy. Let’s give this brew a shot.",
+			"speaker": "Rose",
+			"emotion": "happy"
+		},
+		{	
+			"text": "Chef! What is this? Did you even filter it?! I can still taste the crust!",
+			"speaker": "Rose",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Is that not how you brew coffee?",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		},
+		{	
+			"text": "No, Chef. You have to tailor every order to the customer! No two customers are the same, you know.",
+			"speaker": "Rose",
+			"emotion": "sad"
+		},
+		{	
+			"text": "I see! So I can’t just use the same technique every time?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "That’s right Chef, you’re a quick learner! Now please, go out and try again! I’ll be waiting!",
+			"speaker": "Rose",
+			"emotion": "happy"
+		}
+	],
+	"subject": "Rose"
+}
