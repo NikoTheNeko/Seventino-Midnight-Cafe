@@ -25,6 +25,13 @@ public class InventoryTracker : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
+
+    void Awake(){
+        //convert all given text assets to dialogue structs
+        foreach(TextAsset asset in TextFiles){
+            dialogues.Add(JsonUtility.FromJson<Dialogue>(asset.text));
+        }
+    }
     void Start()
     {
         //destroys self if it is a duplicate
@@ -33,11 +40,6 @@ public class InventoryTracker : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-
-        foreach(TextAsset asset in TextFiles){
-            dialogues.Add(JsonUtility.FromJson<Dialogue>(asset.text));
-        }
-        
     }
 
     // Update is called once per frame
@@ -81,6 +83,7 @@ public class InventoryTracker : MonoBehaviour
         return false;
     }
 
+    //Saves current inventory state to savedData.smc
     public void save(){
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/savedData.smc";
@@ -91,6 +94,7 @@ public class InventoryTracker : MonoBehaviour
         stream.Close();
     }
 
+    //Loads inventory state from savedData.smc
     public void load(){
 
         string path = Application.persistentDataPath + "/savedData.smc";

@@ -23,19 +23,19 @@ public class QuestMarker : MonoBehaviour
         marker.SetActive(false);
         trigger.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        curDialogue = tracker.dialogues[tracker.dialogueProg];
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        curDialogue = tracker.dialogues[tracker.dialogueProg];
         if(pickedUp && !textbox.activated){
             trigger.SetActive(true);
         }
-        Debug.Log("activated: " + textbox.activated);
 
         if(entered && Input.GetButtonDown("Use") && !textbox.activated){
+            
             
             if(!pickedUp && curDialogue.subject == subject){
                 pickedUp = true;
