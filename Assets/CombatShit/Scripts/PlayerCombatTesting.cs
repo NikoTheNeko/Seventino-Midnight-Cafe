@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombatTesting : MonoBehaviour{
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -28,6 +29,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     public GameObject flameShit;
     [Tooltip("Seasoning Shot")]
     public GameObject sShot;
+
+    public Animator playerAnim;
 
 
     public int health = 10;
@@ -102,11 +105,11 @@ public class PlayerCombatTesting : MonoBehaviour{
                 // WASD movement implementation.
                 if (Input.GetKey(KeyCode.W))
                 {
-                    moveY = +1f;
+                    moveY = +.3f;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    moveY = -1f;
+                    moveY = -.3f;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
@@ -114,7 +117,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     {
                         Flip();
                     }
-                    moveX = +1f;
+                    moveX = +.3f;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -122,7 +125,17 @@ public class PlayerCombatTesting : MonoBehaviour{
                     {
                         Flip();
                     }
-                    moveX = -1f;
+                    moveX = -.3f;
+                }
+                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    playerAnim.SetBool("Idle", false);
+                    playerAnim.SetBool("Run", true);
+                }
+                else
+                {
+                    playerAnim.SetBool("Idle", true);
+                    playerAnim.SetBool("Run", false);
                 }
                 // converting WASD input into a vector3, normalized.
                 moveDirection = new Vector3(moveX, moveY).normalized;
@@ -137,6 +150,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 // Dodge roll starts here.
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
+                    playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
                     rollSpeed = 20f;
                     state = State.Rolling;
@@ -295,16 +309,6 @@ public class PlayerCombatTesting : MonoBehaviour{
         return worldPosition;
     }
 
-    public void CheckAttack(){
-        Quaternion rotato = new Quaternion(0,0,0,0);
-        Vector3 Offset = transform.position + new Vector3(1,0,0);
-        if(Input.GetButtonDown("Use")){
-            //Object.Instantiate(hitbox, Offset, rotato);
-        }
-    }
-
-
-
     public void PlayerHit(int amount)
     {
 
@@ -329,12 +333,18 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
+    IEnumerator LeaveScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName: "TitleScreen");
+    }
+
     private void checkDead()
     {
         if (health < 0)
         {
-            Destroy(gameObject);
-            Application.Quit();
+            playerAnim.SetTrigger("Death");
+            StartCoroutine("LeaveScene", 1.5f);
         }
     }
 }
