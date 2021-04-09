@@ -9,11 +9,11 @@ public class QuestMarker : MonoBehaviour
     public TextBoxScript textbox;
     public GameObject trigger;
     bool entered = false;
-    public TextAsset questText;
     public TextAsset[] idleText;
     InventoryTracker tracker;
-    Dialogue curDialogue;
+    Dialogue curQuest;
     public string subject;
+    private int idlePos = -1;
 
     private bool pickedUp = false;
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class QuestMarker : MonoBehaviour
         marker.SetActive(false);
         trigger.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        curDialogue = tracker.dialogues[tracker.dialogueProg];
+        curQuest = tracker.dialogues[tracker.dialogueProg];
         
     }
 
@@ -34,15 +34,34 @@ public class QuestMarker : MonoBehaviour
             trigger.SetActive(true);
         }
 
+        if(curQuest.subject == subject && !pickedUp){
+            marker.SetActive(true);
+        }
+        else{
+            marker.SetActive(false);
+        }
+
+        //if player presses space and textbox not currently active, choose either quest or idle text and activate textbox
         if(entered && Input.GetButtonDown("Use") && !textbox.activated){
             
-            
-            if(!pickedUp && curDialogue.subject == subject){
+            if(!pickedUp && curQuest.subject == subject){
                 pickedUp = true;
-                textbox.SetDialogue(curDialogue);
+                textbox.SetDialogue(curQuest);
+                tracker.dialogueProg++;
             }
             else{
-                TextAsset temp = idleText[(int)Random.Range(0, idleText.Length)];
+                //chooses whether idle text is sequential or random
+                //sequential text resets once end of array has been reached
+                switch(subject){
+                    case "Camellia":
+                    idlePos = (idlePos + 1)%idleText.Length;
+                    break;
+
+                    default:
+                    idlePos = (int)Random.Range(0, idleText.Length);
+                    break;
+                }
+                TextAsset temp = idleText[idlePos];
                 textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text));
             }
             
@@ -51,12 +70,12 @@ public class QuestMarker : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other){
-        marker.SetActive(true);
+        
         entered = true;
     }
 
     void OnTriggerExit2D(Collider2D other){
-        marker.SetActive(false);
+        // marker.SetActive(false);
         entered = false;
     }
 }

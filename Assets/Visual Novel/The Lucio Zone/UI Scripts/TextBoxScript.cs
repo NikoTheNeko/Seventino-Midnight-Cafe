@@ -49,12 +49,6 @@ public class TextBoxScript : MonoBehaviour
         //deactivate all of the visual elements
         DeactivateObjects();
         
-        //setting up variables for first part of dialogue
-        // message = dialogue.dialogueSegments[loops].text;
-        // currentSpeaker = dialogue.dialogueSegments[loops].speaker;
-        // emotion = dialogue.dialogueSegments[loops].emotion;
-        // loops ++;
-        // ChangeName();
     }
 
     // Update is called once per frame
@@ -73,6 +67,14 @@ public class TextBoxScript : MonoBehaviour
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
+                // switch(currentSpeaker){
+                //     case "Chef":
+                //         Debug.Log("my name chef");
+                //         break;
+                //     default:
+                //         Debug.Log("my name not chef");
+                //         break;
+                // }
                 if(data.name == currentSpeaker){
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);

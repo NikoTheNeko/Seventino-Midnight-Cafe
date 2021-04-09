@@ -52,7 +52,8 @@ public class InventoryDisplay : MonoBehaviour
         int display = 0;
 
         foreach(Ingredient food in tracker.inventory){
-            if(display > ingredientDisplays.Count){
+            //note to self: "new text" error maybe caused when too many ingredients in tracker. breaks here, doesn't do checkformouseover
+            if(display > ingredientDisplays.Count - 1){
                 break;
             }
             ingredientDisplays[display].image.sprite = tracker.getIngredient(food.name).picture;
