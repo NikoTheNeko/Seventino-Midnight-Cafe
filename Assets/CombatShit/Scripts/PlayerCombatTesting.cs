@@ -171,7 +171,6 @@ public class PlayerCombatTesting : MonoBehaviour{
                 break;
         }
 
-        CheckAttack();
         UpdateWeapon();
         //if (Input.GetMouseButtonDown(0))
         weaponSelect = gunAnchor.GetComponent<weaponBehaviour>().index;
