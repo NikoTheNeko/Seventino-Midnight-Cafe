@@ -333,7 +333,7 @@ public class EnemyBH : MonoBehaviour {
         if (canAttack)
         {
             canAttack = false;
-            Instantiate(SeedShot, transform.position, Quaternion.identity);
+            //Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
         }
     }
@@ -343,7 +343,7 @@ public class EnemyBH : MonoBehaviour {
         if (canAttack)
         {
             canAttack = false;
-            Instantiate(SeedShot, transform.position, Quaternion.identity);
+            //Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
         }
     }
@@ -397,7 +397,7 @@ public class EnemyBH : MonoBehaviour {
         {
             sprites[i].color = hurtColor;
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.10f);
         for (int i = 0; i < sprites.Length; i++)
         {
             sprites[i].color = Color.white;
