@@ -8,12 +8,17 @@ public class CookingController : MonoBehaviour
     #region public variables
 
     [Header("Minigame Objects")]
+    [Tooltip("This is the number of minigames")]
+    public int AmountOfMinigames = 1;
     [Tooltip("This is where all of the minigames are stored.")]
     public GameObject[] Minigames;
 
     [Header("Minigame Camera Locations")]
     [Tooltip("This is where all of the CAMERA locations are stored so that the camera cam move to each location")]
     public Transform[] CameraLocations;
+
+    [Tooltip("This holds all the buttons for the minigames")]
+    public Button[] Choices;
 
     [Header("Camera and other Game Objects")]
     [Tooltip("The Main Camera that is being used")]
@@ -25,15 +30,29 @@ public class CookingController : MonoBehaviour
     [Tooltip("The button to progress through each track")]
     public Button NextButton;
 
+    [Tooltip("The Book that moves around")]
+    public Transform Book;
+    [Tooltip("Left Anchor for the book")]
+    public Transform LeftAnchor;
+    [Tooltip("Center Anchor for the book")]
+    public Transform CenterAnchor;
+
+    [Header("Canvases")]
+    public GameObject Instructions;
+    public GameObject ChoiceButtons;
+
     #endregion
 
     #region Private Variables
 
     //Minigame Number keeps track of the minigames that go through each thing.
-    public int MinigameNumber = 0;
+    private int MinigameNumber = -1;
 
     //This variable checks to send the activation messages so it's not constantly being called
     private bool ActivationMessageSent = false;
+
+    //This is the state of the game 0 = Grind, 1 = Brew Pour, 2 = Brew Espresso, 3 = Addon
+    private int GameState = 0;
 
     #endregion
 
@@ -51,7 +70,7 @@ public class CookingController : MonoBehaviour
     **/
     public void UpdateMinigames(){
         ActivateMinigame();
-        MoveCamera();
+        BookControl();
     }
 
     #region The actual functions for Minigame Control
@@ -67,11 +86,44 @@ public class CookingController : MonoBehaviour
         Camera.position = NewLocation;
     }
 
+    private void MoveBook(Transform Anchor){
+        Vector3 NewLocation = Vector3.Lerp(Book.position, 
+                                            Anchor.position,
+                                            CameraSpeed);
+        Book.position = NewLocation;
+    }
+
+    private void BookControl(){
+        if(MinigameNumber == -1){
+            MoveBook(CenterAnchor);
+        } else {
+            ChoiceButtons.SetActive(false);
+            Instructions.SetActive(true);
+            MoveBook(LeftAnchor);
+        }
+
+        switch(GameState){
+            case 0:
+            Choices[0].interactable = true;
+            break;
+
+            case 1:
+            break;
+
+            case 3:
+            break;
+
+            case 4:
+            break;
+        }
+    }
+
     /**
         This sends a message to the minigames tho turn on their minigames
     **/
     private void ActivateMinigame(){
-        if(ActivationMessageSent == false){
+        if(ActivationMessageSent == false && MinigameNumber != -1){
+            MoveCamera();
             Minigames[MinigameNumber].SendMessage("ActivateMinigame");
             ActivationMessageSent = true;
         }
@@ -96,11 +148,19 @@ public class CookingController : MonoBehaviour
         This funciton gets called on by the minigames to notify
         that the minigame is completed
     **/
-    public void IncrementMinigame(){
-        Minigames[MinigameNumber].SendMessage("DeactivateMinigame");
-        if(MinigameNumber + 1 < Minigames.Length)
-            MinigameNumber++;
-        ActivationMessageSent = false;
+    public void GoToMinigame(int NewMinigameNumber){
+        if(MinigameNumber != -1)
+            Minigames[MinigameNumber].SendMessage("DeactivateMinigame");
+        if(NewMinigameNumber < Minigames.Length){
+            ActivationMessageSent = false;
+            MinigameNumber = NewMinigameNumber;
+        }
+    }
+
+    public void ShowChoices(){
+        MinigameNumber = -1;
+        Instructions.SetActive(false);
+        ChoiceButtons.SetActive(true);
     }
 
     #endregion
