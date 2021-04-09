@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BeanSpawner : MonoBehaviour
 {
+    /*
     public GameObject beanResource;
     public float minRotation;
     public float maxRotation;
@@ -26,7 +27,7 @@ public class BeanSpawner : MonoBehaviour
             /* 
              * This doesn't need to be in update because the rotations will be the same no matter what
              * Unless if we change min Rotation and max Rotation Variables leave this in Start.
-             */
+             *
             DistributedRotations();
         }
     }
@@ -74,11 +75,12 @@ public class BeanSpawner : MonoBehaviour
             RandomRotations();
         }
 
+
         // Spawn Bullets
         GameObject[] spawnedBullets = new GameObject[numberOfBullets];
         for (int i = 0; i < numberOfBullets; i++)
         {
-            spawnedBullets[i] = Instantiate(beanResource, transform);
+            spawnedBullets[i] = Instantiate(beanResource, transform.position, Quaternion.identity, transform);
             Debug.Log(transform.position);
 
             var b = spawnedBullets[i].GetComponent<Bean>();
@@ -88,7 +90,8 @@ public class BeanSpawner : MonoBehaviour
         }
         return spawnedBullets;
     }
-    /*
+    */
+    
     public BeanSpawnData[] spawnData;
     int index = 0;
     public bool isSequenceRandom; 
@@ -110,7 +113,7 @@ public class BeanSpawner : MonoBehaviour
             /* 
              * This doesn't need to be in update because the rotations will be the same no matter what
              * Unless if we change min Rotation and max Rotation Variables leave this in Start.
-             *
+             */
             DistributedRotations();
         }
     }
@@ -177,7 +180,7 @@ public class BeanSpawner : MonoBehaviour
             spawnedBeans[i] = BeanPoolManager.GetBeanFromPool();
             if (spawnedBeans[i] == null)
             {
-                spawnedBeans[i] = Instantiate(GetSpawnData().beanResource, transform);
+                spawnedBeans[i] = Instantiate(GetSpawnData().beanResource, transform.position, Quaternion.identity, transform);
                 BeanPoolManager.beans.Add(spawnedBeans[i]);
             } else
             {
@@ -196,5 +199,5 @@ public class BeanSpawner : MonoBehaviour
         }
         return spawnedBeans;
     }
-    */
+    
 }
