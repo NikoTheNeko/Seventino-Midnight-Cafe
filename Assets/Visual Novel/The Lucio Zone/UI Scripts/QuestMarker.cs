@@ -9,15 +9,22 @@ public class QuestMarker : MonoBehaviour
     public TextBoxScript textbox;
     public GameObject trigger;
     bool entered = false;
-    public TextAsset questText;
     public TextAsset[] idleText;
+    InventoryTracker tracker;
+    Dialogue curQuest;
+    public string subject;
+    private int idlePos = -1;
 
     private bool pickedUp = false;
     // Start is called before the first frame update
     void Start()
     {
+        
         marker.SetActive(false);
         trigger.SetActive(false);
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        curQuest = tracker.dialogues[tracker.dialogueProg];
+        
     }
 
     // Update is called once per frame
@@ -26,30 +33,49 @@ public class QuestMarker : MonoBehaviour
         if(pickedUp && !textbox.activated){
             trigger.SetActive(true);
         }
-        if(entered && Input.GetButton("Use") && !pickedUp){
-            pickedUp = true;
-            textbox.ActivateObjects();
+
+        if(curQuest.subject == subject && !pickedUp){
+            marker.SetActive(true);
+        }
+        else{
+            marker.SetActive(false);
+        }
+
+        //if player presses space and textbox not currently active, choose either quest or idle text and activate textbox
+        if(entered && Input.GetButtonDown("Use") && !textbox.activated){
+            
+            if(!pickedUp && curQuest.subject == subject){
+                pickedUp = true;
+                textbox.SetDialogue(curQuest);
+                tracker.dialogueProg++;
+            }
+            else{
+                //chooses whether idle text is sequential or random
+                //sequential text resets once end of array has been reached
+                switch(subject){
+                    case "Camellia":
+                    idlePos = (idlePos + 1)%idleText.Length;
+                    break;
+
+                    default:
+                    idlePos = (int)Random.Range(0, idleText.Length);
+                    break;
+                }
+                TextAsset temp = idleText[idlePos];
+                textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text));
+            }
+            
         }
     }
 
 
     void OnTriggerEnter2D(Collider2D other){
-        marker.SetActive(true);
+        
         entered = true;
     }
 
     void OnTriggerExit2D(Collider2D other){
-        marker.SetActive(false);
+        // marker.SetActive(false);
         entered = false;
     }
-    
-    // void OnTriggerStay2D(Collider2D other){
-    //     Debug.Log("colliding");
-    //     if(Input.GetButton("Use")){
-    //         // Time.timeScale = 0f;
-    //         Debug.Log("entered the Lucio Zone");
-    //         textbox.ActivateObjects();
-    //         pickedUp = true;
-    //     }
-    // }
 }

@@ -10,11 +10,13 @@ public class InventoryDisplay : MonoBehaviour
     public List<Display> ingredientDisplays = new List<Display>();
     public GameObject mouseFollower;
     public Text followerText;
+    public GameObject onScreenAnchor;
+    public GameObject offScreenAnchor;
     #endregion
 
     #region Private Variables
-    private int OffsetX = 50; //amount of leeway in x axis
-    private int OffsetY = 50; //amount of leeway in y axis
+    private int OffsetX = 40; //amount of leeway in x axis
+    private int OffsetY = 40; //amount of leeway in y axis
     private InventoryTracker tracker;
     private bool onScreen = false;
     private bool textActive = false;
@@ -49,11 +51,12 @@ public class InventoryDisplay : MonoBehaviour
     private void displayIngredients(){
         int display = 0;
 
-        foreach(FoodDrop food in tracker.inventory){
-            if(display > ingredientDisplays.Count){
+        foreach(Ingredient food in tracker.inventory){
+            //note to self: "new text" error maybe caused when too many ingredients in tracker. breaks here, doesn't do checkformouseover
+            if(display > ingredientDisplays.Count - 1){
                 break;
             }
-            ingredientDisplays[display].image.sprite = food.image;
+            ingredientDisplays[display].image.sprite = tracker.getIngredient(food.name).picture;
             ingredientDisplays[display].Activate();
             ingredientDisplays[display].setVars(food.texture, food.warmth, food.flavor, food.name);
             display++;
@@ -72,21 +75,21 @@ public class InventoryDisplay : MonoBehaviour
                 textActive = true;
                 //info should be displayed here
                 followerText.text = "Name: " + target.name + 
-                                    "\nFlavor: " + target.flavor + 
                                     "\nTexture: " + target.texture + 
-                                    "\nWarmth: " + target.warmth;
+                                    "\nWarmth: " + target.warmth + 
+                                    "\nFlavor: " + target.flavor;
             }
         }
     }
 
     private void move(){
         if(onScreen){
-            if(this.gameObject.transform.position.y < 250){
+            if(this.gameObject.transform.position.y < onScreenAnchor.transform.position.y){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
             }
         }
         else if(!onScreen){
-            if(this.gameObject.transform.position.y > 80){
+            if(this.gameObject.transform.position.y > offScreenAnchor.transform.position.y){
                 this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
             }
         }

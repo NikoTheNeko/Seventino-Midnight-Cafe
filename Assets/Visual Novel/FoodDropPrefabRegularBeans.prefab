@@ -97,10 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f27d9abeeb91b24abe215c9c81774c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  texture: 50
   warmth: 0
   flavor: 0
-  texture: 50
   name: bingus
+  image: {fileID: 0}
 --- !u!50 &7952648659736948952
 Rigidbody2D:
   serializedVersion: 4
