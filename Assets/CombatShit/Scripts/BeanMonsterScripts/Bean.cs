@@ -13,7 +13,7 @@ public class Bean : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //timer = beanLife;
+        timer = beanLife;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 
@@ -21,13 +21,12 @@ public class Bean : MonoBehaviour
     void Update()
     {
         transform.Translate(velocity * speed * Time.deltaTime);
-        //timer -= Time.deltaTime;
-        //if (timer <= 0) gameObject.SetActive(false);
+        timer -= Time.deltaTime;
+        if (timer <= 0) gameObject.SetActive(false);
     }
-    /*
+
     public void ResetTimer()
     {
         timer = beanLife;
     }
-    */
 }

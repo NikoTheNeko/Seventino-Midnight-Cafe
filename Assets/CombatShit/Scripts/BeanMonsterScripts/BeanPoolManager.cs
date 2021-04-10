@@ -18,24 +18,24 @@ public class BeanPoolManager : MonoBehaviour
         {
             if (!beans[i].active)
             {
-                //beans[i].GetComponent<Bean>().ResetTimer();
+                beans[i].GetComponent<Bean>().ResetTimer();
                 beans[i].SetActive(true);
                 return beans[i];
             }
         }
         return null;
     }
-    /*
+    
     public static GameObject GetBeanFromPoolWithType(string type)
     {
         for (int i = 0; i < beans.Count; i++)
         {
-            if (!beans[i].active && beans[i].GetComponent<Bean>().GetType)
+            if (!beans[i].active)
                 return beans[i];
         }
         return null;
     }
-    */
+    
 
     // Update is called once per frame
     void Update()

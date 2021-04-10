@@ -38534,15 +38534,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be6daf3d05978d468155b42339701b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beanResource: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
-    type: 3}
-  minRotation: 0
-  maxRotation: 360
-  numberOfBullets: 10
-  isRandom: 0
-  cooldown: 3
-  bulletSpeed: 7
-  bulletVelocity: {x: 1, y: 0}
+  playerTarget: {fileID: 1716528797}
+  spawnData:
+  - {fileID: 11400000, guid: d86ba2800531372438eddc506b998b45, type: 2}
+  - {fileID: 11400000, guid: 6f81e7cae79082b46b932cb87e967b87, type: 2}
+  isSequenceRandom: 0
 --- !u!213 &791914352
 Sprite:
   m_ObjectHideFlags: 0
@@ -46293,14 +46289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be6daf3d05978d468155b42339701b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beanResource: {fileID: 0}
-  minRotation: 0
-  maxRotation: 0
-  numberOfBullets: 0
-  isRandom: 0
-  cooldown: 0
-  bulletSpeed: 0
-  bulletVelocity: {x: 0, y: 0}
+  playerTarget: {fileID: 0}
+  spawnData: []
+  isSequenceRandom: 0
 --- !u!114 &1594626378
 MonoBehaviour:
   m_ObjectHideFlags: 0

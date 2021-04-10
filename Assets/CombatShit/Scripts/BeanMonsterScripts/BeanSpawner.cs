@@ -91,7 +91,8 @@ public class BeanSpawner : MonoBehaviour
         return spawnedBullets;
     }
     */
-    
+    public Transform playerTarget;
+
     public BeanSpawnData[] spawnData;
     int index = 0;
     public bool isSequenceRandom; 
@@ -121,6 +122,8 @@ public class BeanSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("INDEX:");
+        Debug.Log(index);
         if (timer <= 0)
         {
             SpawnBeans();
@@ -146,22 +149,38 @@ public class BeanSpawner : MonoBehaviour
             rotations[i] = Random.Range(GetSpawnData().minRotation, GetSpawnData().maxRotation);
         }
         return rotations;
-
     }
 
     // This will set random rotations evenly distributed between the min and max Rotation.
-    public float[] DistributedRotations()
+    public void DistributedRotations()
     {
+        for (int j = 0; j < rotations.Length; j++)
+        {
+            rotations[j] = 0;
+        }
+        Debug.Log(GetSpawnData().numberOfBeans);
+        if(GetSpawnData().numberOfBeans > rotations.Length)
+        {
+            rotations = new float[GetSpawnData().numberOfBeans];
+        }
         for (int i = 0; i < GetSpawnData().numberOfBeans; i++)
         {
             var fraction = (float)i / ((float)GetSpawnData().numberOfBeans - 1);
             var difference = GetSpawnData().maxRotation - GetSpawnData().minRotation;
             var fractionOfDifference = fraction * difference;
-            rotations[i] = fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
+            rotations[i] = GetAngleOffset() + fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
         }
-        foreach (var r in rotations) print(r);
-        return rotations;
+        foreach (var r in rotations) ; //print(r);
     }
+
+    public float GetAngleOffset()
+    {
+        Vector3 dir = (playerTarget.position - transform.position).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Debug.Log("Angle2Player: " + angle.ToString());
+        return angle;
+    }
+
     public GameObject[] SpawnBeans()
     {
         if (GetSpawnData().isRandom)
