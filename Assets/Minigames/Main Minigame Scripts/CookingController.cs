@@ -71,6 +71,8 @@ public class CookingController : MonoBehaviour
     public void UpdateMinigames(){
         ActivateMinigame();
         BookControl();
+        if(MinigameNumber != -1)
+            MoveCamera();
     }
 
     #region The actual functions for Minigame Control
@@ -96,6 +98,8 @@ public class CookingController : MonoBehaviour
     private void BookControl(){
         if(MinigameNumber == -1){
             MoveBook(CenterAnchor);
+            ChoiceButtons.SetActive(true);
+            Instructions.SetActive(false);
         } else {
             ChoiceButtons.SetActive(false);
             Instructions.SetActive(true);

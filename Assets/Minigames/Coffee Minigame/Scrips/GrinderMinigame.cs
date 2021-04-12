@@ -109,8 +109,11 @@ public class GrinderMinigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         //Only plays if the minigame is active and running
-        if(MinigameActive)
+        if(MinigameActive){
             RunMinigame();
+        } else {
+            MinigameCanvas.SetActive(false);
+        }
     }
 
     #region Minigame Controls
@@ -118,6 +121,7 @@ public class GrinderMinigame : MonoBehaviour{
         As always there's this one cohesive function to run so that way life is easier
     **/
     private void RunMinigame(){
+        MinigameCanvas.SetActive(true);
         //If the minigame is NOT completed
         if(!MinigameCompleted){
             StatManager.GetComponent<FoodStats>().ShowPlus(0);
@@ -132,8 +136,7 @@ public class GrinderMinigame : MonoBehaviour{
                 MoveGrindSelection();
             }
             GrindBeans();
-            UpdateInstructions();
-            MinigameCanvas.SetActive(true);
+            UpdateInstructions();  
         }
 
         //If the minigame is completed

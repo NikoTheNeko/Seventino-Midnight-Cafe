@@ -24,6 +24,8 @@ public class PouringMinigame : MonoBehaviour{
     [Tooltip("This is the instructions so players know what to fuckin do")]
     public Text Instructions;
 
+    public Transform MaskingImage;
+
     #endregion
 
     #region Private Variables
@@ -34,7 +36,20 @@ public class PouringMinigame : MonoBehaviour{
     //This is so you can signal to the Cooking Controller that the minigame is complete
     private bool MinigameCompleted = false;
 
+    //This is a nondestructive way for the timer to not fucking die and get destroyed
+    private float PourTime;
+
+    //This is the size of the mask so that way it can fill up
+    private float MaskSize = 3.7f;
+
+    //This keeps track of how much of the percentage has been done
+    private float PercentDone = 0.0f;
+
     #endregion
+
+    private void Start() {
+        PourTime = TimerCount;
+    }
 
     // Update is called once per frame
     void Update(){
@@ -56,15 +71,26 @@ public class PouringMinigame : MonoBehaviour{
 
     private void CheckPouring(){
         if(Input.GetButton("Use")){
-            if(TimerCount > 0){
+            if(PourTime > 0){
                 PouringSFX.mute = false;
-                TimerCount -= Time.deltaTime;
+                PourTime -= Time.deltaTime;
+                UpdatePercentage();
+                MoveMaskingImage();
             } else {
                 MinigameCompleted = true;
             }
         } else if(Input.GetButtonUp("Use")){
             PouringSFX.mute = true;
         }
+    }
+
+    private void UpdatePercentage(){
+        PercentDone = (TimerCount - PourTime) / TimerCount;
+    }
+
+    public void MoveMaskingImage(){
+        Vector3 NewSize = new Vector3(1, PercentDone * 1.5f, 0);
+        MaskingImage.localScale = NewSize;
     }
 
     /**
