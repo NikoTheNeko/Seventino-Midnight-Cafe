@@ -35,7 +35,7 @@ public class TextBoxScript : MonoBehaviour
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
     private string emotion; //holds the emotion of the current speaker in a non-philisophical type way
-    private Dialogue dialogue;
+    private dialogueSegment[] dialogueSegments;
     
 
     #endregion
@@ -100,12 +100,12 @@ public class TextBoxScript : MonoBehaviour
         }
 
         //move to next message in dialogue if end of message has been reached
-        if(letter >= message.Length && loops < dialogue.dialogueSegments.Length - 1){
+        if(letter >= message.Length && loops < dialogueSegments.Length - 1){
             //set unique variables up for next message
             loops++;
-            message = dialogue.dialogueSegments[loops].text;
-            currentSpeaker = dialogue.dialogueSegments[loops].speaker;
-            emotion = dialogue.dialogueSegments[loops].emotion;
+            message = dialogueSegments[loops].text;
+            currentSpeaker = dialogueSegments[loops].speaker;
+            emotion = dialogueSegments[loops].emotion;
             ChangeName();
             
             //reset general variables
@@ -116,7 +116,7 @@ public class TextBoxScript : MonoBehaviour
         }
 
         //if end of dialogue has been reached
-        if(loops >= dialogue.dialogueSegments.Length - 1 && letter >= message.Length){
+        if(loops >= dialogueSegments.Length - 1 && letter >= message.Length){
             DeactivateObjects();
         }
         
@@ -210,17 +210,17 @@ public class TextBoxScript : MonoBehaviour
 
     //set dialogue to given TextAsset, resets variables
     //then activates self
-    public void SetDialogue(Dialogue text){
+    public void SetDialogue(dialogueSegment[] text){
 
-        dialogue = text;
+        dialogueSegments = text;
         loops = 0;
         letter = 0;
         speedUp = false;
         textbox.text = "";
         scrollSpeed = 0.0625f;
-        message = dialogue.dialogueSegments[loops].text;
-        currentSpeaker = dialogue.dialogueSegments[loops].speaker;
-        emotion = dialogue.dialogueSegments[loops].emotion;
+        message = dialogueSegments[loops].text;
+        currentSpeaker = dialogueSegments[loops].speaker;
+        emotion = dialogueSegments[loops].emotion;
         ActivateObjects();
     }
 }
@@ -266,8 +266,20 @@ public class dialogueSegment
 //Represents an entire dialogue. The encompassing object for the json file
 public class Dialogue
 {
-    public dialogueSegment[] dialogueSegments;
     public string subject;
-    // public string progression;
-    //public string target;
+    public dialogueSegment[] dialogueSegments;
+    public dialogueSegment[] goodEnding;
+    public dialogueSegment[] bestEnding;
+    public int textureMin;
+    public int textureMax;
+    public int warmthMin;
+    public int warmthMax;
+    public int flavorMin;
+    public int flavorMax;
+
+    public bool satisfiesQuest(int texture, int warmth, int flavor){
+        return texture > textureMin && texture < textureMax 
+                && warmth > warmthMin && warmth < warmthMax 
+                && flavor > flavorMin && flavor < flavorMax;
+    }
 }

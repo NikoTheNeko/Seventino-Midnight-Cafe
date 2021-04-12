@@ -44,10 +44,22 @@ public class QuestMarker : MonoBehaviour
         //if player presses space and textbox not currently active, choose either quest or idle text and activate textbox
         if(entered && Input.GetButtonDown("Use") && !textbox.activated){
             
+            //
             if(!pickedUp && curQuest.subject == subject){
                 pickedUp = true;
-                textbox.SetDialogue(curQuest);
-                tracker.dialogueProg++;
+                if(tracker.hasFood){
+                    if(curQuest.satisfiesQuest(tracker.foodObject.texture, tracker.foodObject.warmth, tracker.foodObject.flavor)){
+                        textbox.SetDialogue(curQuest.bestEnding);
+                        tracker.dialogueProg++;
+                    }
+                    else{
+                        textbox.SetDialogue(curQuest.goodEnding);
+                    }
+                }
+                else{
+                    textbox.SetDialogue(curQuest.dialogueSegments);
+                }
+                
             }
             else{
                 //chooses whether idle text is sequential or random
@@ -62,9 +74,8 @@ public class QuestMarker : MonoBehaviour
                     break;
                 }
                 TextAsset temp = idleText[idlePos];
-                textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text));
+                textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text).dialogueSegments);
             }
-            
         }
     }
 

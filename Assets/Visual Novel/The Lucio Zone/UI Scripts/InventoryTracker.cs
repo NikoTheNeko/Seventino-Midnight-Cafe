@@ -20,6 +20,7 @@ public class InventoryTracker : MonoBehaviour
 
     public List<Dialogue> dialogues;
     public int dialogueProg = 0;
+    public bool hasFood;
     
 
     #endregion
