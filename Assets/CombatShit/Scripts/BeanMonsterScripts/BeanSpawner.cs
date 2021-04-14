@@ -4,93 +4,6 @@ using UnityEngine;
 
 public class BeanSpawner : MonoBehaviour
 {
-    /*
-    public GameObject beanResource;
-    public float minRotation;
-    public float maxRotation;
-    public int numberOfBullets;
-    public bool isRandom;
-
-    public float cooldown;
-    float timer;
-    public float bulletSpeed;
-    public Vector2 bulletVelocity;
-
-
-    float[] rotations;
-    void Start()
-    {
-        timer = cooldown;
-        rotations = new float[numberOfBullets];
-        if (!isRandom)
-        {
-            /* 
-             * This doesn't need to be in update because the rotations will be the same no matter what
-             * Unless if we change min Rotation and max Rotation Variables leave this in Start.
-             *
-            DistributedRotations();
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (timer <= 0)
-        {
-            SpawnBullets();
-            timer = cooldown;
-        }
-        timer -= Time.deltaTime;
-    }
-
-    // Select a random rotation from min to max for each bullet
-    public float[] RandomRotations()
-    {
-        for (int i = 0; i < numberOfBullets; i++)
-        {
-            rotations[i] = Random.Range(minRotation, maxRotation);
-        }
-        return rotations;
-
-    }
-
-    // This will set random rotations evenly distributed between the min and max Rotation.
-    public float[] DistributedRotations()
-    {
-        for (int i = 0; i < numberOfBullets; i++)
-        {
-            var fraction = (float)i / ((float)numberOfBullets - 1);
-            var difference = maxRotation - minRotation;
-            var fractionOfDifference = fraction * difference;
-            rotations[i] = fractionOfDifference + minRotation; // We add minRotation to undo Difference
-        }
-        foreach (var r in rotations) print(r);
-        return rotations;
-    }
-    public GameObject[] SpawnBullets()
-    {
-        if (isRandom)
-        {
-            // This is in Update because we want a random rotation for each bullet each time
-            RandomRotations();
-        }
-
-
-        // Spawn Bullets
-        GameObject[] spawnedBullets = new GameObject[numberOfBullets];
-        for (int i = 0; i < numberOfBullets; i++)
-        {
-            spawnedBullets[i] = Instantiate(beanResource, transform.position, Quaternion.identity, transform);
-            Debug.Log(transform.position);
-
-            var b = spawnedBullets[i].GetComponent<Bean>();
-            b.rotation = rotations[i];
-            b.speed = bulletSpeed;
-            b.velocity = bulletVelocity;
-        }
-        return spawnedBullets;
-    }
-    */
     public Transform playerTarget;
 
     public BeanSpawnData[] spawnData;
@@ -103,6 +16,8 @@ public class BeanSpawner : MonoBehaviour
     }
 
     float timer;
+    int rotationSpeed = 20;
+    
 
     float[] rotations;
     void Start()
@@ -122,10 +37,15 @@ public class BeanSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("INDEX:");
-        Debug.Log(index);
+        //Debug.Log("INDEX:");
+        //Debug.Log(index);
         if (timer <= 0)
         {
+            //Quaternion q = Quaternion.AngleAxis(GetAngleOffset(), Vector3.forward);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Euler(Vector3.forward * (GetAngleOffset() + 90f));
+            Debug.Log("Transform rotation: " + transform.position);
+
             SpawnBeans();
             timer = GetSpawnData().cooldown;
             if (isSequenceRandom)
@@ -158,7 +78,7 @@ public class BeanSpawner : MonoBehaviour
         {
             rotations[j] = 0;
         }
-        Debug.Log(GetSpawnData().numberOfBeans);
+        //Debug.Log(GetSpawnData().numberOfBeans);
         if(GetSpawnData().numberOfBeans > rotations.Length)
         {
             rotations = new float[GetSpawnData().numberOfBeans];
@@ -168,7 +88,7 @@ public class BeanSpawner : MonoBehaviour
             var fraction = (float)i / ((float)GetSpawnData().numberOfBeans - 1);
             var difference = GetSpawnData().maxRotation - GetSpawnData().minRotation;
             var fractionOfDifference = fraction * difference;
-            rotations[i] = GetAngleOffset() + fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
+            rotations[i] = fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
         }
         foreach (var r in rotations) ; //print(r);
     }
