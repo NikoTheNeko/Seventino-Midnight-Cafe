@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beanResource: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
     type: 3}
-  minRotation: 0
-  maxRotation: 90
+  minRotation: -30
+  maxRotation: 30
   numberOfBeans: 3
   isRandom: 0
   isParent: 1

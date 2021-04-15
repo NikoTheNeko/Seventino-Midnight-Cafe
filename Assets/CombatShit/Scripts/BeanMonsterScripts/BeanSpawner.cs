@@ -40,11 +40,7 @@ public class BeanSpawner : MonoBehaviour
         //Debug.Log("INDEX:");
         //Debug.Log(index);
         if (timer <= 0)
-        {
-            //Quaternion q = Quaternion.AngleAxis(GetAngleOffset(), Vector3.forward);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotationSpeed);
-            transform.rotation = Quaternion.Euler(Vector3.forward * (GetAngleOffset() + 90f));
-            Debug.Log("Transform rotation: " + transform.position);
+        {   
 
             SpawnBeans();
             timer = GetSpawnData().cooldown;
@@ -88,7 +84,7 @@ public class BeanSpawner : MonoBehaviour
             var fraction = (float)i / ((float)GetSpawnData().numberOfBeans - 1);
             var difference = GetSpawnData().maxRotation - GetSpawnData().minRotation;
             var fractionOfDifference = fraction * difference;
-            rotations[i] = fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
+            rotations[i] = GetAngleOffset() + fractionOfDifference + GetSpawnData().minRotation; // We add minRotation to undo Difference
         }
         foreach (var r in rotations) ; //print(r);
     }
@@ -112,6 +108,9 @@ public class BeanSpawner : MonoBehaviour
             DistributedRotations();
         }
 
+        //Quaternion q = Quaternion.AngleAxis(GetAngleOffset(), Vector3.forward);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, q, Time.deltaTime * rotationSpeed);
+
         // Spawn Beans
         GameObject[] spawnedBeans = new GameObject[GetSpawnData().numberOfBeans];
         for (int i = 0; i < GetSpawnData().numberOfBeans; i++)
@@ -119,7 +118,7 @@ public class BeanSpawner : MonoBehaviour
             spawnedBeans[i] = BeanPoolManager.GetBeanFromPool();
             if (spawnedBeans[i] == null)
             {
-                spawnedBeans[i] = Instantiate(GetSpawnData().beanResource, transform.position, Quaternion.identity, transform);
+                spawnedBeans[i] = Instantiate(GetSpawnData().beanResource, transform.position, Quaternion.Euler(0, 0, rotations[i]), transform);
                 BeanPoolManager.beans.Add(spawnedBeans[i]);
             } else
             {
@@ -128,7 +127,7 @@ public class BeanSpawner : MonoBehaviour
             }
 
             var b = spawnedBeans[i].GetComponent<Bean>();
-            b.rotation = rotations[i];
+            b.SetRotation(rotations[i]);
             b.speed = GetSpawnData().beanSpeed;
             b.velocity = GetSpawnData().beanVelocity;
             if (GetSpawnData().isParent == true)

@@ -14,7 +14,6 @@ public class Bean : MonoBehaviour
     void Start()
     {
         timer = beanLife;
-        transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 
     // Update is called once per frame
@@ -28,5 +27,10 @@ public class Bean : MonoBehaviour
     public void ResetTimer()
     {
         timer = beanLife;
+    }
+
+    public void SetRotation(float r)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, r);
     }
 }
