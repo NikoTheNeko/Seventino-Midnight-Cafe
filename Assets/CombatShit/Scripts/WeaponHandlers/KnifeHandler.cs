@@ -10,8 +10,19 @@ public class KnifeHandler : MonoBehaviour
     //public LayerMask enemyLayer;
     //public int damage;
 
-    public static void Swing(Vector3 attackPoint, float attackRange, LayerMask enemyLayer)
+    public AudioClip knifeSound;
+    private AudioSource audio;
+    void Start()
     {
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = knifeSound;
+        audio.loop = false;
+        audio.Stop();
+    }
+    public void Swing(Vector3 attackPoint, float attackRange, LayerMask enemyLayer)
+    {
+        audio.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 1.5f, enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {

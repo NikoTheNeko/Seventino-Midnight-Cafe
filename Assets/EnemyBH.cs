@@ -47,6 +47,11 @@ public class EnemyBH : MonoBehaviour {
 
     private InventoryTracker tracker;
 
+
+    public AudioClip hitSound;
+    private AudioSource audio;
+        
+
     private void Start()
     {
         idleTimer = 1;
@@ -63,6 +68,12 @@ public class EnemyBH : MonoBehaviour {
 
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
+
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = hitSound;
+        audio.loop = false;
+        audio.Stop();
     }
 
     void UpdatePath() 
@@ -377,7 +388,7 @@ public class EnemyBH : MonoBehaviour {
     public void TakeDamage(int amount, DamageEnum damageType){
 
         StartCoroutine(FlashColor());
-
+        audio.Play();
         health -= amount;
         // Debug.Log("DAMAGED I REPEAT DAMAGED");
 
