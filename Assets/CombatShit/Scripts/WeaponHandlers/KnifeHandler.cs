@@ -15,7 +15,7 @@ public class KnifeHandler : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 1.5f, enemyLayer);
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyBH>().TakeDamage(10, Slice);
+            enemy.GetComponent<EnemyBH>().TakeDamage(8, Slice);
             CameraShake.instance.ShakeCamera(.25f, .03f);
         }
     }
