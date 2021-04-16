@@ -113,6 +113,11 @@
 			"speaker": "Chef",
 			"emotion": "happy"
 		}
-	]
-	
+	],
+	"textureMin": 0,
+	"textureMax": 100,
+	"warmthMin": 0,
+	"warmthMax": 100,
+	"flavorMin": 0,
+	"flavorMax": 100
 }

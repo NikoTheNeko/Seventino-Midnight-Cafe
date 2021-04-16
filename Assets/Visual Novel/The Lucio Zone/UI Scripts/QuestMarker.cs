@@ -23,13 +23,15 @@ public class QuestMarker : MonoBehaviour
         marker.SetActive(false);
         trigger.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        curQuest = tracker.dialogues[tracker.dialogueProg];
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        curQuest = tracker.dialogues[tracker.dialogueProg];
+
         if(pickedUp && !textbox.activated){
             trigger.SetActive(true);
         }
@@ -44,10 +46,13 @@ public class QuestMarker : MonoBehaviour
         //if player presses space and textbox not currently active, choose either quest or idle text and activate textbox
         if(entered && Input.GetButtonDown("Use") && !textbox.activated){
             
-            //
+            //if NPC is the target of current quest
             if(!pickedUp && curQuest.subject == subject){
                 pickedUp = true;
+                //if player has a dish, choose an ending
                 if(tracker.hasFood){
+                    tracker.hasFood = false;
+                    //if food being carried satisfies quest, give good ending and advance dialogue progression
                     if(curQuest.satisfiesQuest(tracker.foodObject.texture, tracker.foodObject.warmth, tracker.foodObject.flavor)){
                         textbox.SetDialogue(curQuest.bestEnding);
                         tracker.dialogueProg++;
@@ -57,6 +62,7 @@ public class QuestMarker : MonoBehaviour
                     }
                 }
                 else{
+                    //give player quest
                     textbox.SetDialogue(curQuest.dialogueSegments);
                 }
                 
@@ -86,7 +92,6 @@ public class QuestMarker : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D other){
-        // marker.SetActive(false);
         entered = false;
     }
 }

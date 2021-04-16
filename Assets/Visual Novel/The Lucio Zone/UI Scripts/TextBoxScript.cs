@@ -95,6 +95,7 @@ public class TextBoxScript : MonoBehaviour
 
         //speed up scrolling rate
         if(!speedUp && activated){
+            Debug.Log("sped up");
             scrollSpeed /= 5;
             speedUp = true;
         }
@@ -126,19 +127,20 @@ public class TextBoxScript : MonoBehaviour
     //increment letter counter and set next time to add letter
     void AddLetter(){
         textbox.text += message[letter];
-        int loc = char.ToUpper(message[letter]) - 65;
-        if(loc < 0){
-            loc = 26;
-        }
-        else if(loc > 25){
-            loc = 26;
-        }
-        // if(loc != 0){
-        //     loc = 0;
-        // }
-        //Debug.Log(clips[loc]);
-        // audio.PlayOneShot(clips[loc]);
 
+        //only play audio if text hasn't been sped up
+        // if(!speedUp){
+        //     int loc = char.ToUpper(message[letter]) - 65;
+        //     if(loc < 0){
+        //         loc = 26;
+        //     }
+        //     else if(loc > 25){
+        //         loc = 26;
+        //     }
+        //     Debug.Log(loc);
+        //     audio.PlayOneShot(clips[loc]);
+        // }
+        
         letter++;
         timer = Time.time + scrollSpeed;
     }
@@ -278,8 +280,8 @@ public class Dialogue
     public int flavorMax;
 
     public bool satisfiesQuest(int texture, int warmth, int flavor){
-        return texture > textureMin && texture < textureMax 
-                && warmth > warmthMin && warmth < warmthMax 
-                && flavor > flavorMin && flavor < flavorMax;
+        return texture >= textureMin && texture <= textureMax 
+                && warmth >= warmthMin && warmth <= warmthMax 
+                && flavor >= flavorMin && flavor <= flavorMax;
     }
 }

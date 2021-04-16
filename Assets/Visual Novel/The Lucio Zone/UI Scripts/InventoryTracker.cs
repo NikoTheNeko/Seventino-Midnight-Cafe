@@ -46,7 +46,6 @@ public class InventoryTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     //adds modifier to amount in inventory linked to key
@@ -90,7 +89,7 @@ public class InventoryTracker : MonoBehaviour
         string path = Application.persistentDataPath + "/savedData.smc";
         FileStream stream = new FileStream(path, FileMode.Create);
         
-        SaveData data = new SaveData(inventory);
+        SaveData data = new SaveData(inventory, dialogueProg);
         formatter.Serialize(stream, data);
         stream.Close();
     }
@@ -137,4 +136,3 @@ public class Ingredient{
         flavor = vars[2];
     }
 }
-
