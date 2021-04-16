@@ -30,7 +30,7 @@ public class ShotgunHandler : MonoBehaviour
                     EnemyBH target = raycastHit2D.collider.GetComponent<EnemyBH>();
                     if (target != null)
                     {
-                        target.TakeDamage(5, Flavor);
+                        target.TakeDamage(3, Flavor);
                         CameraShake.instance.ShakeCamera(.5f, .02f);
                     }
                 }

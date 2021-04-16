@@ -316,7 +316,7 @@ public class EnemyBH : MonoBehaviour {
             Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
             foreach (Collider2D player in hit)
             {
-                player.GetComponent<PlayerCombatTesting>().PlayerHit(10);
+                player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
             }
             StartCoroutine(ResetAttack(1f));
         }
