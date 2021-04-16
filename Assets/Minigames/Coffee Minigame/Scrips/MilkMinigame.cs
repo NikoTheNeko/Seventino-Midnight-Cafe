@@ -9,7 +9,7 @@ public class MilkMinigame : MonoBehaviour{
 
     [Header("Minigame Objects and Variables")]
     [Tooltip("The amount you will add to Warmth")]    
-    public int AddAmount = 10;
+    public int AddAmount = 1;
     [Tooltip("Pouring SFX")]
     public AudioSource PouringSFX;
 
@@ -22,6 +22,14 @@ public class MilkMinigame : MonoBehaviour{
 
     [Tooltip("This is the instructions so players know what to fuckin do")]
     public Text Instructions;
+    
+    [Tooltip("Slider for the the minigame")]
+    public Slider PouringSlider;
+    [Tooltip("The handle of the slider so it can tilt")]
+    public Transform Pitcher;
+    [Tooltip("The angle it will tip at at the very top")]
+    public float TiltAngle = 45f;
+
 
     #endregion
 
@@ -35,9 +43,15 @@ public class MilkMinigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(MinigameActive){
+            PouringSlider.interactable = true;
             StatManager.GetComponent<FoodStats>().ShowPlus(1);
             RunMinigame();
         } else {
+            PouringSlider.interactable = false;
+            if(PouringSlider.value > 0){
+                TiltPitcher();
+                PouringSlider.value -= 0.5f * Time.deltaTime;
+            }
             StatManager.GetComponent<FoodStats>().HidePlus(1);           
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
         }
@@ -49,16 +63,23 @@ public class MilkMinigame : MonoBehaviour{
         It just adds the amount from AddAmount to the thing. That's it.
     **/
     private void RunMinigame(){
-        Instructions.text = "Press space to add steamed milk! To continue press next!";
+        Instructions.text = "Click and drag the pitcher up to pour, the higher you pour the faster you pour.";
 
-        StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + AddAmount);
+        StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + AddAmount * PouringSlider.value);
 
-        if(Input.GetButtonDown("Use")){
-            StatManager.GetComponent<FoodStats>().AddWarmth(AddAmount);
+        if(PouringSlider.value > 0){
+            TiltPitcher();
+            StatManager.GetComponent<FoodStats>().AddWarmth(AddAmount * PouringSlider.value * Time.deltaTime);
             PouringSFX.Play();
         }
         CookingManager.GetComponent<CookingController>().MinigameFinished();
     }
+
+    private void TiltPitcher(){
+        float NewAngle = TiltAngle * PouringSlider.value;
+        Pitcher.rotation = Quaternion.AngleAxis(NewAngle, Vector3.forward);
+    }
+
     #endregion
 
 

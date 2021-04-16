@@ -24,7 +24,17 @@ public class PouringMinigame : MonoBehaviour{
     [Tooltip("This is the instructions so players know what to fuckin do")]
     public Text Instructions;
 
+    [Tooltip("This is the mask for the coffee so you can't see it")]
     public Transform MaskingImage;
+
+    [Tooltip("Slider for the the minigame")]
+    public Slider PouringSlider;
+    [Tooltip("The handle of the slider so it can tilt")]
+    public Transform Pitcher;
+    [Tooltip("The angle it will tip at at the very top")]
+    public float TiltAngle = 45f;
+
+
 
     #endregion
 
@@ -53,8 +63,14 @@ public class PouringMinigame : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(MinigameActive)
+        if(MinigameActive){
             RunMinigame();
+        } else {
+            if(PouringSlider.value > 0){
+                TiltPitcher();
+                PouringSlider.value -= 0.5f * Time.deltaTime;
+            }
+        }
     }
 
     private void RunMinigame(){
@@ -64,13 +80,17 @@ public class PouringMinigame : MonoBehaviour{
         }
 
         if(MinigameCompleted){
+            PouringSlider.interactable = false;
+            if(PouringSlider.value > 0)
+                PouringSlider.value -= 0.5f * Time.deltaTime;
+            TiltPitcher();
             PouringSFX.Stop();
             CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
     }
 
     private void CheckPouring(){
-        if(Input.GetButton("Use")){
+        if(PouringSlider.value >= 1){
             if(PourTime > 0){
                 PouringSFX.mute = false;
                 PourTime -= Time.deltaTime;
@@ -79,9 +99,16 @@ public class PouringMinigame : MonoBehaviour{
             } else {
                 MinigameCompleted = true;
             }
-        } else if(Input.GetButtonUp("Use")){
+        } else if(PouringSlider.value < 1){
             PouringSFX.mute = true;
         }
+
+        TiltPitcher();
+    }
+
+    private void TiltPitcher(){
+        float NewAngle = TiltAngle * PouringSlider.value;
+        Pitcher.rotation = Quaternion.AngleAxis(NewAngle, Vector3.forward);
     }
 
     private void UpdatePercentage(){
@@ -98,7 +125,7 @@ public class PouringMinigame : MonoBehaviour{
     **/
     private void UpdateInstructions(){
         if(MinigameCompleted == false){
-            Instructions.text = "Hold space to pour the coffee!! Just pretend for now!!!";
+            Instructions.text = "Click and drag the kettle up all the way to brew the coffee!";
         } else {
            Instructions.text = "You did it! Click Next to move onto the next step!";
         }

@@ -14,13 +14,13 @@ public class FoodStats : MonoBehaviour{
 
     [Header("The Food Stat Values")]
     [Tooltip("Texture value, this checks the texture of the food, affected by knife")]
-    public int TextureVal = 0;
+    public float TextureVal = 0;
 
     [Tooltip("Warmth value, this checks the warmth of the food, affected by flambethrower")]
-    public int WarmthVal = 0;
+    public float WarmthVal = 0;
 
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
-    public int FlavorVal = 0;
+    public float FlavorVal = 0;
 
     private InventoryTracker tracker;
 
@@ -73,21 +73,21 @@ public class FoodStats : MonoBehaviour{
     and then calling this function. You could probably just add to the value but this just
     makes life easier to manipulate these. They cannot exceed 100
     **/
-    public void AddTexture(int amount){
+    public void AddTexture(float amount){
         if(TextureVal < 100)
             TextureVal += amount;
         if(TextureVal > 100)
             TextureVal = 100;
     }
 
-    public void AddWarmth(int amount){
+    public void AddWarmth(float amount){
         if(WarmthVal < 100)
             WarmthVal += amount;
         if(WarmthVal > 100)
             WarmthVal = 100;
     }
 
-    public void AddFlavor(int amount){
+    public void AddFlavor(float amount){
         if(FlavorVal < 100)
             FlavorVal += amount;
         if(FlavorVal > 100)
@@ -117,15 +117,15 @@ public class FoodStats : MonoBehaviour{
     //All of these updates the lighter brown preview bar to indicate how much you will add onto the dish.
     //They're all called by the minigames
 
-    public void UpdateTexturePreview(int amount){
+    public void UpdateTexturePreview(float amount){
         TexturePreview.value = amount;
     }
 
-    public void UpdateWarmthPreview(int amount){
+    public void UpdateWarmthPreview(float amount){
         WarmthPreview.value = amount;
     }
 
-    public void UpdateFlavorPreview(int amount){
+    public void UpdateFlavorPreview(float amount){
         FlavorPreview.value = amount;
     }
 
@@ -169,7 +169,7 @@ public class FoodStats : MonoBehaviour{
     /**
         This function checks the values and returns if it is in the range specified.
     **/
-    public bool CheckValues(int TextureTarget,int WarmthTarget,int FlavorTarget,int GraceRange){
+    public bool CheckValues(float TextureTarget,float WarmthTarget,float FlavorTarget,float GraceRange){
         bool TexturePass = false;
         bool WarmthPass = false;
         bool FlavorPass = false;
@@ -190,7 +190,7 @@ public class FoodStats : MonoBehaviour{
         Helper function for Check Values. This just goes in and calculates everything
         so I don't have to copy and paste it over and over again
     **/
-    private bool IsInRange(int ValueCheck, int Target, int Range){
+    private bool IsInRange(float ValueCheck, float Target, float Range){
         if(ValueCheck >= (Target - Range) && ValueCheck <= (Target + Range)){
             return true;
         } else {
