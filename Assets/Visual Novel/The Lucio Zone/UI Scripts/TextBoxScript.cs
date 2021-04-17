@@ -54,6 +54,7 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(activated);
         //if there are letters to add and required amount of time has passed
         if(activated){
             if(Time.time > timer && letter < message.Length && activated){
@@ -61,7 +62,8 @@ public class TextBoxScript : MonoBehaviour
             }
 
              //if user presses "x" text will speed up or go to next part of dialogue
-            if(Input.GetButtonDown("Use")){
+            if(Input.GetButtonUp("Use")){
+                Debug.Log("called speed up");
                 SpeedUp();
             }
 
@@ -129,17 +131,17 @@ public class TextBoxScript : MonoBehaviour
         textbox.text += message[letter];
 
         //only play audio if text hasn't been sped up
-        // if(!speedUp){
-        //     int loc = char.ToUpper(message[letter]) - 65;
-        //     if(loc < 0){
-        //         loc = 26;
-        //     }
-        //     else if(loc > 25){
-        //         loc = 26;
-        //     }
-        //     Debug.Log(loc);
-        //     audio.PlayOneShot(clips[loc]);
-        // }
+        if(!speedUp){
+            int loc = char.ToUpper(message[letter]) - 65;
+            if(loc < 0){
+                loc = 26;
+            }
+            else if(loc > 25){
+                loc = 26;
+            }
+            Debug.Log(loc);
+            audio.PlayOneShot(clips[loc]);
+        }
         
         letter++;
         timer = Time.time + scrollSpeed;
@@ -223,6 +225,7 @@ public class TextBoxScript : MonoBehaviour
         message = dialogueSegments[loops].text;
         currentSpeaker = dialogueSegments[loops].speaker;
         emotion = dialogueSegments[loops].emotion;
+        ChangeName();
         ActivateObjects();
     }
 }
