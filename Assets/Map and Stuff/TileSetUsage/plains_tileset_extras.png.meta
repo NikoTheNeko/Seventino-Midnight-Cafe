@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ff907419b6df7d4391f2a11fcff65f7
+guid: 33348e9cda3ad9f49a53fd76a2b44fe4
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -122,6 +122,21 @@ TextureImporter:
   - first:
       213: -6967975568185898845
     second: plains_tileset_extras_39
+  - first:
+      213: 6653060185437481482
+    second: plains_tileset_extras_40
+  - first:
+      213: 4858923615995840685
+    second: plains_tileset_extras_41
+  - first:
+      213: -7862819274241616288
+    second: plains_tileset_extras_42
+  - first:
+      213: 2662938484668442493
+    second: plains_tileset_extras_43
+  - first:
+      213: -6431874613606174564
+    second: plains_tileset_extras_44
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -611,7 +626,7 @@ TextureImporter:
       name: plains_tileset_extras_19
       rect:
         serializedVersion: 2
-        x: 256
+        x: 192
         y: 320
         width: 64
         height: 64
@@ -632,7 +647,7 @@ TextureImporter:
       name: plains_tileset_extras_20
       rect:
         serializedVersion: 2
-        x: 384
+        x: 256
         y: 320
         width: 64
         height: 64
@@ -653,7 +668,7 @@ TextureImporter:
       name: plains_tileset_extras_21
       rect:
         serializedVersion: 2
-        x: 448
+        x: 384
         y: 320
         width: 64
         height: 64
@@ -674,8 +689,8 @@ TextureImporter:
       name: plains_tileset_extras_22
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 448
+        y: 320
         width: 64
         height: 64
       alignment: 0
@@ -695,7 +710,7 @@ TextureImporter:
       name: plains_tileset_extras_23
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 256
         width: 64
         height: 64
@@ -716,7 +731,7 @@ TextureImporter:
       name: plains_tileset_extras_24
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 256
         width: 64
         height: 64
@@ -737,8 +752,8 @@ TextureImporter:
       name: plains_tileset_extras_25
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
+        x: 128
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -758,8 +773,8 @@ TextureImporter:
       name: plains_tileset_extras_26
       rect:
         serializedVersion: 2
-        x: 128
-        y: 192
+        x: 192
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -779,8 +794,8 @@ TextureImporter:
       name: plains_tileset_extras_27
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
+        x: 256
+        y: 256
         width: 64
         height: 64
       alignment: 0
@@ -800,7 +815,7 @@ TextureImporter:
       name: plains_tileset_extras_28
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 192
         width: 64
         height: 64
@@ -821,7 +836,7 @@ TextureImporter:
       name: plains_tileset_extras_29
       rect:
         serializedVersion: 2
-        x: 320
+        x: 128
         y: 192
         width: 64
         height: 64
@@ -842,7 +857,7 @@ TextureImporter:
       name: plains_tileset_extras_30
       rect:
         serializedVersion: 2
-        x: 384
+        x: 192
         y: 192
         width: 64
         height: 64
@@ -863,8 +878,8 @@ TextureImporter:
       name: plains_tileset_extras_31
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
+        x: 256
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -884,8 +899,8 @@ TextureImporter:
       name: plains_tileset_extras_32
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 320
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -905,8 +920,8 @@ TextureImporter:
       name: plains_tileset_extras_33
       rect:
         serializedVersion: 2
-        x: 192
-        y: 128
+        x: 384
+        y: 192
         width: 64
         height: 64
       alignment: 0
@@ -926,7 +941,7 @@ TextureImporter:
       name: plains_tileset_extras_34
       rect:
         serializedVersion: 2
-        x: 256
+        x: 64
         y: 128
         width: 64
         height: 64
@@ -947,7 +962,7 @@ TextureImporter:
       name: plains_tileset_extras_35
       rect:
         serializedVersion: 2
-        x: 320
+        x: 128
         y: 128
         width: 64
         height: 64
@@ -968,7 +983,7 @@ TextureImporter:
       name: plains_tileset_extras_36
       rect:
         serializedVersion: 2
-        x: 384
+        x: 192
         y: 128
         width: 64
         height: 64
@@ -989,8 +1004,8 @@ TextureImporter:
       name: plains_tileset_extras_37
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
+        x: 256
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -1010,8 +1025,8 @@ TextureImporter:
       name: plains_tileset_extras_38
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
+        x: 320
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -1031,8 +1046,8 @@ TextureImporter:
       name: plains_tileset_extras_39
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
+        x: 384
+        y: 128
         width: 64
         height: 64
       alignment: 0
@@ -1044,6 +1059,111 @@ TextureImporter:
       bones: []
       spriteID: 3a8cdae7327cc4f90800000000000000
       internalID: -6967975568185898845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plains_tileset_extras_40
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0aab4e3dfa645c50800000000000000
+      internalID: 6653060185437481482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plains_tileset_extras_41
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da8403af84d5e6340800000000000000
+      internalID: 4858923615995840685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plains_tileset_extras_42
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 066dbb17787a1e290800000000000000
+      internalID: -7862819274241616288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plains_tileset_extras_43
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7721656178a4f420800000000000000
+      internalID: 2662938484668442493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plains_tileset_extras_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c90b620dd146db6a0800000000000000
+      internalID: -6431874613606174564
       vertices: []
       indices: 
       edges: []
