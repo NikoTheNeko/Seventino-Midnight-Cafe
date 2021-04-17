@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beanResource: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
     type: 3}
-  minRotation: -30
-  maxRotation: 30
+  minRotation: -20
+  maxRotation: 20
   numberOfBeans: 3
   isRandom: 0
   isParent: 1
-  cooldown: 5
-  beanSpeed: 5
+  cooldown: 3
+  beanSpeed: 7
   beanVelocity: {x: 1, y: 0}

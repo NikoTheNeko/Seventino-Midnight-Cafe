@@ -33,7 +33,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Animator playerAnim;
 
 
-    public int health = 10;
+    public int health = 100;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
 
@@ -336,6 +336,17 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName: "TitleScreen");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "beanProjectile")
+        {
+            health -= 3;
+            CameraShake.instance.ShakeCamera(.25f, .05f);
+            Debug.Log(health);
+            other.gameObject.SetActive(false);
+        }
     }
 
     private void checkDead()

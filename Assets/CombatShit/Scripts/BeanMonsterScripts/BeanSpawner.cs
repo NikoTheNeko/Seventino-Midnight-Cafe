@@ -93,7 +93,7 @@ public class BeanSpawner : MonoBehaviour
     {
         Vector3 dir = (playerTarget.position - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Debug.Log("Angle2Player: " + angle.ToString());
+        //Debug.Log("Angle2Player: " + angle.ToString());
         return angle;
     }
 
