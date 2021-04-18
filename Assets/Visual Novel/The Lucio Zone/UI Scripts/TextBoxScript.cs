@@ -98,7 +98,7 @@ public class TextBoxScript : MonoBehaviour
         //speed up scrolling rate
         if(!speedUp && activated){
             Debug.Log("sped up");
-            scrollSpeed /= 5;
+            scrollSpeed /= 20;
             speedUp = true;
         }
 
@@ -139,7 +139,6 @@ public class TextBoxScript : MonoBehaviour
             else if(loc > 25){
                 loc = 26;
             }
-            Debug.Log(loc);
             audio.PlayOneShot(clips[loc]);
         }
         
