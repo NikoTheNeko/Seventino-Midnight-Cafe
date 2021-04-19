@@ -3,6 +3,9 @@
 	"dialogueSegments":
 	[
 		{
+			"text": ""
+		},
+		{
 			"text": "A customer! What can I get for you? Wait, welcome to the Seventino Midnight Cafe! I am Chef, your chef and barista!",
 			"speaker": "Chef",
 			"emotion": "happy"
@@ -30,6 +33,9 @@
 	],
 	"bestEnding": 
 	[
+		{
+			"text": ""
+		},
 		{
 			"text": "Here you go Alan! A coffee, brewed to perfection. What do you think?",
 			"speaker": "Chef",
@@ -68,6 +74,9 @@
 	],
 	"goodEnding": 
 	[
+		{
+			"text": ""
+		},
 		{
 			"text": "Here you go Alan! Thank you so much for waiting!",
 			"speaker": "Chef",
