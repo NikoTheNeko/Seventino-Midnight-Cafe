@@ -179,6 +179,10 @@ public class FoodStats : MonoBehaviour{
         FlavorPass = IsInRange(FlavorVal, FlavorTarget, GraceRange);
 
         if(TexturePass && WarmthPass && FlavorPass){
+            tracker.hasFood = true;
+            tracker.foodObject.texture = TextureVal;
+            tracker.foodObject.warmth = WarmthVal;
+            tracker.foodObject.flavor = FlavorVal;
             return true;
         } else {
             return false;
