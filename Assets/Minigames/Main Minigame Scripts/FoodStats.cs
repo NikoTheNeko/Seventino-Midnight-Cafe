@@ -164,6 +164,13 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     #region Check Stats
+    /**
+        This gives you an array of the values for the 
+    **/
+    public float[] GetValues(){
+        float[] ValueArray = {TextureVal, WarmthVal, FlavorVal};
+        return ValueArray;
+    }
 
     
     /**

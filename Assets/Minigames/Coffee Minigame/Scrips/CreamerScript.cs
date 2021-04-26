@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SyrupScript : MonoBehaviour{
+public class CreamerScript : MonoBehaviour{
   #region Public Variables
 
     [Header("Minigame Objects and Variables")]
     [Tooltip("The amount you will add to Flavor")]
     //Values forr when you add the flavors
-    public int[] FlavorValues = {10, 8, 5};
+    public int[] FlavorValues = {0, 2, 5};
 
     [Tooltip("The amount you will add to Texture")]
-    public int[] TextureValues = {0, 2, 5};
+    public int[] TextureValues = {10, 8, 5};
 
 
-    //[Tooltip("Syrup SFX")]
-    //public AudioSource SyrupSFX;
+    //[Tooltip("Creamer SFX")]
+    //public AudioSource CreamerSFX;
    // public Animator Animation;
 
-    [Tooltip("The locations of each syrup bottle")]
-    public Transform[] SyrupLocations = new Transform[3];
+    [Tooltip("The locations of each Creamer bottle")]
+    public Transform[] CreamerLocations = new Transform[3];
 
     [Tooltip("The cup that moves")]
     public Transform Cup;
@@ -41,11 +41,11 @@ public class SyrupScript : MonoBehaviour{
     #endregion
 
     #region Private Variables
-    //States for the syrup
+    //States for the Creamer
     //0 - Vanilla
     //1 - Caramel
     //2 - Chocolate
-    private int SyrupState = 0;
+    private int CreamerState = 0;
     
     //This is so that you can't play the game if it's not active
     private bool MinigameActive = false;
@@ -63,7 +63,7 @@ public class SyrupScript : MonoBehaviour{
             RunMinigame();
         } else {
             MinigameCanvas.SetActive(false);
-            SyrupState = 0;
+            CreamerState = 0;
             StatManager.GetComponent<FoodStats>().HidePlus(2);
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
         }
@@ -75,45 +75,45 @@ public class SyrupScript : MonoBehaviour{
         It just adds the amount from AddAmount to the thing. That's it.
     **/
     private void RunMinigame(){
-        Instructions.text = "Press left and right to select a syrup and pump to pump!";
+        Instructions.text = "Press left and right to select a creamer and press add to add!";
         ShowPluses();
         MoveCup();
 
-        StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SyrupState]);
-        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[SyrupState]);
+        StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[CreamerState]);
+        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[CreamerState]);
 
         CookingManager.GetComponent<CookingController>().MinigameFinished();
     }
 
-    //Called by the button to pump syrup
-    public void PumpSyrup(){
-        StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
-        StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
+    //Called by the button to pump Creamer
+    public void PumpCreamer(){
+        StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[CreamerState]);
+        StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[CreamerState]);
     }
 
-    //Called by the buttons to move the cup and change syrups
+    //Called by the buttons to move the cup and change Creamers
     //Moves the state left (-1) or right (1)
     public void AdjustSelection(int direction){
-        if(SyrupState + direction >= 0 && SyrupState <= 2){
-            SyrupState += direction;
+        if(CreamerState + direction >= 0 && CreamerState <= 1){
+            CreamerState += direction;
         }
     }
 
     //This moves the coffee cup to the correct location
     private void MoveCup(){
-        Vector3 NewLocation = Vector3.Lerp(Cup.position, SyrupLocations[SyrupState].position, 0.2f);
+        Vector3 NewLocation = Vector3.Lerp(Cup.position, CreamerLocations[CreamerState].position, 0.2f);
         Cup.position = NewLocation;
     }
 
 
     //This hides and shows pluses based on the 
     private void ShowPluses(){
-        StatManager.GetComponent<FoodStats>().ShowPlus(2);
+        StatManager.GetComponent<FoodStats>().ShowPlus(0);
 
-        if(SyrupState > 0){
-            StatManager.GetComponent<FoodStats>().ShowPlus(0);    
+        if(CreamerState > 0){
+            StatManager.GetComponent<FoodStats>().ShowPlus(2);    
         } else {
-            StatManager.GetComponent<FoodStats>().HidePlus(0);
+            StatManager.GetComponent<FoodStats>().HidePlus(2);
         }
 
     }
