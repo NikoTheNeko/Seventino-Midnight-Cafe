@@ -9,7 +9,7 @@ public class InventoryDisplay : MonoBehaviour
     [Tooltip("Texts and Images for displaying the inventory. ")]
     public List<Display> ingredientDisplays = new List<Display>();
     public GameObject mouseFollower;
-    public Text followerText;
+    // public Text followerText;
     public GameObject onScreenAnchor;
     public GameObject offScreenAnchor;
     #endregion
@@ -39,8 +39,8 @@ public class InventoryDisplay : MonoBehaviour
         displayIngredients();
         checkForMouseOver();
         mouseFollower.transform.position = Input.mousePosition;
-        followerText.gameObject.SetActive(textActive);
-        move();
+        // followerText.gameObject.SetActive(textActive);
+        // move();
         if(Input.GetKeyDown(KeyCode.I)){
             onScreen = !onScreen;
         }
@@ -65,19 +65,26 @@ public class InventoryDisplay : MonoBehaviour
 
     //Checks if mouse has moved over an image
     private void checkForMouseOver(){
-        textActive = false;
+        // textActive = false;
         foreach(Display target in ingredientDisplays){
             if(Input.mousePosition.x < target.image.gameObject.transform.position.x + OffsetX && 
             Input.mousePosition.x > target.image.gameObject.transform.position.x - OffsetX && 
             Input.mousePosition.y < target.image.gameObject.transform.position.y + OffsetY && 
             Input.mousePosition.y > target.image.gameObject.transform.position.y - OffsetY &&
             target.active){
-                textActive = true;
+                // textActive = true;
+                Slider textureSlider = mouseFollower.transform.GetChild(1).gameObject.GetComponent<Slider>();
+                Slider warmthSlider = mouseFollower.transform.GetChild(2).gameObject.GetComponent<Slider>();
+                Slider flavorSlider = mouseFollower.transform.GetChild(3).gameObject.GetComponent<Slider>();
+
+                textureSlider.value = target.texture;
+                warmthSlider.value = target.warmth;
+                flavorSlider.value = target.flavor;
                 //info should be displayed here
-                followerText.text = "Name: " + target.name + 
-                                    "\nTexture: " + target.texture + 
-                                    "\nWarmth: " + target.warmth + 
-                                    "\nFlavor: " + target.flavor;
+                // followerText.text = "Name: " + target.name + 
+                //                     "\nTexture: " + target.texture + 
+                //                     "\nWarmth: " + target.warmth + 
+                //                     "\nFlavor: " + target.flavor;
             }
         }
     }

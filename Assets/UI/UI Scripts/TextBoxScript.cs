@@ -189,6 +189,9 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        
+
         textbox.gameObject.SetActive(true);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(true);

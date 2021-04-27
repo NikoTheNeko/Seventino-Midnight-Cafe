@@ -180,9 +180,9 @@ public class FoodStats : MonoBehaviour{
 
         if(TexturePass && WarmthPass && FlavorPass){
             tracker.hasFood = true;
-            tracker.foodObject.texture = TextureVal;
-            tracker.foodObject.warmth = WarmthVal;
-            tracker.foodObject.flavor = FlavorVal;
+            tracker.foodObject.texture = (int)TextureVal;
+            tracker.foodObject.warmth = (int)WarmthVal;
+            tracker.foodObject.flavor = (int)FlavorVal;
             return true;
         } else {
             return false;
