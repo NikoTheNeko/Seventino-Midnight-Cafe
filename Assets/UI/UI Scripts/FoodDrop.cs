@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class FoodDrop : MonoBehaviour
 {
-    public int texture;
-    public int warmth;
-    public int flavor;
+    public float texture;
+    public float warmth;
+    public float flavor;
     public string name;
     public Sprite image;
     // Start is called before the first frame update
@@ -21,40 +21,40 @@ public class FoodDrop : MonoBehaviour
         
     }
 
-    public int getWarmth(){
+    public float getWarmth(){
         return warmth;
     }
 
-    public int getFlavor(){
+    public float getFlavor(){
         return flavor;
     }
 
-    public int getTexture(){
+    public float getTexture(){
         return texture;
     }
     
-    public void setWarmth(int input){
+    public void setWarmth(float input){
         warmth = input;
     }
 
-    public void setFlavor(int input){
+    public void setFlavor(float input){
         flavor = input;
     }
 
-    public void setTexture(int input){
+    public void setTexture(float input){
         texture = input;
     }
 
     //the apple factory
-    public void setValues(int iTexture, int iWarmth, int iFlavor, string iName){
+    public void setValues(float iTexture, float iWarmth, float iFlavor, string iName){
         warmth = iWarmth;
         flavor = iFlavor;
         texture = iTexture;
         name = iName;
     }
 
-    public int[] getValues(){
-        return new int[] {texture, warmth, flavor};
+    public float[] getValues(){
+        return new float[] {texture, warmth, flavor};
     }
 
     public void setImage(Sprite ingredient){

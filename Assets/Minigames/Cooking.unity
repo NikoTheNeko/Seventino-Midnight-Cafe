@@ -6402,6 +6402,18 @@ MonoBehaviour:
           m_StringArgument: Cafe Walk Around
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 346374496}
+        m_TargetAssemblyTypeName: FoodStats, Assembly-CSharp
+        m_MethodName: DishDone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &273861147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6778,6 +6790,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13430b773c779e044b26f419b9c11e79, type: 3}
+--- !u!114 &346374496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 148110412, guid: 13430b773c779e044b26f419b9c11e79,
+    type: 3}
+  m_PrefabInstance: {fileID: 346374495}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106839642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6e91d87cf4c354c83534a43e3c9605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &348084232
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ public class InventoryDisplay : MonoBehaviour
     private InventoryTracker tracker;
     private bool onScreen = false;
     private bool textActive = false;
+    private Slider textureSlider;
+    private Slider warmthSlider;
+    private Slider flavorSlider;
     #endregion
 
     // Start is called before the first frame update
@@ -31,6 +34,10 @@ public class InventoryDisplay : MonoBehaviour
         foreach(Display display in ingredientDisplays){
             display.Deactivate();
         }
+
+        textureSlider = mouseFollower.transform.GetChild(1).gameObject.GetComponent<Slider>();
+        warmthSlider = mouseFollower.transform.GetChild(2).gameObject.GetComponent<Slider>();
+        flavorSlider = mouseFollower.transform.GetChild(3).gameObject.GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -73,9 +80,10 @@ public class InventoryDisplay : MonoBehaviour
             Input.mousePosition.y > target.image.gameObject.transform.position.y - OffsetY &&
             target.active){
                 // textActive = true;
-                Slider textureSlider = mouseFollower.transform.GetChild(1).gameObject.GetComponent<Slider>();
-                Slider warmthSlider = mouseFollower.transform.GetChild(2).gameObject.GetComponent<Slider>();
-                Slider flavorSlider = mouseFollower.transform.GetChild(3).gameObject.GetComponent<Slider>();
+                Debug.Log("went over");
+                // textureSlider.transform.gameObject.SetActive(true);
+                // warmthSlider.transform.gameObject.SetActive(true);
+                // flavorSlider.transform.gameObject.SetActive(true);
 
                 textureSlider.value = target.texture;
                 warmthSlider.value = target.warmth;
@@ -85,6 +93,11 @@ public class InventoryDisplay : MonoBehaviour
                 //                     "\nTexture: " + target.texture + 
                 //                     "\nWarmth: " + target.warmth + 
                 //                     "\nFlavor: " + target.flavor;
+            }
+            else{
+                // textureSlider.transform.gameObject.SetActive(false);
+                // warmthSlider.transform.gameObject.SetActive(false);
+                // flavorSlider.transform.gameObject.SetActive(false);
             }
         }
     }
@@ -107,9 +120,9 @@ public class InventoryDisplay : MonoBehaviour
 public class Display{
     public Image image;
     public string name;
-    public int texture;
-    public int warmth;
-    public int flavor;
+    public float texture;
+    public float warmth;
+    public float flavor;
     public bool active = false;
 
     //Sets all members inactive
@@ -124,7 +137,7 @@ public class Display{
         active = true;
     }
 
-    public void setVars(int iTexture, int iWarmth, int iFlavor, string iName){
+    public void setVars(float iTexture, float iWarmth, float iFlavor, string iName){
         texture = iTexture;
         warmth = iWarmth;
         flavor = iFlavor;

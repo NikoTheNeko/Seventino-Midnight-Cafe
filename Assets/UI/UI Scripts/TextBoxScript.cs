@@ -284,7 +284,7 @@ public class Dialogue
     public int flavorMin;
     public int flavorMax;
 
-    public bool satisfiesQuest(int texture, int warmth, int flavor){
+    public bool satisfiesQuest(float texture, float warmth, float flavor){
         return texture >= textureMin && texture <= textureMax 
                 && warmth >= warmthMin && warmth <= warmthMax 
                 && flavor >= flavorMin && flavor <= flavorMax;

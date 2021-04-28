@@ -124,13 +124,13 @@ public class IngredientPicture{
 [System.Serializable]
 public class Ingredient{
     public string name;
-    public int texture;
-    public int warmth;
-    public int flavor;
+    public float texture;
+    public float warmth;
+    public float flavor;
 
     public Ingredient(FoodDrop food){
         name = food.name;
-        int[] vars = food.getValues();
+        float[] vars = food.getValues();
         texture = vars[0];
         warmth = vars[1];
         flavor = vars[2];
