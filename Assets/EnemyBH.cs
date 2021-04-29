@@ -39,6 +39,9 @@ public class EnemyBH : MonoBehaviour {
     private bool canAttack = true;
     public LayerMask playerLayer;
     public GameObject SeedShot;
+    [SerializeField] private GameObject flameFloatingDamageText;
+    [SerializeField] private GameObject gunFloatingDamageText;
+    [SerializeField] private GameObject knifeFloatingDamageText;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -370,6 +373,7 @@ public class EnemyBH : MonoBehaviour {
 
     public void TakeDamage(int amount, DamageEnum damageType){
 
+        
         StartCoroutine(FlashColor());
 
         health -= amount;
@@ -379,12 +383,18 @@ public class EnemyBH : MonoBehaviour {
         {
             case DamageEnum.Fire:
                 totalFireDamage += amount;
+                var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, transform);
+                damagePrefab1.GetComponent<TextMesh>().text = amount.ToString();
                 break;
             case DamageEnum.Flavor:
                 totalFlavorDamage += amount;
+                var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, transform);
+                damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;
+                var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, transform);
+                damagePrefab3.GetComponent<TextMesh>().text = amount.ToString();
                 break;
         }
 

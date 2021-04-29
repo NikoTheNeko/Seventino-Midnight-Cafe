@@ -50895,6 +50895,29 @@ PrefabInstance:
       propertyPath: hurtColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2936634157296216013, guid: 90e5eeb22806fb446857b2518f75d5dc,
+        type: 3}
+      propertyPath: floatingDamageText
+      value: 
+      objectReference: {fileID: 1505906073}
+    - target: {fileID: 2936634157296216013, guid: 90e5eeb22806fb446857b2518f75d5dc,
+        type: 3}
+      propertyPath: flameFloatingDamageText
+      value: 
+      objectReference: {fileID: 3518094737619641709, guid: a998caa9394ff884494ae3323ea82535,
+        type: 3}
+    - target: {fileID: 2936634157296216013, guid: 90e5eeb22806fb446857b2518f75d5dc,
+        type: 3}
+      propertyPath: gunFloatingDamageText
+      value: 
+      objectReference: {fileID: 2431092844999344156, guid: 41674b6ab9265044eb98cba1996b9533,
+        type: 3}
+    - target: {fileID: 2936634157296216013, guid: 90e5eeb22806fb446857b2518f75d5dc,
+        type: 3}
+      propertyPath: knifeFloatingDamageText
+      value: 
+      objectReference: {fileID: 4710220606463752391, guid: 364cd02e44b27fe4085e493884e27576,
+        type: 3}
     - target: {fileID: 2936634157296216014, guid: 90e5eeb22806fb446857b2518f75d5dc,
         type: 3}
       propertyPath: m_LocalPosition.x
