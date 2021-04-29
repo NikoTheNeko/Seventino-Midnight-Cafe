@@ -344,7 +344,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             health -= 3;
             CameraShake.instance.ShakeCamera(.25f, .05f);
-            Debug.Log(health);
+            //Debug.Log(health);
             other.gameObject.SetActive(false);
         }
     }
