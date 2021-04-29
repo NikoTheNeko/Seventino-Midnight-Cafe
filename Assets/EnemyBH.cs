@@ -383,18 +383,36 @@ public class EnemyBH : MonoBehaviour {
         {
             case DamageEnum.Fire:
                 totalFireDamage += amount;
-                var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, transform);
+                GameObject fireContainer = new GameObject();
+                Vector3 newVec = transform.position;
+                newVec.x += Random.Range(-0.5f, 0.5f);
+                newVec.y += Random.Range(-0.5f, 0.5f);
+                fireContainer.transform.position = newVec;
+                var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, fireContainer.transform);
                 damagePrefab1.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(fireContainer, 0.7f);
                 break;
             case DamageEnum.Flavor:
                 totalFlavorDamage += amount;
-                var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, transform);
+                GameObject flavorContainer = new GameObject();
+                Vector3 newVec1 = transform.position;
+                newVec1.x += Random.Range(-0.5f, 0.5f);
+                newVec1.y += Random.Range(-0.5f, 0.5f);
+                flavorContainer.transform.position = newVec1;
+                var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
                 damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(flavorContainer, 0.7f);
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;
-                var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, transform);
+                GameObject sliceContainer = new GameObject();
+                Vector3 newVec2 = transform.position;
+                newVec2.x += Random.Range(-0.5f, 0.5f);
+                newVec2.y += Random.Range(-0.5f, 0.5f);
+                sliceContainer.transform.position = newVec2;
+                var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, sliceContainer.transform);
                 damagePrefab3.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(sliceContainer, 0.7f);
                 break;
         }
 
