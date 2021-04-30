@@ -54,7 +54,6 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(activated);
         //if there are letters to add and required amount of time has passed
         if(activated){
             if(Time.time > timer && letter < message.Length && activated){
@@ -189,8 +188,8 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
         foreach(CharacterData data in characterInformation){
@@ -204,8 +203,13 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
+        // GameObject player = GameObject.FindGameObjectWithTag("Player");
+        // player.GetComponent<PlayerCombatTesting>().CanMove = true;
+
         textbox.gameObject.SetActive(false);
         foreach(CharacterData data in characterInformation){
+            data.image.color = new Color32(55, 55, 55, 255);
+            data.image.transform.localScale = new Vector3(0.09828957f,0.09828957f,0.09828957f);
             data.image.gameObject.SetActive(false);
         }
         nameText.gameObject.SetActive(false);

@@ -321,6 +321,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5333751974742148547, guid: cd847c79fd42db64e8e08e44061a9b88,
+        type: 3}
+      propertyPath: m_Name
+      value: Flavor Slider
+      objectReference: {fileID: 0}
     - target: {fileID: 6547048698738461802, guid: cd847c79fd42db64e8e08e44061a9b88,
         type: 3}
       propertyPath: m_IsActive

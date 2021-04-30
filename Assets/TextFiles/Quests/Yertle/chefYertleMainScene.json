@@ -1,0 +1,137 @@
+{
+	"subject": "Yertle",
+	"dialogueSegments":
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "Hello sir! Welcome to the Seventino Midnight Cafe, my name is Chef! What brings you here?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{
+			"text": "I’ll tell you what brings old Yertle here, Chef, a need to try every food!",
+			"speaker": "Yertle",
+			"emotion": "happy"
+		},
+		{
+			"text": "E-every food?! That’s so many!",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		},
+		{	
+			"text": "I’ve been around, little one. Now, my journey has brought me to your fine eatery. ",
+			"speaker": "Yertle",
+			"emotion": "neutral"
+		},		
+		{	
+			"text": "Well, I’m glad it has! That being the case, what can I get for you?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{
+			"text": "My age has made tasting things quite difficult… how about something with a punch, like a Hot Claw?",
+			"speaker": "Yertle",
+			"emotion": "sad"
+		},
+		{
+			"text": "One Hot Claw, coming right up! That’ll pack a punch!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		}
+	],
+	"bestEnding": 
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "Ouch! One hot claw, ready to serve! Be careful, it burns!",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Oh! Careful young one, we wouldn’t want an injured chef! I can take that off your hands.",
+			"speaker": "Yertle",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Thanks Yertle! Well, what do you think? Spicy enough for you?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "My tongue hasn’t been this hot since my trip to the Firelands!",
+			"speaker": "Yertle",
+			"emotion": "surprised"
+		},	
+		{	
+			"text": "Say, you didn’t take any spices from there, did you?",
+			"speaker": "Yertle",
+			"emotion": "surprised"
+		},			
+		{	
+			"text": "I definitely took inspiration from the brewers out there, but this is a creation of my own!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},		
+		{	
+			"text": "Ha! How amazing. Take pride in your work Chef, I’ll be telling my friends to come from all around.",
+			"speaker": "Yertle",
+			"emotion": "happy"
+		},
+		{
+			"text": "You’d do that for me? Thank you Yertle!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{	
+			"text": "You let me know if you need anything, and I’ll be happy to provide it!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		}
+	],
+	"goodEnding": 
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "One Hot Claw, hot and ready! Be careful please!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "No need to worry lad, I’ve had my fair share of coffee…",
+			"speaker": "Yertle",
+			"emotion": "neutral"
+		},
+		{
+			"text": "Yeah? Well I bet none are as hot as mine!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{	
+			"text": "Youch! You were right Chef! My tongue hasn’t felt this on fire since my trip to the Firelands!",
+			"speaker": "Yertle",
+			"emotion": "happy"
+		},
+		{	
+			"text": "Just as I told you! Is there anything else I can get you? Perhaps some water?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "That’ll do! Thank you Chef! I’ll be here.",
+			"speaker": "Yertle",
+			"emotion": "neutral"
+		}
+	],
+	"textureMin": 0,
+	"textureMax": 100,
+	"warmthMin": 0,
+	"warmthMax": 100,
+	"flavorMin": 0,
+	"flavorMax": 100
+}
