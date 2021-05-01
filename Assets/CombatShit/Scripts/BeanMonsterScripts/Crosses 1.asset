@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb36f89e723b33246a8448017316fbea, type: 3}
-  m_Name: Special 2
+  m_Name: Crosses 1
   m_EditorClassIdentifier: 
   beanResource: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
     type: 3}
-  minRotation: 15
-  maxRotation: 375
-  numberOfBeans: 19
+  minRotation: 0
+  maxRotation: 360
+  numberOfBeans: 5
   isRandom: 0
   isParent: 1
-  cooldown: 0.1
-  beanSpeed: 5
+  cooldown: 0.5
+  beanSpeed: 7
   beanVelocity: {x: 1, y: 0}

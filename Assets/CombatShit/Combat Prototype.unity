@@ -48267,10 +48267,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 1716528797}
   spawnData:
+  - {fileID: 11400000, guid: ceb070d0b756df749b614046d49c9f45, type: 2}
+  - {fileID: 11400000, guid: b59ae4ea4fd659148aee94a992c3a2c7, type: 2}
+  - {fileID: 11400000, guid: ceb070d0b756df749b614046d49c9f45, type: 2}
+  - {fileID: 11400000, guid: b59ae4ea4fd659148aee94a992c3a2c7, type: 2}
   - {fileID: 11400000, guid: 6f81e7cae79082b46b932cb87e967b87, type: 2}
   - {fileID: 11400000, guid: decc34ccbc66a3c4c8f4447dde58962f, type: 2}
   - {fileID: 11400000, guid: 0cd5eaa528b40cd4e8435d8c00ddde42, type: 2}
   - {fileID: 11400000, guid: 56ee8151efd59ef4aa6fc08b4e3ffbea, type: 2}
+  - {fileID: 11400000, guid: 6f81e7cae79082b46b932cb87e967b87, type: 2}
+  - {fileID: 11400000, guid: decc34ccbc66a3c4c8f4447dde58962f, type: 2}
+  - {fileID: 11400000, guid: 0cd5eaa528b40cd4e8435d8c00ddde42, type: 2}
+  - {fileID: 11400000, guid: 56ee8151efd59ef4aa6fc08b4e3ffbea, type: 2}
+  - {fileID: 11400000, guid: dc1ecd46765faa24a8d656cd3df0fde4, type: 2}
   isSequenceRandom: 0
 --- !u!114 &1880191919
 MonoBehaviour:
