@@ -57,6 +57,10 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void staminaControl(){
+        float stamina;
+    }
+
     public void triggerControl(){
         
         if(tracker.inventory.Count > 0){
