@@ -22,6 +22,9 @@ public class InventoryTracker : MonoBehaviour
     public int dialogueProg = 0;
     public bool hasFood;
     
+    public float texture;
+    public float warmth;
+    public float flavor;
 
     #endregion
 

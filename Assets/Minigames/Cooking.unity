@@ -7883,7 +7883,7 @@ GameObject:
   - component: {fileID: 273861147}
   - component: {fileID: 273861146}
   m_Layer: 5
-  m_Name: Go home
+  m_Name: Serve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7959,9 +7959,22 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Cafe Walk Around
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6269454791213909196, guid: a35f3724e8879574cb7d83969ceee675,
+          type: 3}
+        m_TargetAssemblyTypeName: FoodStats, Assembly-CSharp
+        m_MethodName: DishDone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &273861147
@@ -10179,8 +10192,8 @@ MonoBehaviour:
     the stats on the counter.
 
 
-    You want to make sure you match your recipe which
-    is always listed at the bottom of this book!'
+    You want to make sure your stats are in range
+    of the recipe. It''s listed at the bottom of this book!'
 --- !u!222 &516293140
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14756,7 +14769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1035138836
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16230,6 +16243,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 109434243}
     m_Modifications:
+    - target: {fileID: 2546504407287515633, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818730598116805, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818730598116805, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_Value
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 6101818730693981543, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -16243,17 +16271,32 @@ PrefabInstance:
     - target: {fileID: 6101818731160633255, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}
       propertyPath: m_Text
-      value: Recipe (Match these!)
+      value: Recipe Be in the Range of These!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818731160633255, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818731205646994, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 6101818731218874960, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6101818731218874960, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818731218874960, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.1011963
       objectReference: {fileID: 0}
     - target: {fileID: 6101818731420555310, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}
@@ -16294,6 +16337,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818732301924797, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 16.999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101818732521569745, guid: 938907d0d84ce0d42b262cc395e6b4ae,
+        type: 3}
+      propertyPath: m_Value
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6101818732536072933, guid: 938907d0d84ce0d42b262cc395e6b4ae,
         type: 3}

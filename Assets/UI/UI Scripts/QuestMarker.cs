@@ -53,7 +53,7 @@ public class QuestMarker : MonoBehaviour
                 if(tracker.hasFood){
                     tracker.hasFood = false;
                     //if food being carried satisfies quest, give good ending and advance dialogue progression
-                    if(curQuest.satisfiesQuest(tracker.foodObject.texture, tracker.foodObject.warmth, tracker.foodObject.flavor)){
+                    if(curQuest.satisfiesQuest(tracker.texture, tracker.warmth, tracker.flavor)){
                         textbox.SetDialogue(curQuest.bestEnding);
                         tracker.dialogueProg++;
                     }

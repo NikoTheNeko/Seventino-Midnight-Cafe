@@ -58,7 +58,7 @@ public class FoodStats : MonoBehaviour{
 
     #region Private Vars
 
-    private InventoryTracker Tracker;
+    private InventoryTracker tracker;
     private Ingredient Bean1;
     private Ingredient Bean2;
     private Ingredient Bean3;
@@ -67,27 +67,27 @@ public class FoodStats : MonoBehaviour{
 
     public void Start(){
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        Tracker = temp.GetComponent<InventoryTracker>();
+        tracker = temp.GetComponent<InventoryTracker>();
 
-        if(Tracker.inventory[0] != null){
-            Bean1 = Tracker.inventory[0];
+        if(tracker.inventory[0] != null){
+            Bean1 = tracker.inventory[0];
             //BeanButton1.interactable = true;
         } else {
             Bean1.texture = 0;
             Bean1.warmth = 0;
             Bean1.flavor = 0;
         }
-        Bean1 = Tracker.inventory[0];
-        if(Tracker.inventory[1] != null){
-            Bean2 = Tracker.inventory[1];
+        Bean1 = tracker.inventory[0];
+        if(tracker.inventory[1] != null){
+            Bean2 = tracker.inventory[1];
             //BeanButton2.interactable = true;
         } else {
             Bean2.texture = 0;
             Bean2.warmth = 0;
             Bean2.flavor = 0;
         }
-        if(Tracker.inventory[2] != null){
-            Bean3 = Tracker.inventory[2];
+        if(tracker.inventory[2] != null){
+            Bean3 = tracker.inventory[2];
             //BeanButton3.interactable = true;
         } else {
             Bean3.texture = 0;
@@ -286,10 +286,16 @@ public class FoodStats : MonoBehaviour{
     }
 
     public void DishDone(){
-        tracker.foodObject.texture = TextureVal;
-        tracker.foodObject.flavor = FlavorVal;
-        tracker.foodObject.warmth = WarmthVal;
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
+
+        tracker.texture = TextureVal;
+        tracker.flavor = FlavorVal;
+        tracker.warmth = WarmthVal;
+
         tracker.hasFood = true;
+
+        tracker.inventory.Clear();
     }
 
     #endregion
