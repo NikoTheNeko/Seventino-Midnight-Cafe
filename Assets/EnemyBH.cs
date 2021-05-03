@@ -27,7 +27,8 @@ public class EnemyBH : MonoBehaviour {
     public Rigidbody2D rb;
 
     public string enemyState = "idle";
-    public int health = 100;
+    public int maxHealth = 300;
+    public int health;
     private Vector3 spawnPos;
     public int idleTimer;
     public int walkTimer;
@@ -39,6 +40,9 @@ public class EnemyBH : MonoBehaviour {
     private bool canAttack = true;
     public LayerMask playerLayer;
     public GameObject SeedShot;
+
+    public HealthBar healthbar;
+
     [SerializeField] private GameObject flameFloatingDamageText;
     [SerializeField] private GameObject gunFloatingDamageText;
     [SerializeField] private GameObject knifeFloatingDamageText;
@@ -61,6 +65,10 @@ public class EnemyBH : MonoBehaviour {
         originVec = transform.localScale;
         flipVec = originVec;
         flipVec.x *= -1;
+
+        health = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
+
     }
 
     void UpdatePath() 
@@ -377,6 +385,7 @@ public class EnemyBH : MonoBehaviour {
         StartCoroutine(FlashColor());
 
         health -= amount;
+        healthbar.SetHealth(health);
         // Debug.Log("DAMAGED I REPEAT DAMAGED");
 
         switch (damageType)
