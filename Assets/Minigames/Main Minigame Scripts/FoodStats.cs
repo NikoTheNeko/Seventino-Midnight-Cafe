@@ -265,6 +265,7 @@ public class FoodStats : MonoBehaviour{
         FlavorPass = IsInRange(FlavorVal, FlavorTarget, GraceRange);
 
         if(TexturePass && WarmthPass && FlavorPass){
+
             return true;
         } else {
             return false;
@@ -282,6 +283,13 @@ public class FoodStats : MonoBehaviour{
         } else {
             return false;
         }
+    }
+
+    public void DishDone(){
+        tracker.foodObject.texture = TextureVal;
+        tracker.foodObject.flavor = FlavorVal;
+        tracker.foodObject.warmth = WarmthVal;
+        tracker.hasFood = true;
     }
 
     #endregion
