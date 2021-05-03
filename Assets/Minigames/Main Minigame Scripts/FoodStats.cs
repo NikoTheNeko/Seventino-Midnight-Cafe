@@ -22,8 +22,6 @@ public class FoodStats : MonoBehaviour{
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
     public float FlavorVal = 0;
 
-    private InventoryTracker tracker;
-
     #endregion
 
     #region UI Related Stuff
@@ -32,7 +30,15 @@ public class FoodStats : MonoBehaviour{
     This section is mainly for the UI elements to display what you're at and how much of
     one stat you have.
     **/
-    [Header("UI Elements")]
+    [Header("Bean Previews")]
+    public Button BeanButton1;
+    public Button BeanButton2;
+    public Button BeanButton3;
+    public Slider[] Bean1Previews = new Slider[3];
+    public Slider[] Bean2Previews = new Slider[3];
+    public Slider[] Bean3Previews = new Slider[3];
+
+    [Header("Bars at the Bottom")]
     public Slider TextureProgress;
     public Slider TexturePreview;
     public Slider WarmthProgress;
@@ -50,20 +56,46 @@ public class FoodStats : MonoBehaviour{
 
     #endregion
 
+    #region Private Vars
+
+    private InventoryTracker Tracker;
+    private Ingredient Bean1;
+    private Ingredient Bean2;
+    private Ingredient Bean3;
+
+    #endregion
+
     public void Start(){
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        tracker = temp.GetComponent<InventoryTracker>();
+        Tracker = temp.GetComponent<InventoryTracker>();
 
-        Ingredient importFood = tracker.inventory[0];
-        // UnityEngine.Debug.Log(importFood.texture);
+        if(Tracker.inventory[0] != null){
+            Bean1 = Tracker.inventory[0];
+            //BeanButton1.interactable = true;
+        } else {
+            Bean1.texture = 0;
+            Bean1.warmth = 0;
+            Bean1.flavor = 0;
+        }
+        Bean1 = Tracker.inventory[0];
+        if(Tracker.inventory[1] != null){
+            Bean2 = Tracker.inventory[1];
+            //BeanButton2.interactable = true;
+        } else {
+            Bean2.texture = 0;
+            Bean2.warmth = 0;
+            Bean2.flavor = 0;
+        }
+        if(Tracker.inventory[2] != null){
+            Bean3 = Tracker.inventory[2];
+            //BeanButton3.interactable = true;
+        } else {
+            Bean3.texture = 0;
+            Bean3.warmth = 0;
+            Bean3.flavor = 0;
+        }
 
-        // FoodDrop importFood = tracker.inventory[0];
-
-        TextureVal = importFood.texture;
-        WarmthVal = importFood.warmth;
-        FlavorVal = importFood.flavor;
-
-        // tracker.remove(tracker.inventory[0]);
+        SetBeanPickingBars();
 
     }
 
@@ -100,6 +132,53 @@ public class FoodStats : MonoBehaviour{
         //tempDisplay();
         UpdateProgressBars();
     }
+
+    #region Bean Previews & More
+
+    /**
+        This sets it so that way the beans you pick can show
+        what you do so it look pretty and you can consciously pick
+        which thing you want
+    **/
+    private void SetBeanPickingBars(){
+        //Import the Textures
+        Bean1Previews[0].value = Bean1.texture;
+        Bean2Previews[0].value = Bean2.texture;
+        Bean3Previews[0].value = Bean3.texture;
+
+        //Import the Warmth
+        Bean1Previews[1].value = Bean1.warmth;
+        Bean2Previews[1].value = Bean2.warmth;
+        Bean3Previews[1].value = Bean3.warmth;
+
+        //Import the Flavor
+        Bean1Previews[2].value = Bean1.flavor;
+        Bean2Previews[2].value = Bean2.flavor;
+        Bean3Previews[2].value = Bean3.flavor;
+    }
+
+    public void SelectBean(int BeanNumber){
+        switch(BeanNumber){
+            case 1:
+                TextureVal = Bean1.texture;
+                WarmthVal = Bean1.warmth;
+                FlavorVal = Bean1.flavor;
+            break;
+            case 2:
+                TextureVal = Bean2.texture;
+                WarmthVal = Bean2.warmth;
+                FlavorVal = Bean2.flavor;
+            break;
+            case 3:
+                TextureVal = Bean3.texture;
+                WarmthVal = Bean3.warmth;
+                FlavorVal = Bean3.flavor;
+            break;
+        }
+        
+    }
+
+    #endregion
 
     #region Bar UI
 

@@ -13,6 +13,8 @@ public class CreamerScript : MonoBehaviour{
 
     [Tooltip("The amount you will add to Texture")]
     public int[] TextureValues = {10, 8, 5};
+    [Tooltip("Amount of Glug")]
+    public int GlugLeft = 5;
 
 
     //[Tooltip("Creamer SFX")]
@@ -64,8 +66,6 @@ public class CreamerScript : MonoBehaviour{
         } else {
             MinigameCanvas.SetActive(false);
             CreamerState = 0;
-            StatManager.GetComponent<FoodStats>().HidePlus(2);
-            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
         }
     }
 
@@ -75,26 +75,35 @@ public class CreamerScript : MonoBehaviour{
         It just adds the amount from AddAmount to the thing. That's it.
     **/
     private void RunMinigame(){
-        Instructions.text = "Press left and right to select a creamer and press add to add!";
         ShowPluses();
         MoveCup();
 
-        StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[CreamerState]);
-        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[CreamerState]);
+        if(GlugLeft > 0){
+            Instructions.text = "Press left and right to select a creamer and press add to add!\n" + "Dashes Left: " + GlugLeft;
+            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[CreamerState]);
+            StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
+            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[CreamerState]);
 
-        CookingManager.GetComponent<CookingController>().MinigameFinished();
+        } else {
+            Instructions.text = "You can't add anymore creamer!";
+        }
+        
+        CookingManager.GetComponent<CookingController>().MinigameFinished(5, true);
     }
 
     //Called by the button to pump Creamer
     public void PumpCreamer(){
-        StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[CreamerState]);
-        StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[CreamerState]);
+        if(GlugLeft > 0){
+            StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[CreamerState]);
+            StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[CreamerState]);
+            GlugLeft--;
+        }
     }
 
     //Called by the buttons to move the cup and change Creamers
     //Moves the state left (-1) or right (1)
     public void AdjustSelection(int direction){
-        if(CreamerState + direction >= 0 && CreamerState <= 1){
+        if(CreamerState + direction >= 0 && CreamerState + direction <= 1){
             CreamerState += direction;
         }
     }
@@ -109,6 +118,7 @@ public class CreamerScript : MonoBehaviour{
     //This hides and shows pluses based on the 
     private void ShowPluses(){
         StatManager.GetComponent<FoodStats>().ShowPlus(0);
+        StatManager.GetComponent<FoodStats>().HidePlus(1);
 
         if(CreamerState > 0){
             StatManager.GetComponent<FoodStats>().ShowPlus(2);    

@@ -82,10 +82,10 @@ public class PouringMinigame : MonoBehaviour{
         if(MinigameCompleted){
             PouringSlider.interactable = false;
             if(PouringSlider.value > 0)
-                PouringSlider.value -= 0.5f * Time.deltaTime;
+                PouringSlider.value -= 3f * Time.deltaTime;
             TiltPitcher();
             PouringSFX.Stop();
-            CookingManager.GetComponent<CookingController>().MinigameFinished();
+            CookingManager.GetComponent<CookingController>().MinigameFinished(1, false);
         }
     }
 

@@ -13,6 +13,8 @@ public class SpicesScript : MonoBehaviour{
 
     [Tooltip("The amount you will add to Warmth")]
     public int[] WarmthValues = {0, 2, 5};
+    [Tooltip("Amount of Scoops")]
+    public int ScoopsLeft = 5;
 
 
     //[Tooltip("Spices SFX")]
@@ -64,8 +66,6 @@ public class SpicesScript : MonoBehaviour{
         } else {
             MinigameCanvas.SetActive(false);
             SpicesState = 0;
-            StatManager.GetComponent<FoodStats>().HidePlus(2);
-            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
         }
     }
 
@@ -79,22 +79,31 @@ public class SpicesScript : MonoBehaviour{
         ShowPluses();
         MoveCup();
 
-        StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SpicesState]);
-        StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + WarmthValues[SpicesState]);
+        if(ScoopsLeft > 0){
+            Instructions.text = "Press left and right to select a spice and press add to add!\n" + "Scoops Left: " + ScoopsLeft;
+            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(0);
+            StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + WarmthValues[SpicesState]);
+            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SpicesState]);
+        } else {
+            Instructions.text = "You can't add anymore scoops!";
+        }
 
-        CookingManager.GetComponent<CookingController>().MinigameFinished();
+        CookingManager.GetComponent<CookingController>().MinigameFinished(4, true);
     }
 
     //Called by the button to pump Spices
     public void PumpSpices(){
-        StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SpicesState]);
-        StatManager.GetComponent<FoodStats>().AddWarmth(WarmthValues[SpicesState]);
+        if(ScoopsLeft > 0){
+            StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SpicesState]);
+            StatManager.GetComponent<FoodStats>().AddWarmth(WarmthValues[SpicesState]);
+            ScoopsLeft--;
+        }
     }
 
     //Called by the buttons to move the cup and change Spicess
     //Moves the state left (-1) or right (1)
     public void AdjustSelection(int direction){
-        if(SpicesState + direction >= 0 && SpicesState <= 2){
+        if(SpicesState + direction >= 0 && SpicesState + direction <= 2){
             SpicesState += direction;
         }
     }
@@ -109,6 +118,7 @@ public class SpicesScript : MonoBehaviour{
     //This hides and shows pluses based on the 
     private void ShowPluses(){
         StatManager.GetComponent<FoodStats>().ShowPlus(2);
+        StatManager.GetComponent<FoodStats>().HidePlus(0);
 
         if(SpicesState > 0){
             StatManager.GetComponent<FoodStats>().ShowPlus(1);    

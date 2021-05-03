@@ -14,6 +14,9 @@ public class SyrupScript : MonoBehaviour{
     [Tooltip("The amount you will add to Texture")]
     public int[] TextureValues = {0, 2, 5};
 
+    [Tooltip("Amount of Pumps")]
+    public int PumpsLeft = 5;
+
 
     //[Tooltip("Syrup SFX")]
     //public AudioSource SyrupSFX;
@@ -64,8 +67,6 @@ public class SyrupScript : MonoBehaviour{
         } else {
             MinigameCanvas.SetActive(false);
             SyrupState = 0;
-            StatManager.GetComponent<FoodStats>().HidePlus(2);
-            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
         }
     }
 
@@ -75,26 +76,34 @@ public class SyrupScript : MonoBehaviour{
         It just adds the amount from AddAmount to the thing. That's it.
     **/
     private void RunMinigame(){
-        Instructions.text = "Press left and right to select a syrup and pump to pump!";
         ShowPluses();
         MoveCup();
 
-        StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SyrupState]);
-        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[SyrupState]);
+        if(PumpsLeft > 0){
+            Instructions.text = "Press left and right to select a syrup and pump to pump!\n" + "Pumps Left: " + PumpsLeft;
+            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SyrupState]);
+            StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
+            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[SyrupState]);
+        } else {
+            Instructions.text = "You can't add anymore pumps!";
+        }
 
-        CookingManager.GetComponent<CookingController>().MinigameFinished();
+        CookingManager.GetComponent<CookingController>().MinigameFinished(3, true);
     }
 
     //Called by the button to pump syrup
     public void PumpSyrup(){
-        StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
-        StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
+        if(PumpsLeft > 0){
+            StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
+            StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
+            PumpsLeft--;
+        }
     }
 
     //Called by the buttons to move the cup and change syrups
     //Moves the state left (-1) or right (1)
     public void AdjustSelection(int direction){
-        if(SyrupState + direction >= 0 && SyrupState <= 2){
+        if(SyrupState + direction >= 0 && SyrupState  + direction <= 2){
             SyrupState += direction;
         }
     }
@@ -109,6 +118,7 @@ public class SyrupScript : MonoBehaviour{
     //This hides and shows pluses based on the 
     private void ShowPluses(){
         StatManager.GetComponent<FoodStats>().ShowPlus(2);
+        StatManager.GetComponent<FoodStats>().HidePlus(1);
 
         if(SyrupState > 0){
             StatManager.GetComponent<FoodStats>().ShowPlus(0);    
