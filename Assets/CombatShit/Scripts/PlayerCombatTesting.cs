@@ -65,7 +65,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 rollDirection;
     private Vector3 lastMovedDirection;
     private float rollSpeed;
-    private const float MV_SPEED = 7f;
+    [SerializeField] private const float MV_SPEED = 7f;
     private State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
@@ -344,7 +344,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             health -= 3;
             CameraShake.instance.ShakeCamera(.25f, .05f);
-            Debug.Log(health);
+            //Debug.Log(health);
             other.gameObject.SetActive(false);
         }
     }

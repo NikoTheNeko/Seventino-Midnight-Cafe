@@ -27,7 +27,8 @@ public class EnemyBH : MonoBehaviour {
     public Rigidbody2D rb;
 
     public string enemyState = "idle";
-    public int health = 100;
+    public int maxHealth = 300;
+    public int health;
     private Vector3 spawnPos;
     public int idleTimer;
     public int walkTimer;
@@ -39,6 +40,12 @@ public class EnemyBH : MonoBehaviour {
     private bool canAttack = true;
     public LayerMask playerLayer;
     public GameObject SeedShot;
+
+    public HealthBar healthbar;
+
+    [SerializeField] private GameObject flameFloatingDamageText;
+    [SerializeField] private GameObject gunFloatingDamageText;
+    [SerializeField] private GameObject knifeFloatingDamageText;
 
     public SpriteRenderer[] sprites;
     public Color hurtColor;
@@ -58,6 +65,10 @@ public class EnemyBH : MonoBehaviour {
         originVec = transform.localScale;
         flipVec = originVec;
         flipVec.x *= -1;
+
+        health = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
+
     }
 
     void UpdatePath() 
@@ -370,21 +381,47 @@ public class EnemyBH : MonoBehaviour {
 
     public void TakeDamage(int amount, DamageEnum damageType){
 
+        
         StartCoroutine(FlashColor());
 
         health -= amount;
+        healthbar.SetHealth(health);
         // Debug.Log("DAMAGED I REPEAT DAMAGED");
 
         switch (damageType)
         {
             case DamageEnum.Fire:
                 totalFireDamage += amount;
+                GameObject fireContainer = new GameObject();
+                Vector3 newVec = transform.position;
+                newVec.x += Random.Range(-0.5f, 0.5f);
+                newVec.y += Random.Range(-0.5f, 0.5f);
+                fireContainer.transform.position = newVec;
+                var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, fireContainer.transform);
+                damagePrefab1.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(fireContainer, 0.7f);
                 break;
             case DamageEnum.Flavor:
                 totalFlavorDamage += amount;
+                GameObject flavorContainer = new GameObject();
+                Vector3 newVec1 = transform.position;
+                newVec1.x += Random.Range(-0.5f, 0.5f);
+                newVec1.y += Random.Range(-0.5f, 0.5f);
+                flavorContainer.transform.position = newVec1;
+                var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
+                damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(flavorContainer, 0.7f);
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;
+                GameObject sliceContainer = new GameObject();
+                Vector3 newVec2 = transform.position;
+                newVec2.x += Random.Range(-0.5f, 0.5f);
+                newVec2.y += Random.Range(-0.5f, 0.5f);
+                sliceContainer.transform.position = newVec2;
+                var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, sliceContainer.transform);
+                damagePrefab3.GetComponent<TextMesh>().text = amount.ToString();
+                Destroy(sliceContainer, 0.7f);
                 break;
         }
 
