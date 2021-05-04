@@ -8,16 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main Menu/TitleScreen.unity
     guid: c1f8da59863d81b40ae9e92331aadee7
-  - enabled: 1
-    path: Assets/Main Menu/SceneSelection.unity
-    guid: 2343bb26869a1104f91d7e5b582c087a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/Coffee Minigame/Coffee Minigame.unity
     guid: 3856330b6f57d044a810135481616f1f
   - enabled: 1
+    path: Assets/Quest Selection/Cafe Walk Around.unity
+    guid: d7d1f85d634b9404ab9b2edebc5ab888
+  - enabled: 1
     path: Assets/Quest Selection/Quest Selection Screen.unity
     guid: 0b1e1c6c1122e2e46a027b3d875b94e7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Map and Stuff/TileSetUsage/PlainsSmall.unity
-    guid: b5d6e63bf37a4ac47967a36c19bfbf61
+    path: Assets/Map and Stuff/Scenes/PlainsSmall.unity
+    guid: 504567d1f8f946f4c9ba99d75271e479
+  - enabled: 1
+    path: Assets/Minigames/Cooking.unity
+    guid: 2704a0c6429479c4b8db28a985dce8e9
   m_configObjects: {}
