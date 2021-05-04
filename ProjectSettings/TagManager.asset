@@ -6,7 +6,6 @@ TagManager:
   tags:
   - enemy
   - InventoryTracker
-  - beanProjectile
   layers:
   - Default
   - TransparentFX
@@ -16,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - aa
+  - 
   - 
   - 
   - Collision
@@ -30,7 +29,7 @@ TagManager:
   - 
   - 
   - enemy
-  - player
+  - 
   - 
   - 
   - 

@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class GrinderMinigame : MonoBehaviour{
     #region Public Varirables
     [Header("Rigidbodies and other basic stuff")]
-    [Tooltip("How much you will add to the texture")]
-    public float TextureAdd;
     [Tooltip("This is the transform for the Grinder Selector bit of the grinder")]
     public Transform GrinderSelection;
 
@@ -17,29 +15,16 @@ public class GrinderMinigame : MonoBehaviour{
     [Tooltip("SFX for the Grinder Clicking")]
     public AudioSource SelectionSFX;
 
-    //#####################################################################################
-
     [Header("Minigame Objects and Variables")]
-    [Tooltip("These are the locations it will go to")]
-    public Transform[] SelectionLocations = new Transform[10];
-    [Tooltip("This is how fast the Grinder Selector moves")]
+    [Tooltip("This is how fast the Griender Selector moves")]
     public float GrinderSelectMoveSpeed = .125f;
 
     [Tooltip("This adjusts how long a player has to hold to grind")]
     public float GrindTimeLength;
+ 
 
     [Tooltip("The particle system for the Coffee Grounds")]
     public ParticleSystem GroundsPS;
-
-    [Tooltip("This is for when the button is pressed")]
-    public GameObject ButtonPressed;
-    [Tooltip("This is for when the button is NOT pressed")]
-    public GameObject ButtonUnpressed;
-
-    [Tooltip("This is the coffee beans in the grinder with 3 states empty, half, and full")]
-    public GameObject[] CoffeeFill = new GameObject[3];
-
-    //#####################################################################################
 
     [Header("UI and Stat Manager")]
     [Tooltip("This is the manager for the stats so we can update them")]
@@ -51,8 +36,7 @@ public class GrinderMinigame : MonoBehaviour{
     [Tooltip("This is the instructions so players know what to fuckin do")]
     public Text Instructions;
 
-    [Tooltip("This is the canvas used to play the game")]
-    public GameObject MinigameCanvas;
+    [Tooltip("")]
 
     #endregion
 
@@ -87,7 +71,7 @@ public class GrinderMinigame : MonoBehaviour{
     //This sets it so you cannot change the grind after you start
     private bool CanChangeGrind = true;
     //This checks so you don't add the value multiple times
-    private bool ValueAdded = false;
+    public bool ValueAdded = false;
     //This is so that you can't play the game if it's not active
     private bool MinigameActive = false;
 
@@ -111,11 +95,8 @@ public class GrinderMinigame : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         //Only plays if the minigame is active and running
-        if(MinigameActive){
+        if(MinigameActive)
             RunMinigame();
-        } else {
-            MinigameCanvas.SetActive(false);
-        }
     }
 
     #region Minigame Controls
@@ -123,35 +104,24 @@ public class GrinderMinigame : MonoBehaviour{
         As always there's this one cohesive function to run so that way life is easier
     **/
     private void RunMinigame(){
-        MinigameCanvas.SetActive(true);
         //If the minigame is NOT completed
         if(!MinigameCompleted){
             StatManager.GetComponent<FoodStats>().ShowPlus(0);
-            StatManager.GetComponent<FoodStats>().HidePlus(1);
-            StatManager.GetComponent<FoodStats>().HidePlus(2);
-
-            StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
-            StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
-
             if(CanChangeGrind){
                 AdjustSelection();
                 MoveGrindSelection();
             }
             GrindBeans();
-            UpdateInstructions();  
+            UpdateInstructions();
         }
 
         //If the minigame is completed
         if(MinigameCompleted){
-            MinigameCanvas.SetActive(false);
-            ButtonPressed.SetActive(false);
-            ButtonUnpressed.SetActive(true);
             StatManager.GetComponent<FoodStats>().HidePlus(0);
             GrinderSFX.Stop();
             if(GroundsPS.isPlaying)
                 GroundsPS.Stop();
-            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(0);
-            CookingManager.GetComponent<CookingController>().MinigameFinished(0, false);
+            CookingManager.GetComponent<CookingController>().MinigameFinished();
         }
 
     }
@@ -167,40 +137,35 @@ public class GrinderMinigame : MonoBehaviour{
             Does a simple check left/right to see and if it too big or small dont change
         **/
         if(Input.GetButtonDown("Right")){
-            AdjustRight();
+            if(GrindSize < 10){
+                SelectionSFX.Play();
+                GrindSize++;
+            }
         } else if (Input.GetButtonDown("Left")){
-            AdjustLeft();
-        }
-
-    }
-
-    public void AdjustRight(){
-        if(GrindSize < 10 && CanChangeGrind){
-            SelectionSFX.Play();
-            GrindSize++;
-        }
-    }
-
-    public void AdjustLeft(){
-        if(GrindSize > 1 && CanChangeGrind){
+            if(GrindSize > 1){
                 SelectionSFX.Play();
                 GrindSize--;
             }
+        }
+
     }
 
     /**
         This VISUALLY moves the grind selection in the game. It does not actually
         affect the variable whatsoever.It does this by just changing it'sposition very slowly
-        using the GrinderSelectMoveSpeed Variable and lerping it
+        using the GrinderSelectMoveSpeed Variable
     **/
     private void MoveGrindSelection(){
-        Vector3 NewLocation = SelectionLocations[GrindSize - 1].position;
+        float newXPos = GrinderLocationX + (0.6f * (GrindSize - 1));
+        Vector3 NewLocation = new Vector3(newXPos, GrinderLocationY, 0);
 
-        Vector3 MovementVector = Vector3.Lerp(GrinderSelection.position, 
-                                            NewLocation, 
-                                            GrinderSelectMoveSpeed);
+        Vector3 MovementVector = new Vector3(GrinderSelectMoveSpeed, 0, 0);
 
-        GrinderSelection.position = MovementVector;
+        if(GrinderSelection.position.x < NewLocation.x)
+            GrinderSelection.position = GrinderSelection.position + MovementVector;
+
+        if(GrinderSelection.position.x > NewLocation.x)
+            GrinderSelection.position = GrinderSelection.position - MovementVector;
 
         GroundsPS.startSize = 0.1f+ GrindSize * 0.05f;
     }
@@ -211,27 +176,16 @@ public class GrinderMinigame : MonoBehaviour{
         isn't that fun. It's okay you're rewarded with particles!
     **/
     bool ShowGrounds = false;
-    bool IsGrinding = false;
     private void GrindBeans(){
-        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(
-                                                StatManager.GetComponent<FoodStats>().TextureVal
-                                                 + GrindSize * TextureAdd);
+        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(GrindSize * 10);
 
-        if(Input.GetButton("Use")){
-            IsGrinding = true;
-        } else if(Input.GetButtonUp("Use")){
-            IsGrinding = false;
-        }
-
-        if(IsGrinding && !ValueAdded){
-            StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * TextureAdd);
+        if(Input.GetButtonDown("Use") && !ValueAdded){
+            StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * 10);
             ValueAdded = true;
             CanChangeGrind = false;
         }
 
-        if(IsGrinding){
-            ButtonPressed.SetActive(true);
-            ButtonUnpressed.SetActive(false);
+        if(Input.GetButton("Use")){
             GrinderSFX.mute = false;
             ShowGrounds = true;
             if(GrindTime > 0){
@@ -240,9 +194,7 @@ public class GrinderMinigame : MonoBehaviour{
                MinigameCompleted = true;
             }
 
-        } else {
-            ButtonPressed.SetActive(false);
-            ButtonUnpressed.SetActive(true);
+        } else if(Input.GetButtonUp("Use")){
             GrinderSFX.mute = true;
             ShowGrounds = false;
         }
@@ -255,27 +207,6 @@ public class GrinderMinigame : MonoBehaviour{
                 GroundsPS.Stop();
         }
 
-        ShowBeans();
-
-    }
-
-    public void ToggleGrinder(){
-        IsGrinding = !IsGrinding;
-    }
-
-    /**
-        This function shows the beans visually so that
-        way the player is getting feedback about making them
-        beans grounds
-    **/
-    private void ShowBeans(){
-        if(GrindTime <= GrindTimeLength/2 && GrindTime > 0){
-            CoffeeFill[0].SetActive(false);
-            CoffeeFill[1].SetActive(true);
-        } else if(GrindTime <= 0){
-            CoffeeFill[1].SetActive(false);
-            CoffeeFill[2].SetActive(true);
-        }
     }
 
 
@@ -284,7 +215,7 @@ public class GrinderMinigame : MonoBehaviour{
     **/
     private void UpdateInstructions(){
         if(MinigameCompleted == false){
-            Instructions.text = "Click Left and Right to adjust the grind size.\nPress the button on top to grind!";
+            Instructions.text = "Press left and right to adjust the grind size.\nHold Space to grind!";
         } else {
            Instructions.text = "You did it! Click Next to move onto the next step!";
         }

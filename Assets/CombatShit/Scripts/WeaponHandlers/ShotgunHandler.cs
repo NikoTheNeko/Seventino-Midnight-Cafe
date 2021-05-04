@@ -3,47 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
-using static EnemyBH.DamageEnum;
+
 public class ShotgunHandler : MonoBehaviour
 {
     public List<LineRenderer> tracers = new List<LineRenderer>(5);
     [SerializeField] private Material weaponTracerMaterial;
     [SerializeField] public SpriteRenderer muzzleFlash;
     public Action<LineRenderer> turnOff;
-    public bool canFire = true;
-    public Animator animator;
-    public int shotgunDamage = 3;
+
     public void RayShoot(Vector3 EndPoint, Vector3 ShootDir)
     {
-        if (canFire)
-        {
-            animator.SetTrigger("Shoot");
-            canFire = false;
-            foreach (LineRenderer tracer in tracers)
+        foreach (LineRenderer tracer in tracers) {
+            float angle = UnityEngine.Random.Range(-5f, 5f);
+            Vector3 newShootDir = (Quaternion.Euler(0f, 0f, angle) * ShootDir);
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(EndPoint, newShootDir);
+            CreateWeaponTracer(EndPoint, EndPoint, newShootDir, tracer);
+            CreateShootFlash();
+            if (raycastHit2D.collider != null)
             {
-                float angle = UnityEngine.Random.Range(-5f, 5f);
-                Vector3 newShootDir = (Quaternion.Euler(0f, 0f, angle) * ShootDir);
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(EndPoint, newShootDir);
-                CreateWeaponTracer(EndPoint, EndPoint, newShootDir, tracer);
-                CreateShootFlash();
-                if (raycastHit2D.collider != null)
+                EnemyBehaviour target = raycastHit2D.collider.GetComponent<EnemyBehaviour>();
+                if (target != null)
                 {
-                    EnemyBH target = raycastHit2D.collider.GetComponent<EnemyBH>();
-                    if (target != null)
-                    {
-                        target.TakeDamage(shotgunDamage, Flavor);
-                        CameraShake.instance.ShakeCamera(.5f, .02f);
-                    }
+                    target.TakeDamage(5);
                 }
             }
-            StartCoroutine(ResetFire(0.5f));
         }
-    }
-
-    IEnumerator ResetFire(float time)
-    {
-        yield return new WaitForSeconds(time);
-        canFire = true;
     }
 
     public void CreateWeaponTracer(Vector3 fromPosition, Vector3 targetPosition, Vector3 targetNormal, LineRenderer tracer)

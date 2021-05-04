@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerCombatTesting : MonoBehaviour{
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -29,13 +28,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     public GameObject flameShit;
     [Tooltip("Seasoning Shot")]
     public GameObject sShot;
-
-    public Animator playerAnim;
-
-
-    public int health = 100;
-    public SpriteRenderer[] sprites;
-    public Color hurtColor;
 
     #endregion
 
@@ -65,7 +57,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 rollDirection;
     private Vector3 lastMovedDirection;
     private float rollSpeed;
-    [SerializeField] private const float MV_SPEED = 7f;
+    private const float MV_SPEED = 7f;
     private State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
@@ -77,8 +69,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     private FlameHandler flameo;
     public ShotgunHandler shuggun;
 
-    public bool facingRight = true;
-
     private void Awake()
     {
         gunAnchor = transform.Find("gunAnchor");
@@ -87,12 +77,12 @@ public class PlayerCombatTesting : MonoBehaviour{
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
         flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
+        //flameParticles = gunAnchor.Find("Flambethrower").Find("Flames").GetComponent<ParticleSystem>();
         state = State.Normal;
     }
 
     // Update is called once per frame
     void Update(){
-        
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -105,37 +95,19 @@ public class PlayerCombatTesting : MonoBehaviour{
                 // WASD movement implementation.
                 if (Input.GetKey(KeyCode.W))
                 {
-                    moveY = +.3f;
+                    moveY = +1f;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    moveY = -.3f;
+                    moveY = -1f;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    if(!facingRight)
-                    {
-                        Flip();
-                    }
-                    moveX = +.3f;
+                    moveX = +1f;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    if(facingRight)
-                    {
-                        Flip();
-                    }
-                    moveX = -.3f;
-                }
-                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-                {
-                    playerAnim.SetBool("Idle", false);
-                    playerAnim.SetBool("Run", true);
-                }
-                else
-                {
-                    playerAnim.SetBool("Idle", true);
-                    playerAnim.SetBool("Run", false);
+                    moveX = -1f;
                 }
                 // converting WASD input into a vector3, normalized.
                 moveDirection = new Vector3(moveX, moveY).normalized;
@@ -150,7 +122,6 @@ public class PlayerCombatTesting : MonoBehaviour{
                 // Dodge roll starts here.
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
                     rollSpeed = 20f;
                     state = State.Rolling;
@@ -171,6 +142,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 break;
         }
 
+        CheckAttack();
         UpdateWeapon();
         //if (Input.GetMouseButtonDown(0))
         weaponSelect = gunAnchor.GetComponent<weaponBehaviour>().index;
@@ -184,18 +156,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             case 2:
                 weaponThree();
                 break;
-        }
-    }
-
-    void Flip()
-    {
-        // Switch the way the player is labelled as facing
-        facingRight = !facingRight;
-
-        // Multiply the player's x local scale by -1
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+            }
     }
 
     private void FixedUpdate()
@@ -214,6 +175,52 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
+    /*
+    private void LateUpdate()
+    {
+        updateCrosshair();
+    }
+    
+    void updateCrosshair()
+    {
+        if (crosshair.transform.localPosition.magnitude >= 5)
+        {
+            crosshair.transform.localPosition = crosshair.transform.localPosition.normalized * 5;
+            crosshair.GetComponent<Rigidbody2D>().velocity = transform.gameObject.GetComponent<Rigidbody2D>().velocity;
+        }
+        Vector2 crosshairVel = transform.gameObject.GetComponent<Rigidbody2D>().velocity + new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        crosshairVel.Normalize();
+        (Physics2D.Raycast(transform.position, Vector3.up, 0.1f))
+        {
+            if(crosshairVel.y > 0)
+            {
+                crosshairVel.y = 0;
+            }
+        }
+        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
+        {
+            if (crosshairVel.y < 0)
+            {
+                crosshairVel.y = 0;
+            }
+        }
+        if (Physics2D.Raycast(transform.position, Vector3.right, 0.1f))
+        {
+            if (crosshairVel.x > 0)
+            {
+                crosshairVel.x = 0;
+            }
+        }
+        if (Physics2D.Raycast(transform.position, Vector3.left, 0.1f))
+        {
+            if (crosshairVel.x < 0)
+            {
+                crosshairVel.x = 0;
+            }
+        }
+        crosshair.GetComponent<Rigidbody2D>().velocity = crosshairVel * 5;
+    }
+    */
     void weaponOne()
     {
         if (Input.GetMouseButtonDown(0))
@@ -269,6 +276,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 mousePosition = GetMouseWorldPosition();
             Vector3 shootDir = (mousePosition - transform.position).normalized;
             shuggun.RayShoot(shootPoint, shootDir);
+            shotgunAnim.SetTrigger("Shoot");
         }
         //spawn pellets from gun end point, need to construct prefabs for projectiles
     }
@@ -294,10 +302,6 @@ public class PlayerCombatTesting : MonoBehaviour{
 
         Vector3 aimDirection = (mousePosition - transform.position).normalized;
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        if(!facingRight)
-        {
-            angle += 180f;
-        }
         gunAnchor.eulerAngles = new Vector3(0, 0, angle);
     }
 
@@ -308,53 +312,12 @@ public class PlayerCombatTesting : MonoBehaviour{
         return worldPosition;
     }
 
-    public void PlayerHit(int amount)
-    {
-
-        StartCoroutine(FlashColor());
-
-        health -= amount;
-
-        checkDead();
-    }
-
-
-    IEnumerator FlashColor()
-    {
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            sprites[i].color = hurtColor;
-        }
-        yield return new WaitForSeconds(0.05f);
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            sprites[i].color = Color.white;
+    public void CheckAttack(){
+        Quaternion rotato = new Quaternion(0,0,0,0);
+        Vector3 Offset = transform.position + new Vector3(1,0,0);
+        if(Input.GetButtonDown("Use")){
+            //Object.Instantiate(hitbox, Offset, rotato);
         }
     }
 
-    IEnumerator LeaveScene(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName: "TitleScreen");
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "beanProjectile")
-        {
-            health -= 3;
-            CameraShake.instance.ShakeCamera(.25f, .05f);
-            //Debug.Log(health);
-            other.gameObject.SetActive(false);
-        }
-    }
-
-    private void checkDead()
-    {
-        if (health < 0)
-        {
-            //playerAnim.SetTrigger("Death");
-            StartCoroutine("LeaveScene", 1.5f);
-        }
-    }
 }
