@@ -57,7 +57,7 @@ public class ShowcaseDish : MonoBehaviour{
                 }
             }
 
-            CookingManager.GetComponent<CookingController>().MinigameFinished();
+            CookingManager.GetComponent<CookingController>().MinigameFinished(69, false);
         }
         
     }

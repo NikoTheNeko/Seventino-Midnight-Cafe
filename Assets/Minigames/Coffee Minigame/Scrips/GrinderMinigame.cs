@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GrinderMinigame : MonoBehaviour{
     #region Public Varirables
     [Header("Rigidbodies and other basic stuff")]
+    [Tooltip("How much you will add to the texture")]
+    public float TextureAdd;
     [Tooltip("This is the transform for the Grinder Selector bit of the grinder")]
     public Transform GrinderSelection;
 
@@ -148,7 +150,8 @@ public class GrinderMinigame : MonoBehaviour{
             GrinderSFX.Stop();
             if(GroundsPS.isPlaying)
                 GroundsPS.Stop();
-            CookingManager.GetComponent<CookingController>().MinigameFinished();
+            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(0);
+            CookingManager.GetComponent<CookingController>().MinigameFinished(0, false);
         }
 
     }
@@ -210,7 +213,9 @@ public class GrinderMinigame : MonoBehaviour{
     bool ShowGrounds = false;
     bool IsGrinding = false;
     private void GrindBeans(){
-        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(GrindSize * 10);
+        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(
+                                                StatManager.GetComponent<FoodStats>().TextureVal
+                                                 + GrindSize * TextureAdd);
 
         if(Input.GetButton("Use")){
             IsGrinding = true;
@@ -219,7 +224,7 @@ public class GrinderMinigame : MonoBehaviour{
         }
 
         if(IsGrinding && !ValueAdded){
-            StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * 10);
+            StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * TextureAdd);
             ValueAdded = true;
             CanChangeGrind = false;
         }
