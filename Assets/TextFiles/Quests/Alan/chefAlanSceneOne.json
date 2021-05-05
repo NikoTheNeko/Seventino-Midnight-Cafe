@@ -1,0 +1,107 @@
+{
+	"subject": "Alan",
+	"dialogueSegments":
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "A customer! What can I get for you? Wait, welcome to the Seventino Midnight Cafe! I am Chef, your chef and barista!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "I’d love to try that brew you have right there. The smell caught me while I was walking outside, it was hard to ignore. Alan, by the way. I haven’t ever seen this place before, is it new?",
+			"speaker": "Alan",
+			"emotion": "confident"
+		},
+		{
+			"text": "New to you, my friend, and that’s all the matters! This roast right here is actually my first attempt at a new recipe I’ve been perfecting. Care to be my trial run Alan?",
+			"speaker": "Chef",
+			"emotion": "sad"
+		},
+		{	
+			"text": "Well if it tastes as good as it smells, I think that’ll be alright. What’s in it?",
+			"speaker": "Alan",
+			"emotion": "happy"
+		},
+		{
+			"text": "Oh, just a few ingredients from out in the wilderness! I know exactly what I need and how much of it I need. Sit tight, I’ll be back in a jif!",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		}
+	],
+	"bestEnding": 
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "Here you go Alan! A coffee, brewed to perfection. What do you think?",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "I knew it smelled just like it… but it even tastes like it!",
+			"speaker": "Alan",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Like what?",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{	
+			"text": "My mom’s coffee, back home. When I walked in earlier, what you were making smelled just like what my mom would make for my dad and I every morning before school.",
+			"speaker": "Alan",
+			"emotion": "happy"
+		},
+		{
+			"text": "We’d spend that little bit of early morning together, right as the sun peeks over the horizon. It was nice.",
+			"speaker": "Alan",
+			"emotion": "happy"
+		},
+		{
+			"text": "It sounds nice. I’m happy you enjoyed the coffee. Let me know if you ever want another.",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{
+			"text": "I think I’ll take you up on the offer sometime. Thanks Chef. I’ll catch you around.",
+			"speaker": "Alan",
+			"emotion": "confident"
+		}
+	],
+	"goodEnding": 
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "Here you go Alan! Thank you so much for waiting!",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{
+			"text": "It tastes pretty good. Thank you for going out of your way to get the ingredients. I really appreciate it.",
+			"speaker": "Alan",
+			"emotion": "confident"
+		},
+		{
+			"text": "I’m happy you enjoyed the coffee. Let me know if you ever want another.",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{	
+			"text": "I think I’ll take you up on that sometime. Thanks Chef. I’ll see you later.",
+			"speaker": "Alan",
+			"emotion": "confident"
+		}
+	],
+	"textureMin": 0,
+	"textureMax": 50,
+	"warmthMin": 50,
+	"warmthMax": 100,
+	"flavorMin": 30,
+	"flavorMax": 100
+}

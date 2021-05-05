@@ -38,6 +38,8 @@ public class CookingController : MonoBehaviour
     public Transform CenterAnchor;
 
     [Header("Canvases")]
+    public GameObject Tutorial;
+    public GameObject BeanPicking;
     public GameObject Instructions;
     public GameObject ChoiceButtons;
 
@@ -46,12 +48,12 @@ public class CookingController : MonoBehaviour
     #region Private Variables
 
     //Minigame Number keeps track of the minigames that go through each thing.
-    private int MinigameNumber = -1;
+    private int MinigameNumber = -3;
 
     //This variable checks to send the activation messages so it's not constantly being called
     private bool ActivationMessageSent = false;
 
-    //This is the state of the game 0 = Grind, 1 = Brew Pour, 2 = Brew Espresso, 3 = Addon
+    //This is the state of the game 0 = Grind, 1 = Brew Pour, 2 = Addon
     private int GameState = 0;
 
     #endregion
@@ -71,8 +73,7 @@ public class CookingController : MonoBehaviour
     public void UpdateMinigames(){
         ActivateMinigame();
         BookControl();
-        if(MinigameNumber != -1)
-            MoveCamera();
+        MoveCamera();
     }
 
     #region The actual functions for Minigame Control
@@ -82,6 +83,8 @@ public class CookingController : MonoBehaviour
         the CameraSpeed variable
     **/
     private void MoveCamera(){
+        if(MinigameNumber < 0)
+            return;
         Vector3 NewLocation = Vector3.Lerp(Camera.position, 
                                             CameraLocations[MinigameNumber].position,
                                             CameraSpeed);
@@ -96,11 +99,27 @@ public class CookingController : MonoBehaviour
     }
 
     private void BookControl(){
-        if(MinigameNumber == -1){
+        if(MinigameNumber == -3){
             MoveBook(CenterAnchor);
+            Tutorial.SetActive(true);
+            BeanPicking.SetActive(false);
+            ChoiceButtons.SetActive(false);
+            Instructions.SetActive(false);
+        } else if(MinigameNumber == -2){
+            MoveBook(CenterAnchor);
+            Tutorial.SetActive(false);
+            BeanPicking.SetActive(true);
+            ChoiceButtons.SetActive(false);
+            Instructions.SetActive(false);
+        } else if(MinigameNumber == -1){
+            MoveBook(CenterAnchor);
+            Tutorial.SetActive(false);
+            BeanPicking.SetActive(false);
             ChoiceButtons.SetActive(true);
             Instructions.SetActive(false);
         } else {
+            Tutorial.SetActive(false);
+            BeanPicking.SetActive(false);
             ChoiceButtons.SetActive(false);
             Instructions.SetActive(true);
             MoveBook(LeftAnchor);
@@ -112,12 +131,15 @@ public class CookingController : MonoBehaviour
             break;
 
             case 1:
+            Choices[0].interactable = false;
+            Choices[1].interactable = true;
             break;
 
-            case 3:
-            break;
-
-            case 4:
+            case 2:
+            Choices[1].interactable = false;
+                for(int i = 2; i < Choices.Length; i++){
+                    Choices[i].interactable = true;
+                }
             break;
         }
     }
@@ -126,7 +148,7 @@ public class CookingController : MonoBehaviour
         This sends a message to the minigames tho turn on their minigames
     **/
     private void ActivateMinigame(){
-        if(ActivationMessageSent == false && MinigameNumber != -1){
+        if(ActivationMessageSent == false && MinigameNumber >= 0){
             MoveCamera();
             Minigames[MinigameNumber].SendMessage("ActivateMinigame");
             ActivationMessageSent = true;
@@ -144,8 +166,12 @@ public class CookingController : MonoBehaviour
         the game to progress. This may be called by some minigames at the start
         as they are optional to complete
     **/    
-    public void MinigameFinished(){
+    public void MinigameFinished(int MinigameNumber, bool CanAccess){
         NextButton.interactable = true;
+        if(MinigameNumber == 0 && GameState == 0)
+            GameState = 1;
+        if(MinigameNumber == 1 && GameState == 1)
+            GameState = 2;
     }
 
     /**
@@ -165,6 +191,14 @@ public class CookingController : MonoBehaviour
         MinigameNumber = -1;
         Instructions.SetActive(false);
         ChoiceButtons.SetActive(true);
+    }
+
+    public void StartCooking(){
+        MinigameNumber = -2;
+    }
+
+    public void BeanSelected(){
+        MinigameNumber = -1;
     }
 
     #endregion
