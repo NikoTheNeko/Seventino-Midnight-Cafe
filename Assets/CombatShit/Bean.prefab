@@ -28,13 +28,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7677941295430313339}
-  - component: {fileID: 7677941295430313342}
+  - component: {fileID: 7677941295676155023}
   - component: {fileID: 7677941295430313341}
+  - component: {fileID: 7677941295430313342}
   - component: {fileID: 7677941295430313343}
   - component: {fileID: 7677941295430313338}
-  - component: {fileID: 7677941295676155023}
-  - component: {fileID: 7677941295676155022}
   - component: {fileID: 7677941295676155017}
+  - component: {fileID: 7677941295676155018}
   m_Layer: 21
   m_Name: Bean
   m_TagString: enemy
@@ -57,6 +57,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7677941295676155023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677941295430313328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968099d1571ea8e418b8f9876e4fba0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiPath: {fileID: 7677941295430313342}
+  knifeHit: {fileID: 7677941295430313338}
+  target: {fileID: 0}
+  enemyGFX: {fileID: 7063555183561608220}
+  speed: 200
+  nextWaypointDistance: 3
+  attackRange: 6
+  seeker: {fileID: 0}
+  rb: {fileID: 7677941295430313343}
+  enemyState: idle
+  health: 100
+  idleTimer: 2
+  walkTimer: 2
+  idleIndex: 0
+  losTimer: 3
+  originVec: {x: 0, y: 0, z: 0}
+  flipVec: {x: 0, y: 0, z: 0}
+  destVec: {x: 0, y: 0, z: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 4194304
+  SeedShot: {fileID: 6361838890117136121, guid: 717addf8ee28ad54b92af1f2823309de,
+    type: 3}
+  sprites: []
+  hurtColor: {r: 1, g: 0, b: 0, a: 0}
+  totalFireDamage: 0
+  totalFlavorDamage: 0
+  totalSliceDamage: 0
+  hitSound: {fileID: 0}
+  monterAnim: {fileID: 2622233967828087608}
+  locked: 0
+--- !u!114 &7677941295430313341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677941295430313328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 1
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!114 &7677941295430313342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,36 +162,8 @@ MonoBehaviour:
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
+  whenCloseToDestination: 1
   constrainInsideGraph: 0
---- !u!114 &7677941295430313341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677941295430313328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!50 &7677941295430313343
 Rigidbody2D:
   serializedVersion: 4
@@ -134,14 +177,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1.5
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7677941295430313338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +211,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7677941295676155023
+--- !u!114 &7677941295676155017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,84 +220,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7677941295430313328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 968099d1571ea8e418b8f9876e4fba0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fab50a410fe1b04180f7e7b01eb1376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPath: {fileID: 7677941295430313342}
-  knifeHit: {fileID: 7677941295430313338}
-  target: {fileID: 0}
-  enemyGFX: {fileID: 0}
-  speed: 200
-  nextWaypointDistance: 3
-  attackRange: 0
-  seeker: {fileID: 7677941295676155022}
-  rb: {fileID: 7677941295430313343}
-  enemyState: idle
-  health: 100
-  idleTimer: 2
-  walkTimer: 2
-  idleIndex: 2
-  losTimer: 3
-  originVec: {x: 0, y: 0, z: 0}
-  flipVec: {x: 0, y: 0, z: 0}
-  destVec: {x: 0, y: 0, z: 0}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  SeedShot: {fileID: 0}
-  sprites: []
-  hurtColor: {r: 1, g: 0, b: 0, a: 0}
-  totalFireDamage: 0
-  totalFlavorDamage: 0
-  totalSliceDamage: 0
-  hitSound: {fileID: 0}
---- !u!114 &7677941295676155022
+  ingredientPictures: []
+  foodObject: {fileID: 0}
+  inventory: []
+  TextFiles: []
+  dialogues: []
+  dialogueProg: 0
+--- !u!114 &7677941295676155018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7677941295430313328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c50aa7e11bd81a48b45b3ba3f41dbda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
---- !u!95 &7677941295676155017
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677941295430313328}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a03134b2e734c284b837fc4403371766, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  beansAmount: 3
+  startAngle: 0
+  endAngle: 45
 --- !u!1001 &5590523338353269613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,12 +254,17 @@ PrefabInstance:
     - target: {fileID: -9071902059813840740, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.23377478
+      value: -0.23377287
       objectReference: {fileID: 0}
     - target: {fileID: -9071902059813840740, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
       value: -0.39584488
+      objectReference: {fileID: 0}
+    - target: {fileID: -9071902059813840740, guid: 815ab2fa123317944938c45e2d666359,
+        type: 3}
+      propertyPath: m_Bounds.m_Extent.x
+      value: 1.6037734
       objectReference: {fileID: 0}
     - target: {fileID: -7336729581238320117, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
@@ -345,7 +339,7 @@ PrefabInstance:
     - target: {fileID: -4949738972568456322, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.10382819
+      value: -0.103833914
       objectReference: {fileID: 0}
     - target: {fileID: -4949738972568456322, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
@@ -355,7 +349,7 @@ PrefabInstance:
     - target: {fileID: -4949738972568456322, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.517388
+      value: 0.5173937
       objectReference: {fileID: 0}
     - target: {fileID: -4949738972568456322, guid: 815ab2fa123317944938c45e2d666359,
         type: 3}

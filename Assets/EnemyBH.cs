@@ -52,7 +52,7 @@ public class EnemyBH : MonoBehaviour {
     private AudioSource audio;
 
 
-    public Animator monterAnim;
+    public Animator monsterAnim;
     public bool locked = false;
         
 
@@ -172,7 +172,7 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0)
         {
             tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
-            monterAnim.SetTrigger("die");
+            monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
             Destroy(gameObject);
         }
@@ -366,7 +366,7 @@ public class EnemyBH : MonoBehaviour {
         if(canAttack)
         {
             canAttack = false;
-            monterAnim.SetTrigger("chomp");
+            monsterAnim.SetTrigger("chomp");
             Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
             foreach (Collider2D player in hit)
             {
@@ -386,7 +386,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (canAttack)
         {
-            monterAnim.SetTrigger("spit");
+            monsterAnim.SetTrigger("spit");
             canAttack = false;
             Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
@@ -397,7 +397,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (canAttack)
         {
-            monterAnim.SetTrigger("spit");
+            monsterAnim.SetTrigger("spit");
             canAttack = false;
             Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
