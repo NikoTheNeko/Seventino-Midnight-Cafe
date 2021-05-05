@@ -159,7 +159,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(15))
                 {
                     playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
