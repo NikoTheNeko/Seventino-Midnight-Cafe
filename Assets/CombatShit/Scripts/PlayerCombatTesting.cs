@@ -84,7 +84,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public bool facingRight = true;
 
     public Slider staminaBar;
-    private int maxStamina = 100;
+    private int maxStamina = 1000;
     private int currentStam;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
