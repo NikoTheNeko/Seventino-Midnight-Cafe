@@ -124,16 +124,16 @@ public class EnemyBH : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        /*if(ai.velocity.x > 0.3f || ai.velocity.y > 0.3f)
+        if(ai.velocity.x > 0.3f || ai.velocity.y > 0.3f)
         {
-            monterAnim.SetBool("walk", true);
-            monterAnim.SetBool("idle", false);
+            monsterAnim.SetBool("walk", true);
+            monsterAnim.SetBool("idle", false);
         }
         else
         {
-            monterAnim.SetBool("walk", false);
-            monterAnim.SetBool("idle", true);
-        }*/
+            monsterAnim.SetBool("walk", false);
+            monsterAnim.SetBool("idle", true);
+        }
     }
 
     private void FixedUpdate()
