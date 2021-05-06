@@ -51,9 +51,11 @@ public class EnemyBH : MonoBehaviour {
     public Color hurtColor;
 
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
+    private InventoryTracker tracker;
 
     private void Start()
     {
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         idleTimer = 1;
         walkTimer = 3;
         spawnPos = transform.position;
@@ -152,6 +154,7 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0)
         {
             Destroy(gameObject);
+            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
         }
     }
     //maybe add aggro timer?
