@@ -1,0 +1,140 @@
+{
+	"subject": "Camellia",
+	"dialogueSegments":
+	[
+		{
+			"text": ""
+		},
+		{
+			"text": "A lion! Hi there, my name is Chef! Welcome to Seventino Midnight Cafe, what can I get for you?",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Yes, yes, hello. If you insist on the pleasantries, my name is Camellia Augustius Reynard IV.",
+			"speaker": "Camellia",
+			"emotion": "angry"
+		},
+		{
+			"text": "That sure is a mouthful! Does Camellia work with you?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "I suppose. Now then, for my meal on this fine day, I would request that you craft a café au lait, catered to me.",
+			"speaker": "Camellia",
+			"emotion": "neutral"
+		},		
+		{	
+			"text": "Topped with cinnamon, cream, and a hint of caramel if you would. ",
+			"speaker": "Camellia",
+			"emotion": "neutral"
+		},
+		{
+			"text": "One café au lait, coming right up! Sit tight Camellia, I won’t be long!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		}
+	],
+	"bestEnding": [
+		{
+			"text": ""
+		},
+		{
+			"text": "Phew! That was a tough one! Here you go Camellia, I hope it’s up to snuff!",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{
+			"text": "Hmph. I hope so as well. I don’t do well with disappointment.",
+			"speaker": "Camellia",
+			"emotion": "angry"
+		},
+		{
+			"text": "You surely won’t be! How’s it taste?",
+			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "It’s… It’s… marvelous! Absolutely exquisite!",
+			"speaker": "Camellia",
+			"emotion": "happy"
+		},		
+		{	
+			"text": "The dash of cinnamon, as well as the caramel adorning the whipped cream.",
+			"speaker": "Camellia",
+			"emotion": "happy"
+		},		
+		{	
+			"text": "Truly the hand of a craftsman went into this.",
+			"speaker": "Camellia",
+			"emotion": "happy"
+		},
+		{
+			"text": "That’s quite high praise! Did you really like it that much?",
+			"speaker": "Chef",
+			"emotion": "happy"
+		},
+		{	
+			"text": "Hush now, I am savoring the moment.",
+			"speaker": "Camellia",
+			"emotion": "angry"
+		},		
+		{	
+			"text": "…",
+			"speaker": "Chef",
+			"emotion": "sad"
+		},		
+		{	
+			"text": "It was incredible, my dear. It appears I made the right decision coming to this establishment.",
+			"speaker": "Camellia",
+			"emotion": "neutral"
+		},		
+		{	
+			"text": "Now then, I believe you have other customers you must be tending to?",
+			"speaker": "Camellia",
+			"emotion": "neutral"
+		},		
+		{	
+			"text": "Please, do not let me keep you.",
+			"speaker": "Camellia",
+			"emotion": "neutral"
+		},	
+		{	
+			"text": "Ack! You’re right! Thank you for coming, and I hope to see you again soon!",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		}
+	],
+	"goodEnding":[
+		{
+			"text": ""
+		},
+		{
+			"text": "I hope I didn’t take too long! Here you go Camellia!",
+			"speaker": "Chef",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Not long at all. Perhaps it could have used a bit more though. It is passable!",
+			"speaker": "Camellia",
+			"emotion": "surprised"
+		},
+		{
+			"text": "Is that… good? I tried really hard on it!",
+			"speaker": "Chef",
+			"emotion": "sad"
+		},
+		{	
+			"text": "It is perfectly… alright! Now, away with you! I must judge your performance with future guests. Begone!",
+			"speaker": "Camellia",
+			"emotion": "angry"
+		}
+	],
+	"textureMin": 30,
+	"textureMax": 100,
+	"warmthMin": 60,
+	"warmthMax": 100,
+	"flavorMin": 70,
+	"flavorMax": 100
+}

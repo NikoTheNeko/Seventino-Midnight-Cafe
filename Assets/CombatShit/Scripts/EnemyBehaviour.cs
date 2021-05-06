@@ -47,8 +47,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void Start()
     {
-        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        tracker = temp.GetComponent<InventoryTracker>();
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         idleTimer = 300;
         walkTimer = 800;
         spawnPos = transform.position;
