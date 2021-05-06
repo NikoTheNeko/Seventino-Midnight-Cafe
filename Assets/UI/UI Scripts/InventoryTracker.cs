@@ -25,6 +25,7 @@ public class InventoryTracker : MonoBehaviour
     public float texture;
     public float warmth;
     public float flavor;
+    public float volume = 0f;
 
     #endregion
 

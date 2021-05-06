@@ -11681,6 +11681,7 @@ MonoBehaviour:
   texture: 0
   warmth: 0
   flavor: 0
+  volume: 0
 --- !u!1 &1618254294
 GameObject:
   m_ObjectHideFlags: 0
@@ -13452,6 +13453,11 @@ PrefabInstance:
       propertyPath: clips.Array.data[25]
       value: 
       objectReference: {fileID: 8300000, guid: 44db2198969632440b45e317a7e356ac, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1836252060}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
