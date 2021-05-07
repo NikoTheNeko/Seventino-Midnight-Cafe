@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     public static bool MapUp = false;
     public static bool isOpen = false;
     public Slider volumeSlider;
-    public float volume = 0f;
+    public float volume = 1f;
     public AudioSource audio;
     private InventoryTracker tracker;
 
@@ -22,8 +22,11 @@ public class PauseMenu : MonoBehaviour
     //public GameObject map;
 
     void Start(){
-        // tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        // volume = tracker.volume;
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        volume = tracker.volume;
+        volumeSlider.value = volume;
+        audio.volume = volume;
+        pauseMenuUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -90,10 +93,9 @@ public class PauseMenu : MonoBehaviour
     public void ChangeVolume(){
         volume = volumeSlider.value;
         Debug.Log(volume);
-        // tracker.volume = volume;
+        tracker.volume = volume;
         if(audio != null){
             audio.volume = volume;
-            
         }
         // audio.Play();
     }
