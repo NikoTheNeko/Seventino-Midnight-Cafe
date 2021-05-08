@@ -159,7 +159,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(15))
+                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
                 {
                     playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
@@ -227,7 +227,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(25))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120))
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -245,7 +245,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(1))
+        if(Input.GetMouseButton(0) && UseStamina(2))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -273,7 +273,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(33))
+        if (Input.GetMouseButtonDown(0) && UseStamina(140))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -384,7 +384,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
         else
         {
-            Debug.Log("nostam");
+            // Debug.Log("nostam");
             return false;
         }
     }
@@ -394,7 +394,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         yield return new WaitForSeconds(1.5f);
         while(currentStam < maxStamina)
         {
-            currentStam++;
+            currentStam += 20;
             staminaBar.value = currentStam;
             yield return regenTick;
         }
