@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
     //public GameObject map;
 
     void Start(){
+        //set volume to and volume slider to volume in inventory tracker, should be valued carried from previous scenes
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         volume = tracker.volume;
         volumeSlider.value = volume;
@@ -42,11 +43,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
-        }
-
-        
-        // ChangeVolume();
-        
+        }        
     }
 
     public void Resume()
@@ -63,13 +60,13 @@ public class PauseMenu : MonoBehaviour
         IsPaused = true;
     }
 
-    public void GoHome()
-    {
-        Debug.Log("loading poopfuck");
-        UnPauseTime();
-        IsPaused = false;
-        SceneManager.LoadScene("Cafe Walk Around");
-    }
+    // public void GoHome()
+    // {
+    //     Debug.Log("loading poopfuck");
+    //     UnPauseTime();
+    //     IsPaused = false;
+    //     SceneManager.LoadScene("Cafe Walk Around");
+    // }
 
     public void TitleScreen()
     {
@@ -92,7 +89,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ChangeVolume(){
         volume = volumeSlider.value;
-        Debug.Log(volume);
         tracker.volume = volume;
         if(audio != null){
             audio.volume = volume;

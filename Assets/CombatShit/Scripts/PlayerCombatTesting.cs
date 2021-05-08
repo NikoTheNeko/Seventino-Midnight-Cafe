@@ -33,7 +33,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Animator playerAnim;
 
 
-    public int health = 100;
+    public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
 
@@ -311,6 +311,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public void PlayerHit(int amount)
     {
 
+
         StartCoroutine(FlashColor());
 
         health -= amount;
@@ -342,16 +343,15 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (other.tag == "beanProjectile")
         {
-            health -= 3;
+            health -= 1;
             CameraShake.instance.ShakeCamera(.25f, .05f);
-            //Debug.Log(health);
             other.gameObject.SetActive(false);
         }
     }
 
     private void checkDead()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             //playerAnim.SetTrigger("Death");
             StartCoroutine("LeaveScene", 1.5f);

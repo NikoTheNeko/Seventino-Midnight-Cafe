@@ -42,7 +42,8 @@ public class UIController : MonoBehaviour
 
     public void healthControl(){
         int counter = 0;
-        int health = player.GetComponent<PlayerCombatTesting>().health/10;
+        int health = player.GetComponent<PlayerCombatTesting>().health;
+        // for(int i = 0; i < (int)(health/2); i++)
         while(counter < (int)(health/2)){
             hearts[counter].sprite = fullHeart;
             counter++;
