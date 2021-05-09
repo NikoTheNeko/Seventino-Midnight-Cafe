@@ -103,15 +103,15 @@ public class PlayerCombatTesting : MonoBehaviour{
                 float moveY = 0f;
 
                 // WASD movement implementation.
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && CanMove)
                 {
                     moveY = +.3f;
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) && CanMove)
                 {
                     moveY = -.3f;
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) && CanMove)
                 {
                     if(!facingRight)
                     {
@@ -119,7 +119,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     }
                     moveX = +.3f;
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) && CanMove)
                 {
                     if(facingRight)
                     {

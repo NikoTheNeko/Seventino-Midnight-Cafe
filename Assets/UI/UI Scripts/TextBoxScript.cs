@@ -192,8 +192,8 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
-        // player.GetComponent<PlayerCombatTesting>().CanMove = false;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
         foreach(CharacterData data in characterInformation){
@@ -207,8 +207,8 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
-        // player.GetComponent<PlayerCombatTesting>().CanMove = true;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
         textbox.gameObject.SetActive(false);
         foreach(CharacterData data in characterInformation){
