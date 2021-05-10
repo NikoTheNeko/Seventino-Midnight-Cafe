@@ -52,8 +52,6 @@ public class InventoryTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
     }
 
     //adds modifier to amount in inventory linked to key
@@ -64,9 +62,8 @@ public class InventoryTracker : MonoBehaviour
         inventory.Add(temp);
     }
 
-    public void remove(FoodDrop food){
-        Ingredient temp = new Ingredient(food);
-        inventory.Remove(temp);
+    public void remove(int BeanSpot){
+        inventory.RemoveAt(BeanSpot);
     }
 
     //returns a reference to a ingredient object

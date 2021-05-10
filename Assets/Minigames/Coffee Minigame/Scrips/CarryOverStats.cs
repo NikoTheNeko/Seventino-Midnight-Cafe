@@ -18,4 +18,8 @@ public class CarryOverStats : MonoBehaviour
         tracker.CarryCoffeeStats();
     }
 
+    public void RemoveBean(int BeanSpot){
+        tracker.remove(BeanSpot);
+    }
+
 }
