@@ -15,13 +15,13 @@ public class FoodStats : MonoBehaviour{
 
     [Header("The Food Stat Values")]
     [Tooltip("Texture value, this checks the texture of the food, affected by knife")]
-    public float TextureVal = 0;
+    public float TextureVal = 20;
 
     [Tooltip("Warmth value, this checks the warmth of the food, affected by flambethrower")]
-    public float WarmthVal = 0;
+    public float WarmthVal = 40;
 
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
-    public float FlavorVal = 0;
+    public float FlavorVal = 10;
 
     #endregion
 
@@ -172,6 +172,7 @@ public class FoodStats : MonoBehaviour{
     }
 
     public void SelectBean(int BeanNumber){
+        Debug.Log("bean number = " + BeanNumber);
         switch(BeanNumber){
             case 1:
                 TextureVal = Bean1.texture;
@@ -300,10 +301,13 @@ public class FoodStats : MonoBehaviour{
     }
 
     public void DishDone(){
-        // GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        // tracker = temp.GetComponent<InventoryTracker>();
-        Debug.Log("tracker: " + tracker);
-        Debug.Log("tracker.texture: " + tracker.texture);
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
+        // Debug.Log("tracker: " + tracker);
+        // Debug.Log("tracker.texture: " + tracker.texture);
+        Debug.Log("texture: " + TextureVal);
+        Debug.Log("warmth: " + WarmthVal);
+        Debug.Log("flavor: " + FlavorVal);
 
         tracker.texture = TextureVal;
         tracker.flavor = FlavorVal;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,12 +10,25 @@ public class PauseMenu : MonoBehaviour
     public static bool QuestsUp = false;
     public static bool MapUp = false;
     public static bool isOpen = false;
+    public Slider volumeSlider;
+    public float volume = 1f;
+    public AudioSource audio;
+    private InventoryTracker tracker;
 
     public GameObject pauseMenuUI;
     //public GameObject questButton;
     //public GameObject questList;
     //public GameObject mapButton;
     //public GameObject map;
+
+    void Start(){
+        //set volume to and volume slider to volume in inventory tracker, should be valued carried from previous scenes
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        volume = tracker.volume;
+        volumeSlider.value = volume;
+        audio.volume = volume;
+        pauseMenuUI.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -29,60 +43,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
-        }
-        //    if(Input.GetKeyDown(KeyCode.Q))
-        //    {
-        //        if (QuestsUp)
-        //        {
-        //            //PutDownQuests();
-        //            //OpenQuest();
-        //        } else
-        //        {
-        //            //PullUpQuests();
-        //            //OpenQuest();
-        //        }
-        //    }
-        //    if(Input.GetKeyDown(KeyCode.M))
-        //    {
-        //        if(MapUp)
-        //        {
-        //            PutDownMap();
-        //        } else
-        //        {
-        //            PullUpMap();
-        //        }
-        //    }
-        //}
-
-        //public void PutDownQuests()
-        //{
-        //    Debug.Log("FUCK");
-        //    questList.SetActive(false);
-        //    questButton.SetActive(true);
-        //    QuestsUp = false;
-        //}
-
-        //public void PullUpQuests()
-        //{
-        //    Debug.Log("SHIT");
-        //    questList.SetActive(true);
-        //    questButton.SetActive(false);
-        //    QuestsUp = true;
-        //}
-
-        //public void PutDownMap()
-        //{
-        //    map.SetActive(false);
-        //    mapButton.SetActive(true);
-        //    MapUp = false;
-        //}
-
-        //public void PullUpMap()
-        //{
-        //    map.SetActive(true);
-        //    mapButton.SetActive(false);
-        //    MapUp = true;
-        //}
+        }        
     }
 
     public void Resume()
@@ -102,7 +63,7 @@ public class PauseMenu : MonoBehaviour
     public void GoHome()
     {
         Debug.Log("loading poopfuck");
-        Time.timeScale = 1f;
+        UnPauseTime();
         IsPaused = false;
         SceneManager.LoadScene("Cafe Walk Around");
     }
@@ -110,7 +71,7 @@ public class PauseMenu : MonoBehaviour
     public void TitleScreen()
     {
         Debug.Log("poopfuck titlescreen");
-        Time.timeScale = 1f;
+        UnPauseTime();
         IsPaused = false;
         SceneManager.LoadScene("TitleScreen");
     }
@@ -118,6 +79,20 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("quitting poopfuck");
+        UnPauseTime();
         Application.Quit();
+    }
+
+    public void UnPauseTime(){
+        Time.timeScale = 1f;
+    }
+
+    public void ChangeVolume(){
+        volume = volumeSlider.value;
+        tracker.volume = volume;
+        if(audio != null){
+            audio.volume = volume;
+        }
+        // audio.Play();
     }
 }

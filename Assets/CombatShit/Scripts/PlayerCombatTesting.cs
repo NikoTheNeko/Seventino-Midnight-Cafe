@@ -34,9 +34,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Animator playerAnim;
 
 
-    public int health = 100;
+    public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
+    public float idleLimit;
 
     #endregion
 
@@ -49,6 +50,10 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //              2: Flambethrower
                 //              3: Pepper shotgun
 
+    private float idleTime = 0f;
+    public SpriteRenderer idlePopUp;
+    
+
     #endregion
     private void Start()
     {
@@ -56,6 +61,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
         //Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     private enum State
@@ -99,11 +105,18 @@ public class PlayerCombatTesting : MonoBehaviour{
         flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
         state = State.Normal;
+        idlePopUp.color = new Color32(255,255,255,0);
     }
 
     // Update is called once per frame
     void Update(){
-        
+        if(idleTime > 3f && idlePopUp.color.a < 1){
+            Debug.Log("waited a long time");
+            Debug.Log(idlePopUp.color.a);
+            Color32 temp = idlePopUp.color;
+            temp.a += 1;
+            idlePopUp.color = temp;
+        }
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -114,15 +127,15 @@ public class PlayerCombatTesting : MonoBehaviour{
                 float moveY = 0f;
 
                 // WASD movement implementation.
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && CanMove)
                 {
                     moveY = +.3f;
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) && CanMove)
                 {
                     moveY = -.3f;
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) && CanMove)
                 {
                     if(!facingRight)
                     {
@@ -130,7 +143,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     }
                     moveX = +.3f;
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) && CanMove)
                 {
                     if(facingRight)
                     {
@@ -140,11 +153,14 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 {
+                    idleTime = 0f;
+                    idlePopUp.color = new Color32(255,255,255,0);
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
                 }
                 else
                 {
+                    idleTime += Time.deltaTime;
                     playerAnim.SetBool("Idle", true);
                     playerAnim.SetBool("Run", false);
                 }
@@ -322,6 +338,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public void PlayerHit(int amount)
     {
 
+
         StartCoroutine(FlashColor());
 
         health -= amount;
@@ -355,14 +372,13 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             health -= 1;
             CameraShake.instance.ShakeCamera(.25f, .05f);
-            //Debug.Log(health);
             other.gameObject.SetActive(false);
         }
     }
 
     private void checkDead()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             //playerAnim.SetTrigger("Death");
             StartCoroutine("LeaveScene", 1.5f);
