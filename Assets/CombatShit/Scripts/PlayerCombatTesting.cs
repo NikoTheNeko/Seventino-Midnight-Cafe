@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerCombatTesting : MonoBehaviour{
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -51,6 +52,9 @@ public class PlayerCombatTesting : MonoBehaviour{
     #endregion
     private void Start()
     {
+        currentStam = maxStamina;
+        staminaBar.maxValue = maxStamina;
+        staminaBar.value = maxStamina;
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -78,6 +82,13 @@ public class PlayerCombatTesting : MonoBehaviour{
     public ShotgunHandler shuggun;
 
     public bool facingRight = true;
+
+    public Slider staminaBar;
+    private int maxStamina = 1000;
+    private int currentStam;
+
+    private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
+    private Coroutine regen;
 
     private void Awake()
     {
@@ -148,7 +159,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
                 {
                     playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
@@ -216,7 +227,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120))
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -234,7 +245,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && UseStamina(2))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -262,7 +273,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && UseStamina(140))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -342,7 +353,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (other.tag == "beanProjectile")
         {
-            health -= 3;
+            health -= 1;
             CameraShake.instance.ShakeCamera(.25f, .05f);
             //Debug.Log(health);
             other.gameObject.SetActive(false);
@@ -356,5 +367,37 @@ public class PlayerCombatTesting : MonoBehaviour{
             //playerAnim.SetTrigger("Death");
             StartCoroutine("LeaveScene", 1.5f);
         }
+    }
+
+    public bool UseStamina(int amount)
+    {
+        if(currentStam - amount >= 0)
+        {
+            currentStam -= amount;
+            staminaBar.value = currentStam;
+            if(regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
+    }
+
+    IEnumerator RegenStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while(currentStam < maxStamina)
+        {
+            currentStam += 20;
+            staminaBar.value = currentStam;
+            yield return regenTick;
+        }
+        regen = null;
     }
 }
