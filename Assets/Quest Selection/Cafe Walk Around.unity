@@ -316,9 +316,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 458e274d5da28b547b61b7f3a64320b7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f6a73e179b41a874c9e1a0b7080299c5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11855,72 +11855,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< HEAD
-=======
---- !u!1 &1611437185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1611437186}
-  - component: {fileID: 1611437187}
-  m_Layer: 0
-  m_Name: InventoryTracker
-  m_TagString: InventoryTracker
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1611437186
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611437185}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 619.3318, y: 198.56631, z: -111.86612}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1611437187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611437185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fab50a410fe1b04180f7e7b01eb1376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientPictures:
-  - name: Brown Beans
-    picture: {fileID: 21300000, guid: 1d3868ac202ffc043a95031dec16cbe2, type: 3}
-  - name: Black Beans
-    picture: {fileID: 21300000, guid: b809ead9de0964444ad20c1829239250, type: 3}
-  foodObject: {fileID: 7952648659736948959, guid: 96b51fe848d038540b5f43fc8d268781,
-    type: 3}
-  inventory: []
-  TextFiles:
-  - {fileID: 4900000, guid: 815623aed09cd0d40bee95e6dd3cb883, type: 3}
-  - {fileID: 4900000, guid: b623a6aa421e0c045bab6a8edb78e722, type: 3}
-  - {fileID: 4900000, guid: 0a2c943cd7e7ab440aef849d6fd351e6, type: 3}
-  - {fileID: 4900000, guid: 8b6c334a60bb7174b9fb1cafe1bc4ab3, type: 3}
-  dialogues: []
-  dialogueProg: 0
-  hasFood: 0
-  texture: 0
-  warmth: 0
-  flavor: 0
-  CoffeeStats: {fileID: 0}
->>>>>>> main
 --- !u!1 &1618254294
 GameObject:
   m_ObjectHideFlags: 0

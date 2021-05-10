@@ -27,8 +27,6 @@ public class InventoryTracker : MonoBehaviour
     public float flavor;
     public float volume = 0f;
 
-    public FoodStats CoffeeStats;
-
     #endregion
 
     // Start is called before the first frame update
@@ -39,22 +37,19 @@ public class InventoryTracker : MonoBehaviour
             dialogues.Add(JsonUtility.FromJson<Dialogue>(asset.text));
         }
     }
-    void Start(){
+    void Start()
+    {
         //destroys self if it is a duplicate
         GameObject[] search = GameObject.FindGameObjectsWithTag("InventoryTracker");
         if(search.Length > 1){
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
     }
 
     //adds modifier to amount in inventory linked to key
@@ -122,24 +117,6 @@ public class InventoryTracker : MonoBehaviour
             Debug.LogError("save file not found");
         }
     }
-
-    public void CarryCoffeeStats(){
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
-
-        Debug.Log(CoffeeStats.TextureVal);
-
-        texture = CoffeeStats.TextureVal;
-        flavor = CoffeeStats.FlavorVal;
-        warmth = CoffeeStats.WarmthVal;
-
-        hasFood = true;
-
-        inventory.Clear();
-
-    }
-
-
 }
 
 [System.Serializable]
