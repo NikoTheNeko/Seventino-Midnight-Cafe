@@ -62,7 +62,6 @@ public class TextBoxScript : MonoBehaviour
 
              //if user presses "x" text will speed up or go to next part of dialogue
             if(Input.GetButtonDown("Use")){
-                Debug.Log("called speed up");
                 SpeedUp();
             }
 
@@ -119,7 +118,6 @@ public class TextBoxScript : MonoBehaviour
 
         //speed up scrolling rate
         else if(!speedUp && activated){
-            Debug.Log("sped up");
             textbox.text = message;
             letter = message.Length;
             // scrollSpeed /= 20;

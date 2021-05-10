@@ -70,13 +70,12 @@ public class UIController : MonoBehaviour
     }
 
     public void toDoControl(Dialogue curQuest){
-        int[] foodVals = new int[6];
         textureMin.value = curQuest.textureMin;
-        textureMax.value = curQuest.textureMax;
+        textureMax.value = 100 - curQuest.textureMax;
         warmthMin.value = curQuest.warmthMin;
-        warmthMax.value = curQuest.warmthMax;
+        warmthMax.value = 100 - curQuest.warmthMax;
         flavorMin.value = curQuest.flavorMin;
-        flavorMax.value = curQuest.flavorMax;
+        flavorMax.value = 100 - curQuest.flavorMax;
     }
 
     public void switchInventory(){
