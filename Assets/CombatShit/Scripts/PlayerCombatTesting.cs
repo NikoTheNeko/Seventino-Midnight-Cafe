@@ -36,6 +36,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
+    public float idleLimit;
 
     #endregion
 
@@ -47,6 +48,9 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //weapon select 1: Knife
                 //              2: Flambethrower
                 //              3: Pepper shotgun
+
+    private float idleTime = 0f;
+    
 
     #endregion
     private void Start()
@@ -92,7 +96,6 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -129,11 +132,13 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 {
+                    idleTime = 0f;
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
                 }
                 else
                 {
+                    idleTime += Time.deltaTime;
                     playerAnim.SetBool("Idle", true);
                     playerAnim.SetBool("Run", false);
                 }
