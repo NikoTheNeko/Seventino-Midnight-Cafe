@@ -60,13 +60,13 @@ public class PauseMenu : MonoBehaviour
         IsPaused = true;
     }
 
-    // public void GoHome()
-    // {
-    //     Debug.Log("loading poopfuck");
-    //     UnPauseTime();
-    //     IsPaused = false;
-    //     SceneManager.LoadScene("Cafe Walk Around");
-    // }
+    public void GoHome()
+    {
+        Debug.Log("loading poopfuck");
+        UnPauseTime();
+        IsPaused = false;
+        SceneManager.LoadScene("Cafe Walk Around");
+    }
 
     public void TitleScreen()
     {
