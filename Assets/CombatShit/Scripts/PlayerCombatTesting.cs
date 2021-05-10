@@ -69,7 +69,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 rollDirection;
     private Vector3 lastMovedDirection;
     private float rollSpeed;
-    [SerializeField] private const float MV_SPEED = 7f;
+    [SerializeField] private float MV_SPEED = 7f;
     private State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
