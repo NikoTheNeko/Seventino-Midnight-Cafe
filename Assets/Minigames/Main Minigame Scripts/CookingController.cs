@@ -42,6 +42,7 @@ public class CookingController : MonoBehaviour
     public GameObject BeanPicking;
     public GameObject Instructions;
     public GameObject ChoiceButtons;
+    public Button ServeButton;
 
     #endregion
 
@@ -136,6 +137,7 @@ public class CookingController : MonoBehaviour
             break;
 
             case 2:
+            ServeButton.interactable = true;
             Choices[1].interactable = false;
                 for(int i = 2; i < Choices.Length; i++){
                     Choices[i].interactable = true;
