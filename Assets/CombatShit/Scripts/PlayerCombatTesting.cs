@@ -353,7 +353,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (other.tag == "beanProjectile")
         {
-            health -= 3;
+            health -= 1;
             CameraShake.instance.ShakeCamera(.25f, .05f);
             //Debug.Log(health);
             other.gameObject.SetActive(false);
