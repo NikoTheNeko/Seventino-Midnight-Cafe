@@ -46,6 +46,21 @@ MonoBehaviour:
   TextureVal: 0
   WarmthVal: 0
   FlavorVal: 0
+  BeanButton1: {fileID: 0}
+  BeanButton2: {fileID: 0}
+  BeanButton3: {fileID: 0}
+  Bean1Previews:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Bean2Previews:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Bean3Previews:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   TextureProgress: {fileID: 6610962762099719139}
   TexturePreview: {fileID: 6610962763274855503}
   WarmthProgress: {fileID: 6610962763485458576}
