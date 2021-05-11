@@ -11,15 +11,11 @@ public class KnifeHandler : MonoBehaviour
     public int knifeDamage = 8;
     static public int knfDamage;
 
-    private void Start()
-    {
-        knfDamage = knifeDamage; 
-    }
-
     public AudioClip knifeSound;
     private AudioSource audio;
     void Start()
     {
+        knfDamage = knifeDamage; 
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
         audio.playOnAwake = false;
         audio.clip = knifeSound;
