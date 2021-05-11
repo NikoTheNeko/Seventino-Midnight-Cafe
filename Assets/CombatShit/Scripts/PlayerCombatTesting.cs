@@ -54,7 +54,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
         audio.playOnAwake = false;
-        audio.clip = hitSound;
+        audio.clip = walkSound;
+        audio.volume = (0.5f);
         audio.Stop();
         currentStam = maxStamina;
         staminaBar.maxValue = maxStamina;
@@ -353,7 +354,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.clip = hitSound;
         audio.loop = false;
         audio.Play();
-        StartCoroutine(ResetToWalk(.75f));
+        StartCoroutine(ResetToWalk(.05f));
         StartCoroutine(FlashColor());
 
         health -= amount;
@@ -385,17 +386,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName: "TitleScreen");
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "beanProjectile")
-        {
-            health -= 3;
-            CameraShake.instance.ShakeCamera(.25f, .05f);
-            //Debug.Log(health);
-            other.gameObject.SetActive(false);
-        }
     }
 
     private void checkDead()

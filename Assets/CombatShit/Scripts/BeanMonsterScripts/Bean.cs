@@ -33,4 +33,15 @@ public class Bean : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, r);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<PlayerCombatTesting>().PlayerHit(3);
+            CameraShake.instance.ShakeCamera(.25f, .05f);
+            //Debug.Log(health);
+            gameObject.SetActive(false);
+        }
+    }
 }
