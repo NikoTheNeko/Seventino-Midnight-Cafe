@@ -51,7 +51,6 @@ public class EnemyBH : MonoBehaviour {
     public Color hurtColor;
 
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
-    private InventoryTracker tracker;
 
     private InventoryTracker tracker;
 
@@ -66,7 +65,6 @@ public class EnemyBH : MonoBehaviour {
 
     private void Start()
     {
-        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         idleTimer = 1;
         walkTimer = 3;
         spawnPos = transform.position;
@@ -183,7 +181,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (health < 0)
         {
-            tracker.spawnFood("Brown Beans", totalSliceDamage / 10, totalFireDamage / 10, totalFlavorDamage / 10, gameObject.transform.position);
+            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
         }

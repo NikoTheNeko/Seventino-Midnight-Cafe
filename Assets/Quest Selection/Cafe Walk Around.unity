@@ -316,9 +316,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 458e274d5da28b547b61b7f3a64320b7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f6a73e179b41a874c9e1a0b7080299c5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11681,7 +11681,6 @@ MonoBehaviour:
   texture: 0
   warmth: 0
   flavor: 0
-  CoffeeStats: {fileID: 0}
 --- !u!1 &1618254294
 GameObject:
   m_ObjectHideFlags: 0

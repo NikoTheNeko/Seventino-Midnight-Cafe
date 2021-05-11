@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-// using System.Diagnostics;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,9 +66,8 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     public void Start(){
-        // GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        Debug.Log("tracker: " + tracker);
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
 
         if(tracker.inventory[0] != null){
             Bean1 = tracker.inventory[0];
@@ -287,10 +286,8 @@ public class FoodStats : MonoBehaviour{
     }
 
     public void DishDone(){
-        // GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        // tracker = temp.GetComponent<InventoryTracker>();
-        Debug.Log("tracker: " + tracker);
-        Debug.Log("tracker.texture: " + tracker.texture);
+        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = temp.GetComponent<InventoryTracker>();
 
         tracker.texture = TextureVal;
         tracker.flavor = FlavorVal;
