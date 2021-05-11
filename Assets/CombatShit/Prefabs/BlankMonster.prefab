@@ -160,6 +160,9 @@ MonoBehaviour:
   totalFireDamage: 0
   totalFlavorDamage: 0
   totalSliceDamage: 0
+  hitSound: {fileID: 8300000, guid: dedbd88dc519f9b4f91fd7e96f93419b, type: 3}
+  monterAnim: {fileID: 0}
+  locked: 0
 --- !u!114 &2936634157296216015
 MonoBehaviour:
   m_ObjectHideFlags: 0

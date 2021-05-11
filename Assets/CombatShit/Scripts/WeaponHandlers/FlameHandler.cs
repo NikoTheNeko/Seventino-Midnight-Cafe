@@ -13,8 +13,36 @@ public class FlameHandler : MonoBehaviour
 
     public BoxCollider2D flames;
 
+    public AudioClip flameSound;
+    private AudioSource audio;
+
     public int interpolationFramesCount = 30;
     private int elapsedFrames = 0;
+
+    void Start()
+    {
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = flameSound;
+        audio.loop = true;
+        audio.Stop();
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButton(0) && !audio.isPlaying)
+        {
+            audio.Play();
+        }
+        else if(Input.GetMouseButton(0) && audio.isPlaying)
+        {
+
+        }
+        else
+        {
+            audio.Stop();
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D enemy)
     {

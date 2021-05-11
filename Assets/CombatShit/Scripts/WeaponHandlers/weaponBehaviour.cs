@@ -61,5 +61,27 @@ public class weaponBehaviour : MonoBehaviour
             }
             currentWeapon = weapons[index];
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weapons[index].SetActive(false);
+            index = 0;
+            weapons[index].SetActive(true);
+            currentWeapon = weapons[index];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            weapons[index].SetActive(false);
+            index = 1;
+            weapons[index].SetActive(true);
+            currentWeapon = weapons[index];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            weapons[index].SetActive(false);
+            index = 2;
+            weapons[index].SetActive(true);
+            currentWeapon = weapons[index];
+        }
     }
 }

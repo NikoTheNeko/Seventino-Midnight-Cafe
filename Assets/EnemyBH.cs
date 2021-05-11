@@ -53,6 +53,16 @@ public class EnemyBH : MonoBehaviour {
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
     private InventoryTracker tracker;
 
+
+
+    public AudioClip hitSound;
+    private AudioSource audio;
+
+
+    public Animator monsterAnim;
+    public bool locked = false;
+        
+
     private void Start()
     {
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
@@ -68,6 +78,15 @@ public class EnemyBH : MonoBehaviour {
         flipVec = originVec;
         flipVec.x *= -1;
 
+        //we should find where we use find and get rid of all of them
+        //GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        //tracker = temp.GetComponent<InventoryTracker>();
+
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = hitSound;
+        audio.loop = false;
+        audio.Stop();
         health = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
 
@@ -106,6 +125,16 @@ public class EnemyBH : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
+        if(ai.velocity.x > 0.3f || ai.velocity.y > 0.3f)
+        {
+            monsterAnim.SetBool("walk", true);
+            monsterAnim.SetBool("idle", false);
+        }
+        else
+        {
+            monsterAnim.SetBool("walk", false);
+            monsterAnim.SetBool("idle", true);
+        }
     }
 
     private void FixedUpdate()
@@ -138,14 +167,14 @@ public class EnemyBH : MonoBehaviour {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             //transform.localScale = theScale;
-            enemyGFX.localScale = new Vector3(-0.25f, 0.25f, 1);
+            enemyGFX.localScale = new Vector3(-0.5f, 0.5f, 1);
         }
         else if (ai.desiredVelocity.x <= .01f)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             //transform.localScale = theScale;
-            enemyGFX.localScale = new Vector3(0.25f, 0.25f, 1);
+            enemyGFX.localScale = new Vector3(0.5f, 0.5f, 1);
         }
     }
 
@@ -153,10 +182,18 @@ public class EnemyBH : MonoBehaviour {
     {
         if (health < 0)
         {
-            Destroy(gameObject);
-            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
+            tracker.spawnFood("Brown Beans", totalSliceDamage / 10, totalFireDamage / 10, totalFlavorDamage / 10, gameObject.transform.position);
+            monsterAnim.SetTrigger("die");
+            StartCoroutine(DestroyYourself(3f, gameObject));
         }
     }
+
+    IEnumerator DestroyYourself(float time, GameObject self)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(self);
+    }
+
     //maybe add aggro timer?
     //generally needs unfucking
     private void checkCombat()
@@ -288,12 +325,15 @@ public class EnemyBH : MonoBehaviour {
         switch (atkIndex)
         {
             case 1:
+                StartCoroutine(lockState(locked, 1.2f));
                 Bite();
                 break;
             case 2:
+                StartCoroutine(lockState(locked, 1f));
                 ShotgunBeans();
                 break;
             case 3:
+                StartCoroutine(lockState(locked, 1f));
                 MachineBeans();
                 break;
         }
@@ -303,6 +343,15 @@ public class EnemyBH : MonoBehaviour {
         {
             enemyState = "idle";
         }
+    }
+
+
+    IEnumerator lockState(bool locked, float time)
+    {
+        locked = true;
+        yield return new WaitForSeconds(time);
+        locked = false;
+
     }
 
     private int Ranges()
@@ -327,7 +376,8 @@ public class EnemyBH : MonoBehaviour {
         if(canAttack)
         {
             canAttack = false;
-            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
+            monsterAnim.SetTrigger("chomp");
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1f, playerLayer);
             foreach (Collider2D player in hit)
             {
                 player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
@@ -346,6 +396,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (canAttack)
         {
+            monsterAnim.SetTrigger("spit");
             canAttack = false;
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
@@ -356,6 +407,7 @@ public class EnemyBH : MonoBehaviour {
     {
         if (canAttack)
         {
+            monsterAnim.SetTrigger("spit");
             canAttack = false;
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
             StartCoroutine(ResetAttack(1f));
@@ -386,7 +438,7 @@ public class EnemyBH : MonoBehaviour {
 
         
         StartCoroutine(FlashColor());
-
+        audio.Play();
         health -= amount;
         healthbar.SetHealth(health);
         // Debug.Log("DAMAGED I REPEAT DAMAGED");
