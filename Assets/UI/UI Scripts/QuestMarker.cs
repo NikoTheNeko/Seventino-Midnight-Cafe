@@ -10,6 +10,7 @@ public class QuestMarker : MonoBehaviour
     public GameObject trigger;
     bool entered = false;
     public TextAsset[] idleText;
+    public GameObject talkTo;
     InventoryTracker tracker;
     Dialogue curQuest;
     public string subject;
@@ -23,7 +24,7 @@ public class QuestMarker : MonoBehaviour
         marker.SetActive(false);
         trigger.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        
+        talkTo.SetActive(false);
         
     }
 
@@ -89,9 +90,11 @@ public class QuestMarker : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         
         entered = true;
+        talkTo.SetActive(true);
     }
 
     void OnTriggerExit2D(Collider2D other){
         entered = false;
+        talkTo.SetActive(false);
     }
 }

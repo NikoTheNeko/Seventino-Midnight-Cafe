@@ -52,9 +52,10 @@ public class FlameHandler : MonoBehaviour
             {
                 StartCoroutine(WaitForSeconds());
                 enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(fireDamage, Fire);
+                CameraShake.instance.ShakeCamera(.2f, .015f);
                 if (enemy.transform.childCount < 1)
                 {
-                    CameraShake.instance.ShakeCamera(.2f, .015f);
+                    CameraShake.instance.ShakeCamera(.2f, .015f); 
                 }
             }
         }

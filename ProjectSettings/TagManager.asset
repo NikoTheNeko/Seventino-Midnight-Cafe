@@ -7,6 +7,8 @@ TagManager:
   - enemy
   - InventoryTracker
   - beanProjectile
+  - StatManager
+  - Plains Collision
   layers:
   - Default
   - TransparentFX

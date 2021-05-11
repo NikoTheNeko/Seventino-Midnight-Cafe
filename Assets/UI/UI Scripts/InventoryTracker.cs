@@ -25,6 +25,7 @@ public class InventoryTracker : MonoBehaviour
     public float texture;
     public float warmth;
     public float flavor;
+    public float volume = 0f;
 
     #endregion
 
@@ -59,9 +60,8 @@ public class InventoryTracker : MonoBehaviour
         inventory.Add(temp);
     }
 
-    public void remove(FoodDrop food){
-        Ingredient temp = new Ingredient(food);
-        inventory.Remove(temp);
+    public void remove(int BeanSpot){
+        inventory.RemoveAt(BeanSpot);
     }
 
     //returns a reference to a ingredient object

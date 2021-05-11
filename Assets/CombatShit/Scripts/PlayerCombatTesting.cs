@@ -34,9 +34,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Animator playerAnim;
 
 
-    public int health = 100;
+    public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
+    public float idleLimit;
 
     #endregion
 
@@ -48,6 +49,10 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //weapon select 1: Knife
                 //              2: Flambethrower
                 //              3: Pepper shotgun
+
+    private float idleTime = 0f;
+    public SpriteRenderer idlePopUp;
+    
 
     #endregion
     private void Start()
@@ -61,6 +66,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
         //Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     private enum State
@@ -74,7 +80,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 rollDirection;
     private Vector3 lastMovedDirection;
     private float rollSpeed;
-    [SerializeField] private const float MV_SPEED = 7f;
+    [SerializeField] private float MV_SPEED = 7f;
     private State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
@@ -113,11 +119,18 @@ public class PlayerCombatTesting : MonoBehaviour{
         knifey = gunAnchor.Find("Knife").GetComponent<KnifeHandler>();
         shuggun = gunAnchor.Find("Shotgun").GetComponent<ShotgunHandler>();
         state = State.Normal;
+        idlePopUp.color = new Color32(255,255,255,0);
     }
 
     // Update is called once per frame
     void Update(){
-        
+        if(idleTime > 3f && idlePopUp.color.a < 1){
+            Debug.Log("waited a long time");
+            Debug.Log(idlePopUp.color.a);
+            Color32 temp = idlePopUp.color;
+            temp.a += 1;
+            idlePopUp.color = temp;
+        }
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -128,15 +141,15 @@ public class PlayerCombatTesting : MonoBehaviour{
                 float moveY = 0f;
 
                 // WASD movement implementation.
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.W) && CanMove)
                 {
                     moveY = +.3f;
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) && CanMove)
                 {
                     moveY = -.3f;
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) && CanMove)
                 {
                     if(!facingRight)
                     {
@@ -144,7 +157,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     }
                     moveX = +.3f;
                 }
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) && CanMove)
                 {
                     if(facingRight)
                     {
@@ -154,6 +167,8 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 {
+                    idleTime = 0f;
+                    idlePopUp.color = new Color32(255,255,255,0);
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
                     if (!audio.isPlaying)
@@ -163,6 +178,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 else
                 {
+                    idleTime += Time.deltaTime;
                     playerAnim.SetBool("Idle", true);
                     playerAnim.SetBool("Run", false);
                     audio.Stop();
@@ -178,7 +194,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(15))
+                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
                 {
                     audio.clip = dashSound;
                     audio.loop = false;
@@ -250,7 +266,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(25))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120))
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -275,7 +291,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(1))
+        if(Input.GetMouseButton(0) && UseStamina(2))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -303,7 +319,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(33))
+        if (Input.GetMouseButtonDown(0) && UseStamina(140))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -390,7 +406,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     private void checkDead()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             //playerAnim.SetTrigger("Death");
             StartCoroutine("LeaveScene", 1.5f);
@@ -412,7 +428,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
         else
         {
-            Debug.Log("nostam");
+            // Debug.Log("nostam");
             return false;
         }
     }
@@ -422,7 +438,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         yield return new WaitForSeconds(1.5f);
         while(currentStam < maxStamina)
         {
-            currentStam+=10;
+            currentStam += 20;
             staminaBar.value = currentStam;
             yield return regenTick;
         }

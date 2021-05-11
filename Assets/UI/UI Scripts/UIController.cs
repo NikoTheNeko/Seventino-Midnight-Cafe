@@ -42,7 +42,8 @@ public class UIController : MonoBehaviour
 
     public void healthControl(){
         int counter = 0;
-        int health = player.GetComponent<PlayerCombatTesting>().health/10;
+        int health = player.GetComponent<PlayerCombatTesting>().health;
+        // for(int i = 0; i < (int)(health/2); i++)
         while(counter < (int)(health/2)){
             hearts[counter].sprite = fullHeart;
             counter++;
@@ -69,13 +70,12 @@ public class UIController : MonoBehaviour
     }
 
     public void toDoControl(Dialogue curQuest){
-        int[] foodVals = new int[6];
         textureMin.value = curQuest.textureMin;
-        textureMax.value = curQuest.textureMax;
+        textureMax.value = 100 - curQuest.textureMax;
         warmthMin.value = curQuest.warmthMin;
-        warmthMax.value = curQuest.warmthMax;
+        warmthMax.value = 100 - curQuest.warmthMax;
         flavorMin.value = curQuest.flavorMin;
-        flavorMax.value = curQuest.flavorMax;
+        flavorMax.value = 100 - curQuest.flavorMax;
     }
 
     public void switchInventory(){

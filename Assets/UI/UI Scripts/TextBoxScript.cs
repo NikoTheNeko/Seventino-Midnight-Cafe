@@ -61,8 +61,7 @@ public class TextBoxScript : MonoBehaviour
             }
 
              //if user presses "x" text will speed up or go to next part of dialogue
-            if(Input.GetButtonUp("Use")){
-                Debug.Log("called speed up");
+            if(Input.GetButtonDown("Use")){
                 SpeedUp();
             }
 
@@ -94,12 +93,7 @@ public class TextBoxScript : MonoBehaviour
     //has variety of effects based on context
     void SpeedUp(){
 
-        //speed up scrolling rate
-        if(!speedUp && activated){
-            Debug.Log("sped up");
-            scrollSpeed /= 20;
-            speedUp = true;
-        }
+        
 
         //move to next message in dialogue if end of message has been reached
         if(letter >= message.Length && loops < dialogueSegments.Length - 1){
@@ -118,8 +112,16 @@ public class TextBoxScript : MonoBehaviour
         }
 
         //if end of dialogue has been reached
-        if(loops >= dialogueSegments.Length - 1 && letter >= message.Length){
+        else if(loops >= dialogueSegments.Length - 1 && letter >= message.Length){
             DeactivateObjects();
+        }
+
+        //speed up scrolling rate
+        else if(!speedUp && activated){
+            textbox.text = message;
+            letter = message.Length;
+            // scrollSpeed /= 20;
+            speedUp = true;
         }
         
     }
@@ -188,8 +190,8 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
-        // player.GetComponent<PlayerCombatTesting>().CanMove = false;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
         foreach(CharacterData data in characterInformation){
@@ -203,8 +205,8 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
-        // GameObject player = GameObject.FindGameObjectWithTag("Player");
-        // player.GetComponent<PlayerCombatTesting>().CanMove = true;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
         textbox.gameObject.SetActive(false);
         foreach(CharacterData data in characterInformation){

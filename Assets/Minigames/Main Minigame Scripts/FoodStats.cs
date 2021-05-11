@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+// using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class FoodStats : MonoBehaviour{
     #region Public Vars
@@ -14,13 +15,13 @@ public class FoodStats : MonoBehaviour{
 
     [Header("The Food Stat Values")]
     [Tooltip("Texture value, this checks the texture of the food, affected by knife")]
-    public float TextureVal = 0;
+    public float TextureVal = 20;
 
     [Tooltip("Warmth value, this checks the warmth of the food, affected by flambethrower")]
-    public float WarmthVal = 0;
+    public float WarmthVal = 40;
 
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
-    public float FlavorVal = 0;
+    public float FlavorVal = 10;
 
     #endregion
 
@@ -66,33 +67,46 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     public void Start(){
-        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        tracker = temp.GetComponent<InventoryTracker>();
+        // GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        Debug.Log("tracker: " + tracker);
+        try{
+            if(tracker.inventory[0] != null){
+                Bean1 = tracker.inventory[0];
+                BeanButton1.interactable = true;
+            } else {
+                Bean1.texture = 0;
+                Bean1.warmth = 0;
+                Bean1.flavor = 0;
+            }
+        } catch (Exception e){
+            Debug.Log(e);
+        }
+        //Bean1 = tracker.inventory[0];
+        try{
+            if(tracker.inventory[1] != null){
+                Bean2 = tracker.inventory[1];
+                BeanButton2.interactable = true;
+            } else {
+                Bean2.texture = 0;
+                Bean2.warmth = 0;
+                Bean2.flavor = 0;
+            }
+        } catch (Exception e){
+            Debug.Log(e);
+        }
 
-        if(tracker.inventory[0] != null){
-            Bean1 = tracker.inventory[0];
-            //BeanButton1.interactable = true;
-        } else {
-            Bean1.texture = 0;
-            Bean1.warmth = 0;
-            Bean1.flavor = 0;
-        }
-        Bean1 = tracker.inventory[0];
-        if(tracker.inventory[1] != null){
-            Bean2 = tracker.inventory[1];
-            //BeanButton2.interactable = true;
-        } else {
-            Bean2.texture = 0;
-            Bean2.warmth = 0;
-            Bean2.flavor = 0;
-        }
-        if(tracker.inventory[2] != null){
-            Bean3 = tracker.inventory[2];
-            //BeanButton3.interactable = true;
-        } else {
-            Bean3.texture = 0;
-            Bean3.warmth = 0;
-            Bean3.flavor = 0;
+        try{
+            if(tracker.inventory[2] != null){
+                Bean3 = tracker.inventory[2];
+                BeanButton3.interactable = true;
+            } else {
+                Bean3.texture = 0;
+                Bean3.warmth = 0;
+                Bean3.flavor = 0;
+            }
+        } catch (Exception e){
+            Debug.Log(e);
         }
 
         SetBeanPickingBars();
@@ -141,23 +155,24 @@ public class FoodStats : MonoBehaviour{
         which thing you want
     **/
     private void SetBeanPickingBars(){
-        //Import the Textures
+        //Imports Bean1
         Bean1Previews[0].value = Bean1.texture;
-        Bean2Previews[0].value = Bean2.texture;
-        Bean3Previews[0].value = Bean3.texture;
-
-        //Import the Warmth
         Bean1Previews[1].value = Bean1.warmth;
-        Bean2Previews[1].value = Bean2.warmth;
-        Bean3Previews[1].value = Bean3.warmth;
-
-        //Import the Flavor
         Bean1Previews[2].value = Bean1.flavor;
+
+        //Imports Bean2
+        Bean2Previews[0].value = Bean2.texture;
+        Bean2Previews[1].value = Bean2.warmth;
         Bean2Previews[2].value = Bean2.flavor;
+
+        //Imports Bean3
+        Bean3Previews[0].value = Bean3.texture;
+        Bean3Previews[1].value = Bean3.warmth;
         Bean3Previews[2].value = Bean3.flavor;
     }
 
     public void SelectBean(int BeanNumber){
+        Debug.Log("bean number = " + BeanNumber);
         switch(BeanNumber){
             case 1:
                 TextureVal = Bean1.texture;
@@ -288,6 +303,11 @@ public class FoodStats : MonoBehaviour{
     public void DishDone(){
         GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = temp.GetComponent<InventoryTracker>();
+        // Debug.Log("tracker: " + tracker);
+        // Debug.Log("tracker.texture: " + tracker.texture);
+        Debug.Log("texture: " + TextureVal);
+        Debug.Log("warmth: " + WarmthVal);
+        Debug.Log("flavor: " + FlavorVal);
 
         tracker.texture = TextureVal;
         tracker.flavor = FlavorVal;
