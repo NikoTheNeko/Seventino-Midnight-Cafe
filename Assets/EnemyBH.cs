@@ -53,7 +53,6 @@ public class EnemyBH : MonoBehaviour {
     public int totalFireDamage, totalFlavorDamage, totalSliceDamage;
     private InventoryTracker tracker;
 
-    private InventoryTracker tracker;
 
 
     public AudioClip hitSound;
