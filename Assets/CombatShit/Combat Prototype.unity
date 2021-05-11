@@ -46432,7 +46432,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 1716528797}
-  spawnData: []
+  spawnData:
+  - {fileID: 11400000, guid: d86ba2800531372438eddc506b998b45, type: 2}
+  - {fileID: 11400000, guid: 6f81e7cae79082b46b932cb87e967b87, type: 2}
   isSequenceRandom: 0
 --- !u!4 &1576776675
 Transform:
