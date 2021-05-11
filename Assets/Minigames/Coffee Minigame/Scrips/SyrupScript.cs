@@ -17,6 +17,15 @@ public class SyrupScript : MonoBehaviour{
     [Tooltip("Amount of Pumps")]
     public int PumpsLeft = 5;
 
+    public Slider VanillaPump;
+
+    public Slider CaramelPump;
+    public Slider ChocolateSlider;
+    public Transform ChocolateBottle;
+    public Button ChocolateButton;
+
+    public AudioSource PumpSFX;
+
 
     //[Tooltip("Syrup SFX")]
     //public AudioSource SyrupSFX;
@@ -78,9 +87,9 @@ public class SyrupScript : MonoBehaviour{
     private void RunMinigame(){
         ShowPluses();
         MoveCup();
-
+        AdjustSliders();
         if(PumpsLeft > 0){
-            Instructions.text = "Press left and right to select a syrup and pump to pump!\n" + "Pumps Left: " + PumpsLeft;
+            Instructions.text = "Press left and right to select a syrup! Grab and pump to add syrup.\n" + "Pumps Left: " + PumpsLeft;
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SyrupState]);
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
             StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[SyrupState]);
@@ -94,6 +103,7 @@ public class SyrupScript : MonoBehaviour{
     //Called by the button to pump syrup
     public void PumpSyrup(){
         if(PumpsLeft > 0){
+            PumpSFX.Play();
             StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
             StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
             PumpsLeft--;
@@ -128,6 +138,61 @@ public class SyrupScript : MonoBehaviour{
 
     }
 
+    public void AdjustSliders(){
+
+        switch(SyrupState){
+            case 0:
+                VanillaPump.interactable = true;
+                CaramelPump.interactable = false;
+                ResetSlider(CaramelPump);
+                ResetSlider(ChocolateSlider);
+                PumpSlider(VanillaPump);
+                ChocolateButton.interactable = false;
+                break;
+            case 1:
+                VanillaPump.interactable = false;
+                CaramelPump.interactable = true;
+                ResetSlider(VanillaPump);
+                ResetSlider(ChocolateSlider);
+                PumpSlider(CaramelPump);
+                ChocolateButton.interactable = false;
+            break;
+            case 2:
+                ResetSlider(VanillaPump);
+                ResetSlider(CaramelPump);
+                ChocolateButton.interactable = true;
+                BottleRotation();
+            break;
+        }
+    }
+    bool Pumped = false;
+    public void PumpSlider(Slider Pump){
+        if(Pumped){
+            ResetSlider(Pump);
+            if(Pump.value == 0)
+                Pumped = false;
+        } else if(Pump.value == 1){
+            if(PumpsLeft > 0 && Pumped == false){
+                Pump.value -= 0.1f;
+                Pumped = true;
+                PumpSFX.Play();
+                StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
+                StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
+                PumpsLeft--;
+            }
+            Pump.interactable = false;
+        }
+    }
+
+    public void ResetSlider(Slider Pump){
+        Pump.value -= 5f * Time.deltaTime;
+    }
+
+    private void BottleRotation(){
+        ChocolateSlider.value += 5f * Time.deltaTime;
+        float NewAngle = 180 * ChocolateSlider.value;
+        ChocolateBottle.rotation = Quaternion.AngleAxis(NewAngle, Vector3.forward);
+    }
 
     #endregion
 
