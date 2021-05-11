@@ -11,7 +11,7 @@ public class KnifeHandler : MonoBehaviour
     public int knifeDamage = 8;
     static public int knfDamage;
 
-    private void Start()
+    private void Awake()
     {
         knfDamage = knifeDamage; 
     }
