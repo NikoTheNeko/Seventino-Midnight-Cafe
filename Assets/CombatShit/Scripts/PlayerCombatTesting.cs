@@ -51,7 +51,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //              3: Pepper shotgun
 
     private float idleTime = 0f;
-    //public SpriteRenderer idlePopUp;
+    public SpriteRenderer idlePopUp;
     
 
     #endregion
@@ -119,17 +119,17 @@ public class PlayerCombatTesting : MonoBehaviour{
         knifey = gunAnchor.Find("Knife").GetComponent<KnifeHandler>();
         shuggun = gunAnchor.Find("Shotgun").GetComponent<ShotgunHandler>();
         state = State.Normal;
-        //idlePopUp.color = new Color32(255,255,255,0);
+        idlePopUp.color = new Color32(255,255,255,0);
     }
 
     // Update is called once per frame
     void Update(){
         if(idleTime > 3f){
             Debug.Log("waited a long time");
-            //Debug.Log(idlePopUp.color.a);
-            //Color32 temp = idlePopUp.color;
-            //temp.a += 1;
-            //idlePopUp.color = temp;
+            Debug.Log(idlePopUp.color.a);
+            Color32 temp = idlePopUp.color;
+            temp.a += 1;
+            idlePopUp.color = temp;
         }
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
@@ -168,7 +168,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 {
                     idleTime = 0f;
-                    //idlePopUp.color = new Color32(255,255,255,0);
+                    idlePopUp.color = new Color32(255,255,255,0);
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
                     if (!audio.isPlaying)
