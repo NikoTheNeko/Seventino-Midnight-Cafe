@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 8750332563838930197}
   - component: {fileID: 8750332563838930198}
   - component: {fileID: 8750332563838930199}
+  - component: {fileID: 121033528}
   m_Layer: 22
   m_Name: Shotgun
   m_TagString: Untagged
@@ -930,6 +931,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &121033528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8750332563838930196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0aed9d44e48c74384d3d7dca11f533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tracers:
+  - {fileID: 1234623027}
+  - {fileID: 887387383}
+  - {fileID: 639568051}
+  - {fileID: 1893863596}
+  - {fileID: 477097447}
+  weaponTracerMaterial: {fileID: 2100000, guid: f162c0bf381b226439b5f1f5683bf10b,
+    type: 2}
+  muzzleFlash: {fileID: 1188690708}
+  canFire: 1
+  animator: {fileID: 8750332563838930199}
+  shotSound: {fileID: 8300000, guid: d046287aaa8276f42b84b18664eec28e, type: 3}
+  shotgunDamage: 3
 --- !u!1 &8750332564070299955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd27175efef56f3419f38a7efd13b91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifeDamage: 8
   knifeSound: {fileID: 8300000, guid: eb921219cf1fcb54baaa730da99f2e83, type: 3}
 --- !u!1 &8750332564355146555
 GameObject:
@@ -1325,6 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5a19cd08caa1049a8e9600d26090f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireDamage: 3
   canTakeDamage: 1
   flames: {fileID: 1524157419}
   flameSound: {fileID: 8300000, guid: 43596279d069e9a4b82777b57ff7e515, type: 3}
@@ -1434,20 +1462,24 @@ MonoBehaviour:
   flameShit: {fileID: 0}
   sShot: {fileID: 0}
   playerAnim: {fileID: 1798535951}
-  health: 10
+  health: 100
   sprites: []
   hurtColor: {r: 0, g: 0, b: 0, a: 0}
+  idleLimit: 0
   CanMove: 1
+  MV_SPEED: 7
   flameParticles: {fileID: 8138441476919819454}
   smokeParticles: {fileID: 8138441475566685345}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2097152
-  shuggun: {fileID: 0}
+  shuggun: {fileID: 121033528}
+  knifey: {fileID: 8750332564760014630}
   walkSound: {fileID: 8300000, guid: 533212debcfeb4245926e9e5cd24c09f, type: 3}
   dashSound: {fileID: 8300000, guid: 994dc097424475b4a882c0715d3c03f9, type: 3}
   hitSound: {fileID: 8300000, guid: 92f397621ba005b40a5b0aad5c92eff3, type: 3}
   facingRight: 1
+  staminaBar: {fileID: 0}
 --- !u!50 &8750332565268564415
 Rigidbody2D:
   serializedVersion: 4
@@ -1879,15 +1911,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb35ff80bd7fa9f468e181b7245f5099, type: 3}
---- !u!4 &8138441476919819425 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
-    type: 3}
-  m_PrefabInstance: {fileID: 8750332564279179498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8138441476919819454 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+    type: 3}
+  m_PrefabInstance: {fileID: 8750332564279179498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8138441476919819425 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
     type: 3}
   m_PrefabInstance: {fileID: 8750332564279179498}
   m_PrefabAsset: {fileID: 0}
@@ -2423,15 +2455,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb35ff80bd7fa9f468e181b7245f5099, type: 3}
---- !u!4 &8138441475566685374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
-    type: 3}
-  m_PrefabInstance: {fileID: 8750332565095549173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8138441475566685345 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 693238217074852948, guid: cb35ff80bd7fa9f468e181b7245f5099,
+    type: 3}
+  m_PrefabInstance: {fileID: 8750332565095549173}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8138441475566685374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 693238217074852939, guid: cb35ff80bd7fa9f468e181b7245f5099,
     type: 3}
   m_PrefabInstance: {fileID: 8750332565095549173}
   m_PrefabAsset: {fileID: 0}
