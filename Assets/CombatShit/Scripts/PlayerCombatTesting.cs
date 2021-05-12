@@ -51,12 +51,17 @@ public class PlayerCombatTesting : MonoBehaviour{
                 //              3: Pepper shotgun
 
     private float idleTime = 0f;
-    public SpriteRenderer idlePopUp;
+    //public SpriteRenderer idlePopUp;
     
 
     #endregion
     private void Start()
     {
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = walkSound;
+        audio.volume = (0.5f);
+        audio.Stop();
         currentStam = maxStamina;
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
@@ -86,6 +91,13 @@ public class PlayerCombatTesting : MonoBehaviour{
     public LayerMask enemyLayer;
     private FlameHandler flameo;
     public ShotgunHandler shuggun;
+    public KnifeHandler knifey;
+
+
+    public AudioClip walkSound;
+    public AudioClip dashSound;
+    public AudioClip hitSound;
+    private AudioSource audio;
 
     public bool facingRight = true;
 
@@ -104,18 +116,20 @@ public class PlayerCombatTesting : MonoBehaviour{
         flamethrowerAnim = gunAnchor.Find("Flambethrower").GetComponent<Animator>();
         flameo = gunAnchor.Find("Flambethrower").GetComponent<FlameHandler>();
         knifeAnim = gunAnchor.Find("Knife").GetComponent<Animator>();
+        knifey = gunAnchor.Find("Knife").GetComponent<KnifeHandler>();
+        shuggun = gunAnchor.Find("Shotgun").GetComponent<ShotgunHandler>();
         state = State.Normal;
-        idlePopUp.color = new Color32(255,255,255,0);
+        //idlePopUp.color = new Color32(255,255,255,0);
     }
 
     // Update is called once per frame
     void Update(){
-        if(idleTime > 3f && idlePopUp.color.a < 1){
+        if(idleTime > 3f){
             Debug.Log("waited a long time");
-            Debug.Log(idlePopUp.color.a);
-            Color32 temp = idlePopUp.color;
-            temp.a += 1;
-            idlePopUp.color = temp;
+            //Debug.Log(idlePopUp.color.a);
+            //Color32 temp = idlePopUp.color;
+            //temp.a += 1;
+            //idlePopUp.color = temp;
         }
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
@@ -154,15 +168,20 @@ public class PlayerCombatTesting : MonoBehaviour{
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 {
                     idleTime = 0f;
-                    idlePopUp.color = new Color32(255,255,255,0);
+                    //idlePopUp.color = new Color32(255,255,255,0);
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
+                    if (!audio.isPlaying)
+                    {
+                        audio.Play();
+                    }
                 }
                 else
                 {
                     idleTime += Time.deltaTime;
                     playerAnim.SetBool("Idle", true);
                     playerAnim.SetBool("Run", false);
+                    audio.Stop();
                 }
                 // converting WASD input into a vector3, normalized.
                 moveDirection = new Vector3(moveX, moveY).normalized;
@@ -177,6 +196,10 @@ public class PlayerCombatTesting : MonoBehaviour{
                 // Dodge roll starts here.
                 if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
                 {
+                    audio.clip = dashSound;
+                    audio.loop = false;
+                    audio.Play();
+                    StartCoroutine(ResetToWalk(.1f));
                     playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
                     rollSpeed = 20f;
@@ -247,9 +270,16 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
-            KnifeHandler.Swing(shootPoint, 0.25f, enemyLayer);
+            knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            knifeAnim.SetTrigger("Fire");
+            if (knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeUp"))
+            {
+                knifeAnim.SetTrigger("goDown");
+            }
+            else if(knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeDown"))
+            {
+                knifeAnim.SetTrigger("goUp");
+            }
         }
     }
 
@@ -337,8 +367,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     public void PlayerHit(int amount)
     {
-
-
+        audio.clip = hitSound;
+        audio.loop = false;
+        audio.Play();
+        StartCoroutine(ResetToWalk(.05f));
         StartCoroutine(FlashColor());
 
         health -= amount;
@@ -346,6 +378,12 @@ public class PlayerCombatTesting : MonoBehaviour{
         checkDead();
     }
 
+    IEnumerator ResetToWalk(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audio.clip = walkSound;
+        audio.loop = true;
+    }
 
     IEnumerator FlashColor()
     {
@@ -364,16 +402,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName: "TitleScreen");
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "beanProjectile")
-        {
-            health -= 1;
-            CameraShake.instance.ShakeCamera(.25f, .05f);
-            other.gameObject.SetActive(false);
-        }
     }
 
     private void checkDead()

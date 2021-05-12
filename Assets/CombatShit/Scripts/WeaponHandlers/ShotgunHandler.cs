@@ -12,12 +12,23 @@ public class ShotgunHandler : MonoBehaviour
     public Action<LineRenderer> turnOff;
     public bool canFire = true;
     public Animator animator;
+    public AudioClip shotSound;
+    private AudioSource audio;
+    void Start()
+    {
+        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.playOnAwake = false;
+        audio.clip = shotSound;
+        audio.loop = false;
+        audio.Stop();
+    }
     public int shotgunDamage = 3;
     public void RayShoot(Vector3 EndPoint, Vector3 ShootDir)
     {
         if (canFire)
         {
             animator.SetTrigger("Shoot");
+            audio.Play();
             canFire = false;
             foreach (LineRenderer tracer in tracers)
             {
