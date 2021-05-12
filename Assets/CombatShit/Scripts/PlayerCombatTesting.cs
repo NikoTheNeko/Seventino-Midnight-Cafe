@@ -327,7 +327,6 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootDir = (mousePosition - transform.position).normalized;
             shuggun.RayShoot(shootPoint, shootDir);
         }
-        //spawn pellets from gun end point, need to construct prefabs for projectiles
     }
 
     

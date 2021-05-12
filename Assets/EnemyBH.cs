@@ -41,6 +41,8 @@ public class EnemyBH : MonoBehaviour {
     public LayerMask playerLayer;
     public GameObject SeedShot;
 
+    public GameObject BeanSpawner;
+
     public HealthBar healthbar;
 
     [SerializeField] private GameObject flameFloatingDamageText;
@@ -124,7 +126,7 @@ public class EnemyBH : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        if(ai.velocity.x > 0.3f || ai.velocity.y > 0.3f)
+        if(ai.velocity.x > 0.1f || ai.velocity.y > 0.1f)
         {
             monsterAnim.SetBool("walk", true);
             monsterAnim.SetBool("idle", false);
@@ -398,6 +400,7 @@ public class EnemyBH : MonoBehaviour {
             monsterAnim.SetTrigger("spit");
             canAttack = false;
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
+            //BeanSpawner.SpawnBeans();
             StartCoroutine(ResetAttack(1f));
         }
     }
