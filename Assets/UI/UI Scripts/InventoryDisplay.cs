@@ -57,7 +57,7 @@ public class InventoryDisplay : MonoBehaviour
     //If ingredient in ingredientPictures hasn't been discovered, it will be passed over when displaying
     private void displayIngredients(){
         int display = 0;
-
+        
         foreach(Ingredient food in tracker.inventory){
             //note to self: "new text" error maybe caused when too many ingredients in tracker. breaks here, doesn't do checkformouseover
             if(display > ingredientDisplays.Count - 1){
