@@ -63,6 +63,7 @@ public class EnemyBH : MonoBehaviour {
 
     public Animator monsterAnim;
     public bool locked = false;
+    private bool isDead = false;
         
 
     private void Start()
@@ -80,8 +81,7 @@ public class EnemyBH : MonoBehaviour {
         flipVec.x *= -1;
 
         //we should find where we use find and get rid of all of them
-        //GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        //tracker = temp.GetComponent<InventoryTracker>();
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
 
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
         audio.playOnAwake = false;
@@ -181,8 +181,9 @@ public class EnemyBH : MonoBehaviour {
 
     private void checkDead()
     {
-        if (health < 0)
+        if (health < 0 && !isDead)
         {
+            isDead = !isDead;
             tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));

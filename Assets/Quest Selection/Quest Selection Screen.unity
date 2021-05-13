@@ -205,18 +205,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &200093460 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7561893447445855971, guid: fa184a233b023294194e16a717d21078,
-    type: 3}
-  m_PrefabInstance: {fileID: 1088134424}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7496c664107e4e64eaae7a49708b9c37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &268524375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1608,9 +1596,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 200093460}
-        m_TargetAssemblyTypeName: SceneChange, Assembly-CSharp
-        m_MethodName: SceneChangeTo
+      - m_Target: {fileID: 1359770901}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: ChangeSceneTo
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
