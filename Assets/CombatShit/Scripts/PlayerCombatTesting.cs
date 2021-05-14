@@ -124,8 +124,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if(idleTime > 3f){
-            Debug.Log("waited a long time");
+        if(idleTime > 3f && idlePopUp.color.a < 1){
             Debug.Log(idlePopUp.color.a);
             Color32 temp = idlePopUp.color;
             temp.a += 1;
@@ -165,7 +164,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     }
                     moveX = -.3f;
                 }
-                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && CanMove)
                 {
                     idleTime = 0f;
                     idlePopUp.color = new Color32(255,255,255,0);
@@ -408,6 +407,8 @@ public class PlayerCombatTesting : MonoBehaviour{
         if (health <= 0)
         {
             //playerAnim.SetTrigger("Death");
+            InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+            tracker.
             StartCoroutine("LeaveScene", 1.5f);
         }
     }

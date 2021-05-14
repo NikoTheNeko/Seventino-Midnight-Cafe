@@ -283,16 +283,20 @@ public class Dialogue
     public dialogueSegment[] dialogueSegments;
     public dialogueSegment[] goodEnding;
     public dialogueSegment[] bestEnding;
-    public int textureMin;
-    public int textureMax;
-    public int warmthMin;
-    public int warmthMax;
-    public int flavorMin;
-    public int flavorMax;
+    public float textureMin;
+    public float textureMax;
+    public float warmthMin;
+    public float warmthMax;
+    public float flavorMin;
+    public float flavorMax;
 
     public bool satisfiesQuest(float texture, float warmth, float flavor){
         return texture >= textureMin && texture <= textureMax 
                 && warmth >= warmthMin && warmth <= warmthMax 
                 && flavor >= flavorMin && flavor <= flavorMax;
+    }
+
+    public float[] getQuestParams(){
+        return new float[6] {textureMin, textureMax, warmthMin, warmthMax, flavorMin, flavorMax};   
     }
 }

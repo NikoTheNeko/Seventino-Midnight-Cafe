@@ -8,10 +8,6 @@ public class InventoryDisplay : MonoBehaviour
     #region Public Variables
     [Tooltip("Texts and Images for displaying the inventory. ")]
     public List<Display> ingredientDisplays = new List<Display>();
-    public GameObject mouseFollower;
-    // public Text followerText;
-    public GameObject onScreenAnchor;
-    public GameObject offScreenAnchor;
     #endregion
 
     #region Private Variables
@@ -19,35 +15,25 @@ public class InventoryDisplay : MonoBehaviour
     private int OffsetY = 40; //amount of leeway in y axis
     private InventoryTracker tracker;
     private bool onScreen = false;
-    private bool textActive = false;
-    private Slider textureSlider;
-    private Slider warmthSlider;
-    private Slider flavorSlider;
+
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
-        tracker = temp.GetComponent<InventoryTracker>();
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         
         foreach(Display display in ingredientDisplays){
             display.Deactivate();
         }
 
-        textureSlider = mouseFollower.transform.GetChild(1).gameObject.GetComponent<Slider>();
-        warmthSlider = mouseFollower.transform.GetChild(2).gameObject.GetComponent<Slider>();
-        flavorSlider = mouseFollower.transform.GetChild(3).gameObject.GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         displayIngredients();
-        checkForMouseOver();
-        mouseFollower.transform.position = Input.mousePosition;
-        // followerText.gameObject.SetActive(textActive);
-        // move();
+        // checkForMouseOver();
         if(Input.GetKeyDown(KeyCode.I)){
             onScreen = !onScreen;
         }
@@ -73,46 +59,32 @@ public class InventoryDisplay : MonoBehaviour
     //Checks if mouse has moved over an image
     private void checkForMouseOver(){
         // textActive = false;
-        foreach(Display target in ingredientDisplays){
-            if(Input.mousePosition.x < target.image.gameObject.transform.position.x + OffsetX && 
-            Input.mousePosition.x > target.image.gameObject.transform.position.x - OffsetX && 
-            Input.mousePosition.y < target.image.gameObject.transform.position.y + OffsetY && 
-            Input.mousePosition.y > target.image.gameObject.transform.position.y - OffsetY &&
-            target.active){
-                // textActive = true;
-                Debug.Log("went over");
-                // textureSlider.transform.gameObject.SetActive(true);
-                // warmthSlider.transform.gameObject.SetActive(true);
-                // flavorSlider.transform.gameObject.SetActive(true);
+        // foreach(Display target in ingredientDisplays){
+        //     if(Input.mousePosition.x < target.image.gameObject.transform.position.x + OffsetX && 
+        //     Input.mousePosition.x > target.image.gameObject.transform.position.x - OffsetX && 
+        //     Input.mousePosition.y < target.image.gameObject.transform.position.y + OffsetY && 
+        //     Input.mousePosition.y > target.image.gameObject.transform.position.y - OffsetY &&
+        //     target.active){
+        //         // textActive = true;
+        //         // textureSlider.transform.gameObject.SetActive(true);
+        //         // warmthSlider.transform.gameObject.SetActive(true);
+        //         // flavorSlider.transform.gameObject.SetActive(true);
 
-                textureSlider.value = target.texture;
-                warmthSlider.value = target.warmth;
-                flavorSlider.value = target.flavor;
-                //info should be displayed here
-                // followerText.text = "Name: " + target.name + 
-                //                     "\nTexture: " + target.texture + 
-                //                     "\nWarmth: " + target.warmth + 
-                //                     "\nFlavor: " + target.flavor;
-            }
-            else{
-                // textureSlider.transform.gameObject.SetActive(false);
-                // warmthSlider.transform.gameObject.SetActive(false);
-                // flavorSlider.transform.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    private void move(){
-        if(onScreen){
-            if(this.gameObject.transform.position.y < onScreenAnchor.transform.position.y){
-                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1, this.gameObject.transform.position.z);
-            }
-        }
-        else if(!onScreen){
-            if(this.gameObject.transform.position.y > offScreenAnchor.transform.position.y){
-                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 1, this.gameObject.transform.position.z);
-            }
-        }
+        //         // textureSlider.value = target.texture;
+        //         // warmthSlider.value = target.warmth;
+        //         // flavorSlider.value = target.flavor;
+        //         //info should be displayed here
+        //         // followerText.text = "Name: " + target.name + 
+        //         //                     "\nTexture: " + target.texture + 
+        //         //                     "\nWarmth: " + target.warmth + 
+        //         //                     "\nFlavor: " + target.flavor;
+        //     }
+        //     else{
+        //         // textureSlider.transform.gameObject.SetActive(false);
+        //         // warmthSlider.transform.gameObject.SetActive(false);
+        //         // flavorSlider.transform.gameObject.SetActive(false);
+        //     }
+        // }
     }
 }
 
@@ -124,23 +96,31 @@ public class Display{
     public float warmth;
     public float flavor;
     public bool active = false;
+    public Slider textureSlider;
+    public Slider warmthSlider;
+    public Slider flavorSlider;
 
     //Sets all members inactive
     public void Deactivate(){
         image.gameObject.SetActive(false);
+        textureSlider.transform.gameObject.SetActive(false);
+        warmthSlider.transform.gameObject.SetActive(false);
+        flavorSlider.transform.gameObject.SetActive(false);
         active = false;
     }
 
     //Sets all members active
     public void Activate(){
         image.gameObject.SetActive(true);
+        textureSlider.transform.gameObject.SetActive(true);
+        warmthSlider.transform.gameObject.SetActive(true);
+        flavorSlider.transform.gameObject.SetActive(true);
         active = true;
     }
 
     public void setVars(float iTexture, float iWarmth, float iFlavor, string iName){
-        texture = iTexture;
-        warmth = iWarmth;
-        flavor = iFlavor;
-        name = iName;
+        textureSlider.value = iTexture;
+        warmthSlider.value = iWarmth;
+        flavorSlider.value = iFlavor;
     }
 }

@@ -116,6 +116,14 @@ public class InventoryTracker : MonoBehaviour
             Debug.LogError("save file not found");
         }
     }
+
+    public float[] getCurrentQuestParams(){
+        return dialogues[dialogueProg].getQuestParams();
+    }
+
+    public void ClearInventory(){
+        inventory.Clear();
+    }
 }
 
 [System.Serializable]

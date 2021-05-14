@@ -7564,18 +7564,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257415981}
   m_CullTransparentMesh: 0
---- !u!114 &273861146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 273861146, guid: 938907d0d84ce0d42b262cc395e6b4ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 1158279822}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &346374495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11521,7 +11509,6 @@ MonoBehaviour:
   BeanPicking: {fileID: 1107641261}
   Instructions: {fileID: 920827735}
   ChoiceButtons: {fileID: 1035138835}
-  ServeButton: {fileID: 273861146}
   MinigameNumber: -3
 --- !u!4 &838361843
 Transform:
@@ -11634,7 +11621,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 155308898e17ee5408914195133d9873, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8c81ee143d0ce4d4e9f8292fe583124b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

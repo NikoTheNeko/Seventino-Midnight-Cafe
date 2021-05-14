@@ -558,7 +558,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 458e274d5da28b547b61b7f3a64320b7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 61c99e7e365d6e74cab7c053bca10e90, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -37628,6 +37628,9 @@ GameObject:
   - component: {fileID: 1984225797}
   - component: {fileID: 1984225796}
   - component: {fileID: 1984225798}
+  - component: {fileID: 1984225799}
+  - component: {fileID: 1984225800}
+  - component: {fileID: 1984225801}
   m_Layer: 0
   m_Name: NewCafeNewPerspective
   m_TagString: Untagged
@@ -37728,6 +37731,10 @@ EdgeCollider2D:
   - {x: 7.273236, y: -8.969523}
   - {x: 7.2732363, y: -9.646141}
   - {x: 7.017349, y: -9.646141}
+  - {x: 7.017349, y: -10.4217005}
+  - {x: 6.261832, y: -10.422468}
+  - {x: 6.263911, y: -10.733813}
+  - {x: 6.7323966, y: -10.732788}
   - {x: 7.017349, y: -10.66969}
   - {x: 8.006548, y: -10.669691}
   - {x: 8.006548, y: -13.0142}
@@ -37736,6 +37743,10 @@ EdgeCollider2D:
   - {x: 7.26337, y: -12.467917}
   - {x: 7.2633696, y: -13.00622}
   - {x: 7.015514, y: -13.00622}
+  - {x: 7.0155144, y: -13.413985}
+  - {x: 6.2649007, y: -13.42856}
+  - {x: 6.2615776, y: -13.729894}
+  - {x: 6.7257924, y: -13.730873}
   - {x: 7.0155144, y: -13.66642}
   - {x: 8.005431, y: -13.666416}
   - {x: 8.005431, y: -15.64261}
@@ -37743,6 +37754,10 @@ EdgeCollider2D:
   - {x: 7.0170774, y: -16.67391}
   - {x: 8.005285, y: -16.673912}
   - {x: 8.005285, y: -18.01707}
+  - {x: 7.7358737, y: -18.021149}
+  - {x: 7.7366123, y: -17.425695}
+  - {x: 7.265925, y: -17.424011}
+  - {x: 7.2654667, y: -18.01707}
   - {x: 4.005286, y: -18.017069}
   - {x: 4.0052857, y: -19.98583}
   - {x: 1.98861, y: -19.985828}
@@ -37753,6 +37768,81 @@ EdgeCollider2D:
   - {x: -0.9916388, y: -17.0056}
   - {x: -4.008488, y: -17.0056}
   - {x: -4.008488, y: -14.4}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &1984225799
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984225795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 2.7324028, y: -9.425838}
+  - {x: 2.732403, y: -9.734963}
+  - {x: 2.267511, y: -9.734963}
+  - {x: 2.267511, y: -9.425838}
+  - {x: 2.732403, y: -9.425838}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &1984225800
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984225795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.2660434, y: -9.424519}
+  - {x: -0.2660434, y: -9.732509}
+  - {x: -0.7331395, y: -9.732509}
+  - {x: -0.7331395, y: -9.424519}
+  - {x: -0.26604342, y: -9.424519}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &1984225801
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984225795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 7.265302, y: -14.469299}
+  - {x: 7.732386, y: -14.4693}
+  - {x: 7.7323856, y: -14.73244}
+  - {x: 7.265302, y: -14.732437}
+  - {x: 7.266419, y: -14.4693}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
