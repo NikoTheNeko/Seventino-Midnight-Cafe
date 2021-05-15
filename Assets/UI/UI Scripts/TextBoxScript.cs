@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TextBoxScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class TextBoxScript : MonoBehaviour
     [Tooltip("GameObject that contains the textbox. This should include any art part of the textbox. Needed for hierarchy manipulation.")]
     public Image textboxImage;
     [Tooltip("Text you want to be displayed")]
-    public Text textbox;
+    public TextMeshProUGUI textbox;
 
     [Tooltip("Text for the name of the speaker")]
     public Text nameText;
@@ -129,6 +130,14 @@ public class TextBoxScript : MonoBehaviour
     //add letter from current message to textbox 
     //increment letter counter and set next time to add letter
     void AddLetter(){
+        string buffer = "";
+        if(message[letter] == '<'){
+            while(message[letter] != '>'){
+                buffer += message[letter];
+                letter++;
+            }
+        }
+        textbox.text += buffer;
         textbox.text += message[letter];
 
         //only play audio if text hasn't been sped up
