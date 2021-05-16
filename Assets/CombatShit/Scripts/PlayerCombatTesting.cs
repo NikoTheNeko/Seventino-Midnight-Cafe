@@ -408,7 +408,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             //playerAnim.SetTrigger("Death");
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-            tracker.
+            tracker.ClearInventory();
             StartCoroutine("LeaveScene", 1.5f);
         }
     }

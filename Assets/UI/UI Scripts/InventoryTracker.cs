@@ -123,6 +123,7 @@ public class InventoryTracker : MonoBehaviour
 
     public void ClearInventory(){
         inventory.Clear();
+        Debug.Log(inventory.Count);
     }
 }
 

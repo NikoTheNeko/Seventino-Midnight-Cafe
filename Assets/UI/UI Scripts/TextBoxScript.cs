@@ -92,10 +92,7 @@ public class TextBoxScript : MonoBehaviour
 
     //method called when Use is pressed
     //has variety of effects based on context
-    void SpeedUp(){
-
-        
-
+    public void SpeedUp(){
         //move to next message in dialogue if end of message has been reached
         if(letter >= message.Length && loops < dialogueSegments.Length - 1){
             //set unique variables up for next message
@@ -185,7 +182,7 @@ public class TextBoxScript : MonoBehaviour
 
             target.transform.localScale += new Vector3(0.005f * target.transform.localScale.x, 0.005f * target.transform.localScale.y, 0);
         }
-        target.transform.SetAsLastSibling();
+        target.transform.SetSiblingIndex(2);
         textboxImage.transform.parent.SetAsLastSibling(); 
                
         target.color = temp;

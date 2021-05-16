@@ -8,6 +8,7 @@ public class QuestMarker : MonoBehaviour
     public GameObject marker;
     public TextBoxScript textbox;
     public GameObject trigger;
+    public GameObject successCG;
     bool entered = false;
     public TextAsset[] idleText;
     public GameObject talkTo;
@@ -20,7 +21,7 @@ public class QuestMarker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        successCG.SetActive(false);
         marker.SetActive(false);
         trigger.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
@@ -55,8 +56,7 @@ public class QuestMarker : MonoBehaviour
                     tracker.hasFood = false;
                     //if food being carried satisfies quest, give good ending and advance dialogue progression
                     if(curQuest.satisfiesQuest(tracker.texture, tracker.warmth, tracker.flavor)){
-                        textbox.SetDialogue(curQuest.bestEnding);
-                        tracker.dialogueProg++;
+                        StartCoroutine(advanceProgression());
                     }
                     else{
                         textbox.SetDialogue(curQuest.goodEnding);
@@ -65,6 +65,7 @@ public class QuestMarker : MonoBehaviour
                 else{
                     //give player quest
                     textbox.SetDialogue(curQuest.dialogueSegments);
+                    // marker.SetActive(false);
                 }
                 
             }
@@ -84,6 +85,15 @@ public class QuestMarker : MonoBehaviour
                 textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text).dialogueSegments);
             }
         }
+    }
+
+    IEnumerator advanceProgression(){
+        successCG.SetActive(true);
+        textbox.activated = true;
+        yield return new WaitForSeconds(2);
+        textbox.SetDialogue(curQuest.bestEnding);
+        textbox.SpeedUp();
+        tracker.dialogueProg++;
     }
 
 
