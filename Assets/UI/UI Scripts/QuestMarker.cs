@@ -9,7 +9,7 @@ public class QuestMarker : MonoBehaviour
     public TextBoxScript textbox;
     public GameObject trigger;
     public GameObject successCG;
-    // public GameObject nextCustomer;
+    public QuestMarkerController controller;
     bool entered = false;
     public TextAsset[] idleText;
     public GameObject talkTo;
@@ -94,7 +94,7 @@ public class QuestMarker : MonoBehaviour
         yield return new WaitForSeconds(2);
         textbox.SetDialogue(curQuest.bestEnding);
         textbox.SpeedUp();
-        tracker.dialogueProg++;
+        controller.AdvanceProgression();
     }
 
 
