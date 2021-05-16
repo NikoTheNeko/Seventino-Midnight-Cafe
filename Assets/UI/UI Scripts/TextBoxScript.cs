@@ -26,6 +26,7 @@ public class TextBoxScript : MonoBehaviour
     [Tooltip("Seconds between adding another letter")]
     public float scrollSpeed = 0.0625f;
     public bool activated = false;
+    public GameObject successCG;
     #endregion
 
     #region Private Variables
@@ -222,6 +223,7 @@ public class TextBoxScript : MonoBehaviour
         }
         nameText.gameObject.SetActive(false);
         textboxImage.gameObject.SetActive(false);
+        successCG.SetActive(false);
 
         activated = false;
     }

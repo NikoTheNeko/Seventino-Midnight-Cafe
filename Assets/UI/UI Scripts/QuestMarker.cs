@@ -9,6 +9,7 @@ public class QuestMarker : MonoBehaviour
     public TextBoxScript textbox;
     public GameObject trigger;
     public GameObject successCG;
+    // public GameObject nextCustomer;
     bool entered = false;
     public TextAsset[] idleText;
     public GameObject talkTo;
