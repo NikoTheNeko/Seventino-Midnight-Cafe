@@ -89,6 +89,7 @@ public class QuestMarker : MonoBehaviour
     }
 
     IEnumerator advanceProgression(){
+        Debug.Log("quest succeeded");
         successCG.SetActive(true);
         textbox.activated = true;
         yield return new WaitForSeconds(2);

@@ -125,7 +125,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if(idleTime > 3f && idlePopUp.color.a < 1){
-            Debug.Log(idlePopUp.color.a);
             Color32 temp = idlePopUp.color;
             temp.a += 1;
             idlePopUp.color = temp;
