@@ -444,10 +444,4 @@ public class PlayerCombatTesting : MonoBehaviour{
         regen = null;
     }
 
-    public int RandomDamage(int minDamage, int maxDamage)
-    {
-        maxDamage++;
-        int number = UnityEngine.Random.Range(minDamage, maxDamage);
-        return number;
-    }
 }

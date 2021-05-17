@@ -8,7 +8,8 @@ public class FlameHandler : MonoBehaviour
     //public Transform attackPoint;
     //public float attackRange = 0.25f;
     //public LayerMask enemyLayer;
-    public int fireDamage = 3;
+    public int minFireDamage = 2;
+    public int maxFireDamage = 4;
     public bool canTakeDamage = true;
 
     public BoxCollider2D flames;
@@ -51,7 +52,7 @@ public class FlameHandler : MonoBehaviour
             if (canTakeDamage)
             {
                 StartCoroutine(WaitForSeconds());
-                enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(fireDamage, Fire);
+                enemy.gameObject.GetComponent<EnemyBH>().TakeDamage(Random.Range(minFireDamage, maxFireDamage + 1), Fire);
                 CameraShake.instance.ShakeCamera(.2f, .015f);
                 if (enemy.transform.childCount < 1)
                 {
