@@ -742,7 +742,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -40270,7 +40270,7 @@ PrefabInstance:
     - target: {fileID: 5304034516953141047, guid: 5f19aa03501629e47a47ea4580342f9f,
         type: 3}
       propertyPath: hasFood
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5304034516953141047, guid: 5f19aa03501629e47a47ea4580342f9f,
         type: 3}

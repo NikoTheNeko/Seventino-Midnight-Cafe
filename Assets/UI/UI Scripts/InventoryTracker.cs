@@ -111,6 +111,7 @@ public class InventoryTracker : MonoBehaviour
             foreach(Ingredient ingredient in load.inventorySave){
                 inventory.Add(ingredient);
             }
+            dialogueProg = load.narrativeProgress;
         }
         else{
             Debug.LogError("save file not found");
