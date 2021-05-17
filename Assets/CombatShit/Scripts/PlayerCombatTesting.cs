@@ -105,6 +105,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     private int maxStamina = 1000;
     private int currentStam;
 
+    public Collider2D triggerCollider;
+
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
 
@@ -207,6 +209,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             // Currently in a rolling state.
             case State.Rolling:
                 // Decays speed over time.
+                triggerCollider.enabled = false;
                 float rollSpeedDropMult = 3.1f;
                 rollSpeed -= rollSpeed * rollSpeedDropMult * Time.deltaTime;
 
@@ -215,6 +218,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
+                    triggerCollider.enabled = true;
                 }
                 break;
         }
@@ -443,4 +447,5 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
         regen = null;
     }
+
 }
