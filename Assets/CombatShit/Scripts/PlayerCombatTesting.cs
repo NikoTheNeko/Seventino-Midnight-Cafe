@@ -200,7 +200,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                     StartCoroutine(ResetToWalk(.1f));
                     playerAnim.SetTrigger("Dash");
                     rollDirection = lastMovedDirection;
-                    rollSpeed = 20f;
+                    rollSpeed = 25f;
                     state = State.Rolling;
                 }
                 break;
