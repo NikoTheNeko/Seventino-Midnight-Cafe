@@ -62,11 +62,17 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.clip = walkSound;
         audio.volume = (0.5f);
         audio.Stop();
-        currentStam = maxStamina;
-        staminaBar.maxValue = maxStamina;
-        staminaBar.value = maxStamina;
+        currentStamKnife = maxStaminaKnife;
+        staminaBarKnife.maxValue = maxStaminaKnife;
+        staminaBarKnife.value = maxStaminaKnife;
+        currentStamGun = maxStaminaGun;
+        staminaBarGun.maxValue = maxStaminaGun;
+        staminaBarGun.value = maxStaminaGun;
+        currentStamFlame = maxStaminaFlame;
+        staminaBarFlame.maxValue = maxStaminaFlame;
+        staminaBarFlame.value = maxStaminaFlame;
         //Cursor.lockState = CursorLockMode.Locked;
-        
+
     }
 
     private enum State
@@ -101,9 +107,15 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     public bool facingRight = true;
 
-    public Slider staminaBar;
-    private int maxStamina = 1000;
-    private int currentStam;
+    public Slider staminaBarKnife;
+    public Slider staminaBarGun;
+    public Slider staminaBarFlame;
+    private int maxStaminaKnife = 1000;
+    private int maxStaminaGun = 1000;
+    private int maxStaminaFlame = 1000;
+    private int currentStamKnife;
+    private int currentStamGun;
+    private int currentStamFlame;
 
     public Collider2D triggerCollider;
 
@@ -196,7 +208,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     audio.clip = dashSound;
                     audio.loop = false;
@@ -270,7 +282,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120, ref currentStamKnife, ref staminaBarKnife))
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -295,7 +307,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(2))
+        if(Input.GetMouseButton(0) && UseStamina(2, ref currentStamFlame, ref staminaBarFlame))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -323,7 +335,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(140))
+        if (Input.GetMouseButtonDown(0) && UseStamina(140, ref currentStamGun, ref staminaBarGun))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -416,7 +428,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
-    public bool UseStamina(int amount)
+    public bool UseStamina(int amount, ref int currentStam, ref Slider staminaBar)
     {
         if(currentStam - amount >= 0)
         {
@@ -426,7 +438,9 @@ public class PlayerCombatTesting : MonoBehaviour{
             {
                 StopCoroutine(regen);
             }
-            regen = StartCoroutine(RegenStam());
+            regen = StartCoroutine(RegenStamKnife());
+            regen = StartCoroutine(RegenStamGun());
+            regen = StartCoroutine(RegenStamFlame());
             return true;
         }
         else
@@ -436,13 +450,35 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
-    IEnumerator RegenStam()
+    IEnumerator RegenStamKnife()
     {
         yield return new WaitForSeconds(1.5f);
-        while(currentStam < maxStamina)
+        while(currentStamKnife < maxStaminaKnife)
         {
-            currentStam += 20;
-            staminaBar.value = currentStam;
+            currentStamKnife += 20;
+            staminaBarKnife.value = currentStamKnife;
+            yield return regenTick;
+        }
+        regen = null;
+    }
+    IEnumerator RegenStamGun()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentStamGun < maxStaminaGun)
+        {
+            currentStamGun += 20;
+            staminaBarGun.value = currentStamGun;
+            yield return regenTick;
+        }
+        regen = null;
+    }
+    IEnumerator RegenStamFlame()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentStamGun < maxStaminaGun)
+        {
+            currentStamGun += 20;
+            staminaBarGun.value = currentStamGun;
             yield return regenTick;
         }
         regen = null;
