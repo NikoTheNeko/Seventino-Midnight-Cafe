@@ -402,7 +402,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator LeaveScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName: "TitleScreen");
+        SceneManager.LoadScene(sceneName: "deathMenu");
     }
 
     private void checkDead()
