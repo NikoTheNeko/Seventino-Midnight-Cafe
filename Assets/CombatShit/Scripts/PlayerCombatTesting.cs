@@ -119,6 +119,8 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
+    private Coroutine regenFlame;
+    private Coroutine regenGun;
 
     private void Awake()
     {
@@ -455,20 +457,49 @@ public class PlayerCombatTesting : MonoBehaviour{
             staminaBar.value = currentStam;
             yield return regenTick;
         }
+        
         while (currentFlameStam < maxFlameStamina)
         {
             currentFlameStam += 20;
             flameBar.value = currentFlameStam;
             yield return regenTick;
         }
+
         while (currentGunStam < maxGunStamina)
         {
             currentGunStam += 20;
             gunBar.value = currentGunStam;
             yield return regenTick;
         }
+        
         regen = null;
     }
+
+    /*
+    IEnumerator RegenFlameStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        regenFlame = null;
+    }
+    
+    IEnumerator RegenGunStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        regenGun = null;
+    }
+    */
 
     public bool UseFlameStamina(int amount)
     {
