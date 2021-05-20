@@ -184,7 +184,7 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0 && !isDead)
         {
             isDead = !isDead;
-            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
+            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
         }
@@ -458,6 +458,7 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, fireContainer.transform);
                 damagePrefab1.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(fireContainer, 0.7f);
+                Debug.Log("fire: " + totalFireDamage);
                 break;
             case DamageEnum.Flavor:
                 totalFlavorDamage += amount;
@@ -469,6 +470,7 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
                 damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(flavorContainer, 0.7f);
+                Debug.Log("flavor: " + totalFlavorDamage);
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;
@@ -480,6 +482,7 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, sliceContainer.transform);
                 damagePrefab3.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(sliceContainer, 0.7f);
+                Debug.Log("slice: " + totalSliceDamage);
                 break;
         }
 

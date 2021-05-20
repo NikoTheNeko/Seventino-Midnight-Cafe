@@ -7027,7 +7027,7 @@ PrefabInstance:
     - target: {fileID: 561248295952697296, guid: be3bd8a56f75a2241b04fd464c805b1b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.596
       objectReference: {fileID: 0}
     - target: {fileID: 561248295952697296, guid: be3bd8a56f75a2241b04fd464c805b1b,
         type: 3}
@@ -12243,7 +12243,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 500
   m_TargetDisplay: 0

@@ -146,6 +146,10 @@ public class InventoryTracker : MonoBehaviour
         inventory.Clear();
 
     }
+
+    public void SetDialogue(int num){
+        dialogueProg = num;
+    }
 }
 
 [System.Serializable]
