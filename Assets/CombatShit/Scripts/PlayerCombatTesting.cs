@@ -65,8 +65,12 @@ public class PlayerCombatTesting : MonoBehaviour{
         currentStam = maxStamina;
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
+        flameBar.maxValue = maxFlameStamina;
+        flameBar.value = maxFlameStamina;
+        gunBar.maxValue = maxGunStamina;
+        gunBar.value = maxGunStamina;
         //Cursor.lockState = CursorLockMode.Locked;
-        
+
     }
 
     private enum State
@@ -102,8 +106,14 @@ public class PlayerCombatTesting : MonoBehaviour{
     public bool facingRight = true;
 
     public Slider staminaBar;
+    public Slider flameBar;
+    public Slider gunBar;
     private int maxStamina = 1000;
+    private int maxFlameStamina = 1000;
+    private int maxGunStamina = 1000;
     private int currentStam;
+    private int currentFlameStam;
+    private int currentGunStam;
 
     public Collider2D triggerCollider;
 
@@ -194,7 +204,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     audio.clip = dashSound;
                     audio.loop = false;
@@ -293,7 +303,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(2))
+        if(Input.GetMouseButton(0) && UseFlameStamina(2))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -321,7 +331,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(140))
+        if (Input.GetMouseButtonDown(0) && UseGunStamina(140))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -402,7 +412,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator LeaveScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName: "TitleScreen");
+        SceneManager.LoadScene(sceneName: "deathMenu");
     }
 
     private void checkDead()
@@ -445,7 +455,59 @@ public class PlayerCombatTesting : MonoBehaviour{
             staminaBar.value = currentStam;
             yield return regenTick;
         }
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
         regen = null;
+    }
+
+    public bool UseFlameStamina(int amount)
+    {
+        if (currentFlameStam - amount >= 0)
+        {
+            currentFlameStam -= amount;
+            flameBar.value = currentFlameStam;
+            if (regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
+    }
+
+    public bool UseGunStamina(int amount)
+    {
+        if (currentGunStam - amount >= 0)
+        {
+            currentGunStam -= amount;
+            gunBar.value = currentGunStam;
+            if (regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
     }
 
 }
