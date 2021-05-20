@@ -53,7 +53,7 @@ public class UIController : MonoBehaviour
             counter++;
         }
         while(counter < hearts.Length){
-            hearts[counter].sprite = emptyHeart;
+            hearts[counter].transform.gameObject.SetActive(false);
             counter++;
         }
     }
