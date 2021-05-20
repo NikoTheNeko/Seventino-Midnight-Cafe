@@ -1076,7 +1076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd27175efef56f3419f38a7efd13b91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knifeDamage: 8
+  minKnifeDamage: 6
+  maxKnifeDamage: 8
   knifeSound: {fileID: 8300000, guid: eb921219cf1fcb54baaa730da99f2e83, type: 3}
 --- !u!1 &8750332564355146555
 GameObject:
@@ -1326,7 +1327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5a19cd08caa1049a8e9600d26090f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireDamage: 3
+  minFireDamage: 2
+  maxFireDamage: 4
   canTakeDamage: 1
   flames: {fileID: 1524157419}
   flameSound: {fileID: 8300000, guid: 43596279d069e9a4b82777b57ff7e515, type: 3}
@@ -1441,6 +1443,7 @@ MonoBehaviour:
   hurtColor: {r: 0, g: 0, b: 0, a: 0}
   idleLimit: 0
   CanMove: 1
+  idlePopUp: {fileID: 0}
   MV_SPEED: 7
   flameParticles: {fileID: 8138441476919819454}
   smokeParticles: {fileID: 8138441475566685345}
@@ -1454,6 +1457,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 057727f53b0424f428067eff524a29bc, type: 3}
   facingRight: 1
   staminaBar: {fileID: 0}
+  triggerCollider: {fileID: 0}
 --- !u!50 &8750332565268564415
 Rigidbody2D:
   serializedVersion: 4
