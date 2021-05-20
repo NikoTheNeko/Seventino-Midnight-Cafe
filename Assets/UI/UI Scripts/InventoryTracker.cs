@@ -26,6 +26,8 @@ public class InventoryTracker : MonoBehaviour
     public float warmth;
     public float flavor;
     public float volume = 0f;
+    
+    public FoodStats CoffeeStats;
 
     #endregion
 
@@ -45,6 +47,9 @@ public class InventoryTracker : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
+        CoffeeStats = temp.GetComponent<FoodStats>();
     }
 
     // Update is called once per frame
@@ -124,6 +129,22 @@ public class InventoryTracker : MonoBehaviour
     public void ClearInventory(){
         inventory.Clear();
         Debug.Log(inventory.Count);
+    }
+
+    public void CarryCoffeeStats(){
+        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
+        CoffeeStats = temp.GetComponent<FoodStats>();
+
+        Debug.Log(CoffeeStats.TextureVal);
+
+        texture = CoffeeStats.TextureVal;
+        flavor = CoffeeStats.FlavorVal;
+        warmth = CoffeeStats.WarmthVal;
+
+        hasFood = true;
+
+        inventory.Clear();
+
     }
 }
 
