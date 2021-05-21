@@ -20,6 +20,8 @@ public class UIController : MonoBehaviour
     public Slider warmthMax;
     public Slider flavorMin;
     public Slider flavorMax;
+    public List<Name> names;
+    public Image toDoName;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +74,12 @@ public class UIController : MonoBehaviour
         warmthMax.value = 100 - curQuest.warmthMax;
         flavorMin.value = curQuest.flavorMin;
         flavorMax.value = 100 - curQuest.flavorMax;
+        
+        foreach(Name name in names){
+            if(name.name == curQuest.subject){
+                toDoName.sprite = name.sprite;
+            }
+        }
     }
 
     public void switchInventory(){
@@ -93,4 +101,12 @@ public class UIController : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
+    
 }
+
+[System.Serializable]
+public class Name{
+        public string name;
+        public Sprite sprite;
+    }
