@@ -68,7 +68,7 @@ public class deathScript : MonoBehaviour
         Debug.Log("continue");
         UnPauseTime();
         IsPaused = false;
-        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.Out, "PlainsNew"));
+        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.In, "PlainsNew"));
         //SceneManager.LoadScene("PlainsNew");
     }
 

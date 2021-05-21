@@ -403,7 +403,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator LeaveScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.Out, "deathMenu"));
+        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.In, "deathMenu"));
     }
 
     private void checkDead()
