@@ -38,6 +38,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     public SpriteRenderer[] sprites;
     public Color hurtColor;
     public float idleLimit;
+    public GameObject sceneFader;
 
     #endregion
 
@@ -402,7 +403,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator LeaveScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName: "deathMenu");
+        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.Out, "deathMenu"));
     }
 
     private void checkDead()
