@@ -62,15 +62,13 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.clip = walkSound;
         audio.volume = (0.5f);
         audio.Stop();
-        currentStamKnife = maxStaminaKnife;
-        staminaBarKnife.maxValue = maxStaminaKnife;
-        staminaBarKnife.value = maxStaminaKnife;
-        currentStamGun = maxStaminaGun;
-        staminaBarGun.maxValue = maxStaminaGun;
-        staminaBarGun.value = maxStaminaGun;
-        currentStamFlame = maxStaminaFlame;
-        staminaBarFlame.maxValue = maxStaminaFlame;
-        staminaBarFlame.value = maxStaminaFlame;
+        currentStam = maxStamina;
+        staminaBar.maxValue = maxStamina;
+        staminaBar.value = maxStamina;
+        flameBar.maxValue = maxFlameStamina;
+        flameBar.value = maxFlameStamina;
+        gunBar.maxValue = maxGunStamina;
+        gunBar.value = maxGunStamina;
         //Cursor.lockState = CursorLockMode.Locked;
 
     }
@@ -107,20 +105,22 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     public bool facingRight = true;
 
-    public Slider staminaBarKnife;
-    public Slider staminaBarGun;
-    public Slider staminaBarFlame;
-    private int maxStaminaKnife = 1000;
-    private int maxStaminaGun = 1000;
-    private int maxStaminaFlame = 1000;
-    private int currentStamKnife;
-    private int currentStamGun;
-    private int currentStamFlame;
+    public Slider staminaBar;
+    public Slider flameBar;
+    public Slider gunBar;
+    private int maxStamina = 1000;
+    private int maxFlameStamina = 1000;
+    private int maxGunStamina = 1000;
+    private int currentStam;
+    private int currentFlameStam;
+    private int currentGunStam;
 
     public Collider2D triggerCollider;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
+    private Coroutine regenFlame;
+    private Coroutine regenGun;
 
     private void Awake()
     {
@@ -307,7 +307,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(2, ref currentStamFlame, ref staminaBarFlame))
+        if(Input.GetMouseButton(0) && UseFlameStamina(2))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -335,7 +335,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(140, ref currentStamGun, ref staminaBarGun))
+        if (Input.GetMouseButtonDown(0) && UseGunStamina(140))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -481,7 +481,88 @@ public class PlayerCombatTesting : MonoBehaviour{
             staminaBarGun.value = currentStamGun;
             yield return regenTick;
         }
+        
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        
         regen = null;
+    }
+
+    /*
+    IEnumerator RegenFlameStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        regenFlame = null;
+    }
+    
+    IEnumerator RegenGunStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        regenGun = null;
+    }
+    */
+
+    public bool UseFlameStamina(int amount)
+    {
+        if (currentFlameStam - amount >= 0)
+        {
+            currentFlameStam -= amount;
+            flameBar.value = currentFlameStam;
+            if (regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
+    }
+
+    public bool UseGunStamina(int amount)
+    {
+        if (currentGunStam - amount >= 0)
+        {
+            currentGunStam -= amount;
+            gunBar.value = currentGunStam;
+            if (regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
     }
 
 }
