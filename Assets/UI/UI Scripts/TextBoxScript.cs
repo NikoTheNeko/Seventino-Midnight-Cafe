@@ -45,7 +45,6 @@ public class TextBoxScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);     
         textbox.text = "";
 
         //deactivate all of the visual elements
@@ -56,27 +55,19 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if there are letters to add and required amount of time has passed
         if(activated){
-            if(Time.time > timer && letter < message.Length && activated){
+            //if there are letters to add and required amount of time has passed
+            if(Time.time > timer && letter < message.Length){
                 AddLetter();
             }
 
-             //if user presses "x" text will speed up or go to next part of dialogue
-            if(Input.GetButtonDown("Use")){
-                SpeedUp();
-            }
+             //if user presses "Space" text will speed up or go to next part of dialogue
+            // if(Input.GetButtonDown("Use")){
+            //     SpeedUp();
+            // }
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
-                // switch(currentSpeaker){
-                //     case "Chef":
-                //         Debug.Log("my name chef");
-                //         break;
-                //     default:
-                //         Debug.Log("my name not chef");
-                //         break;
-                // }
                 if(data.name == currentSpeaker){
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
@@ -86,9 +77,6 @@ public class TextBoxScript : MonoBehaviour
                 }
             }
         }
-        
-
-       
     }
 
     //method called when Use is pressed
@@ -197,6 +185,7 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
+        Debug.Log("activated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
@@ -212,6 +201,7 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
+        Debug.Log("deactivated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
@@ -231,7 +221,6 @@ public class TextBoxScript : MonoBehaviour
     //set dialogue to given TextAsset, resets variables
     //then activates self
     public void SetDialogue(dialogueSegment[] text){
-
         dialogueSegments = text;
         loops = 0;
         letter = 0;
