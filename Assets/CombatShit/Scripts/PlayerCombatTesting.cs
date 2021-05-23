@@ -282,7 +282,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120, ref currentStamKnife, ref staminaBarKnife))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120, ref currentStam, ref staminaBar))
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -307,7 +307,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseFlameStamina(2))
+        if(Input.GetMouseButton(0) && UseStamina(2, ref currentFlameStam, ref flameBar))
         {
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
@@ -335,7 +335,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseGunStamina(140))
+        if (Input.GetMouseButtonDown(0) && UseStamina(140, ref currentGunStam, ref gunBar))
         {
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
@@ -453,10 +453,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator RegenStamKnife()
     {
         yield return new WaitForSeconds(1.5f);
-        while(currentStamKnife < maxStaminaKnife)
+        while(currentStam < maxStamina)
         {
-            currentStamKnife += 20;
-            staminaBarKnife.value = currentStamKnife;
+            currentStam += 20;
+            staminaBar.value = currentStam;
             yield return regenTick;
         }
         regen = null;
@@ -464,10 +464,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator RegenStamGun()
     {
         yield return new WaitForSeconds(1.5f);
-        while (currentStamGun < maxStaminaGun)
+        while (currentGunStam < maxGunStamina)
         {
-            currentStamGun += 20;
-            staminaBarGun.value = currentStamGun;
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
             yield return regenTick;
         }
         regen = null;
@@ -475,10 +475,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     IEnumerator RegenStamFlame()
     {
         yield return new WaitForSeconds(1.5f);
-        while (currentStamGun < maxStaminaGun)
+        while (currentFlameStam < maxFlameStamina)
         {
-            currentStamGun += 20;
-            staminaBarGun.value = currentStamGun;
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
             yield return regenTick;
         }
         
@@ -525,7 +525,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     }
     */
 
-    public bool UseFlameStamina(int amount)
+    /*public bool UseFlameStamina(int amount)
     {
         if (currentFlameStam - amount >= 0)
         {
@@ -563,6 +563,6 @@ public class PlayerCombatTesting : MonoBehaviour{
             // Debug.Log("nostam");
             return false;
         }
-    }
+    }*/
 
 }
