@@ -117,6 +117,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     private int currentFlameStam;
     private int currentGunStam;
 
+    public int fireDelay;
+
     public Collider2D triggerCollider;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
@@ -268,6 +270,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     private void FixedUpdate()
     {
+        if (fireDelay > 0)
+        {
+            --fireDelay;
+        }
         // handles the rolling state in a fixed update with a switch statement.
         switch (state)
         {
@@ -284,8 +290,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120, ref currentStam, ref staminaBar))
+        if (Input.GetMouseButtonDown(0) && currentStam > 120 && fireDelay == 0)
         {
+            UseStamina(120, ref currentStam, ref staminaBar);
+            fireDelay = 20;
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
@@ -309,8 +317,10 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(2, ref currentFlameStam, ref flameBar))
+        if(Input.GetMouseButton(0) && currentFlameStam > 2 && fireDelay == 0)
         {
+            UseStamina(2, ref currentFlameStam, ref flameBar);
+            fireDelay = 0;
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
             var em = flameParticles.emission;
@@ -337,8 +347,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(140, ref currentGunStam, ref gunBar))
+        if (Input.GetMouseButtonDown(0) && currentGunStam > 140 && fireDelay == 0)
         {
+            UseStamina(140, ref currentGunStam, ref gunBar);
+            fireDelay = 30;
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             Vector3 mousePosition = GetMouseWorldPosition();
