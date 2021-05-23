@@ -436,11 +436,19 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             currentStam -= amount;
             staminaBar.value = currentStam;
-            if(regen != null)
+            if(regen != null && staminaBar.maxValue == 1000)
             {
                 StopCoroutine(regen);
             }
-            if(staminaBar.maxValue == 1000)
+            if (regenFlame != null && staminaBar.maxValue == 1001)
+            {
+                StopCoroutine(regenFlame);
+            }
+            if (regenGun != null && staminaBar.maxValue == 1002)
+            {
+                StopCoroutine(regenGun);
+            }
+            if (staminaBar.maxValue == 1000)
             {
                 regen = StartCoroutine(RegenStamKnife());
             }
