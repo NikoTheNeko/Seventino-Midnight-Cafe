@@ -111,8 +111,8 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Slider flameBar;
     public Slider gunBar;
     private int maxStamina = 1000;
-    private int maxFlameStamina = 1000;
-    private int maxGunStamina = 1000;
+    private int maxFlameStamina = 1001;
+    private int maxGunStamina = 1002;
     private int currentStam;
     private int currentFlameStam;
     private int currentGunStam;
@@ -440,9 +440,18 @@ public class PlayerCombatTesting : MonoBehaviour{
             {
                 StopCoroutine(regen);
             }
-            regen = StartCoroutine(RegenStamKnife());
-            regen = StartCoroutine(RegenStamGun());
-            regen = StartCoroutine(RegenStamFlame());
+            if(staminaBar.maxValue == 1000)
+            {
+                regen = StartCoroutine(RegenStamKnife());
+            }
+            else if (staminaBar.maxValue == 1001)
+            {
+                regenFlame = StartCoroutine(RegenStamFlame());
+            }
+            else if (staminaBar.maxValue == 1002)
+            {
+                regenGun = StartCoroutine(RegenStamGun());
+            }
             return true;
         }
         else
@@ -472,7 +481,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             gunBar.value = currentGunStam;
             yield return regenTick;
         }
-        regen = null;
+        regenGun = null;
     }
     IEnumerator RegenStamFlame()
     {
@@ -484,7 +493,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             yield return regenTick;
         }
         
-        regen = null;
+        regenFlame = null;
     }
 
     /*
