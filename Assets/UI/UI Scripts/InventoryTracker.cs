@@ -52,11 +52,6 @@ public class InventoryTracker : MonoBehaviour
         CoffeeStats = temp.GetComponent<FoodStats>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     //adds modifier to amount in inventory linked to key
     //returns true if addition succesful
     //returns false if addition couldn't be done
@@ -104,7 +99,7 @@ public class InventoryTracker : MonoBehaviour
 
     //Loads inventory state from savedData.smc
     public void load(){
-
+        Debug.Log("loading");
         string path = Application.persistentDataPath + "/savedData.smc";
         if(File.Exists(path)){
             BinaryFormatter formatter = new BinaryFormatter();
@@ -116,6 +111,7 @@ public class InventoryTracker : MonoBehaviour
             foreach(Ingredient ingredient in load.inventorySave){
                 inventory.Add(ingredient);
             }
+            dialogueProg = load.narrativeProgress;
         }
         else{
             Debug.LogError("save file not found");

@@ -55,13 +55,13 @@ public class UIController : MonoBehaviour
             counter++;
         }
         while(counter < hearts.Length){
-            hearts[counter].transform.gameObject.SetActive(false);
+            // hearts[counter].transform.gameObject.SetActive(false);
+            hearts[counter].sprite = emptyHeart;
             counter++;
         }
     }
 
     public void triggerControl(){
-        
         if(tracker.inventory.Count > 0){
             leaveTrigger.SetActive(true);
         }

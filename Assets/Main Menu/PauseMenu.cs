@@ -14,12 +14,7 @@ public class PauseMenu : MonoBehaviour
     public float volume = 1f;
     public AudioSource audio;
     private InventoryTracker tracker;
-
     public GameObject pauseMenuUI;
-    //public GameObject questButton;
-    //public GameObject questList;
-    //public GameObject mapButton;
-    //public GameObject map;
 
     void Start(){
         //set volume to and volume slider to volume in inventory tracker, should be valued carried from previous scenes
@@ -62,7 +57,6 @@ public class PauseMenu : MonoBehaviour
 
     public void GoHome()
     {
-        Debug.Log("loading poopfuck");
         UnPauseTime();
         IsPaused = false;
         SceneManager.LoadScene("Cafe Walk Around");
@@ -70,7 +64,6 @@ public class PauseMenu : MonoBehaviour
 
     public void TitleScreen()
     {
-        Debug.Log("poopfuck titlescreen");
         UnPauseTime();
         IsPaused = false;
         SceneManager.LoadScene("TitleScreen");
@@ -78,7 +71,6 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("quitting poopfuck");
         UnPauseTime();
         Application.Quit();
     }
@@ -94,5 +86,13 @@ public class PauseMenu : MonoBehaviour
             audio.volume = volume;
         }
         // audio.Play();
+    }
+
+    public void SaveGame(){
+        tracker.save();
+    }
+
+    public void LoadGame(){
+        tracker.load();
     }
 }

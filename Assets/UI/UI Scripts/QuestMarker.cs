@@ -16,6 +16,7 @@ public class QuestMarker : MonoBehaviour
     InventoryTracker tracker;
     Dialogue curQuest;
     public string subject;
+    public PauseMenu pauseMenu;
     private int idlePos = -1;
 
     public bool pickedUp = false;
@@ -46,7 +47,7 @@ public class QuestMarker : MonoBehaviour
             marker.SetActive(false);
         }
 
-        if(entered && Input.GetKeyDown(KeyCode.Space)){
+        if(entered && Input.GetKeyDown(KeyCode.Space) && Time.timeScale > 0f){
                 //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
             if(!textbox.activated){
                 //if NPC is the target of current quest
@@ -58,10 +59,6 @@ public class QuestMarker : MonoBehaviour
                         //if food being carried satisfies quest, give good ending and advance dialogue progression
                         if(curQuest.satisfiesQuest(tracker.texture, tracker.warmth, tracker.flavor)){
                             StartCoroutine(advanceProgression());
-                            // Debug.Log("quest succeeded");
-                            // textbox.activated = true;
-                            // textbox.SetDialogue(curQuest.bestEnding);
-                            // controller.AdvanceProgression();
                         }
                         else{
                             textbox.SetDialogue(curQuest.goodEnding);
