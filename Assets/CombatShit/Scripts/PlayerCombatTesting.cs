@@ -63,6 +63,8 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.volume = (0.5f);
         audio.Stop();
         currentStam = maxStamina;
+        currentFlameStam = maxFlameStamina;
+        currentGunStam = maxGunStamina;
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
         flameBar.maxValue = maxFlameStamina;
@@ -479,20 +481,6 @@ public class PlayerCombatTesting : MonoBehaviour{
         {
             currentFlameStam += 20;
             flameBar.value = currentFlameStam;
-            yield return regenTick;
-        }
-        
-        while (currentFlameStam < maxFlameStamina)
-        {
-            currentFlameStam += 20;
-            flameBar.value = currentFlameStam;
-            yield return regenTick;
-        }
-
-        while (currentGunStam < maxGunStamina)
-        {
-            currentGunStam += 20;
-            gunBar.value = currentGunStam;
             yield return regenTick;
         }
         

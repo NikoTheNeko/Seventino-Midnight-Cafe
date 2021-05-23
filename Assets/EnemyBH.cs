@@ -378,7 +378,7 @@ public class EnemyBH : MonoBehaviour {
         {
             canAttack = false;
             monsterAnim.SetTrigger("chomp");
-            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1f, playerLayer);
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
             foreach (Collider2D player in hit)
             {
                 player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
