@@ -278,7 +278,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120))
+        if (Input.GetMouseButtonDown(0) && UseStamina(120) && Time.timeScale > 0f)
         {
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
