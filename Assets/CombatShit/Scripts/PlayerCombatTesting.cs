@@ -63,6 +63,8 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.volume = (0.5f);
         audio.Stop();
         currentStam = maxStamina;
+        currentFlameStam = maxFlameStamina;
+        currentGunStam = maxGunStamina;
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
         flameBar.maxValue = maxFlameStamina;
@@ -73,7 +75,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     }
 
-    private enum State
+    public enum State
     {
         Normal,
         Rolling
@@ -85,7 +87,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 lastMovedDirection;
     private float rollSpeed;
     [SerializeField] private float MV_SPEED = 7f;
-    private State state;
+    public State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
     private Animator knifeAnim;
@@ -109,16 +111,20 @@ public class PlayerCombatTesting : MonoBehaviour{
     public Slider flameBar;
     public Slider gunBar;
     private int maxStamina = 1000;
-    private int maxFlameStamina = 1000;
-    private int maxGunStamina = 1000;
+    private int maxFlameStamina = 1001;
+    private int maxGunStamina = 1002;
     private int currentStam;
     private int currentFlameStam;
     private int currentGunStam;
+
+    public int fireDelay;
 
     public Collider2D triggerCollider;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
+    private Coroutine regenFlame;
+    private Coroutine regenGun;
 
     private void Awake()
     {
@@ -219,7 +225,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             // Currently in a rolling state.
             case State.Rolling:
                 // Decays speed over time.
-                triggerCollider.enabled = false;
+                //triggerCollider.enabled = false;
                 float rollSpeedDropMult = 3.1f;
                 rollSpeed -= rollSpeed * rollSpeedDropMult * Time.deltaTime;
 
@@ -228,7 +234,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
-                    triggerCollider.enabled = true;
+                    //triggerCollider.enabled = true;
                 }
                 break;
         }
@@ -262,6 +268,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     private void FixedUpdate()
     {
+        if (fireDelay > 0)
+        {
+            --fireDelay;
+        }
         // handles the rolling state in a fixed update with a switch statement.
         switch (state)
         {
@@ -278,8 +288,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120))
+        if (Input.GetMouseButtonDown(0) && currentStam > 120 && fireDelay == 0)
         {
+            UseStamina(120, ref currentStam, ref staminaBar);
+            fireDelay = 20;
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
@@ -303,8 +315,10 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseFlameStamina(2))
+        if(Input.GetMouseButton(0) && currentFlameStam > 2 && fireDelay == 0)
         {
+            UseStamina(2, ref currentFlameStam, ref flameBar);
+            fireDelay = 0;
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
             var em = flameParticles.emission;
@@ -331,8 +345,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseGunStamina(140))
+        if (Input.GetMouseButtonDown(0) && currentGunStam > 140 && fireDelay == 0)
         {
+            UseStamina(140, ref currentGunStam, ref gunBar);
+            fireDelay = 30;
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             Vector3 mousePosition = GetMouseWorldPosition();
@@ -426,17 +442,36 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
-    public bool UseStamina(int amount)
+    public bool UseStamina(int amount, ref int currentStam, ref Slider staminaBar)
     {
         if(currentStam - amount >= 0)
         {
             currentStam -= amount;
             staminaBar.value = currentStam;
-            if(regen != null)
+            if(regen != null && staminaBar.maxValue == 1000)
             {
                 StopCoroutine(regen);
             }
-            regen = StartCoroutine(RegenStam());
+            if (regenFlame != null && staminaBar.maxValue == 1001)
+            {
+                StopCoroutine(regenFlame);
+            }
+            if (regenGun != null && staminaBar.maxValue == 1002)
+            {
+                StopCoroutine(regenGun);
+            }
+            if (staminaBar.maxValue == 1000)
+            {
+                regen = StartCoroutine(RegenStamKnife());
+            }
+            else if (staminaBar.maxValue == 1001)
+            {
+                regenFlame = StartCoroutine(RegenStamFlame());
+            }
+            else if (staminaBar.maxValue == 1002)
+            {
+                regenGun = StartCoroutine(RegenStamGun());
+            }
             return true;
         }
         else
@@ -446,7 +481,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
-    IEnumerator RegenStam()
+    IEnumerator RegenStamKnife()
     {
         yield return new WaitForSeconds(1.5f);
         while(currentStam < maxStamina)
@@ -455,22 +490,59 @@ public class PlayerCombatTesting : MonoBehaviour{
             staminaBar.value = currentStam;
             yield return regenTick;
         }
-        while (currentFlameStam < maxFlameStamina)
-        {
-            currentFlameStam += 20;
-            flameBar.value = currentFlameStam;
-            yield return regenTick;
-        }
+        regen = null;
+    }
+    IEnumerator RegenStamGun()
+    {
+        yield return new WaitForSeconds(1.5f);
         while (currentGunStam < maxGunStamina)
         {
             currentGunStam += 20;
             gunBar.value = currentGunStam;
             yield return regenTick;
         }
-        regen = null;
+        regenGun = null;
+    }
+    IEnumerator RegenStamFlame()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        
+        regenFlame = null;
     }
 
-    public bool UseFlameStamina(int amount)
+    /*
+    IEnumerator RegenFlameStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        regenFlame = null;
+    }
+    
+    IEnumerator RegenGunStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        regenGun = null;
+    }
+    */
+
+    /*public bool UseFlameStamina(int amount)
     {
         if (currentFlameStam - amount >= 0)
         {
@@ -508,6 +580,6 @@ public class PlayerCombatTesting : MonoBehaviour{
             // Debug.Log("nostam");
             return false;
         }
-    }
+    }*/
 
 }
