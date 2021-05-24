@@ -83,6 +83,7 @@ public class InventoryTracker : MonoBehaviour
         FoodDrop dropped = Instantiate(foodObject, coords, Quaternion.identity);
         dropped.setImage(getIngredient(name).picture);
         dropped.setValues(texture, warmth, flavor, name);
+        // dropped.gameObject.GetComponent<Rigidbody>().AddForce();
         return false;
     }
 
