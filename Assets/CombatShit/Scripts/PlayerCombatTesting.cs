@@ -288,7 +288,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120) && Time.timeScale > 0f)
+        if (Input.GetMouseButtonDown(0) && currentStam > 120 && fireDelay == 0)
         {
             UseStamina(120, ref currentStam, ref staminaBar);
             fireDelay = 20;

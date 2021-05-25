@@ -25,7 +25,7 @@ public class TextBoxScript : MonoBehaviour
     public AudioClip ChefSoundClip;
 
     [Tooltip("Seconds between adding another letter")]
-    public float scrollSpeed = 0.125f;
+    public float scrollSpeed = 0.03125f;
     public bool activated = false;
     public GameObject successCG;
     #endregion
