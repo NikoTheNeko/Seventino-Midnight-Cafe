@@ -3046,6 +3046,21 @@ PrefabInstance:
       propertyPath: successCG
       value: 
       objectReference: {fileID: 1221596952}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: soundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e60b70747bdd1f34e826137e74c194d6, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: CustomerSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e60b70747bdd1f34e826137e74c194d6, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: ChefSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b0b6eea374aa7144b7f1d5a69ad03df, type: 3}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -12731,6 +12746,21 @@ PrefabInstance:
       propertyPath: successCG
       value: 
       objectReference: {fileID: 2066809359}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: soundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0f98030b241f694c8c90c76013753ca, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: CustomerSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0f98030b241f694c8c90c76013753ca, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: ChefSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b0b6eea374aa7144b7f1d5a69ad03df, type: 3}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -34146,6 +34176,21 @@ PrefabInstance:
       propertyPath: successCG
       value: 
       objectReference: {fileID: 587643296}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: soundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0a36c914119be74c8fa0c34d074333e, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: CustomerSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0a36c914119be74c8fa0c34d074333e, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: ChefSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b0b6eea374aa7144b7f1d5a69ad03df, type: 3}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -35511,6 +35556,21 @@ PrefabInstance:
       propertyPath: successCG
       value: 
       objectReference: {fileID: 1169208917}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: soundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a587b902464010244969e725fd4d0838, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: CustomerSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a587b902464010244969e725fd4d0838, type: 3}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: ChefSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b0b6eea374aa7144b7f1d5a69ad03df, type: 3}
     - target: {fileID: 8665021985403961538, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Enabled

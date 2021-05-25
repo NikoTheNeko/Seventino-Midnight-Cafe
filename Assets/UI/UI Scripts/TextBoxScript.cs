@@ -21,10 +21,11 @@ public class TextBoxScript : MonoBehaviour
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
-    public AudioClip[] clips;
+    public AudioClip CustomerSoundClip;
+    public AudioClip ChefSoundClip;
 
     [Tooltip("Seconds between adding another letter")]
-    public float scrollSpeed = 0.0625f;
+    public float scrollSpeed = 0.125f;
     public bool activated = false;
     public GameObject successCG;
     #endregion
@@ -32,7 +33,7 @@ public class TextBoxScript : MonoBehaviour
     #region Private Variables
     private int letter = 0; //keeps track of letters added to text
     private int loops = 0; //tracks where program is in the dialogue
-    private bool speedUp = false; //tracks if conversation has been sped up;
+    public bool speedUp = false; //tracks if conversation has been sped up;
     private string message; //text part of the dialogue currently being shown
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
@@ -60,6 +61,9 @@ public class TextBoxScript : MonoBehaviour
             if(Time.time > timer && letter < message.Length){
                 AddLetter();
             }
+            // for(int i = 0; i < 50; i++){
+            //     audio.PlayOneShot(CustomerSoundClip);
+            // }
 
              //if user presses "Space" text will speed up or go to next part of dialogue
             // if(Input.GetButtonDown("Use")){
@@ -127,16 +131,28 @@ public class TextBoxScript : MonoBehaviour
         textbox.text += message[letter];
 
         //only play audio if text hasn't been sped up
-        if(!speedUp){
-            int loc = char.ToUpper(message[letter]) - 65;
-            if(loc < 0){
-                loc = 26;
-            }
-            else if(loc > 25){
-                loc = 26;
-            }
-            audio.PlayOneShot(clips[loc]);
-        }
+        // if(!speedUp){
+            // switch(message[letter]){
+            //     case ' ':
+            //     break;
+            //     default:
+                if(currentSpeaker == "Chef"){
+                    audio.PlayOneShot(ChefSoundClip);
+                }
+                else{
+                    audio.PlayOneShot(CustomerSoundClip);
+                }
+                // break;
+            // }
+            // int loc = char.ToUpper(message[letter]) - 65;
+            // if(loc < 0){
+            //     loc = 26;
+            // }
+            // else if(loc > 25){
+            //     loc = 26;
+            // }
+            // audio.PlayOneShot(clips[loc]);
+        // }
         
         letter++;
         timer = Time.time + scrollSpeed;
