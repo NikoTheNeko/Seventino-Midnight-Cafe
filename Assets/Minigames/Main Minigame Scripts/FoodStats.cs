@@ -23,6 +23,10 @@ public class FoodStats : MonoBehaviour{
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
     public float FlavorVal = 0;
 
+    [Tooltip("Array of Cups on the table, to be fucked with.")]
+    public Sprite[] CupSprites = new Sprite[4];
+    public SpriteRenderer[] Cups;
+
     #endregion
 
     #region UI Related Stuff
@@ -150,6 +154,7 @@ public class FoodStats : MonoBehaviour{
             RestartButton.interactable = false;
         //tempDisplay();
         UpdateProgressBars();
+        UpdateCup();
     }
 
     #region Bean Previews & More
@@ -196,6 +201,21 @@ public class FoodStats : MonoBehaviour{
             break;
         }
         
+    }
+
+    private void UpdateCup(){
+        if(TextureVal >= 25 && TextureVal < 50){
+            foreach(SpriteRenderer Cup in Cups)
+                Cup.sprite = CupSprites[1];
+        }
+        if(TextureVal >= 50 && TextureVal < 75){
+            foreach(SpriteRenderer Cup in Cups)
+                Cup.sprite = CupSprites[2];
+        }
+        if(TextureVal >= 75 && TextureVal < 100){
+            foreach(SpriteRenderer Cup in Cups)
+                Cup.sprite = CupSprites[3];
+        }
     }
 
     #endregion

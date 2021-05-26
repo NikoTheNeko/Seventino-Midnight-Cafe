@@ -3088,6 +3088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PagesArray:
   - {fileID: 896969998}
+  Prev: {fileID: 1192757583}
+  Next: {fileID: 5190440975333456342}
 --- !u!1 &823109642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3377,7 +3379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1035138836
 RectTransform:
   m_ObjectHideFlags: 0
