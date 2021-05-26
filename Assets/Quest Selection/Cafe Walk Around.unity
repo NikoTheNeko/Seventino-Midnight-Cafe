@@ -5189,6 +5189,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 71760918, guid: 1297b1f281bc49b4595fe835f5671a66, type: 3}
+      propertyPath: m_fontSize
+      value: 40.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 71760918, guid: 1297b1f281bc49b4595fe835f5671a66, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2974626576144964975, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.x
