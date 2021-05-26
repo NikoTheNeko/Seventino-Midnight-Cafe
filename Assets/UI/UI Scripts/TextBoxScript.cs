@@ -15,7 +15,8 @@ public class TextBoxScript : MonoBehaviour
     public TextMeshProUGUI textbox;
 
     [Tooltip("Text for the name of the speaker")]
-    public Text nameText;
+    public TextMeshProUGUI nameText;
+    public GameObject namePlate;
 
     [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
@@ -201,11 +202,11 @@ public class TextBoxScript : MonoBehaviour
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
-        Debug.Log("activated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
+        namePlate.SetActive(true);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(true);
         }
@@ -217,11 +218,11 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
-        Debug.Log("deactivated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
         textbox.gameObject.SetActive(false);
+        namePlate.SetActive(false);
         foreach(CharacterData data in characterInformation){
             data.image.color = new Color32(55, 55, 55, 255);
             data.image.transform.localScale = new Vector3(0.09828957f,0.09828957f,0.09828957f);
