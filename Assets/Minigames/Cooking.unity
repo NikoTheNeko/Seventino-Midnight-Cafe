@@ -13324,7 +13324,7 @@ PrefabInstance:
     - target: {fileID: 273861146, guid: 938907d0d84ce0d42b262cc395e6b4ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1158279826}
+      objectReference: {fileID: 1695590880}
     - target: {fileID: 273861146, guid: 938907d0d84ce0d42b262cc395e6b4ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -13335,11 +13335,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 273861146, guid: 938907d0d84ce0d42b262cc395e6b4ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeSceneTo
+      value: SceneChangeTo
       objectReference: {fileID: 0}
     - target: {fileID: 273861146, guid: 938907d0d84ce0d42b262cc395e6b4ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ChangeScene, Assembly-CSharp
+      value: SceneChange, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 379063369, guid: 938907d0d84ce0d42b262cc395e6b4ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -13744,18 +13744,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eba5ef2ce5bd20e4d8c90f1a1598faa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1158279826 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 273861150, guid: 938907d0d84ce0d42b262cc395e6b4ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 1158279822}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0070b2f49f7c7214190e1309ed6f4c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1158279827 stripped
@@ -14451,7 +14439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf68ba787300c441845ed32a811a4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1802640755}
+  volumeSlider: {fileID: 0}
   volume: 1
   audio: {fileID: 841663195}
   pauseMenuUI: {fileID: 895626063}
@@ -16874,18 +16862,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764969046}
   m_CullTransparentMesh: 0
---- !u!114 &1802640755 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 561248294558517821, guid: be3bd8a56f75a2241b04fd464c805b1b,
-    type: 3}
-  m_PrefabInstance: {fileID: 215942779}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1804309330
 GameObject:
   m_ObjectHideFlags: 0
