@@ -29,6 +29,8 @@ public class TextBoxScript : MonoBehaviour
     public float scrollSpeed = 0.03125f;
     public bool activated = false;
     public GameObject successCG;
+    public GameObject chefAnchor;
+    public GameObject customerAnchor;
     #endregion
 
     #region Private Variables
@@ -62,14 +64,6 @@ public class TextBoxScript : MonoBehaviour
             if(Time.time > timer && letter < message.Length){
                 AddLetter();
             }
-            // for(int i = 0; i < 50; i++){
-            //     audio.PlayOneShot(CustomerSoundClip);
-            // }
-
-             //if user presses "Space" text will speed up or go to next part of dialogue
-            // if(Input.GetButtonDown("Use")){
-            //     SpeedUp();
-            // }
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
@@ -130,30 +124,13 @@ public class TextBoxScript : MonoBehaviour
         }
         textbox.text += buffer;
         textbox.text += message[letter];
-
-        //only play audio if text hasn't been sped up
-        // if(!speedUp){
-            // switch(message[letter]){
-            //     case ' ':
-            //     break;
-            //     default:
-                if(currentSpeaker == "Chef"){
-                    audio.PlayOneShot(ChefSoundClip);
-                }
-                else{
-                    audio.PlayOneShot(CustomerSoundClip);
-                }
-                // break;
-            // }
-            // int loc = char.ToUpper(message[letter]) - 65;
-            // if(loc < 0){
-            //     loc = 26;
-            // }
-            // else if(loc > 25){
-            //     loc = 26;
-            // }
-            // audio.PlayOneShot(clips[loc]);
-        // }
+        if(currentSpeaker == "Chef"){
+            audio.PlayOneShot(ChefSoundClip);
+        }
+        else{
+            audio.PlayOneShot(CustomerSoundClip);
+        }
+           
         
         letter++;
         timer = Time.time + scrollSpeed;
@@ -197,6 +174,12 @@ public class TextBoxScript : MonoBehaviour
     //Changes name displayed
     void ChangeName(){
         nameText.text = currentSpeaker;
+        if(currentSpeaker == "Chef"){
+            namePlate.transform.position = chefAnchor.transform.position;
+        }
+        else{
+            namePlate.transform.position = customerAnchor.transform.position;
+        }
     }
 
     //Activates all of the visual elements

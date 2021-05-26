@@ -2938,6 +2938,16 @@ PrefabInstance:
       propertyPath: namePlate
       value: 
       objectReference: {fileID: 1871919043}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: chefAnchor
+      value: 
+      objectReference: {fileID: 789424833}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: customerAnchor
+      value: 
+      objectReference: {fileID: 1003004068}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -4263,6 +4273,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &789424833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789424834}
+  m_Layer: 5
+  m_Name: ChefNameAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &789424834
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789424833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.687344, y: 2.687344, z: 2.687344}
+  m_Children: []
+  m_Father: {fileID: 1097358744}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -548.3, y: 346.3}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &805735513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4940,6 +4985,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 998527681}
   m_CullTransparentMesh: 0
+--- !u!1 &1003004068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003004069}
+  m_Layer: 5
+  m_Name: CustomerNameAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1003004069
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003004068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.687344, y: 2.687344, z: 2.687344}
+  m_Children: []
+  m_Father: {fileID: 1097358744}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 563, y: 346.3}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1013046489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,6 +5185,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 675336710}
     m_Modifications:
+    - target: {fileID: 71760917, guid: 1297b1f281bc49b4595fe835f5671a66, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2974626576144964975, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5129,6 +5213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25028148
+      objectReference: {fileID: 0}
+    - target: {fileID: 2974626576144964975, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8393995175115614400, guid: 1297b1f281bc49b4595fe835f5671a66,
         type: 3}
@@ -5265,6 +5354,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.9355394
       objectReference: {fileID: 0}
+    - target: {fileID: 9144981642125167685, guid: 1297b1f281bc49b4595fe835f5671a66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1297b1f281bc49b4595fe835f5671a66, type: 3}
 --- !u!224 &1097358744 stripped
@@ -5275,7 +5369,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1097358745 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1784376329721983848, guid: 1297b1f281bc49b4595fe835f5671a66,
+  m_CorrespondingSourceObject: {fileID: 5744324020216450133, guid: 1297b1f281bc49b4595fe835f5671a66,
     type: 3}
   m_PrefabInstance: {fileID: 1097358743}
   m_PrefabAsset: {fileID: 0}
@@ -11829,6 +11923,16 @@ PrefabInstance:
       propertyPath: namePlate
       value: 
       objectReference: {fileID: 1871919043}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: chefAnchor
+      value: 
+      objectReference: {fileID: 789424833}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: customerAnchor
+      value: 
+      objectReference: {fileID: 1003004068}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -33264,6 +33368,16 @@ PrefabInstance:
       propertyPath: namePlate
       value: 
       objectReference: {fileID: 1871919043}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: chefAnchor
+      value: 
+      objectReference: {fileID: 789424833}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: customerAnchor
+      value: 
+      objectReference: {fileID: 1003004068}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -34649,6 +34763,16 @@ PrefabInstance:
       propertyPath: namePlate
       value: 
       objectReference: {fileID: 1871919043}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: chefAnchor
+      value: 
+      objectReference: {fileID: 789424833}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: customerAnchor
+      value: 
+      objectReference: {fileID: 1003004068}
     - target: {fileID: 8665021985403961538, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Enabled
