@@ -411,7 +411,7 @@ PrefabInstance:
     - target: {fileID: 7677941295430313339, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7677941295430313339, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
@@ -550,7 +550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &227601356 stripped
 SpriteRenderer:
@@ -3465,7 +3465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729907590
 MonoBehaviour:
@@ -3968,15 +3968,16 @@ MonoBehaviour:
   flavorMin: {fileID: 1451275040}
   flavorMax: {fileID: 1451275039}
   names:
-  - name: Alan
-    sprite: {fileID: 21300000, guid: dbbf8191b591f564e94fbd3974356e52, type: 3}
-  - name: Camellia
-    sprite: {fileID: 21300000, guid: 09cdc152c4e84774ca3b0093457dfecc, type: 3}
-  - name: Rose
-    sprite: {fileID: 21300000, guid: 51fda0629ae72b247af037caec3e7bc8, type: 3}
-  - name: Yertle
-    sprite: {fileID: 21300000, guid: bee25d36959a2cb469c73de9921d8023, type: 3}
+  - sprite: {fileID: 21300000, guid: dbbf8191b591f564e94fbd3974356e52, type: 3}
+    portrait: {fileID: 0}
+  - sprite: {fileID: 21300000, guid: 09cdc152c4e84774ca3b0093457dfecc, type: 3}
+    portrait: {fileID: 0}
+  - sprite: {fileID: 21300000, guid: 51fda0629ae72b247af037caec3e7bc8, type: 3}
+    portrait: {fileID: 0}
+  - sprite: {fileID: 21300000, guid: bee25d36959a2cb469c73de9921d8023, type: 3}
+    portrait: {fileID: 0}
   toDoName: {fileID: 514254198}
+  CustomerPortrait: {fileID: 0}
 --- !u!114 &2035401115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4527,7 +4528,7 @@ PrefabInstance:
     - target: {fileID: 4661708097029266392, guid: fff70c8c890b285428f4b118fa2fcf03,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4661708097029266392, guid: fff70c8c890b285428f4b118fa2fcf03,
         type: 3}
