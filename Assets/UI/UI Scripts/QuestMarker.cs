@@ -16,7 +16,6 @@ public class QuestMarker : MonoBehaviour
     InventoryTracker tracker;
     Dialogue curQuest;
     public string subject;
-    public PauseMenu pauseMenu;
     private int idlePos = -1;
 
     public bool pickedUp = false;

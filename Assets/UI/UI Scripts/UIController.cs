@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public Slider flavorMax;
     public List<Name> names;
     public Image toDoName;
+    public Image CustomerPortrait;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,11 +76,8 @@ public class UIController : MonoBehaviour
         flavorMin.value = curQuest.flavorMin;
         flavorMax.value = 100 - curQuest.flavorMax;
         
-        foreach(Name name in names){
-            if(name.name == curQuest.subject){
-                toDoName.sprite = name.sprite;
-            }
-        }
+        toDoName.sprite = names[tracker.dialogueProg].sprite;
+        CustomerPortrait.sprite = names[tracker.dialogueProg].portrait;
     }
 
     public void switchInventory(){
@@ -107,6 +105,6 @@ public class UIController : MonoBehaviour
 
 [System.Serializable]
 public class Name{
-        public string name;
         public Sprite sprite;
+        public Sprite portrait;
     }

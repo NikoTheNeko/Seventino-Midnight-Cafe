@@ -59,7 +59,7 @@ public class EnemyBH : MonoBehaviour {
 
     public AudioClip hitSound;
     private AudioSource audio;
-
+    public HealthDrop healthDrop;
 
     public Animator monsterAnim;
     public bool locked = false;
@@ -185,6 +185,7 @@ public class EnemyBH : MonoBehaviour {
         {
             isDead = !isDead;
             tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
+            Instantiate(healthDrop, gameObject.transform.position, Quaternion.identity);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
         }

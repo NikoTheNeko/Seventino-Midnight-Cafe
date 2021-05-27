@@ -15,24 +15,28 @@ public class TextBoxScript : MonoBehaviour
     public TextMeshProUGUI textbox;
 
     [Tooltip("Text for the name of the speaker")]
-    public Text nameText;
+    public TextMeshProUGUI nameText;
+    public GameObject namePlate;
 
     [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
-    public AudioClip[] clips;
+    public AudioClip CustomerSoundClip;
+    public AudioClip ChefSoundClip;
 
     [Tooltip("Seconds between adding another letter")]
-    public float scrollSpeed = 0.0625f;
+    public float scrollSpeed = 0.03125f;
     public bool activated = false;
     public GameObject successCG;
+    public GameObject chefAnchor;
+    public GameObject customerAnchor;
     #endregion
 
     #region Private Variables
     private int letter = 0; //keeps track of letters added to text
     private int loops = 0; //tracks where program is in the dialogue
-    private bool speedUp = false; //tracks if conversation has been sped up;
+    public bool speedUp = false; //tracks if conversation has been sped up;
     private string message; //text part of the dialogue currently being shown
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
@@ -60,11 +64,6 @@ public class TextBoxScript : MonoBehaviour
             if(Time.time > timer && letter < message.Length){
                 AddLetter();
             }
-
-             //if user presses "Space" text will speed up or go to next part of dialogue
-            // if(Input.GetButtonDown("Use")){
-            //     SpeedUp();
-            // }
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
@@ -125,18 +124,13 @@ public class TextBoxScript : MonoBehaviour
         }
         textbox.text += buffer;
         textbox.text += message[letter];
-
-        //only play audio if text hasn't been sped up
-        if(!speedUp){
-            int loc = char.ToUpper(message[letter]) - 65;
-            if(loc < 0){
-                loc = 26;
-            }
-            else if(loc > 25){
-                loc = 26;
-            }
-            audio.PlayOneShot(clips[loc]);
+        if(currentSpeaker == "Chef"){
+            audio.PlayOneShot(ChefSoundClip);
         }
+        else{
+            audio.PlayOneShot(CustomerSoundClip);
+        }
+           
         
         letter++;
         timer = Time.time + scrollSpeed;
@@ -180,16 +174,22 @@ public class TextBoxScript : MonoBehaviour
     //Changes name displayed
     void ChangeName(){
         nameText.text = currentSpeaker;
+        if(currentSpeaker == "Chef"){
+            namePlate.transform.position = chefAnchor.transform.position;
+        }
+        else{
+            namePlate.transform.position = customerAnchor.transform.position;
+        }
     }
 
     //Activates all of the visual elements
     //Basically let's program know it should start to display
     public void ActivateObjects(){
-        Debug.Log("activated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
+        namePlate.SetActive(true);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(true);
         }
@@ -201,11 +201,11 @@ public class TextBoxScript : MonoBehaviour
 
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
-        Debug.Log("deactivated at " + Time.time);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
         textbox.gameObject.SetActive(false);
+        namePlate.SetActive(false);
         foreach(CharacterData data in characterInformation){
             data.image.color = new Color32(55, 55, 55, 255);
             data.image.transform.localScale = new Vector3(0.09828957f,0.09828957f,0.09828957f);
