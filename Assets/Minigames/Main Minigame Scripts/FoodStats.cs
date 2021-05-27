@@ -212,7 +212,7 @@ public class FoodStats : MonoBehaviour{
             foreach(SpriteRenderer Cup in Cups)
                 Cup.sprite = CupSprites[2];
         }
-        if(TextureVal >= 75 && TextureVal < 100){
+        if(TextureVal >= 75 && TextureVal <= 100){
             foreach(SpriteRenderer Cup in Cups)
                 Cup.sprite = CupSprites[3];
         }
