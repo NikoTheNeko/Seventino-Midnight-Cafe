@@ -184,8 +184,11 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0 && !isDead)
         {
             isDead = !isDead;
-            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
-            Instantiate(healthDrop, gameObject.transform.position, Quaternion.identity);
+            Vector3 pos = gameObject.transform.position;
+            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, pos);
+            pos.x -= 0.5f;
+            pos.y -= 0.5f;
+            Instantiate(healthDrop, pos, Quaternion.identity);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
         }
