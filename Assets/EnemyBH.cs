@@ -187,7 +187,7 @@ public class EnemyBH : MonoBehaviour {
             tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
             Instantiate(healthDrop, gameObject.transform.position, Quaternion.identity);
             monsterAnim.SetTrigger("die");
-            StartCoroutine(DestroyYourself(3f, gameObject));
+            StartCoroutine(DestroyYourself(5.5f, gameObject));
         }
     }
 
