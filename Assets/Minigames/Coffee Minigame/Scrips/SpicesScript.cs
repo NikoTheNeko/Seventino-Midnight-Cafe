@@ -119,12 +119,7 @@ public class SpicesScript : MonoBehaviour{
     private void ShowPluses(){
         StatManager.GetComponent<FoodStats>().ShowPlus(2);
         StatManager.GetComponent<FoodStats>().HidePlus(0);
-
-        if(SpicesState > 0){
-            StatManager.GetComponent<FoodStats>().ShowPlus(1);    
-        } else {
-            StatManager.GetComponent<FoodStats>().HidePlus(1);
-        }
+        StatManager.GetComponent<FoodStats>().ShowPlus(1);    
 
     }
 

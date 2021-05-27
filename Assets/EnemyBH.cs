@@ -190,7 +190,7 @@ public class EnemyBH : MonoBehaviour {
             pos.y -= 0.5f;
             Instantiate(healthDrop, pos, Quaternion.identity);
             monsterAnim.SetTrigger("die");
-            StartCoroutine(DestroyYourself(3f, gameObject));
+            StartCoroutine(DestroyYourself(5.5f, gameObject));
         }
     }
 

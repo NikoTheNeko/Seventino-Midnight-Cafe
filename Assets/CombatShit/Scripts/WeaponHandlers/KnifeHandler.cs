@@ -8,8 +8,8 @@ public class KnifeHandler : MonoBehaviour
     //public Transform attackPoint;
     //public float attackRange = 0.25f;
     //public LayerMask enemyLayer;
-    public int minKnifeDamage = 6;
-    public int maxKnifeDamage = 8;
+    public int knifeDamage = 9;
+    //public int maxKnifeDamage = 8;
     private int damage;
     PlayerCombatTesting playerScript;
     
@@ -31,7 +31,8 @@ public class KnifeHandler : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             //damage = playerScript.RandomDamage(minKnifeDamage, maxKnifeDamage);
-            enemy.GetComponent<EnemyBH>().TakeDamage(Random.Range(minKnifeDamage, maxKnifeDamage + 1), Slice);
+            //enemy.GetComponent<EnemyBH>().TakeDamage(Random.Range(minKnifeDamage, maxKnifeDamage + 1), Slice);
+            enemy.GetComponent<EnemyBH>().TakeDamage(knifeDamage, Slice);
             CameraShake.instance.ShakeCamera(.25f, .03f);
         }
     }
