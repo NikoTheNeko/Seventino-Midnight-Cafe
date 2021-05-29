@@ -37,7 +37,7 @@ public class KnifeHandler : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //damage = playerScript.RandomDamage(minKnifeDamage, maxKnifeDamage);
-            enemy.GetComponent<EnemyBH>().TakeDamage(Random.Range(minKnifeDamage, maxKnifeDamage + 1), Slice);
+            enemy.GetComponent<EnemyBH>().TakeDamage(knfDamage, Slice);
             CameraShake.instance.ShakeCamera(.25f, .03f);
         }
     }
