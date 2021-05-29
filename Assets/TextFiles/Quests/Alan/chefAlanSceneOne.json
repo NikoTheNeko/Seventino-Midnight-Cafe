@@ -2,11 +2,9 @@
 	"subject": "Alan",
 	"dialogueSegments":
 	[
+		 
 		{
-			"text": ""
-		},
-		{
-			"text": "A customer! What can I get for you? Wait, welcome to the Seventino Midnight Cafe! I am Chef, your chef and barista!",
+			"text": "A customer! My first customer of the day! What can I get for you? Wait, welcome to the Seventino Midnight Cafe! I am Chef, your chef and barista!",
 			"speaker": "Chef",
 			"emotion": "happy"
 		},
@@ -33,9 +31,7 @@
 	],
 	"bestEnding": 
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Here you go Alan! A coffee, brewed to perfection. What do you think?",
 			"speaker": "Chef",
@@ -74,28 +70,21 @@
 	],
 	"goodEnding": 
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Here you go Alan! Thank you so much for waiting!",
 			"speaker": "Chef",
 			"emotion": "neutral"
 		},
 		{
-			"text": "It tastes pretty good. Thank you for going out of your way to get the ingredients. I really appreciate it.",
+			"text": "It tastes pretty good...but I was expecting more.",
 			"speaker": "Alan",
 			"emotion": "confident"
 		},
 		{
-			"text": "I’m happy you enjoyed the coffee. Let me know if you ever want another.",
+			"text": "Don't you worry! I'll get you another, free of charge!",
 			"speaker": "Chef",
 			"emotion": "happy"
-		},
-		{	
-			"text": "I think I’ll take you up on that sometime. Thanks Chef. I’ll see you later.",
-			"speaker": "Alan",
-			"emotion": "confident"
 		}
 	],
 	"textureMin": 0,

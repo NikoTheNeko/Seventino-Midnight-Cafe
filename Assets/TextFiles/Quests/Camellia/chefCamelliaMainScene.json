@@ -2,9 +2,7 @@
 	"subject": "Camellia",
 	"dialogueSegments":
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "A lion! Hi there, my name is Chef! Welcome to Seventino Midnight Cafe, what can I get for you?",
 			"speaker": "Chef",
@@ -37,9 +35,7 @@
 		}
 	],
 	"bestEnding": [
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Phew! That was a tough one! Here you go Camellia, I hope it’s up to snuff!",
 			"speaker": "Chef",
@@ -107,26 +103,24 @@
 		}
 	],
 	"goodEnding":[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "I hope I didn’t take too long! Here you go Camellia!",
 			"speaker": "Chef",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Not long at all. Perhaps it could have used a bit more though. It is passable!",
+			"text": "Not long at all. Perhaps it could have used a bit more though. I demand another!",
 			"speaker": "Camellia",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Is that… good? I tried really hard on it!",
+			"text": "A-another?!",
 			"speaker": "Chef",
 			"emotion": "sad"
 		},
 		{	
-			"text": "It is perfectly… alright! Now, away with you! I must judge your performance with future guests. Begone!",
+			"text": "Indeed! Now begone! I must marinate on your craft. Away with you!",
 			"speaker": "Camellia",
 			"emotion": "angry"
 		}

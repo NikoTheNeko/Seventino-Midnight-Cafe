@@ -2,9 +2,7 @@
 	"subject": "Rose",
 	"dialogueSegments":
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "<color=#c21e56>Rose!</color> Is that you? I finally opened my own restaurant!",
 			"speaker": "Chef",
@@ -53,9 +51,7 @@
 	],
 	"bestEnding":
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Here you go Rose, how I’d do?",
 			"speaker": "Chef",
@@ -84,9 +80,7 @@
 	],
 	"goodEnding":
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Here you go Rose. How’s this one?",
 			"speaker": "Chef",
@@ -103,7 +97,7 @@
 			"emotion": "sad"
 		},
 		{	
-			"text": "I know little guy. You gotta make each coffee exactly how the customer likes it! Temper it to their expectations, and they’ll be coming back for more!",
+			"text": "I know, little guy. You gotta make each coffee exactly how the customer likes it! Temper it to their expectations, and they’ll be coming back for more!",
 			"speaker": "Rose",
 			"emotion": "neutral"
 		},
@@ -113,12 +107,12 @@
 			"emotion": "neutral"
 		},
 		{	
-			"text": "Exactly! Keep that attitude up and I’m sure you’ll succeed. I’ve got to get back to work at my own restaurant, so I’ll be back later to check on your progress. Cya later Chef!",
+			"text": "Exactly! Keep that attitude up and I’m sure you’ll succeed. Go ahead and give this one another shot! I know you can do it Chef!",
 			"speaker": "Rose",
 			"emotion": "smirk"
 		},
 		{
-			"text": "Bye Rose! Thank you again. Your next coffee will be phenomenal!",
+			"text": "There's no way I can give up now! Wait right there Rose, I'll be back!",
 			"speaker": "Chef",
 			"emotion": "happy"
 		}

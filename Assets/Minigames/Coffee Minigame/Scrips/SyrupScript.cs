@@ -20,9 +20,7 @@ public class SyrupScript : MonoBehaviour{
     public Slider VanillaPump;
 
     public Slider CaramelPump;
-    public Slider ChocolateSlider;
-    public Transform ChocolateBottle;
-    public Button ChocolateButton;
+    public Slider ChocolatePump;
 
     public AudioSource PumpSFX;
 
@@ -76,6 +74,9 @@ public class SyrupScript : MonoBehaviour{
         } else {
             MinigameCanvas.SetActive(false);
             SyrupState = 0;
+            ResetSlider(VanillaPump);
+            ResetSlider(CaramelPump);
+            ResetSlider(ChocolatePump);
         }
     }
 
@@ -145,23 +146,23 @@ public class SyrupScript : MonoBehaviour{
                 VanillaPump.interactable = true;
                 CaramelPump.interactable = false;
                 ResetSlider(CaramelPump);
-                ResetSlider(ChocolateSlider);
+                ResetSlider(ChocolatePump);
                 PumpSlider(VanillaPump);
-                ChocolateButton.interactable = false;
+                ChocolatePump.interactable = false;
                 break;
             case 1:
                 VanillaPump.interactable = false;
                 CaramelPump.interactable = true;
                 ResetSlider(VanillaPump);
-                ResetSlider(ChocolateSlider);
+                ResetSlider(ChocolatePump);
                 PumpSlider(CaramelPump);
-                ChocolateButton.interactable = false;
+                ChocolatePump.interactable = false;
             break;
             case 2:
                 ResetSlider(VanillaPump);
                 ResetSlider(CaramelPump);
-                ChocolateButton.interactable = true;
-                BottleRotation();
+                PumpSlider(ChocolatePump);
+                ChocolatePump.interactable = true;
             break;
         }
     }
@@ -186,12 +187,6 @@ public class SyrupScript : MonoBehaviour{
 
     public void ResetSlider(Slider Pump){
         Pump.value -= 5f * Time.deltaTime;
-    }
-
-    private void BottleRotation(){
-        ChocolateSlider.value += 5f * Time.deltaTime;
-        float NewAngle = 180 * ChocolateSlider.value;
-        ChocolateBottle.rotation = Quaternion.AngleAxis(NewAngle, Vector3.forward);
     }
 
     #endregion

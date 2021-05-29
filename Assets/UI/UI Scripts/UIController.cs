@@ -20,6 +20,9 @@ public class UIController : MonoBehaviour
     public Slider warmthMax;
     public Slider flavorMin;
     public Slider flavorMax;
+    public List<Name> names;
+    public Image toDoName;
+    public Image CustomerPortrait;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,17 +56,13 @@ public class UIController : MonoBehaviour
             counter++;
         }
         while(counter < hearts.Length){
+            // hearts[counter].transform.gameObject.SetActive(false);
             hearts[counter].sprite = emptyHeart;
             counter++;
         }
     }
 
-    public void staminaControl(){
-        float stamina;
-    }
-
     public void triggerControl(){
-        
         if(tracker.inventory.Count > 0){
             leaveTrigger.SetActive(true);
         }
@@ -76,6 +75,9 @@ public class UIController : MonoBehaviour
         warmthMax.value = 100 - curQuest.warmthMax;
         flavorMin.value = curQuest.flavorMin;
         flavorMax.value = 100 - curQuest.flavorMax;
+        
+        toDoName.sprite = names[tracker.dialogueProg].sprite;
+        CustomerPortrait.sprite = names[tracker.dialogueProg].portrait;
     }
 
     public void switchInventory(){
@@ -97,4 +99,12 @@ public class UIController : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
+    
 }
+
+[System.Serializable]
+public class Name{
+        public Sprite sprite;
+        public Sprite portrait;
+    }
