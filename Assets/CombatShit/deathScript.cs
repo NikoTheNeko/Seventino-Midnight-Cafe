@@ -15,6 +15,8 @@ public class deathScript : MonoBehaviour
     public AudioSource audio;
     private InventoryTracker tracker;
 
+    public GameObject sceneFader;
+
     public GameObject pauseMenuUI;
     //public GameObject questButton;
     //public GameObject questList;
@@ -66,7 +68,8 @@ public class deathScript : MonoBehaviour
         Debug.Log("continue");
         UnPauseTime();
         IsPaused = false;
-        SceneManager.LoadScene("PlainsNew");
+        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.In, "PlainsNew"));
+        //SceneManager.LoadScene("PlainsNew");
     }
 
     public void TitleScreen()
@@ -74,7 +77,8 @@ public class deathScript : MonoBehaviour
         Debug.Log("poopfuck titlescreen");
         UnPauseTime();
         IsPaused = false;
-        SceneManager.LoadScene("TitleScreen");
+        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.Out, "PlainsNew"));
+        //SceneManager.LoadScene("TitleScreen");
     }
 
     public void QuitGame()
