@@ -162,7 +162,6 @@ public class EnemyBH : MonoBehaviour {
 
         if(attkCooldown > 0)
         {
-            Debug.Log(attkCooldown);
             --attkCooldown;
         }
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
@@ -348,9 +347,9 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 8;
-                    if (lockCo != null)
+                    if (lockCo == null)
                         lockCo = StartCoroutine(lockState(locked, 1.2f));
-                    if (biteCo != null)
+                    if (biteCo == null)
                         biteCo = StartCoroutine(delayBite());
                 }
                 break;
@@ -358,9 +357,9 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 15;
-                    if(lockCo != null)
+                    if(lockCo == null)
                         lockCo = StartCoroutine(lockState(locked, 1f));
-                    if(shotCo != null)
+                    if(shotCo == null)
                         shotCo = StartCoroutine(delayShot());
                 }
                 break;
@@ -368,9 +367,9 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 10;
-                    if (lockCo != null)
+                    if (lockCo == null)
                         lockCo = StartCoroutine(lockState(locked, 1f));
-                    if (shotCo != null)
+                    if (shotCo == null)
                         shotCo = StartCoroutine(delayShot());
                 }
                 break;
@@ -433,13 +432,14 @@ public class EnemyBH : MonoBehaviour {
 
     private void ShotgunBeans()
     {
-            //Instantiate(SeedShot, transform.position, Quaternion.identity);
+        //Instantiate(SeedShot, transform.position, Quaternion.identity);
+        Debug.Log("pow");
             BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
     }
 
     private void MachineBeans()
     {
-            monsterAnim.SetTrigger("spit");
+        Debug.Log("pow");
             BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
     }
