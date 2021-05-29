@@ -37,7 +37,6 @@ public class EnemyBH : MonoBehaviour {
     public Vector3 originVec;
     public Vector3 flipVec;
     public Vector3 destVec;
-    private bool canAttack = true;
     public LayerMask playerLayer;
     public GameObject SeedShot;
 
@@ -64,7 +63,13 @@ public class EnemyBH : MonoBehaviour {
     public Animator monsterAnim;
     public bool locked = false;
     private bool isDead = false;
-        
+
+    private int attkCooldown = 0;
+
+    private Coroutine biteCo;
+    private Coroutine shotCo;
+    private Coroutine lockCo;
+
 
     private void Start()
     {
@@ -154,6 +159,12 @@ public class EnemyBH : MonoBehaviour {
             reachedEndOfPath = false;
         }
 
+
+        if(attkCooldown > 0)
+        {
+            Debug.Log(attkCooldown);
+            --attkCooldown;
+        }
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -308,13 +319,19 @@ public class EnemyBH : MonoBehaviour {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
 
-        if (Vector3.Distance(transform.position, target.transform.position) > 10)
+        if(Vector3.Distance(transform.position, target.transform.position) > 10)
         {
             if (seeker.IsDone())
             {
                 seeker.StartPath(rb.position, target.position, OnPathComplete);
             }
         }
+
+        if(locked)
+        {
+            seeker.StartPath(rb.position, rb.position, OnPathComplete);
+        }
+
         if(LineOfSight())
         {
             losTimer = 3;
@@ -328,16 +345,34 @@ public class EnemyBH : MonoBehaviour {
         switch (atkIndex)
         {
             case 1:
-                StartCoroutine(lockState(locked, 1.2f));
-                Bite();
+                if (attkCooldown == 0)
+                {
+                    attkCooldown = 8;
+                    if (lockCo != null)
+                        lockCo = StartCoroutine(lockState(locked, 1.2f));
+                    if (biteCo != null)
+                        biteCo = StartCoroutine(delayBite());
+                }
                 break;
             case 2:
-                StartCoroutine(lockState(locked, 1f));
-                ShotgunBeans();
+                if (attkCooldown == 0)
+                {
+                    attkCooldown = 15;
+                    if(lockCo != null)
+                        lockCo = StartCoroutine(lockState(locked, 1f));
+                    if(shotCo != null)
+                        shotCo = StartCoroutine(delayShot());
+                }
                 break;
             case 3:
-                StartCoroutine(lockState(locked, 1f));
-                MachineBeans();
+                if (attkCooldown == 0)
+                {
+                    attkCooldown = 10;
+                    if (lockCo != null)
+                        lockCo = StartCoroutine(lockState(locked, 1f));
+                    if (shotCo != null)
+                        shotCo = StartCoroutine(delayShot());
+                }
                 break;
         }
 
@@ -348,13 +383,25 @@ public class EnemyBH : MonoBehaviour {
         }
     }
 
+    IEnumerator delayShot()
+    {
+        monsterAnim.SetTrigger("spit");
+        yield return new WaitForSeconds(1.5f);
+        ShotgunBeans();
+    }
+
+    IEnumerator delayBite()
+    {
+        monsterAnim.SetTrigger("chomp");
+        yield return new WaitForSeconds(1.5f);
+        Bite();
+    }
 
     IEnumerator lockState(bool locked, float time)
     {
         locked = true;
         yield return new WaitForSeconds(time);
         locked = false;
-
     }
 
     private int Ranges()
@@ -376,46 +423,25 @@ public class EnemyBH : MonoBehaviour {
 
     private void Bite()
     {
-        if(canAttack)
-        {
-            canAttack = false;
-            monsterAnim.SetTrigger("chomp");
+            Debug.Log("bite");
             Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
             foreach (Collider2D player in hit)
             {
                 player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
             }
-            StartCoroutine(ResetAttack(1f));
-        }
-    }
-
-    IEnumerator ResetAttack(float time)
-    {
-        yield return new WaitForSeconds(time);
-        canAttack = true;
     }
 
     private void ShotgunBeans()
     {
-        if (canAttack)
-        {
-            monsterAnim.SetTrigger("spit");
-            canAttack = false;
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
-            //BeanSpawner.SpawnBeans();
-            StartCoroutine(ResetAttack(1f));
-        }
+            BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
     }
 
     private void MachineBeans()
     {
-        if (canAttack)
-        {
             monsterAnim.SetTrigger("spit");
-            canAttack = false;
+            BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
-            StartCoroutine(ResetAttack(1f));
-        }
     }
 
     private void EnemyEnrage()
