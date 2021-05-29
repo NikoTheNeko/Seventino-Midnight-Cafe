@@ -69,6 +69,8 @@ public class EnemyBH : MonoBehaviour {
     private Coroutine biteCo;
     private Coroutine shotCo;
     private Coroutine lockCo;
+    private bool shooting = false;
+    private bool biting = false;
 
 
     private void Start()
@@ -347,38 +349,36 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 8;
-                    if (lockCo != null)
-                        StopCoroutine(lockCo);
-                    if (biteCo != null)
-                        StopCoroutine(biteCo);
-                    if (lockCo == null)
-                        lockCo = StartCoroutine(lockState(locked, 1.2f));
-                    if (biteCo == null)
+                    if (!biting)
+                    {
+                        if(!locked)
+                            lockCo = StartCoroutine(lockState(locked, 1.2f));
                         biteCo = StartCoroutine(delayBite());
+                    }
                 }
                 break;
             case 2:
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 15;
-                    if (lockCo != null)
-                        StopCoroutine(lockCo);
-                    if (shotCo != null)
-                        StopCoroutine(shotCo);
-                    lockCo = StartCoroutine(lockState(locked, 1f));
-                    shotCo = StartCoroutine(delayShot());
+                    if (!shooting)
+                    {
+                        if(!locked)
+                            lockCo = StartCoroutine(lockState(locked, 1f));
+                        shotCo = StartCoroutine(delayShot());
+                    }
                 }
                 break;
             case 3:
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 10;
-                    if (lockCo != null)
-                        StopCoroutine(lockCo);
-                    if (shotCo != null)
-                        StopCoroutine(shotCo);
-                    lockCo = StartCoroutine(lockState(locked, 1f));
-                    shotCo = StartCoroutine(delayShot());
+                    if (!shooting)
+                    {
+                        if (!locked)
+                            lockCo = StartCoroutine(lockState(locked, 1f));
+                        shotCo = StartCoroutine(delayShot());
+                    }
                 }
                 break;
         }
@@ -393,15 +393,21 @@ public class EnemyBH : MonoBehaviour {
     IEnumerator delayShot()
     {
         monsterAnim.SetTrigger("spit");
+        shooting = true;
+        Debug.Log("SHOOT IENUM");
         yield return new WaitForSeconds(1.5f);
         ShotgunBeans();
+        shooting = false;
     }
 
     IEnumerator delayBite()
     {
         monsterAnim.SetTrigger("chomp");
+        Debug.Log("BITE IENUM");
+        biting = true;
         yield return new WaitForSeconds(1.5f);
         Bite();
+        biting = false;
     }
 
     IEnumerator lockState(bool locked, float time)
@@ -441,7 +447,7 @@ public class EnemyBH : MonoBehaviour {
     private void ShotgunBeans()
     {
         //Instantiate(SeedShot, transform.position, Quaternion.identity);
-        Debug.Log("pow");
+            Debug.Log("pow");
             BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
     }
 

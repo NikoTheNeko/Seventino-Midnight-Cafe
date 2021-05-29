@@ -99,6 +99,7 @@ public class BeanSpawner : MonoBehaviour
 
     public GameObject[] SpawnBeans()
     {
+        Debug.Log("Spawning");
         if (GetSpawnData().isRandom)
         {
             // This is in Update because we want a random rotation for each bean each time
