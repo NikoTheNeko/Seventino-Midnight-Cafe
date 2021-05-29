@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1a8950c3d17cf438894733b846ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 1932534217}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0.15425768, b: 0.10849059, a: 1}
@@ -656,7 +656,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
-  spawnData: []
+  spawnData:
+  - {fileID: 11400000, guid: d86ba2800531372438eddc506b998b45, type: 2}
+  - {fileID: 11400000, guid: 6f81e7cae79082b46b932cb87e967b87, type: 2}
   isSequenceRandom: 0
 --- !u!1 &4513416166549338420
 GameObject:
@@ -1273,7 +1275,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2148584274348304256}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.008}
 --- !u!1 &8811606687194241161
 GameObject:
   m_ObjectHideFlags: 0
