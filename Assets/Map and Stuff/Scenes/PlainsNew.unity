@@ -214,6 +214,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.709999
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.5699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 15.236145
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068611, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.2947426
+      objectReference: {fileID: 0}
+    - target: {fileID: 47068612, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 84eebcb399beb814bb204ee841ed7976,
+        type: 3}
     - target: {fileID: 556619704, guid: 07135db479d55734fa9686e63d73df69, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -221,6 +250,14 @@ PrefabInstance:
     - target: {fileID: 556619704, guid: 07135db479d55734fa9686e63d73df69, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 556619704, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932534218, guid: 07135db479d55734fa9686e63d73df69, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 1932534219, guid: 07135db479d55734fa9686e63d73df69, type: 3}
       propertyPath: slider
@@ -443,6 +480,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1135406456}
+    - target: {fileID: 7677941295676155023, guid: 07135db479d55734fa9686e63d73df69,
+        type: 3}
+      propertyPath: maxHealth
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 8632451005400425367, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -3773,8 +3815,7 @@ MonoBehaviour:
   canFire: 1
   animator: {fileID: 0}
   shotSound: {fileID: 0}
-  minShotgunDamage: 2
-  maxShotgunDamage: 5
+  shotgunDamage: 4
 --- !u!1 &1873231427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,8 +3939,7 @@ MonoBehaviour:
   canFire: 1
   animator: {fileID: 2006222786}
   shotSound: {fileID: 8300000, guid: 16e9f8885a3bd0345936065080e9dfb5, type: 3}
-  minShotgunDamage: 2
-  maxShotgunDamage: 5
+  shotgunDamage: 4
 --- !u!1 &2035401112
 GameObject:
   m_ObjectHideFlags: 0
