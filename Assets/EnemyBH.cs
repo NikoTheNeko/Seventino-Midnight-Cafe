@@ -347,6 +347,10 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 8;
+                    if (lockCo != null)
+                        StopCoroutine(lockCo);
+                    if (biteCo != null)
+                        StopCoroutine(biteCo);
                     if (lockCo == null)
                         lockCo = StartCoroutine(lockState(locked, 1.2f));
                     if (biteCo == null)
@@ -357,20 +361,24 @@ public class EnemyBH : MonoBehaviour {
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 15;
-                    if(lockCo == null)
-                        lockCo = StartCoroutine(lockState(locked, 1f));
-                    if(shotCo == null)
-                        shotCo = StartCoroutine(delayShot());
+                    if (lockCo != null)
+                        StopCoroutine(lockCo);
+                    if (shotCo != null)
+                        StopCoroutine(shotCo);
+                    lockCo = StartCoroutine(lockState(locked, 1f));
+                    shotCo = StartCoroutine(delayShot());
                 }
                 break;
             case 3:
                 if (attkCooldown == 0)
                 {
                     attkCooldown = 10;
-                    if (lockCo == null)
-                        lockCo = StartCoroutine(lockState(locked, 1f));
-                    if (shotCo == null)
-                        shotCo = StartCoroutine(delayShot());
+                    if (lockCo != null)
+                        StopCoroutine(lockCo);
+                    if (shotCo != null)
+                        StopCoroutine(shotCo);
+                    lockCo = StartCoroutine(lockState(locked, 1f));
+                    shotCo = StartCoroutine(delayShot());
                 }
                 break;
         }
