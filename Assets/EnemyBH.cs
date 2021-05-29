@@ -57,6 +57,8 @@ public class EnemyBH : MonoBehaviour {
 
 
     public AudioClip hitSound;
+    public AudioClip chompSound;
+    public AudioClip spitSound;
     private AudioSource audio;
     public HealthDrop healthDrop;
 
@@ -71,6 +73,8 @@ public class EnemyBH : MonoBehaviour {
     private Coroutine lockCo;
     private bool shooting = false;
     private bool biting = false;
+
+    public GameObject walker;
 
 
     private void Start()
@@ -133,13 +137,15 @@ public class EnemyBH : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        if(ai.velocity.x > 0.1f || ai.velocity.y > 0.1f)
+        if(ai.velocity.x > 0.05f || ai.velocity.y > 0.05f)
         {
+            walker.GetComponent<walkerScript>().Walk();
             monsterAnim.SetBool("walk", true);
             monsterAnim.SetBool("idle", false);
         }
         else
         {
+            walker.GetComponent<walkerScript>().Stop();
             monsterAnim.SetBool("walk", false);
             monsterAnim.SetBool("idle", true);
         }
@@ -437,24 +443,30 @@ public class EnemyBH : MonoBehaviour {
     private void Bite()
     {
             Debug.Log("bite");
-            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
-            foreach (Collider2D player in hit)
-            {
-                player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
-            }
+        audio.clip = chompSound;
+        audio.Play();
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
+        foreach (Collider2D player in hit)
+        {
+            player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
+        }
     }
 
     private void ShotgunBeans()
     {
         //Instantiate(SeedShot, transform.position, Quaternion.identity);
             Debug.Log("pow");
-            BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
+        audio.clip = spitSound;
+        audio.Play();
+        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
     }
 
     private void MachineBeans()
     {
-        Debug.Log("pow");
-            BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
+        Debug.Log("pow"); 
+        audio.clip = spitSound;
+        audio.Play();
+        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
     }
 
@@ -482,6 +494,7 @@ public class EnemyBH : MonoBehaviour {
 
         
         StartCoroutine(FlashColor());
+        audio.clip = hitSound;
         audio.Play();
         health -= amount;
         healthbar.SetHealth(health);
