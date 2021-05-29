@@ -126,11 +126,10 @@ public class GrinderMinigame : MonoBehaviour{
         MinigameCanvas.SetActive(true);
         //If the minigame is NOT completed
         if(!MinigameCompleted){
-            StatManager.GetComponent<FoodStats>().HidePlus(0);
+            StatManager.GetComponent<FoodStats>().ShowPlus(0);
             StatManager.GetComponent<FoodStats>().HidePlus(1);
             StatManager.GetComponent<FoodStats>().HidePlus(2);
 
-            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(0);
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(0);
 
@@ -214,9 +213,9 @@ public class GrinderMinigame : MonoBehaviour{
     bool ShowGrounds = false;
     bool IsGrinding = false;
     private void GrindBeans(){
-        //StatManager.GetComponent<FoodStats>().UpdateTexturePreview(
-        //                                        StatManager.GetComponent<FoodStats>().TextureVal
-        //                                         + GrindSize * TextureAdd);
+        StatManager.GetComponent<FoodStats>().UpdateTexturePreview(
+                                                StatManager.GetComponent<FoodStats>().TextureVal
+                                                 + GrindSize * TextureAdd);
 
         if(Input.GetButton("Use")){
             IsGrinding = true;
@@ -225,7 +224,7 @@ public class GrinderMinigame : MonoBehaviour{
         }
 
         if(IsGrinding && !ValueAdded){
-           //StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * TextureAdd);
+            StatManager.GetComponent<FoodStats>().AddTexture(GrindSize * TextureAdd);
             ValueAdded = true;
             CanChangeGrind = false;
         }
@@ -287,7 +286,7 @@ public class GrinderMinigame : MonoBehaviour{
         if(MinigameCompleted == false){
             Instructions.text = "Click Left and Right to adjust the grind size.\nPress the button on top to grind!";
         } else {
-           Instructions.text = "You did it! Click Back to move onto the next step!";
+           Instructions.text = "You did it! Click Next to move onto the next step!";
         }
     }
     #endregion

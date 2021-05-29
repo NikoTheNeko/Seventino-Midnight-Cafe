@@ -38,13 +38,10 @@ public class Bean : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (other.gameObject.GetComponent<PlayerCombatTesting>().state == PlayerCombatTesting.State.Normal)
-            {
-                other.GetComponent<PlayerCombatTesting>().PlayerHit(1);
-                CameraShake.instance.ShakeCamera(.25f, .05f);
-                //Debug.Log(health);
-                gameObject.SetActive(false);
-            }
+            other.GetComponent<PlayerCombatTesting>().PlayerHit(1);
+            CameraShake.instance.ShakeCamera(.25f, .05f);
+            //Debug.Log(health);
+            gameObject.SetActive(false);
         }
     }
 }

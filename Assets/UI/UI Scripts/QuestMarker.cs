@@ -18,7 +18,7 @@ public class QuestMarker : MonoBehaviour
     public string subject;
     private int idlePos = -1;
 
-    public bool pickedUp = false;
+    private bool pickedUp = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,51 +46,46 @@ public class QuestMarker : MonoBehaviour
             marker.SetActive(false);
         }
 
-        if(entered && Input.GetKeyDown(KeyCode.Space) && Time.timeScale > 0f){
-                //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
-            if(!textbox.activated){
-                //if NPC is the target of current quest
-                if(!pickedUp && curQuest.subject == subject){
-                    pickedUp = true;
-                    //if player has a dish, choose an ending
-                    if(tracker.hasFood){
-                        tracker.hasFood = false;
-                        //if food being carried satisfies quest, give good ending and advance dialogue progression
-                        if(curQuest.satisfiesQuest(tracker.texture, tracker.warmth, tracker.flavor)){
-                            StartCoroutine(advanceProgression());
-                        }
-                        else{
-                            textbox.SetDialogue(curQuest.goodEnding);
-                        }
+        //if player presses space and textbox not currently active, choose either quest or idle text and activate textbox
+        if(entered && Input.GetButtonDown("Use") && !textbox.activated){
+            
+            //if NPC is the target of current quest
+            if(!pickedUp && curQuest.subject == subject){
+                pickedUp = true;
+                //if player has a dish, choose an ending
+                if(tracker.hasFood){
+                    tracker.hasFood = false;
+                    //if food being carried satisfies quest, give good ending and advance dialogue progression
+                    if(curQuest.satisfiesQuest(tracker.texture, tracker.warmth, tracker.flavor)){
+                        StartCoroutine(advanceProgression());
                     }
                     else{
-                        //give player quest
-                        textbox.SetDialogue(curQuest.dialogueSegments);
+                        textbox.SetDialogue(curQuest.goodEnding);
                     }
-                    
                 }
                 else{
-                    //chooses whether idle text is sequential or random
-                    //sequential text resets once end of array has been reached
-                    switch(subject){
-                        case "Camellia":
-                        idlePos = (idlePos + 1)%idleText.Length;
-                        break;
-
-                        default:
-                        idlePos = (int)Random.Range(0, idleText.Length);
-                        break;
-                    }
-                    TextAsset temp = idleText[idlePos];
-                    textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text).dialogueSegments);
+                    //give player quest
+                    textbox.SetDialogue(curQuest.dialogueSegments);
+                    // marker.SetActive(false);
                 }
+                
             }
             else{
-                textbox.SpeedUp();
+                //chooses whether idle text is sequential or random
+                //sequential text resets once end of array has been reached
+                switch(subject){
+                    case "Camellia":
+                    idlePos = (idlePos + 1)%idleText.Length;
+                    break;
+
+                    default:
+                    idlePos = (int)Random.Range(0, idleText.Length);
+                    break;
+                }
+                TextAsset temp = idleText[idlePos];
+                textbox.SetDialogue(JsonUtility.FromJson<Dialogue>(temp.text).dialogueSegments);
             }
         }
-        
-        
     }
 
     IEnumerator advanceProgression(){
@@ -99,7 +94,7 @@ public class QuestMarker : MonoBehaviour
         textbox.activated = true;
         yield return new WaitForSeconds(2);
         textbox.SetDialogue(curQuest.bestEnding);
-        // textbox.SpeedUp();
+        textbox.SpeedUp();
         controller.AdvanceProgression();
     }
 

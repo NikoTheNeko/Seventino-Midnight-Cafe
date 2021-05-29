@@ -39,7 +39,7 @@ public class BeanSpawner : MonoBehaviour
     {
         //Debug.Log("INDEX:");
         //Debug.Log(index);
-        /*if (timer <= 0)
+        if (timer <= 0)
         {   
 
             SpawnBeans();
@@ -54,7 +54,7 @@ public class BeanSpawner : MonoBehaviour
                 if (index >= spawnData.Length) index = 0;
             }
         }
-        timer -= Time.deltaTime;*/
+        timer -= Time.deltaTime;
     }
 
     // Select a random rotation from min to max for each bean
@@ -99,7 +99,6 @@ public class BeanSpawner : MonoBehaviour
 
     public GameObject[] SpawnBeans()
     {
-        Debug.Log("Spawning");
         if (GetSpawnData().isRandom)
         {
             // This is in Update because we want a random rotation for each bean each time

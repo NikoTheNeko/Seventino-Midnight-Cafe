@@ -8,12 +8,10 @@ public class MilkMinigame : MonoBehaviour{
     #region Public Variables
 
     [Header("Minigame Objects and Variables")]
-    [Tooltip("The max amount you will add to Warmth")]
+    [Tooltip("The moax amount you will add to Warmth")]
     public int MaxAmount = 30;
     [Tooltip("Max amount you will add to Warmth")]    
     public int AddAmount = 1;
-    [Tooltip("Amount you will add to texture")]
-    public float AddTexture = 0.5f;
     [Tooltip("Pouring SFX")]
     public AudioSource PouringSFX;
 
@@ -33,10 +31,6 @@ public class MilkMinigame : MonoBehaviour{
     public Transform Pitcher;
     [Tooltip("The angle it will tip at at the very top")]
     public float TiltAngle = 45f;
-    [Tooltip("Particle System")]
-    public ParticleSystem MilkPS;
-    [Tooltip("The Progress Bar")]
-    public Slider ProgressBar;
 
 
     #endregion
@@ -57,7 +51,6 @@ public class MilkMinigame : MonoBehaviour{
             PouringSlider.interactable = true;
             RunMinigame();
         } else {
-            MilkPS.Stop();
             PouringSlider.interactable = false;
             if(PouringSlider.value > 0){
                 TiltPitcher();
@@ -77,11 +70,11 @@ public class MilkMinigame : MonoBehaviour{
 
         if(AddedAmount <= MaxAmount){
             AddMilk();
-            float PercentageFloat = 1 - (AddedAmount / MaxAmount);
-            Instructions.text = "Click and drag the pitcher up to pour, the higher you pour the faster you pour.";
-            ProgressBar.value = PercentageFloat;
+            float PercentageFloat = (AddedAmount / MaxAmount) * 100f;
+            int PercentageLeft = (int)PercentageFloat;
+            Instructions.text = "Click and drag the pitcher up to pour, the higher you pour the faster you pour.\n"
+                                + (100 - PercentageLeft) + "% of Milk Left";
         } else {
-            MilkPS.Stop();
             Instructions.text = "No more Milk Left!";
             PouringSlider.value -= 3f * Time.deltaTime;
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
@@ -104,16 +97,10 @@ public class MilkMinigame : MonoBehaviour{
     **/
     private void AddMilk(){
         if(PouringSlider.value > 0){
-            if(!MilkPS.isPlaying)
-                MilkPS.Play();
             TiltPitcher();
             StatManager.GetComponent<FoodStats>().AddWarmth(AddAmount * PouringSlider.value * Time.deltaTime);
-            StatManager.GetComponent<FoodStats>().AddTexture(AddTexture * PouringSlider.value * Time.deltaTime);
             AddedAmount += AddAmount * PouringSlider.value * Time.deltaTime;
             PouringSFX.Play();
-        } else if(PouringSlider.value == 0) {
-            if(MilkPS.isPlaying)
-                MilkPS.Stop();
         }
     }
 
@@ -122,8 +109,7 @@ public class MilkMinigame : MonoBehaviour{
     #region Cooking Controller Actions
     private void ControlBars(){
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + AddAmount * PouringSlider.value);
-            StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + AddTexture * PouringSlider.value);
-            StatManager.GetComponent<FoodStats>().ShowPlus(0);  
+            StatManager.GetComponent<FoodStats>().HidePlus(0);  
             StatManager.GetComponent<FoodStats>().ShowPlus(1); 
             StatManager.GetComponent<FoodStats>().HidePlus(2);         
     }

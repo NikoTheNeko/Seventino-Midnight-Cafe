@@ -55,8 +55,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6163004289234399985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6, y: -15.89, z: 0}
-  m_LocalScale: {x: 1.4117253, y: 1.4117253, z: 1.4117253}
+  m_LocalPosition: {x: -2.2, y: -15.89, z: 0}
+  m_LocalScale: {x: 3.84572, y: 3.84572, z: 3.84572}
   m_Children: []
   m_Father: {fileID: 8665021985403961541}
   m_RootOrder: 2
@@ -100,8 +100,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
-  m_Sprite: {fileID: 21300000, guid: ecb855cd4d18fa941bffd0d8e8be05f5, type: 3}
+  m_SortingOrder: 8
+  m_Sprite: {fileID: 21300000, guid: 964429d1803724d41becc19c271c8731, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,12 +164,9 @@ MonoBehaviour:
   marker: {fileID: 8665021986706317027}
   textbox: {fileID: 8665021985403961537}
   trigger: {fileID: 0}
-  successCG: {fileID: 0}
-  controller: {fileID: 0}
   idleText: []
   talkTo: {fileID: 0}
   subject: Alan
-  pickedUp: 0
 --- !u!61 &8665021985403961539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +267,6 @@ MonoBehaviour:
   - {fileID: 0}
   scrollSpeed: 0.0625
   activated: 0
-  successCG: {fileID: 0}
 --- !u!68 &6262064009194814660
 EdgeCollider2D:
   m_ObjectHideFlags: 0

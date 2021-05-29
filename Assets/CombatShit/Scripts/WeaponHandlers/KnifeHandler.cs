@@ -33,12 +33,22 @@ public class KnifeHandler : MonoBehaviour
     {
         audio.Play();
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint, 1.5f, enemyLayer);
-        foreach(Collider2D enemy in hitEnemies)
+        StartCoroutine(KnifeTrail());
+        foreach (Collider2D enemy in hitEnemies)
         {
             //damage = playerScript.RandomDamage(minKnifeDamage, maxKnifeDamage);
-            //enemy.GetComponent<EnemyBH>().TakeDamage(Random.Range(minKnifeDamage, maxKnifeDamage + 1), Slice);
-            enemy.GetComponent<EnemyBH>().TakeDamage(knifeDamage, Slice);
+            enemy.GetComponent<EnemyBH>().TakeDamage(Random.Range(minKnifeDamage, maxKnifeDamage + 1), Slice);
             CameraShake.instance.ShakeCamera(.25f, .03f);
         }
+    }
+
+    IEnumerator KnifeTrail()
+    {
+        Debug.Log("went into ienum");
+        trail.emitting = true;
+        yield return new WaitForSeconds(0.05f);
+        trail.Clear();
+        trail.emitting = false;
+
     }
 }

@@ -929,7 +929,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6404787511320103282}
-  - component: {fileID: 9053716776819392589}
   m_Layer: 5
   m_Name: Goal Bars
   m_TagString: Untagged
@@ -959,24 +958,6 @@ RectTransform:
   m_AnchoredPosition: {x: 177.60004, y: -281}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9053716776819392589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6404787511320103281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e882544192c096e4bbd79a3c2a699f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TextureMinBar: {fileID: 6404787511710997077}
-  TextureMaxBar: {fileID: 9009413700471505810}
-  WarmthMinBar: {fileID: 6404787510514531346}
-  WarmthMaxBar: {fileID: 4743118147726961319}
-  FlavorMinBar: {fileID: 6404787512374864902}
-  FlavorMaxBar: {fileID: 7189114122157422760}
 --- !u!1 &6404787511710997067
 GameObject:
   m_ObjectHideFlags: 0

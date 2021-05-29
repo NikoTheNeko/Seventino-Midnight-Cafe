@@ -37,6 +37,7 @@ public class EnemyBH : MonoBehaviour {
     public Vector3 originVec;
     public Vector3 flipVec;
     public Vector3 destVec;
+    private bool canAttack = true;
     public LayerMask playerLayer;
     public GameObject SeedShot;
 
@@ -57,25 +58,13 @@ public class EnemyBH : MonoBehaviour {
 
 
     public AudioClip hitSound;
-    public AudioClip chompSound;
-    public AudioClip spitSound;
     private AudioSource audio;
-    public HealthDrop healthDrop;
+
 
     public Animator monsterAnim;
     public bool locked = false;
     private bool isDead = false;
-
-    private int attkCooldown = 0;
-
-    private Coroutine biteCo;
-    private Coroutine shotCo;
-    private Coroutine lockCo;
-    private bool shooting = false;
-    private bool biting = false;
-
-    public GameObject walker;
-
+        
 
     private void Start()
     {
@@ -137,15 +126,13 @@ public class EnemyBH : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-        if(ai.velocity.x > 0.05f || ai.velocity.y > 0.05f)
+        if(ai.velocity.x > 0.1f || ai.velocity.y > 0.1f)
         {
-            walker.GetComponent<walkerScript>().Walk();
             monsterAnim.SetBool("walk", true);
             monsterAnim.SetBool("idle", false);
         }
         else
         {
-            walker.GetComponent<walkerScript>().Stop();
             monsterAnim.SetBool("walk", false);
             monsterAnim.SetBool("idle", true);
         }
@@ -167,11 +154,6 @@ public class EnemyBH : MonoBehaviour {
             reachedEndOfPath = false;
         }
 
-
-        if(attkCooldown > 0)
-        {
-            --attkCooldown;
-        }
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -202,10 +184,9 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0 && !isDead)
         {
             isDead = !isDead;
-            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, gameObject.transform.position);
-            Instantiate(healthDrop, gameObject.transform.position, Quaternion.identity);
+            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
             monsterAnim.SetTrigger("die");
-            StartCoroutine(DestroyYourself(5.5f, gameObject));
+            StartCoroutine(DestroyYourself(3f, gameObject));
         }
     }
 
@@ -326,19 +307,13 @@ public class EnemyBH : MonoBehaviour {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
 
-        if(Vector3.Distance(transform.position, target.transform.position) > 10)
+        if (Vector3.Distance(transform.position, target.transform.position) > 10)
         {
             if (seeker.IsDone())
             {
                 seeker.StartPath(rb.position, target.position, OnPathComplete);
             }
         }
-
-        if(locked)
-        {
-            seeker.StartPath(rb.position, rb.position, OnPathComplete);
-        }
-
         if(LineOfSight())
         {
             losTimer = 3;
@@ -352,40 +327,16 @@ public class EnemyBH : MonoBehaviour {
         switch (atkIndex)
         {
             case 1:
-                if (attkCooldown == 0)
-                {
-                    attkCooldown = 8;
-                    if (!biting)
-                    {
-                        if(!locked)
-                            lockCo = StartCoroutine(lockState(locked, 1.2f));
-                        biteCo = StartCoroutine(delayBite());
-                    }
-                }
+                StartCoroutine(lockState(locked, 1.2f));
+                Bite();
                 break;
             case 2:
-                if (attkCooldown == 0)
-                {
-                    attkCooldown = 15;
-                    if (!shooting)
-                    {
-                        if(!locked)
-                            lockCo = StartCoroutine(lockState(locked, 1f));
-                        shotCo = StartCoroutine(delayShot());
-                    }
-                }
+                StartCoroutine(lockState(locked, 1f));
+                ShotgunBeans();
                 break;
             case 3:
-                if (attkCooldown == 0)
-                {
-                    attkCooldown = 10;
-                    if (!shooting)
-                    {
-                        if (!locked)
-                            lockCo = StartCoroutine(lockState(locked, 1f));
-                        shotCo = StartCoroutine(delayShot());
-                    }
-                }
+                StartCoroutine(lockState(locked, 1f));
+                MachineBeans();
                 break;
         }
 
@@ -396,31 +347,13 @@ public class EnemyBH : MonoBehaviour {
         }
     }
 
-    IEnumerator delayShot()
-    {
-        monsterAnim.SetTrigger("spit");
-        shooting = true;
-        Debug.Log("SHOOT IENUM");
-        yield return new WaitForSeconds(1.5f);
-        ShotgunBeans();
-        shooting = false;
-    }
-
-    IEnumerator delayBite()
-    {
-        monsterAnim.SetTrigger("chomp");
-        Debug.Log("BITE IENUM");
-        biting = true;
-        yield return new WaitForSeconds(1.5f);
-        Bite();
-        biting = false;
-    }
 
     IEnumerator lockState(bool locked, float time)
     {
         locked = true;
         yield return new WaitForSeconds(time);
         locked = false;
+
     }
 
     private int Ranges()
@@ -442,32 +375,46 @@ public class EnemyBH : MonoBehaviour {
 
     private void Bite()
     {
-            Debug.Log("bite");
-        audio.clip = chompSound;
-        audio.Play();
-        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2.5f, playerLayer);
-        foreach (Collider2D player in hit)
+        if(canAttack)
         {
-            player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
+            canAttack = false;
+            monsterAnim.SetTrigger("chomp");
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1f, playerLayer);
+            foreach (Collider2D player in hit)
+            {
+                player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
+            }
+            StartCoroutine(ResetAttack(1f));
         }
+    }
+
+    IEnumerator ResetAttack(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canAttack = true;
     }
 
     private void ShotgunBeans()
     {
-        //Instantiate(SeedShot, transform.position, Quaternion.identity);
-            Debug.Log("pow");
-        audio.clip = spitSound;
-        audio.Play();
-        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
+        if (canAttack)
+        {
+            monsterAnim.SetTrigger("spit");
+            canAttack = false;
+            //Instantiate(SeedShot, transform.position, Quaternion.identity);
+            //BeanSpawner.SpawnBeans();
+            StartCoroutine(ResetAttack(1f));
+        }
     }
 
     private void MachineBeans()
     {
-        Debug.Log("pow"); 
-        audio.clip = spitSound;
-        audio.Play();
-        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
+        if (canAttack)
+        {
+            monsterAnim.SetTrigger("spit");
+            canAttack = false;
             //Instantiate(SeedShot, transform.position, Quaternion.identity);
+            StartCoroutine(ResetAttack(1f));
+        }
     }
 
     private void EnemyEnrage()
@@ -494,7 +441,6 @@ public class EnemyBH : MonoBehaviour {
 
         
         StartCoroutine(FlashColor());
-        audio.clip = hitSound;
         audio.Play();
         health -= amount;
         healthbar.SetHealth(health);
@@ -512,7 +458,6 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab1 = Instantiate(flameFloatingDamageText, transform.position, Quaternion.identity, fireContainer.transform);
                 damagePrefab1.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(fireContainer, 0.7f);
-                Debug.Log("fire: " + totalFireDamage);
                 break;
             case DamageEnum.Flavor:
                 totalFlavorDamage += amount;
@@ -524,7 +469,6 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
                 damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(flavorContainer, 0.7f);
-                Debug.Log("flavor: " + totalFlavorDamage);
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;
@@ -536,7 +480,6 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab3 = Instantiate(knifeFloatingDamageText, transform.position, Quaternion.identity, sliceContainer.transform);
                 damagePrefab3.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(sliceContainer, 0.7f);
-                Debug.Log("slice: " + totalSliceDamage);
                 break;
         }
 

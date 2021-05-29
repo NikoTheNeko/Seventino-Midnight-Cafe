@@ -26,8 +26,6 @@ public class InventoryTracker : MonoBehaviour
     public float warmth;
     public float flavor;
     public float volume = 0f;
-    
-    public FoodStats CoffeeStats;
 
     #endregion
 
@@ -47,9 +45,11 @@ public class InventoryTracker : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+    }
 
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
+    // Update is called once per frame
+    void Update()
+    {
     }
 
     //adds modifier to amount in inventory linked to key
@@ -83,7 +83,6 @@ public class InventoryTracker : MonoBehaviour
         FoodDrop dropped = Instantiate(foodObject, coords, Quaternion.identity);
         dropped.setImage(getIngredient(name).picture);
         dropped.setValues(texture, warmth, flavor, name);
-        // dropped.gameObject.GetComponent<Rigidbody>().AddForce();
         return false;
     }
 
@@ -100,7 +99,7 @@ public class InventoryTracker : MonoBehaviour
 
     //Loads inventory state from savedData.smc
     public void load(){
-        Debug.Log("loading");
+
         string path = Application.persistentDataPath + "/savedData.smc";
         if(File.Exists(path)){
             BinaryFormatter formatter = new BinaryFormatter();
@@ -112,7 +111,6 @@ public class InventoryTracker : MonoBehaviour
             foreach(Ingredient ingredient in load.inventorySave){
                 inventory.Add(ingredient);
             }
-            dialogueProg = load.narrativeProgress;
         }
         else{
             Debug.LogError("save file not found");
@@ -126,26 +124,6 @@ public class InventoryTracker : MonoBehaviour
     public void ClearInventory(){
         inventory.Clear();
         Debug.Log(inventory.Count);
-    }
-
-    public void CarryCoffeeStats(){
-        GameObject temp = GameObject.FindGameObjectWithTag("StatManager");
-        CoffeeStats = temp.GetComponent<FoodStats>();
-
-        Debug.Log(CoffeeStats.TextureVal);
-
-        texture = CoffeeStats.TextureVal;
-        flavor = CoffeeStats.FlavorVal;
-        warmth = CoffeeStats.WarmthVal;
-
-        hasFood = true;
-
-        inventory.Clear();
-
-    }
-
-    public void SetDialogue(int num){
-        dialogueProg = num;
     }
 }
 
