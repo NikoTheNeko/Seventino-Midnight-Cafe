@@ -1869,6 +1869,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 599351520647682335, guid: 27120e20f8700a746acc89b722160f9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5382894961338650066, guid: 27120e20f8700a746acc89b722160f9e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -1989,6 +1994,12 @@ PrefabInstance:
 --- !u!4 &484050763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5382894962092975257, guid: 27120e20f8700a746acc89b722160f9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 484050762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &484050764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 599351520647682335, guid: 27120e20f8700a746acc89b722160f9e,
     type: 3}
   m_PrefabInstance: {fileID: 484050762}
   m_PrefabAsset: {fileID: 0}
@@ -2393,7 +2404,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3107276079144237745, guid: cbf4b8c3d514c994f845614305d2a68b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3472,7 +3483,7 @@ PrefabInstance:
         type: 3}
       propertyPath: trigger
       value: 
-      objectReference: {fileID: 841691555}
+      objectReference: {fileID: 484050764}
     - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: talkTo
@@ -5745,7 +5756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 484050763}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1089231190
 BoxCollider2D:
@@ -13475,7 +13486,7 @@ PrefabInstance:
         type: 3}
       propertyPath: trigger
       value: 
-      objectReference: {fileID: 841691555}
+      objectReference: {fileID: 484050764}
     - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: talkTo
@@ -34875,7 +34886,7 @@ PrefabInstance:
         type: 3}
       propertyPath: trigger
       value: 
-      objectReference: {fileID: 841691555}
+      objectReference: {fileID: 484050764}
     - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: subject
@@ -36295,7 +36306,7 @@ PrefabInstance:
         type: 3}
       propertyPath: trigger
       value: 
-      objectReference: {fileID: 841691555}
+      objectReference: {fileID: 484050764}
     - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: idleText.Array.data[0]

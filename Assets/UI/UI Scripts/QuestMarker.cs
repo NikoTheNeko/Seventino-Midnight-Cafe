@@ -24,7 +24,7 @@ public class QuestMarker : MonoBehaviour
     {
         successCG.SetActive(false);
         marker.SetActive(false);
-        trigger.SetActive(false);
+        trigger.SetActive(true);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         talkTo.SetActive(false);
         
@@ -36,7 +36,7 @@ public class QuestMarker : MonoBehaviour
         curQuest = tracker.dialogues[tracker.dialogueProg];
 
         if(pickedUp && !textbox.activated){
-            trigger.SetActive(true);
+            trigger.SetActive(false);
         }
 
         if(curQuest.subject == subject && !pickedUp){
