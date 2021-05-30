@@ -64,7 +64,15 @@ public class EnemyBH : MonoBehaviour {
     public Animator monsterAnim;
     public bool locked = false;
     private bool isDead = false;
-        
+
+
+    private Coroutine lockCo;
+    private Coroutine shotCo;
+    private Coroutine biteCo;
+
+    private int canFire = 0;
+    private bool started = false;
+
 
     private void Start()
     {
@@ -95,6 +103,8 @@ public class EnemyBH : MonoBehaviour {
 
     void UpdatePath() 
     {
+        if(canFire > 0)
+            --canFire;
         switch (enemyState)
         {
             case "idle":
@@ -327,16 +337,31 @@ public class EnemyBH : MonoBehaviour {
         switch (atkIndex)
         {
             case 1:
-                StartCoroutine(lockState(locked, 1.2f));
-                Bite();
+                if (canFire <= 0)
+                {
+                    if (!locked)
+                        lockCo = StartCoroutine(lockState(locked, 1.2f));
+                    if(!started)
+                        StartCoroutine(delayBite());
+                }
                 break;
             case 2:
-                StartCoroutine(lockState(locked, 1f));
-                ShotgunBeans();
+                if (canFire <= 0)
+                {
+                    if (lockCo == null)
+                        lockCo = StartCoroutine(lockState(locked, 1.2f));
+                    if (!started)
+                        StartCoroutine(delayShot());
+                }
                 break;
             case 3:
-                StartCoroutine(lockState(locked, 1f));
-                MachineBeans();
+                if (canFire <= 0)
+                {
+                    if (lockCo == null)
+                        lockCo = StartCoroutine(lockState(locked, 1.2f));
+                    if(!started)
+                        StartCoroutine(delayShot());
+                }
                 break;
         }
 
@@ -346,14 +371,29 @@ public class EnemyBH : MonoBehaviour {
             enemyState = "idle";
         }
     }
-
+    IEnumerator delayShot()
+    {
+        started = true;
+        Debug.Log("delayShot");
+        monsterAnim.SetTrigger("spit");
+        yield return new WaitForSeconds(2.03f);
+        ShotgunBeans();
+        started = false;
+    }
+    IEnumerator delayBite()
+    {
+        started = true;
+        monsterAnim.SetTrigger("chomp");
+        yield return new WaitForSeconds(0.43f);
+        Bite();
+        started = false;
+    }
 
     IEnumerator lockState(bool locked, float time)
     {
         locked = true;
         yield return new WaitForSeconds(time);
         locked = false;
-
     }
 
     private int Ranges()
@@ -375,46 +415,26 @@ public class EnemyBH : MonoBehaviour {
 
     private void Bite()
     {
-        if(canAttack)
+        canFire = 6;
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 4f, playerLayer);
+        foreach (Collider2D player in hit)
         {
-            canAttack = false;
-            monsterAnim.SetTrigger("chomp");
-            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 1f, playerLayer);
-            foreach (Collider2D player in hit)
-            {
-                player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
-            }
-            StartCoroutine(ResetAttack(1f));
+            player.GetComponent<PlayerCombatTesting>().PlayerHit(1);
         }
     }
 
-    IEnumerator ResetAttack(float time)
-    {
-        yield return new WaitForSeconds(time);
-        canAttack = true;
-    }
 
     private void ShotgunBeans()
     {
-        if (canAttack)
-        {
-            monsterAnim.SetTrigger("spit");
-            canAttack = false;
-            //Instantiate(SeedShot, transform.position, Quaternion.identity);
-            //BeanSpawner.SpawnBeans();
-            StartCoroutine(ResetAttack(1f));
-        }
+        canFire = 8;
+        //Instantiate(SeedShot, transform.position, Quaternion.identity);
+        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
     }
 
     private void MachineBeans()
     {
-        if (canAttack)
-        {
-            monsterAnim.SetTrigger("spit");
-            canAttack = false;
-            //Instantiate(SeedShot, transform.position, Quaternion.identity);
-            StartCoroutine(ResetAttack(1f));
-        }
+        BeanSpawner.GetComponent<BeanSpawner>().SpawnBeans();
+        //Instantiate(SeedShot, transform.position, Quaternion.identity);
     }
 
     private void EnemyEnrage()

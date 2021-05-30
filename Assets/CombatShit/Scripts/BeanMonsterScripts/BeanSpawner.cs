@@ -39,7 +39,7 @@ public class BeanSpawner : MonoBehaviour
     {
         //Debug.Log("INDEX:");
         //Debug.Log(index);
-        if (timer <= 0)
+        /*if (timer <= 0)
         {   
 
             SpawnBeans();
@@ -54,7 +54,7 @@ public class BeanSpawner : MonoBehaviour
                 if (index >= spawnData.Length) index = 0;
             }
         }
-        timer -= Time.deltaTime;
+        timer -= Time.deltaTime;*/
     }
 
     // Select a random rotation from min to max for each bean
