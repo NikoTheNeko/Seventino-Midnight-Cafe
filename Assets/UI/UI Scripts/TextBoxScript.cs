@@ -31,12 +31,13 @@ public class TextBoxScript : MonoBehaviour
     public GameObject successCG;
     public GameObject chefAnchor;
     public GameObject customerAnchor;
+    public GameObject goNext;
     #endregion
 
     #region Private Variables
     private int letter = 0; //keeps track of letters added to text
     private int loops = 0; //tracks where program is in the dialogue
-    public bool speedUp = false; //tracks if conversation has been sped up;
+    private bool speedUp = false; //tracks if conversation has been sped up;
     private string message; //text part of the dialogue currently being shown
     private float timer = 1f; //counts when the next letter should be added
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
@@ -67,13 +68,20 @@ public class TextBoxScript : MonoBehaviour
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
-                if(data.name == currentSpeaker){
+                if(currentSpeaker.Contains(data.name)){
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
                 }
                 else{
                     DarkenImage(data.image);
                 }
+            }
+
+            if(letter >= message.Length){
+                goNext.SetActive(true);
+            }
+            else{
+                goNext.SetActive(false);
             }
         }
     }
@@ -124,7 +132,7 @@ public class TextBoxScript : MonoBehaviour
         }
         textbox.text += buffer;
         textbox.text += message[letter];
-        if(currentSpeaker == "Chef"){
+        if(currentSpeaker.Contains("Chef")){
             audio.PlayOneShot(ChefSoundClip);
         }
         else{
@@ -174,7 +182,7 @@ public class TextBoxScript : MonoBehaviour
     //Changes name displayed
     void ChangeName(){
         nameText.text = currentSpeaker;
-        if(currentSpeaker == "Chef"){
+        if(currentSpeaker.Contains("Chef")){
             namePlate.transform.position = chefAnchor.transform.position;
         }
         else{
@@ -206,6 +214,7 @@ public class TextBoxScript : MonoBehaviour
 
         textbox.gameObject.SetActive(false);
         namePlate.SetActive(false);
+        goNext.SetActive(false);
         foreach(CharacterData data in characterInformation){
             data.image.color = new Color32(55, 55, 55, 255);
             data.image.transform.localScale = new Vector3(0.09828957f,0.09828957f,0.09828957f);

@@ -88,9 +88,7 @@ public class QuestMarker : MonoBehaviour
             else{
                 textbox.SpeedUp();
             }
-        }
-        
-        
+        } 
     }
 
     IEnumerator advanceProgression(){
