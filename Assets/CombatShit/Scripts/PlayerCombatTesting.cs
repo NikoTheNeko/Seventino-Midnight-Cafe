@@ -111,6 +111,10 @@ public class PlayerCombatTesting : MonoBehaviour{
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
 
+    public GameObject deathPar;
+
+    private Coroutine leavCo;
+
     private void Awake()
     {
         gunAnchor = transform.Find("gunAnchor");
@@ -127,6 +131,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
+        checkDead();
         if(idleTime > 3f && idlePopUp.color.a < 1){
             Color32 temp = idlePopUp.color;
             temp.a += 1;
@@ -396,7 +401,9 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     IEnumerator LeaveScene(float delay)
     {
+        playerAnim.SetTrigger("Death");
         yield return new WaitForSeconds(delay);
+        Destroy(Instantiate(deathPar, transform, false), 1);
         StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.In, "deathMenu"));
     }
 
@@ -407,7 +414,8 @@ public class PlayerCombatTesting : MonoBehaviour{
             //playerAnim.SetTrigger("Death");
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
             tracker.ClearInventory();
-            StartCoroutine("LeaveScene", 1.5f);
+            if(leavCo == null)
+                leavCo = StartCoroutine("LeaveScene", 1f);
         }
     }
 
