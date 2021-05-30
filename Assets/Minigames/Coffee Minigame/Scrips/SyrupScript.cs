@@ -128,14 +128,9 @@ public class SyrupScript : MonoBehaviour{
 
     //This hides and shows pluses based on the 
     private void ShowPluses(){
+        StatManager.GetComponent<FoodStats>().ShowPlus(0);    
         StatManager.GetComponent<FoodStats>().ShowPlus(2);
         StatManager.GetComponent<FoodStats>().HidePlus(1);
-
-        if(SyrupState > 0){
-            StatManager.GetComponent<FoodStats>().ShowPlus(0);    
-        } else {
-            StatManager.GetComponent<FoodStats>().HidePlus(0);
-        }
 
     }
 
@@ -186,7 +181,8 @@ public class SyrupScript : MonoBehaviour{
     }
 
     public void ResetSlider(Slider Pump){
-        Pump.value -= 5f * Time.deltaTime;
+        if(Pump.value > 0)
+            Pump.value -= 5f * Time.deltaTime;
     }
 
     #endregion
