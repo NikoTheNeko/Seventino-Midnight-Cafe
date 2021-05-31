@@ -16,6 +16,8 @@ public class QuestMarker : MonoBehaviour
     InventoryTracker tracker;
     Dialogue curQuest;
     public string subject;
+    public AudioSource audio;
+    public AudioClip doorbell;
     private int idlePos = -1;
 
     public bool pickedUp = false;
@@ -35,8 +37,10 @@ public class QuestMarker : MonoBehaviour
     {
         curQuest = tracker.dialogues[tracker.dialogueProg];
 
+        //open door when quest has been picked up
         if(pickedUp && !textbox.activated){
             trigger.SetActive(false);
+            audio.PlayOneShot(doorbell);
         }
 
         if(curQuest.subject == subject && !pickedUp){
@@ -47,7 +51,7 @@ public class QuestMarker : MonoBehaviour
         }
 
         if(entered && Input.GetKeyDown(KeyCode.Space) && Time.timeScale > 0f){
-                //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
+            //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
             if(!textbox.activated){
                 //if NPC is the target of current quest
                 if(!pickedUp && curQuest.subject == subject){
@@ -99,6 +103,7 @@ public class QuestMarker : MonoBehaviour
         textbox.SetDialogue(curQuest.bestEnding);
         // textbox.SpeedUp();
         controller.AdvanceProgression();
+        audio.PlayOneShot(doorbell);
     }
 
 

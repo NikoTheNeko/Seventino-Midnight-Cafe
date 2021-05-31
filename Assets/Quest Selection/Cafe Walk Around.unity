@@ -3499,6 +3499,16 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1520536801}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 51598906}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: doorbell
+      value: 
+      objectReference: {fileID: 8300000, guid: 335bcfe96b2636c4a971721f154a2955, type: 3}
     - target: {fileID: 8665021985403961541, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7188,6 +7198,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: d6c912e0c78aad3408c0701e490a4552, type: 3}
   talkTo: {fileID: 1386698081}
   subject: originstory
+  audio: {fileID: 0}
+  doorbell: {fileID: 0}
   pickedUp: 0
 --- !u!114 &1291164406
 MonoBehaviour:
@@ -7758,6 +7770,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 1dff6607e1315684e8a014fae5ee0cc5, type: 3}
   talkTo: {fileID: 1560439062}
   subject: bixie
+  audio: {fileID: 0}
+  doorbell: {fileID: 0}
   pickedUp: 0
 --- !u!61 &1436143208
 BoxCollider2D:
@@ -11862,6 +11876,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 67f3e23a5a1c4504794b57d8872c277a, type: 3}
   talkTo: {fileID: 1572901798}
   subject: bixie
+  audio: {fileID: 0}
+  doorbell: {fileID: 0}
   pickedUp: 0
 --- !u!61 &1562246208
 BoxCollider2D:
@@ -13502,6 +13518,16 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1520536801}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 51598906}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: doorbell
+      value: 
+      objectReference: {fileID: 8300000, guid: 335bcfe96b2636c4a971721f154a2955, type: 3}
     - target: {fileID: 8665021985403961541, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34937,6 +34963,16 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1520536801}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 51598906}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: doorbell
+      value: 
+      objectReference: {fileID: 8300000, guid: 335bcfe96b2636c4a971721f154a2955, type: 3}
     - target: {fileID: 8665021985403961541, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36352,6 +36388,16 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 1520536801}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 51598906}
+    - target: {fileID: 8665021985403961540, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: doorbell
+      value: 
+      objectReference: {fileID: 8300000, guid: 335bcfe96b2636c4a971721f154a2955, type: 3}
     - target: {fileID: 8665021985403961541, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_LocalPosition.x
