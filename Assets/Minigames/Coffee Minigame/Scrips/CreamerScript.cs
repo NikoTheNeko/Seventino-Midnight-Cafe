@@ -18,7 +18,7 @@ public class CreamerScript : MonoBehaviour{
 
 
     //[Tooltip("Creamer SFX")]
-    //public AudioSource CreamerSFX;
+    public AudioSource CreamerSFX;
    // public Animator Animation;
 
     [Tooltip("The locations of each Creamer bottle")]
@@ -83,7 +83,12 @@ public class CreamerScript : MonoBehaviour{
             MilkPS.Stop();
             MinigameCanvas.SetActive(false);
             CreamerState = 0;
+            ResetSlider(MilkSlider);
+            ResetSlider(CookiesSlider);
+            MilkPS.Stop();
+            CookiesPS.Stop();
         }
+        CreamerSFX.volume = CookiesSlider.value + MilkSlider.value;
     }
 
     #region Minigame Function
@@ -104,9 +109,13 @@ public class CreamerScript : MonoBehaviour{
             if(CreamerState == 0){
                 AddCreamer(Milk, MilkSlider, MilkPS);
                 CookiesSlider.interactable = false;
+                ResetSlider(CookiesSlider);
+                CookiesPS.Stop();
             } else if (CreamerState == 1){
                 AddCreamer(Cookies, CookiesSlider, CookiesPS);
                 MilkSlider.interactable = false;
+                ResetSlider(MilkSlider);
+                MilkPS.Stop();
             }
 
             GlugSlider.value = 1 - (AddedAmount / GlugLeft);
@@ -129,7 +138,6 @@ public class CreamerScript : MonoBehaviour{
             StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[CreamerState] * PouringSlider.value * Time.deltaTime);
             StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[CreamerState] * PouringSlider.value * Time.deltaTime);
             AddedAmount += 5 * PouringSlider.value * Time.deltaTime;
-            //PouringSFX.Play();
         } else if(PouringSlider.value == 0) {
             if(PS.isPlaying)
                 PS.Stop();
@@ -157,6 +165,11 @@ public class CreamerScript : MonoBehaviour{
         StatManager.GetComponent<FoodStats>().HidePlus(1);
         StatManager.GetComponent<FoodStats>().ShowPlus(2);    
 
+    }
+
+    //Resets the sliders
+    private void ResetSlider(Slider MinigameSlider){
+        MinigameSlider.value -= 5f * Time.deltaTime;
     }
 
 

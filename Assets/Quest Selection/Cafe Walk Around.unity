@@ -640,7 +640,8 @@ AudioSource:
   m_GameObject: {fileID: 51598901}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 3b013a69c9ba68c458686d168b08c1c7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 61c99e7e365d6e74cab7c053bca10e90, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -6991,6 +6992,11 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2272012977711928912, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_MinValue
+      value: 0.0001
+      objectReference: {fileID: 0}
     - target: {fileID: 3361724714088771701, guid: be3bd8a56f75a2241b04fd464c805b1b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10394,6 +10400,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 1750236333}
   volume: 1
   audio: {fileID: 51598906}
+  allAudio: {fileID: 24100000, guid: 3b013a69c9ba68c458686d168b08c1c7, type: 2}
   pauseMenuUI: {fileID: 1442338994}
 --- !u!114 &1520536801
 MonoBehaviour:
