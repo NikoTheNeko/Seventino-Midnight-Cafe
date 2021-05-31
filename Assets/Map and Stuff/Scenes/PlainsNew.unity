@@ -443,6 +443,12 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1135406456}
+    - target: {fileID: 7677941295676155023, guid: 07135db479d55734fa9686e63d73df69,
+        type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 615240480230451758, guid: 49fa63f183fa80d449fd18425a1234a4,
+        type: 3}
     - target: {fileID: 8632451005400425367, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -788,6 +794,12 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1135406456}
+    - target: {fileID: 7677941295676155023, guid: 07135db479d55734fa9686e63d73df69,
+        type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 615240480230451758, guid: 49fa63f183fa80d449fd18425a1234a4,
+        type: 3}
     - target: {fileID: 8632451005400425367, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -3615,6 +3627,12 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1135406456}
+    - target: {fileID: 7677941295676155023, guid: 07135db479d55734fa9686e63d73df69,
+        type: 3}
+      propertyPath: gunImpactEffect
+      value: 
+      objectReference: {fileID: 615240480230451758, guid: 49fa63f183fa80d449fd18425a1234a4,
+        type: 3}
     - target: {fileID: 8632451005400425367, guid: 07135db479d55734fa9686e63d73df69,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -4353,6 +4371,7 @@ MonoBehaviour:
   canFire: 1
   animator: {fileID: 0}
   shotSound: {fileID: 0}
+  muzzleEffect: {fileID: 0}
   shotgunDamage: 4
 --- !u!1 &1873231427
 GameObject:
@@ -4477,6 +4496,8 @@ MonoBehaviour:
   canFire: 1
   animator: {fileID: 2006222786}
   shotSound: {fileID: 8300000, guid: 16e9f8885a3bd0345936065080e9dfb5, type: 3}
+  muzzleEffect: {fileID: 6733537044671420933, guid: 421b890b7cc1b9345b8ccdbc8f7bb51f,
+    type: 3}
   shotgunDamage: 4
 --- !u!1 &2035401112
 GameObject:
