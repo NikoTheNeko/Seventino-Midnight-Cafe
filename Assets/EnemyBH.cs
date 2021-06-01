@@ -73,6 +73,7 @@ public class EnemyBH : MonoBehaviour {
     private int canFire = 0;
     private bool started = false;
 
+    public GameObject gunImpactEffect;
 
     private void Start()
     {
@@ -194,7 +195,11 @@ public class EnemyBH : MonoBehaviour {
         if (health < 0 && !isDead)
         {
             isDead = !isDead;
-            tracker.spawnFood("Brown Beans", totalSliceDamage, totalFireDamage, totalFlavorDamage, gameObject.transform.position);
+            Vector3 pos = gameObject.transform.position;
+            tracker.spawnFood("Brown Beans", totalSliceDamage/10, totalFireDamage/10, totalFlavorDamage/10, pos);
+            pos.x -= 0.5f;
+            pos.y -= 0.5f;
+            Instantiate(healthDrop, pos, Quaternion.identity);
             monsterAnim.SetTrigger("die");
             StartCoroutine(DestroyYourself(3f, gameObject));
         }
@@ -489,6 +494,8 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
                 damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(flavorContainer, 0.7f);
+                Instantiate(gunImpactEffect, transform.position, Quaternion.identity);
+                Debug.Log("flavor: " + totalFlavorDamage);
                 break;
             case DamageEnum.Slice:
                 totalSliceDamage += amount;

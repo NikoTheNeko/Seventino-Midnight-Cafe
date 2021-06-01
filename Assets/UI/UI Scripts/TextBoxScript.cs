@@ -15,18 +15,23 @@ public class TextBoxScript : MonoBehaviour
     public TextMeshProUGUI textbox;
 
     [Tooltip("Text for the name of the speaker")]
-    public Text nameText;
+    public TextMeshProUGUI nameText;
+    public GameObject namePlate;
 
     [Tooltip("Name and image of character. Name of character must exactly match name given in JSON file")]
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
-    public AudioClip[] clips;
+    public AudioClip CustomerSoundClip;
+    public AudioClip ChefSoundClip;
 
     [Tooltip("Seconds between adding another letter")]
-    public float scrollSpeed = 0.0625f;
+    public float scrollSpeed = 0.03125f;
     public bool activated = false;
     public GameObject successCG;
+    public GameObject chefAnchor;
+    public GameObject customerAnchor;
+    public GameObject goNext;
     #endregion
 
     #region Private Variables
@@ -45,7 +50,6 @@ public class TextBoxScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // dialogue = JsonUtility.FromJson<Dialogue>(questText[curDialogue].text);     
         textbox.text = "";
 
         //deactivate all of the visual elements
@@ -56,28 +60,15 @@ public class TextBoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if there are letters to add and required amount of time has passed
         if(activated){
-            if(Time.time > timer && letter < message.Length && activated){
+            //if there are letters to add and required amount of time has passed
+            if(Time.time > timer && letter < message.Length){
                 AddLetter();
-            }
-
-             //if user presses "x" text will speed up or go to next part of dialogue
-            if(Input.GetButtonDown("Use")){
-                SpeedUp();
             }
 
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
-                // switch(currentSpeaker){
-                //     case "Chef":
-                //         Debug.Log("my name chef");
-                //         break;
-                //     default:
-                //         Debug.Log("my name not chef");
-                //         break;
-                // }
-                if(data.name == currentSpeaker){
+                if(currentSpeaker.Contains(data.name)){
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
                 }
@@ -85,10 +76,14 @@ public class TextBoxScript : MonoBehaviour
                     DarkenImage(data.image);
                 }
             }
-        }
-        
 
-       
+            if(letter >= message.Length){
+                goNext.SetActive(true);
+            }
+            else{
+                goNext.SetActive(false);
+            }
+        }
     }
 
     //method called when Use is pressed
@@ -137,18 +132,13 @@ public class TextBoxScript : MonoBehaviour
         }
         textbox.text += buffer;
         textbox.text += message[letter];
-
-        //only play audio if text hasn't been sped up
-        if(!speedUp){
-            int loc = char.ToUpper(message[letter]) - 65;
-            if(loc < 0){
-                loc = 26;
-            }
-            else if(loc > 25){
-                loc = 26;
-            }
-            audio.PlayOneShot(clips[loc]);
+        if(currentSpeaker.Contains("Chef")){
+            audio.PlayOneShot(ChefSoundClip);
         }
+        else{
+            audio.PlayOneShot(CustomerSoundClip);
+        }
+           
         
         letter++;
         timer = Time.time + scrollSpeed;
@@ -192,6 +182,12 @@ public class TextBoxScript : MonoBehaviour
     //Changes name displayed
     void ChangeName(){
         nameText.text = currentSpeaker;
+        if(currentSpeaker.Contains("Chef")){
+            namePlate.transform.position = chefAnchor.transform.position;
+        }
+        else{
+            namePlate.transform.position = customerAnchor.transform.position;
+        }
     }
 
     //Activates all of the visual elements
@@ -201,6 +197,7 @@ public class TextBoxScript : MonoBehaviour
         player.GetComponent<PlayerCombatTesting>().CanMove = false;
 
         textbox.gameObject.SetActive(true);
+        namePlate.SetActive(true);
         foreach(CharacterData data in characterInformation){
             data.image.gameObject.SetActive(true);
         }
@@ -216,6 +213,8 @@ public class TextBoxScript : MonoBehaviour
         player.GetComponent<PlayerCombatTesting>().CanMove = true;
 
         textbox.gameObject.SetActive(false);
+        namePlate.SetActive(false);
+        goNext.SetActive(false);
         foreach(CharacterData data in characterInformation){
             data.image.color = new Color32(55, 55, 55, 255);
             data.image.transform.localScale = new Vector3(0.09828957f,0.09828957f,0.09828957f);
@@ -231,7 +230,6 @@ public class TextBoxScript : MonoBehaviour
     //set dialogue to given TextAsset, resets variables
     //then activates self
     public void SetDialogue(dialogueSegment[] text){
-
         dialogueSegments = text;
         loops = 0;
         letter = 0;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     public Slider volumeSlider;
     public float volume = 1f;
     public AudioSource audio;
+    public AudioMixer allAudio;
     private InventoryTracker tracker;
 
     public GameObject pauseMenuUI;
@@ -27,6 +29,7 @@ public class PauseMenu : MonoBehaviour
         volume = tracker.volume;
         volumeSlider.value = volume;
         audio.volume = volume;
+        allAudio.SetFloat("Volume", volume);
         pauseMenuUI.SetActive(false);
     }
 
@@ -92,6 +95,7 @@ public class PauseMenu : MonoBehaviour
         tracker.volume = volume;
         if(audio != null){
             audio.volume = volume;
+            allAudio.SetFloat("Volume", Mathf.Log10(volume) * 20);
         }
         // audio.Play();
     }

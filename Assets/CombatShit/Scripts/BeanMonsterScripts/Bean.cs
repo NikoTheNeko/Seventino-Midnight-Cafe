@@ -8,6 +8,9 @@ public class Bean : MonoBehaviour
     public float speed;
     public float rotation;
     public float beanLife;
+
+    public GameObject beanPopEffect;
+    public GameObject beanImpactEffect;
     float timer;
 
     // Start is called before the first frame update
@@ -21,7 +24,11 @@ public class Bean : MonoBehaviour
     {
         transform.Translate(velocity * speed * Time.deltaTime);
         timer -= Time.deltaTime;
-        if (timer <= 0) gameObject.SetActive(false);
+        if (timer <= 0)
+        {
+            Instantiate(beanPopEffect, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
     }
 
     public void ResetTimer()
@@ -38,10 +45,14 @@ public class Bean : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<PlayerCombatTesting>().PlayerHit(1);
-            CameraShake.instance.ShakeCamera(.25f, .05f);
-            //Debug.Log(health);
-            gameObject.SetActive(false);
+            if (other.gameObject.GetComponent<PlayerCombatTesting>().state == PlayerCombatTesting.State.Normal)
+            {
+                other.GetComponent<PlayerCombatTesting>().PlayerHit(1);
+                CameraShake.instance.ShakeCamera(.25f, .05f);
+                Instantiate(beanImpactEffect, transform.position, Quaternion.identity);
+                //Debug.Log(health);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

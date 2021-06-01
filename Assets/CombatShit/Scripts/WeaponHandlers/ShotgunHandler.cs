@@ -14,6 +14,9 @@ public class ShotgunHandler : MonoBehaviour
     public Animator animator;
     public AudioClip shotSound;
     private AudioSource audio;
+
+    public GameObject muzzleEffect;
+
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
@@ -29,6 +32,7 @@ public class ShotgunHandler : MonoBehaviour
         if (canFire)
         {
             animator.SetTrigger("Shoot");
+            Instantiate(muzzleEffect, transform.position, Quaternion.identity);
             audio.Play();
             canFire = false;
             foreach (LineRenderer tracer in tracers)
