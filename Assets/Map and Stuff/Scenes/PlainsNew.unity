@@ -1976,7 +1976,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2738,7 +2738,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3100,7 +3100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3feda9be9cc92b24789cc7069b1b2aa1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7773f59bd7c29fc4397a213b8bedbd07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3868,7 +3868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3943,7 +3943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4309,7 +4309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4377,7 +4377,8 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: 16e9f8885a3bd0345936065080e9dfb5, type: 3}
   muzzleEffect: {fileID: 6733537044671420933, guid: 421b890b7cc1b9345b8ccdbc8f7bb51f,
     type: 3}
-  shotgunDamage: 4
+  minShotgunDamage: 2
+  maxShotgunDamage: 5
 --- !u!1 &2035401112
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,9 +4434,9 @@ MonoBehaviour:
   - {fileID: 865564458}
   - {fileID: 1677696088}
   - {fileID: 1873231429}
-  fullHeart: {fileID: 21300000, guid: ccbb433609b04ac488259cc61b586f0e, type: 3}
-  halfHeart: {fileID: 21300000, guid: b339398f4693a904bb528dc97287d8d7, type: 3}
-  emptyHeart: {fileID: 21300000, guid: 43ad8ffa671b1774eae01eb3daa32556, type: 3}
+  fullHeart: {fileID: 21300000, guid: 1c5ce3e3ab04aef4ab18cb1b9548038d, type: 3}
+  halfHeart: {fileID: 21300000, guid: 65b7c37b3abd1b14194918a0484723fe, type: 3}
+  emptyHeart: {fileID: 21300000, guid: f58c008b7cb30e34c999eb8a43612fcf, type: 3}
   inventoryDisplay: {fileID: 1239327611}
   leaveTrigger: {fileID: 1524889695}
   toDoScreen: {fileID: 2105518334}
@@ -4447,15 +4448,15 @@ MonoBehaviour:
   flavorMax: {fileID: 1451275039}
   names:
   - sprite: {fileID: 21300000, guid: 51fda0629ae72b247af037caec3e7bc8, type: 3}
-    portrait: {fileID: 21300000, guid: 4e4059cf886c848418b58e7248893377, type: 3}
+    portrait: {fileID: 21300000, guid: bc4b2dee0a4f5c64791a6a55bcf535fc, type: 3}
   - sprite: {fileID: 21300000, guid: dbbf8191b591f564e94fbd3974356e52, type: 3}
-    portrait: {fileID: 21300000, guid: 0cf6c20312f724449955b972c686ccad, type: 3}
+    portrait: {fileID: 21300000, guid: d44bfd54d99e4e64abcfef3e2747219a, type: 3}
   - sprite: {fileID: 21300000, guid: 09cdc152c4e84774ca3b0093457dfecc, type: 3}
-    portrait: {fileID: 21300000, guid: 3feda9be9cc92b24789cc7069b1b2aa1, type: 3}
+    portrait: {fileID: 21300000, guid: 7773f59bd7c29fc4397a213b8bedbd07, type: 3}
   - sprite: {fileID: 21300000, guid: bee25d36959a2cb469c73de9921d8023, type: 3}
-    portrait: {fileID: 21300000, guid: 34b02733a3db775428d4671054e899a8, type: 3}
+    portrait: {fileID: 21300000, guid: 7b0b4ee3ae6a70e43a2282ea2e43f6b3, type: 3}
   toDoName: {fileID: 514254198}
-  CustomerPortrait: {fileID: 0}
+  CustomerPortrait: {fileID: 1489994460}
 --- !u!114 &2035401115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,9 +4470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 561248295182239022}
-  volume: 0
+  volume: 1
   audio: {fileID: 1729907592}
-  allAudio: {fileID: 0}
+  allAudio: {fileID: 24100000, guid: 3b013a69c9ba68c458686d168b08c1c7, type: 2}
   pauseMenuUI: {fileID: 630779684}
 --- !u!1 &2075518089
 GameObject:

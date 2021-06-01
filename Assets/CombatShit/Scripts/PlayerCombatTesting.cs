@@ -37,8 +37,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
-    public float idleLimit;
-    public GameObject sceneFader;
 
     #endregion
 
@@ -60,10 +58,16 @@ public class PlayerCombatTesting : MonoBehaviour{
         audio.volume = (0.5f);
         audio.Stop();
         currentStam = maxStamina;
+        currentFlameStam = maxFlameStamina;
+        currentGunStam = maxGunStamina;
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
+        flameBar.maxValue = maxFlameStamina;
+        flameBar.value = maxFlameStamina;
+        gunBar.maxValue = maxGunStamina;
+        gunBar.value = maxGunStamina;
         //Cursor.lockState = CursorLockMode.Locked;
-        
+
     }
 
     public enum State
@@ -99,17 +103,23 @@ public class PlayerCombatTesting : MonoBehaviour{
     public bool facingRight = true;
 
     public Slider staminaBar;
+    public Slider flameBar;
+    public Slider gunBar;
     private int maxStamina = 1000;
+    private int maxFlameStamina = 1001;
+    private int maxGunStamina = 1002;
     private int currentStam;
+    private int currentFlameStam;
+    private int currentGunStam;
+
+    public int fireDelay;
 
     public Collider2D triggerCollider;
 
     private WaitForSeconds regenTick = new WaitForSeconds(0.1f);
     private Coroutine regen;
-
-    public GameObject deathPar;
-
-    private Coroutine leavCo;
+    private Coroutine regenFlame;
+    private Coroutine regenGun;
 
     private void Awake()
     {
@@ -126,7 +136,6 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        checkDead();
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -187,7 +196,7 @@ public class PlayerCombatTesting : MonoBehaviour{
 
                 // Dodge roll can only start if the player is currently not in a dodge roll.
                 // Dodge roll starts here.
-                if (Input.GetKeyDown(KeyCode.LeftShift) && UseStamina(100))
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     audio.clip = dashSound;
                     audio.loop = false;
@@ -202,7 +211,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             // Currently in a rolling state.
             case State.Rolling:
                 // Decays speed over time.
-                triggerCollider.enabled = false;
+                //triggerCollider.enabled = false;
                 float rollSpeedDropMult = 3.1f;
                 rollSpeed -= rollSpeed * rollSpeedDropMult * Time.deltaTime;
 
@@ -211,7 +220,7 @@ public class PlayerCombatTesting : MonoBehaviour{
                 if (rollSpeed < rollSpeedMin)
                 {
                     state = State.Normal;
-                    triggerCollider.enabled = true;
+                    //triggerCollider.enabled = true;
                 }
                 break;
         }
@@ -245,6 +254,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     private void FixedUpdate()
     {
+        if (fireDelay > 0)
+        {
+            --fireDelay;
+        }
         // handles the rolling state in a fixed update with a switch statement.
         switch (state)
         {
@@ -261,14 +274,22 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponOne()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(120))
+        if (Input.GetMouseButtonDown(0) && currentStam > 120 && fireDelay == 0)
         {
+            UseStamina(120, ref currentStam, ref staminaBar);
+            fireDelay = 20;
             aimGunEndPoint = gunAnchor.Find("Knife").Find("AttackPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            knifeAnim.SetTrigger("Shwing");
-            
+            if (knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeUp"))
+            {
+                knifeAnim.SetTrigger("goDown");
+            }
+            else if(knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeDown"))
+            {
+                knifeAnim.SetTrigger("goUp");
+            }
         }
     }
 
@@ -280,8 +301,10 @@ public class PlayerCombatTesting : MonoBehaviour{
             flamethrowerAnim.SetTrigger("Fire");
             flameo.ActivateFlame();
         }
-        if(Input.GetMouseButton(0) && UseStamina(2))
+        if(Input.GetMouseButton(0) && currentFlameStam > 2 && fireDelay == 0)
         {
+            UseStamina(2, ref currentFlameStam, ref flameBar);
+            fireDelay = 0;
             aimGunEndPoint = gunAnchor.Find("Flambethrower");
             flamethrowerAnim.SetBool("IsFiring", true);
             var em = flameParticles.emission;
@@ -308,8 +331,10 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     void weaponThree()
     {
-        if (Input.GetMouseButtonDown(0) && UseStamina(140))
+        if (Input.GetMouseButtonDown(0) && currentGunStam > 140 && fireDelay == 0)
         {
+            UseStamina(140, ref currentGunStam, ref gunBar);
+            fireDelay = 30;
             aimGunEndPoint = gunAnchor.Find("Shotgun").Find("GunEndPoint");
             Vector3 shootPoint = aimGunEndPoint.position;
             Vector3 mousePosition = GetMouseWorldPosition();
@@ -388,10 +413,8 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     IEnumerator LeaveScene(float delay)
     {
-        playerAnim.SetTrigger("Death");
         yield return new WaitForSeconds(delay);
-        Destroy(Instantiate(deathPar, transform, false), 1);
-        StartCoroutine(sceneFader.GetComponent<SceneFader>().FadeAndLoadScene(SceneFader.FadeDirection.In, "deathMenu"));
+        SceneManager.LoadScene(sceneName: "deathMenu");
     }
 
     private void checkDead()
@@ -401,18 +424,117 @@ public class PlayerCombatTesting : MonoBehaviour{
             //playerAnim.SetTrigger("Death");
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
             tracker.ClearInventory();
-            if(leavCo == null)
-                leavCo = StartCoroutine("LeaveScene", 1f);
+            StartCoroutine("LeaveScene", 1.5f);
         }
     }
 
-    public bool UseStamina(int amount)
+    public bool UseStamina(int amount, ref int currentStam, ref Slider staminaBar)
     {
         if(currentStam - amount >= 0)
         {
             currentStam -= amount;
             staminaBar.value = currentStam;
-            if(regen != null)
+            if(regen != null && staminaBar.maxValue == 1000)
+            {
+                StopCoroutine(regen);
+            }
+            if (regenFlame != null && staminaBar.maxValue == 1001)
+            {
+                StopCoroutine(regenFlame);
+            }
+            if (regenGun != null && staminaBar.maxValue == 1002)
+            {
+                StopCoroutine(regenGun);
+            }
+            if (staminaBar.maxValue == 1000)
+            {
+                regen = StartCoroutine(RegenStamKnife());
+            }
+            else if (staminaBar.maxValue == 1001)
+            {
+                regenFlame = StartCoroutine(RegenStamFlame());
+            }
+            else if (staminaBar.maxValue == 1002)
+            {
+                regenGun = StartCoroutine(RegenStamGun());
+            }
+            return true;
+        }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
+    }
+
+    IEnumerator RegenStamKnife()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while(currentStam < maxStamina)
+        {
+            currentStam += 20;
+            staminaBar.value = currentStam;
+            yield return regenTick;
+        }
+        regen = null;
+    }
+    IEnumerator RegenStamGun()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        regenGun = null;
+    }
+    IEnumerator RegenStamFlame()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        
+        regenFlame = null;
+    }
+
+    /*
+    IEnumerator RegenFlameStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentFlameStam < maxFlameStamina)
+        {
+            currentFlameStam += 20;
+            flameBar.value = currentFlameStam;
+            yield return regenTick;
+        }
+        regenFlame = null;
+    }
+    
+    IEnumerator RegenGunStam()
+    {
+        yield return new WaitForSeconds(1.5f);
+        while (currentGunStam < maxGunStamina)
+        {
+            currentGunStam += 20;
+            gunBar.value = currentGunStam;
+            yield return regenTick;
+        }
+        regenGun = null;
+    }
+    */
+
+    /*public bool UseFlameStamina(int amount)
+    {
+        if (currentFlameStam - amount >= 0)
+        {
+            currentFlameStam -= amount;
+            flameBar.value = currentFlameStam;
+            if (regen != null)
             {
                 StopCoroutine(regen);
             }
@@ -426,16 +548,24 @@ public class PlayerCombatTesting : MonoBehaviour{
         }
     }
 
-    IEnumerator RegenStam()
+    public bool UseGunStamina(int amount)
     {
-        yield return new WaitForSeconds(1.5f);
-        while(currentStam < maxStamina)
+        if (currentGunStam - amount >= 0)
         {
-            currentStam += 20;
-            staminaBar.value = currentStam;
-            yield return regenTick;
+            currentGunStam -= amount;
+            gunBar.value = currentGunStam;
+            if (regen != null)
+            {
+                StopCoroutine(regen);
+            }
+            regen = StartCoroutine(RegenStam());
+            return true;
         }
-        regen = null;
-    }
+        else
+        {
+            // Debug.Log("nostam");
+            return false;
+        }
+    }*/
 
 }
