@@ -53,12 +53,10 @@ public class TextBoxScript : MonoBehaviour
     void Awake()
     {
         textbox.text = "";
-        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        // tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         //deactivate all of the visual elements
         DeactivateObjects();
-        
-        Debug.Log(tracker);
-        
+                
     }
 
     // Update is called once per frame
@@ -235,10 +233,10 @@ public class TextBoxScript : MonoBehaviour
 
         activated = false;
 
-        if(tracker.dialogueProg >= 4){
-            SceneManager.LoadScene("OutroScene", LoadSceneMode.Single);
+        // if(tracker.dialogueProg >= 4){
+            // SceneManager.LoadScene("OutroScene", LoadSceneMode.Single);
             // Debug.Log("going to new scene");
-        }
+        // }
     }
 
     //set dialogue to given TextAsset, resets variables

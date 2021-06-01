@@ -12,25 +12,21 @@ public class OutroShell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-        if(tracker.dialogueProg > 0){
-            dialogue = JsonUtility.FromJson<Dialogue>(outroText.text);
-        }
-        else{
+        // tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+        // if(tracker.dialogueProg > 0){
+        //     dialogue = JsonUtility.FromJson<Dialogue>(outroText.text);
+        // }
+        // else{
             dialogue = JsonUtility.FromJson<Dialogue>(introText.text);
-        }
+        // }
+        textBox.SetDialogue(dialogue.dialogueSegments);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Use")){
-            if(!textBox.activated){
-                textBox.SetDialogue(dialogue.dialogueSegments);
-            }
-            else{
-                textBox.SpeedUp();
-            }
+            textBox.SpeedUp();
         }
     }
 }
