@@ -15,17 +15,13 @@ public class FoodStats : MonoBehaviour{
 
     [Header("The Food Stat Values")]
     [Tooltip("Texture value, this checks the texture of the food, affected by knife")]
-    public float TextureVal = 0;
+    public float TextureVal = 20;
 
     [Tooltip("Warmth value, this checks the warmth of the food, affected by flambethrower")]
-    public float WarmthVal = 0;
+    public float WarmthVal = 40;
 
     [Tooltip("Flavor value, this checks the flavor of the food, affected by gun")]
-    public float FlavorVal = 0;
-
-    [Tooltip("Array of Cups on the table, to be fucked with.")]
-    public Sprite[] CupSprites = new Sprite[4];
-    public SpriteRenderer[] Cups;
+    public float FlavorVal = 10;
 
     #endregion
 
@@ -51,9 +47,6 @@ public class FoodStats : MonoBehaviour{
     public Slider FlavorProgress;
     public Slider FlavorPreview;
 
-    [Tooltip("The button to restart the scene")]
-    public Button RestartButton;
-
     [Header("Plus UI")]
     public Transform[] ShowLocations = new Transform[3];
     public Transform[] HideLocations = new Transform[3];
@@ -76,7 +69,7 @@ public class FoodStats : MonoBehaviour{
     public void Start(){
         // GameObject temp = GameObject.FindGameObjectWithTag("InventoryTracker");
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
-
+        Debug.Log("tracker: " + tracker);
         try{
             if(tracker.inventory[0] != null){
                 Bean1 = tracker.inventory[0];
@@ -150,11 +143,8 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     private void Update() {
-        if(tracker.inventory.Count == 1)
-            RestartButton.interactable = false;
         //tempDisplay();
         UpdateProgressBars();
-        UpdateCup();
     }
 
     #region Bean Previews & More
@@ -201,21 +191,6 @@ public class FoodStats : MonoBehaviour{
             break;
         }
         
-    }
-
-    private void UpdateCup(){
-        if(TextureVal >= 25 && TextureVal < 50){
-            foreach(SpriteRenderer Cup in Cups)
-                Cup.sprite = CupSprites[1];
-        }
-        if(TextureVal >= 50 && TextureVal < 75){
-            foreach(SpriteRenderer Cup in Cups)
-                Cup.sprite = CupSprites[2];
-        }
-        if(TextureVal >= 75 && TextureVal <= 100){
-            foreach(SpriteRenderer Cup in Cups)
-                Cup.sprite = CupSprites[3];
-        }
     }
 
     #endregion

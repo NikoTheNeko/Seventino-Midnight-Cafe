@@ -33,8 +33,6 @@ public class PouringMinigame : MonoBehaviour{
     public Transform Pitcher;
     [Tooltip("The angle it will tip at at the very top")]
     public float TiltAngle = 45f;
-    public ParticleSystem WaterPS;
-    public ParticleSystem CoffeeDripPS;
 
 
 
@@ -57,10 +55,6 @@ public class PouringMinigame : MonoBehaviour{
     //This keeps track of how much of the percentage has been done
     private float PercentDone = 0.0f;
 
-    //This is when it's pouring the thing
-    private bool Pouring = false;
-
-
     #endregion
 
     private void Start() {
@@ -72,8 +66,6 @@ public class PouringMinigame : MonoBehaviour{
         if(MinigameActive){
             RunMinigame();
         } else {
-            ParticleEffectControl();
-            Pouring = false;
             if(PouringSlider.value > 0){
                 TiltPitcher();
                 PouringSlider.value -= 0.5f * Time.deltaTime;
@@ -91,8 +83,6 @@ public class PouringMinigame : MonoBehaviour{
             PouringSlider.interactable = false;
             if(PouringSlider.value > 0)
                 PouringSlider.value -= 3f * Time.deltaTime;
-            Pouring = false;
-            ParticleEffectControl();
             TiltPitcher();
             PouringSFX.Stop();
             CookingManager.GetComponent<CookingController>().MinigameFinished(1, false);
@@ -100,9 +90,7 @@ public class PouringMinigame : MonoBehaviour{
     }
 
     private void CheckPouring(){
-        ParticleEffectControl();
         if(PouringSlider.value >= 1){
-            Pouring = true;
             if(PourTime > 0){
                 PouringSFX.mute = false;
                 PourTime -= Time.deltaTime;
@@ -112,20 +100,10 @@ public class PouringMinigame : MonoBehaviour{
                 MinigameCompleted = true;
             }
         } else if(PouringSlider.value < 1){
-            Pouring = false;
             PouringSFX.mute = true;
         }
 
         TiltPitcher();
-    }
-
-    private void ParticleEffectControl(){
-        if(!WaterPS.isPlaying && Pouring)
-            WaterPS.Play();
-        if(WaterPS.isPlaying && !Pouring)
-            WaterPS.Stop();
-        if(!CoffeeDripPS.isPlaying && WaterPS.isPlaying && Pouring)
-            CoffeeDripPS.Play();
     }
 
     private void TiltPitcher(){
@@ -149,7 +127,7 @@ public class PouringMinigame : MonoBehaviour{
         if(MinigameCompleted == false){
             Instructions.text = "Click and drag the kettle up all the way to brew the coffee!";
         } else {
-           Instructions.text = "You did it! Click Back to move onto the next step!";
+           Instructions.text = "You did it! Click Next to move onto the next step!";
         }
     }
 

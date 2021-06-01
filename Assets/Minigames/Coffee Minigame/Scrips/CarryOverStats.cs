@@ -15,7 +15,7 @@ public class CarryOverStats : MonoBehaviour
     }
 
     public void CarryStatsPlease(){
-        tracker.CarryCoffeeStats();
+        //tracker.CarryCoffeeStats();
     }
 
     public void RemoveBean(int BeanSpot){

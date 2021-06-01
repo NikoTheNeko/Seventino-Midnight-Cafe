@@ -2,7 +2,9 @@
 	"subject": "Yertle",
 	"dialogueSegments":
 	[
-		 
+		{
+			"text": ""
+		},
 		{
 			"text": "Hello sir! Welcome to the Seventino Midnight Cafe, my name is Chef! What brings you here?",
 			"speaker": "Chef",
@@ -41,7 +43,9 @@
 	],
 	"bestEnding": 
 	[
-		 
+		{
+			"text": ""
+		},
 		{
 			"text": "Ouch! One hot claw, ready to serve! Be careful, it burns!",
 			"speaker": "Chef",
@@ -90,7 +94,9 @@
 	],
 	"goodEnding": 
 	[
-		 
+		{
+			"text": ""
+		},
 		{
 			"text": "One Hot Claw, hot and ready! Be careful please!",
 			"speaker": "Chef",
@@ -107,13 +113,18 @@
 			"emotion": "happy"
 		},
 		{	
-			"text": "I think you may have put the wrong spices in here Chef... I barely feel the heat!",
+			"text": "Youch! You were right Chef! My tongue hasn’t felt this on fire since my trip to the Firelands!",
 			"speaker": "Yertle",
 			"emotion": "happy"
 		},
 		{	
-			"text": "Oh no! Don't worry Yertle, I'll be back with a Hot Claw that'll knock your beard off!",
+			"text": "Just as I told you! Is there anything else I can get you? Perhaps some water?",
 			"speaker": "Chef",
+			"emotion": "neutral"
+		},
+		{	
+			"text": "That’ll do! Thank you Chef! I’ll be here.",
+			"speaker": "Yertle",
 			"emotion": "neutral"
 		}
 	],

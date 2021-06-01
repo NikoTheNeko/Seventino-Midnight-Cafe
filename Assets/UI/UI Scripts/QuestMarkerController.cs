@@ -15,6 +15,12 @@ public class QuestMarkerController : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     public void AdvanceProgression(){
         tracker.dialogueProg++;
         QuestMarkers[tracker.dialogueProg].SetActive(true);

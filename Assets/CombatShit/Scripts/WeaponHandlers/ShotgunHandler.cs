@@ -25,8 +25,8 @@ public class ShotgunHandler : MonoBehaviour
         audio.loop = false;
         audio.Stop();
     }
-    public int shotgunDamage = 4;
-    //public int maxShotgunDamage = 5;
+    public int minShotgunDamage = 2;
+    public int maxShotgunDamage = 5;
     public void RayShoot(Vector3 EndPoint, Vector3 ShootDir)
     {
         if (canFire)
@@ -47,8 +47,7 @@ public class ShotgunHandler : MonoBehaviour
                     EnemyBH target = raycastHit2D.collider.GetComponent<EnemyBH>();
                     if (target != null)
                     {
-                        //target.TakeDamage(UnityEngine.Random.Range(minShotgunDamage, maxShotgunDamage + 1), Flavor);
-                        target.TakeDamage(shotgunDamage, Flavor);
+                        target.TakeDamage(UnityEngine.Random.Range(minShotgunDamage, maxShotgunDamage + 1), Flavor);
                         CameraShake.instance.ShakeCamera(.5f, .02f);
                     }
                 }
