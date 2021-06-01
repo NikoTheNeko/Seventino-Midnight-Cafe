@@ -8685,7 +8685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marker: {fileID: 1753121198}
   textbox: {fileID: 1291164406}
-  trigger: {fileID: 0}
+  trigger: {fileID: 484050764}
   successCG: {fileID: 1753121198}
   controller: {fileID: 1520536801}
   idleText:
@@ -8990,7 +8990,7 @@ MonoBehaviour:
   ChefSoundClip: {fileID: 0}
   scrollSpeed: 0.0625
   activated: 0
-  successCG: {fileID: 1186413873}
+  successCG: {fileID: 1753121198}
   chefAnchor: {fileID: 789424833}
   customerAnchor: {fileID: 1003004068}
   goNext: {fileID: 232408850}
@@ -9008,7 +9008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marker: {fileID: 1753121198}
   textbox: {fileID: 1436143206}
-  trigger: {fileID: 0}
+  trigger: {fileID: 484050764}
   successCG: {fileID: 1753121198}
   controller: {fileID: 1520536801}
   idleText:
@@ -12700,7 +12700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marker: {fileID: 1753121198}
   textbox: {fileID: 1562246206}
-  trigger: {fileID: 0}
+  trigger: {fileID: 484050764}
   successCG: {fileID: 1753121198}
   controller: {fileID: 1520536801}
   idleText:
