@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TextBoxScript : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class TextBoxScript : MonoBehaviour
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
     private string emotion; //holds the emotion of the current speaker in a non-philisophical type way
     private dialogueSegment[] dialogueSegments;
+    private InventoryTracker tracker;
     
 
     #endregion
@@ -51,9 +53,11 @@ public class TextBoxScript : MonoBehaviour
     void Awake()
     {
         textbox.text = "";
-
+        tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         //deactivate all of the visual elements
         DeactivateObjects();
+        
+        Debug.Log(tracker);
         
     }
 
@@ -230,6 +234,11 @@ public class TextBoxScript : MonoBehaviour
         successCG.SetActive(false);
 
         activated = false;
+
+        if(tracker.dialogueProg >= 4){
+            SceneManager.LoadScene("OutroScene", LoadSceneMode.Single);
+            // Debug.Log("going to new scene");
+        }
     }
 
     //set dialogue to given TextAsset, resets variables

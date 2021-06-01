@@ -203,7 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 991836716}
-  dialogue: {fileID: 0}
+  introText: {fileID: 4900000, guid: 815623aed09cd0d40bee95e6dd3cb883, type: 3}
+  outroText: {fileID: 4900000, guid: b623a6aa421e0c045bab6a8edb78e722, type: 3}
 --- !u!1 &263147262
 GameObject:
   m_ObjectHideFlags: 0
