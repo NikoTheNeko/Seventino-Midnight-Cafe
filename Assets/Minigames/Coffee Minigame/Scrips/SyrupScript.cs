@@ -15,19 +15,17 @@ public class SyrupScript : MonoBehaviour{
     public int[] TextureValues = {0, 2, 5};
 
     [Tooltip("Amount of Pumps")]
-    public int PumpsLeft = 5;
+    public int PumpsLeft = 4;
 
     public Slider VanillaPump;
 
     public Slider CaramelPump;
     public Slider ChocolatePump;
 
+    [Tooltip("Syrup SFX")]
     public AudioSource PumpSFX;
 
-
-    //[Tooltip("Syrup SFX")]
-    //public AudioSource SyrupSFX;
-   // public Animator Animation;
+    public ParticleSystem[] SyrupPS = new ParticleSystem[3];
 
     [Tooltip("The locations of each syrup bottle")]
     public Transform[] SyrupLocations = new Transform[3];
@@ -104,6 +102,7 @@ public class SyrupScript : MonoBehaviour{
     //Called by the button to pump syrup
     public void PumpSyrup(){
         if(PumpsLeft > 0){
+            SyrupPS[SyrupState].Play();
             PumpSFX.Play();
             StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SyrupState]);
             StatManager.GetComponent<FoodStats>().AddTexture(TextureValues[SyrupState]);
@@ -128,14 +127,9 @@ public class SyrupScript : MonoBehaviour{
 
     //This hides and shows pluses based on the 
     private void ShowPluses(){
+        StatManager.GetComponent<FoodStats>().ShowPlus(0);    
         StatManager.GetComponent<FoodStats>().ShowPlus(2);
         StatManager.GetComponent<FoodStats>().HidePlus(1);
-
-        if(SyrupState > 0){
-            StatManager.GetComponent<FoodStats>().ShowPlus(0);    
-        } else {
-            StatManager.GetComponent<FoodStats>().HidePlus(0);
-        }
 
     }
 
@@ -174,6 +168,7 @@ public class SyrupScript : MonoBehaviour{
                 Pumped = false;
         } else if(Pump.value == 1){
             if(PumpsLeft > 0 && Pumped == false){
+                SyrupPS[SyrupState].Play();
                 Pump.value -= 0.1f;
                 Pumped = true;
                 PumpSFX.Play();
@@ -186,7 +181,8 @@ public class SyrupScript : MonoBehaviour{
     }
 
     public void ResetSlider(Slider Pump){
-        Pump.value -= 5f * Time.deltaTime;
+        if(Pump.value > 0)
+            Pump.value -= 5f * Time.deltaTime;
     }
 
     #endregion

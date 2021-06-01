@@ -116,3 +116,7 @@ MonoBehaviour:
   speed: 0
   rotation: 0
   beanLife: 1
+  beanPopEffect: {fileID: 2777032639897864372, guid: b235e5574ff86f64d8e83c11d6b810ba,
+    type: 3}
+  beanImpactEffect: {fileID: 4743500103434425488, guid: 6647ed099765d1e49a378f3cf61cddd1,
+    type: 3}

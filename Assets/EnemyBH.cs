@@ -64,7 +64,8 @@ public class EnemyBH : MonoBehaviour {
     public Animator monsterAnim;
     public bool locked = false;
     private bool isDead = false;
-        
+
+    public GameObject gunImpactEffect;
 
     private void Start()
     {
@@ -474,6 +475,7 @@ public class EnemyBH : MonoBehaviour {
                 var damagePrefab2 = Instantiate(gunFloatingDamageText, transform.position, Quaternion.identity, flavorContainer.transform);
                 damagePrefab2.GetComponent<TextMesh>().text = amount.ToString();
                 Destroy(flavorContainer, 0.7f);
+                Instantiate(gunImpactEffect, transform.position, Quaternion.identity);
                 Debug.Log("flavor: " + totalFlavorDamage);
                 break;
             case DamageEnum.Slice:

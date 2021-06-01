@@ -14,15 +14,17 @@ public class SpicesScript : MonoBehaviour{
     [Tooltip("The amount you will add to Warmth")]
     public int[] WarmthValues = {0, 2, 5};
     [Tooltip("Amount of Scoops")]
-    public int ScoopsLeft = 5;
+    public int ScoopsLeft = 4;
 
 
     //[Tooltip("Spices SFX")]
-    //public AudioSource SpicesSFX;
+    public AudioSource SpicesSFX;
    // public Animator Animation;
 
     [Tooltip("The locations of each Spices bottle")]
     public Transform[] SpicesLocations = new Transform[3];
+
+    public ParticleSystem[] SpicePS = new ParticleSystem[3];
 
     [Tooltip("The cup that moves")]
     public Transform Cup;
@@ -94,6 +96,8 @@ public class SpicesScript : MonoBehaviour{
     //Called by the button to pump Spices
     public void PumpSpices(){
         if(ScoopsLeft > 0){
+            SpicePS[SpicesState].Play();
+            SpicesSFX.Play();
             StatManager.GetComponent<FoodStats>().AddFlavor(FlavorValues[SpicesState]);
             StatManager.GetComponent<FoodStats>().AddWarmth(WarmthValues[SpicesState]);
             ScoopsLeft--;

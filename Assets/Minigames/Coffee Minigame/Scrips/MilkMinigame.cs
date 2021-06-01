@@ -65,6 +65,7 @@ public class MilkMinigame : MonoBehaviour{
             }
 
         }
+        PouringSFX.volume = PouringSlider.value;
     }
 
     #region Minigame Function
@@ -110,7 +111,6 @@ public class MilkMinigame : MonoBehaviour{
             StatManager.GetComponent<FoodStats>().AddWarmth(AddAmount * PouringSlider.value * Time.deltaTime);
             StatManager.GetComponent<FoodStats>().AddTexture(AddTexture * PouringSlider.value * Time.deltaTime);
             AddedAmount += AddAmount * PouringSlider.value * Time.deltaTime;
-            PouringSFX.Play();
         } else if(PouringSlider.value == 0) {
             if(MilkPS.isPlaying)
                 MilkPS.Stop();
