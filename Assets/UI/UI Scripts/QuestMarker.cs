@@ -19,6 +19,7 @@ public class QuestMarker : MonoBehaviour
     public AudioSource audio;
     public AudioClip doorbell;
     private int idlePos = -1;
+    private bool playedSound = false;
 
     public bool pickedUp = false;
     // Start is called before the first frame update
@@ -40,7 +41,10 @@ public class QuestMarker : MonoBehaviour
         //open door when quest has been picked up
         if(pickedUp && !textbox.activated){
             trigger.SetActive(false);
-            audio.PlayOneShot(doorbell);
+            if(!playedSound){
+                audio.PlayOneShot(doorbell);
+                playedSound = true;
+            }
         }
 
         if(curQuest.subject == subject && !pickedUp){
@@ -103,7 +107,7 @@ public class QuestMarker : MonoBehaviour
         textbox.SetDialogue(curQuest.bestEnding);
         // textbox.SpeedUp();
         controller.AdvanceProgression();
-        audio.PlayOneShot(doorbell);
+        // audio.PlayOneShot(doorbell);
     }
 
 
