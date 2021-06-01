@@ -922,6 +922,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 4063377374282147483, guid: 956384f48dcd2aa4c98ca1ccb226fc40,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -3.632773
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063377374282147483, guid: 956384f48dcd2aa4c98ca1ccb226fc40,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.5281286
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 956384f48dcd2aa4c98ca1ccb226fc40, type: 3}
 --- !u!1 &493991085
