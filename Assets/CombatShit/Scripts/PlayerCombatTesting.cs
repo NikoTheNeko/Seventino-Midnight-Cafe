@@ -66,7 +66,7 @@ public class PlayerCombatTesting : MonoBehaviour{
         
     }
 
-    private enum State
+    public enum State
     {
         Normal,
         Rolling
@@ -78,7 +78,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private Vector3 lastMovedDirection;
     private float rollSpeed;
     [SerializeField] private float MV_SPEED = 7f;
-    private State state;
+    public State state;
     private Transform gunAnchor;
     private Animator shotgunAnim;
     private Animator knifeAnim;

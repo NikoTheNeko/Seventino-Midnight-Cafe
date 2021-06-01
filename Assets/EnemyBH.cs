@@ -74,6 +74,9 @@ public class EnemyBH : MonoBehaviour {
     private bool started = false;
 
     public GameObject gunImpactEffect;
+    public GameObject healthDrop;
+
+
 
     private void Start()
     {
