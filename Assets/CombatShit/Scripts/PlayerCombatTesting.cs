@@ -37,7 +37,6 @@ public class PlayerCombatTesting : MonoBehaviour{
     public int health = 10;
     public SpriteRenderer[] sprites;
     public Color hurtColor;
-    public float idleLimit;
 
     #endregion
 
@@ -48,11 +47,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private int weaponSelect = 0;
                 //weapon select 1: Knife
                 //              2: Flambethrower
-                //              3: Pepper shotgun
-
-    private float idleTime = 0f;
-    public SpriteRenderer idlePopUp;
-    
+                //              3: Pepper shotgun    
 
     #endregion
     private void Start()
@@ -137,16 +132,10 @@ public class PlayerCombatTesting : MonoBehaviour{
         knifey = gunAnchor.Find("Knife").GetComponent<KnifeHandler>();
         shuggun = gunAnchor.Find("Shotgun").GetComponent<ShotgunHandler>();
         state = State.Normal;
-        idlePopUp.color = new Color32(255,255,255,0);
     }
 
     // Update is called once per frame
     void Update(){
-        if(idleTime > 3f && idlePopUp.color.a < 1){
-            Color32 temp = idlePopUp.color;
-            temp.a += 1;
-            idlePopUp.color = temp;
-        }
         /* The switch statement determines whether the player
            is in a running state or rolling state. */
         switch (state)
@@ -183,8 +172,6 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 if((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) && CanMove)
                 {
-                    idleTime = 0f;
-                    idlePopUp.color = new Color32(255,255,255,0);
                     playerAnim.SetBool("Idle", false);
                     playerAnim.SetBool("Run", true);
                     if (!audio.isPlaying)
@@ -194,7 +181,6 @@ public class PlayerCombatTesting : MonoBehaviour{
                 }
                 else
                 {
-                    idleTime += Time.deltaTime;
                     playerAnim.SetBool("Idle", true);
                     playerAnim.SetBool("Run", false);
                     audio.Stop();

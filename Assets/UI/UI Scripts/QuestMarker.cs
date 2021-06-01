@@ -16,7 +16,10 @@ public class QuestMarker : MonoBehaviour
     InventoryTracker tracker;
     Dialogue curQuest;
     public string subject;
+    public AudioSource audio;
+    public AudioClip doorbell;
     private int idlePos = -1;
+    private bool playedSound = false;
 
     public bool pickedUp = false;
     // Start is called before the first frame update
@@ -24,7 +27,7 @@ public class QuestMarker : MonoBehaviour
     {
         successCG.SetActive(false);
         marker.SetActive(false);
-        trigger.SetActive(false);
+        trigger.SetActive(true);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         talkTo.SetActive(false);
         
@@ -35,8 +38,13 @@ public class QuestMarker : MonoBehaviour
     {
         curQuest = tracker.dialogues[tracker.dialogueProg];
 
+        //open door when quest has been picked up
         if(pickedUp && !textbox.activated){
-            trigger.SetActive(true);
+            trigger.SetActive(false);
+            if(!playedSound){
+                audio.PlayOneShot(doorbell);
+                playedSound = true;
+            }
         }
 
         if(curQuest.subject == subject && !pickedUp){
@@ -47,7 +55,7 @@ public class QuestMarker : MonoBehaviour
         }
 
         if(entered && Input.GetKeyDown(KeyCode.Space) && Time.timeScale > 0f){
-                //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
+            //if player presses space and textbox not currently active, choose either quest or idle text and activates textbox
             if(!textbox.activated){
                 //if NPC is the target of current quest
                 if(!pickedUp && curQuest.subject == subject){
@@ -88,9 +96,7 @@ public class QuestMarker : MonoBehaviour
             else{
                 textbox.SpeedUp();
             }
-        }
-        
-        
+        } 
     }
 
     IEnumerator advanceProgression(){
@@ -101,6 +107,7 @@ public class QuestMarker : MonoBehaviour
         textbox.SetDialogue(curQuest.bestEnding);
         // textbox.SpeedUp();
         controller.AdvanceProgression();
+        // audio.PlayOneShot(doorbell);
     }
 
 
