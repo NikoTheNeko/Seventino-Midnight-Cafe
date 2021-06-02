@@ -356,7 +356,7 @@ public class EnemyBH : MonoBehaviour {
             case 2:
                 if (canFire <= 0)
                 {
-                    if (lockCo == null)
+                    if (!locked)
                         lockCo = StartCoroutine(lockState(locked, 1.2f));
                     if (!started)
                         StartCoroutine(delayShot());
@@ -365,7 +365,7 @@ public class EnemyBH : MonoBehaviour {
             case 3:
                 if (canFire <= 0)
                 {
-                    if (lockCo == null)
+                    if (!locked)
                         lockCo = StartCoroutine(lockState(locked, 1.2f));
                     if(!started)
                         StartCoroutine(delayShot());
@@ -384,7 +384,7 @@ public class EnemyBH : MonoBehaviour {
         started = true;
         Debug.Log("delayShot");
         monsterAnim.SetTrigger("spit");
-        yield return new WaitForSeconds(2.03f);
+        yield return new WaitForSeconds(1.16f);
         ShotgunBeans();
         started = false;
     }
