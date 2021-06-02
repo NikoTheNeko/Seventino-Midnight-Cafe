@@ -38,6 +38,8 @@ public class MilkMinigame : MonoBehaviour{
     [Tooltip("The Progress Bar")]
     public Slider ProgressBar;
 
+    public GameObject FullPitcher;
+
 
     #endregion
 
@@ -82,6 +84,7 @@ public class MilkMinigame : MonoBehaviour{
             Instructions.text = "Click and drag the pitcher up to pour, the higher you pour the faster you pour.";
             ProgressBar.value = PercentageFloat;
         } else {
+            FullPitcher.SetActive(false);
             MilkPS.Stop();
             Instructions.text = "No more Milk Left!";
             PouringSlider.value -= 3f * Time.deltaTime;

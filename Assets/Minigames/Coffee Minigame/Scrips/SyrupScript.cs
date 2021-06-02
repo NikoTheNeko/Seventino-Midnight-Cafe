@@ -46,6 +46,8 @@ public class SyrupScript : MonoBehaviour{
     [Tooltip("This is the minigame Canvas")]
     public GameObject MinigameCanvas;
 
+    public Text LeftText;
+
     #endregion
 
     #region Private Variables
@@ -88,11 +90,13 @@ public class SyrupScript : MonoBehaviour{
         MoveCup();
         AdjustSliders();
         if(PumpsLeft > 0){
-            Instructions.text = "Press left and right to select a syrup! Grab and pump to add syrup.\n" + "Pumps Left: " + PumpsLeft;
+            Instructions.text = "Press left and right to select a syrup! Grab and pump to add syrup.";
+            LeftText.text = "Left: " + PumpsLeft;
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SyrupState]);
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(0);
             StatManager.GetComponent<FoodStats>().UpdateTexturePreview(StatManager.GetComponent<FoodStats>().TextureVal + TextureValues[SyrupState]);
         } else {
+            LeftText.text = "Left: " + PumpsLeft;
             Instructions.text = "You can't add anymore pumps!";
         }
 
