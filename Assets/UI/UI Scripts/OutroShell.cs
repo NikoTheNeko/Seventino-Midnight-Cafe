@@ -19,18 +19,15 @@ public class OutroShell : MonoBehaviour
         else{
             dialogue = JsonUtility.FromJson<Dialogue>(introText.text);
         }
+        new WaitForSeconds(1);
+        textBox.SetDialogue(dialogue.dialogueSegments);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Use")){
-            if(!textBox.activated){
-                textBox.SetDialogue(dialogue.dialogueSegments);
-            }
-            else{
-                textBox.SpeedUp();
-            }
+            textBox.SpeedUp();
         }
     }
 }
