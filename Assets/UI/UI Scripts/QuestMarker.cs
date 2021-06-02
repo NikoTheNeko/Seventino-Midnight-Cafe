@@ -8,6 +8,7 @@ public class QuestMarker : MonoBehaviour
     public GameObject marker;
     public TextBoxScript textbox;
     public GameObject trigger;
+    public GameObject arrow;
     public GameObject successCG;
     public QuestMarkerController controller;
     bool entered = false;
@@ -28,6 +29,7 @@ public class QuestMarker : MonoBehaviour
         successCG.SetActive(false);
         marker.SetActive(false);
         trigger.SetActive(true);
+        arrow.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         talkTo.SetActive(false);
         
@@ -40,10 +42,11 @@ public class QuestMarker : MonoBehaviour
 
         //open door when quest has been picked up
         if(pickedUp && !textbox.activated){
-            trigger.SetActive(false);
             if(!playedSound){
                 audio.PlayOneShot(doorbell);
                 playedSound = true;
+                trigger.SetActive(false);
+                arrow.SetActive(true);
             }
         }
 

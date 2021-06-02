@@ -11,8 +11,6 @@ public class InventoryDisplay : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int OffsetX = 40; //amount of leeway in x axis
-    private int OffsetY = 40; //amount of leeway in y axis
     private InventoryTracker tracker;
     private bool onScreen = false;
 
@@ -54,37 +52,6 @@ public class InventoryDisplay : MonoBehaviour
             ingredientDisplays[display].setVars(food.texture, food.warmth, food.flavor, food.name);
             display++;
         }
-    }
-
-    //Checks if mouse has moved over an image
-    private void checkForMouseOver(){
-        // textActive = false;
-        // foreach(Display target in ingredientDisplays){
-        //     if(Input.mousePosition.x < target.image.gameObject.transform.position.x + OffsetX && 
-        //     Input.mousePosition.x > target.image.gameObject.transform.position.x - OffsetX && 
-        //     Input.mousePosition.y < target.image.gameObject.transform.position.y + OffsetY && 
-        //     Input.mousePosition.y > target.image.gameObject.transform.position.y - OffsetY &&
-        //     target.active){
-        //         // textActive = true;
-        //         // textureSlider.transform.gameObject.SetActive(true);
-        //         // warmthSlider.transform.gameObject.SetActive(true);
-        //         // flavorSlider.transform.gameObject.SetActive(true);
-
-        //         // textureSlider.value = target.texture;
-        //         // warmthSlider.value = target.warmth;
-        //         // flavorSlider.value = target.flavor;
-        //         //info should be displayed here
-        //         // followerText.text = "Name: " + target.name + 
-        //         //                     "\nTexture: " + target.texture + 
-        //         //                     "\nWarmth: " + target.warmth + 
-        //         //                     "\nFlavor: " + target.flavor;
-        //     }
-        //     else{
-        //         // textureSlider.transform.gameObject.SetActive(false);
-        //         // warmthSlider.transform.gameObject.SetActive(false);
-        //         // flavorSlider.transform.gameObject.SetActive(false);
-        //     }
-        // }
     }
 }
 
