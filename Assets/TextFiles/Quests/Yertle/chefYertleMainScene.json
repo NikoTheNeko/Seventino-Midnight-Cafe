@@ -2,129 +2,118 @@
 	"subject": "Yertle",
 	"dialogueSegments":
 	[
+		 
 		{
-			"text": ""
-		},
-		{
-			"text": "Hello sir! Welcome to the Seventino Midnight Cafe, my name is Chef! What brings you here?",
-			"speaker": "Chef",
+			"text": "Hello sir! Welcome to the Seventino Midnight Cafe, my name is <color=#0da0d9>Chef</color>! What brings you here?",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{
-			"text": "I’ll tell you what brings old <color=#547659>Yertle</color> here, Chef, a need to try every food!",
+			"text": "I’ll tell you what brings old <color=#547659>Yertle</color> here, <color=#0da0d9>Chef</color>, a need to try every food!",
 			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "happy"
 		},
 		{
 			"text": "E-every food?! That’s so many!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{	
 			"text": "I’ve been around, little one. Now, my journey has brought me to your fine eatery. ",
-			"speaker": "Yertle",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "neutral"
 		},		
 		{	
 			"text": "Well, I’m glad it has! That being the case, what can I get for you?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{
 			"text": "My age has made tasting things quite difficult… how about something with a punch, like a Hot Claw?",
-			"speaker": "Yertle",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "sad"
 		},
 		{
 			"text": "One Hot Claw, coming right up! That’ll pack a punch!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		}
 	],
 	"bestEnding": 
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Ouch! One hot claw, ready to serve! Be careful, it burns!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Oh! Careful young one, we wouldn’t want an injured chef! I can take that off your hands.",
-			"speaker": "Yertle",
+			"text": "Oh! Careful young one, we wouldn’t want an injured <color=#0da0d9>Chef</color>! I can take that off your hands.",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Thanks Yertle! Well, what do you think? Spicy enough for you?",
-			"speaker": "Chef",
+			"text": "Thanks <color=#547659>Yertle</color>! Well, what do you think? Spicy enough for you?",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
 			"text": "My tongue hasn’t been this hot since my trip to the Firelands!",
-			"speaker": "Yertle",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "surprised"
 		},	
 		{	
 			"text": "Say, you didn’t take any spices from there, did you?",
-			"speaker": "Yertle",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "surprised"
 		},			
 		{	
 			"text": "I definitely took inspiration from the brewers out there, but this is a creation of my own!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},		
 		{	
-			"text": "Ha! How amazing. Take pride in your work Chef, I’ll be telling my friends to come from all around.",
-			"speaker": "Yertle",
+			"text": "Ha! How amazing. Take pride in your work <color=#0da0d9>Chef</color>, I’ll be telling my friends to come from all around.",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "happy"
 		},
 		{
-			"text": "You’d do that for me? Thank you Yertle!",
-			"speaker": "Chef",
+			"text": "You’d do that for me? Thank you <color=#547659>Yertle</color>!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{	
 			"text": "You let me know if you need anything, and I’ll be happy to provide it!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		}
 	],
 	"goodEnding": 
 	[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "One Hot Claw, hot and ready! Be careful please!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{
 			"text": "No need to worry lad, I’ve had my fair share of coffee…",
-			"speaker": "Yertle",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "neutral"
 		},
 		{
 			"text": "Yeah? Well I bet none are as hot as mine!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{	
-			"text": "Youch! You were right Chef! My tongue hasn’t felt this on fire since my trip to the Firelands!",
-			"speaker": "Yertle",
+			"text": "I think you may have put the wrong spices in here <color=#0da0d9>Chef</color>... I barely feel the heat!",
+			"speaker": "<color=#547659>Yertle</color>",
 			"emotion": "happy"
 		},
 		{	
-			"text": "Just as I told you! Is there anything else I can get you? Perhaps some water?",
-			"speaker": "Chef",
-			"emotion": "neutral"
-		},
-		{	
-			"text": "That’ll do! Thank you Chef! I’ll be here.",
-			"speaker": "Yertle",
+			"text": "Oh no! Don't worry <color=#547659>Yertle</color>, I'll be back with a Hot Claw that'll knock your beard off!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		}
 	],

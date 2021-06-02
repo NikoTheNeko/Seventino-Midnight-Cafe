@@ -9,7 +9,14 @@ public class SceneChangeShell : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Player"){
-            change.SceneChangeTo("Quest Selection Screen");
+            InventoryTracker tracker = GameObject.FindWithTag("InventoryTracker").GetComponent<InventoryTracker>();
+            if(tracker.dialogueProg >= 4){
+                change.SceneChangeTo("OutroScene");
+            }
+            else{
+                change.SceneChangeTo("Quest Selection Screen");
+            }
+            
         }
     }
 }

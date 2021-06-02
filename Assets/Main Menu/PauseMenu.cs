@@ -70,6 +70,11 @@ public class PauseMenu : MonoBehaviour
         IsPaused = false;
         SceneManager.LoadScene("Cafe Walk Around");
     }
+    public void GoToIntro(){
+        UnPauseTime();
+        IsPaused = false;
+        SceneManager.LoadScene("OutroScene");
+    }
 
     public void TitleScreen()
     {

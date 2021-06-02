@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d3868ac202ffc043a95031dec16cbe2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15493311b786bb94c8766be05f3fa8c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   warmth: 0
   flavor: 0
   name: bingus
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 15493311b786bb94c8766be05f3fa8c7, type: 3}
 --- !u!50 &7952648659736948952
 Rigidbody2D:
   serializedVersion: 4

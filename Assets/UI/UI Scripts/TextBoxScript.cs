@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TextBoxScript : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class TextBoxScript : MonoBehaviour
     private string currentSpeaker; //who is currently speaking in dialogue, determined with speaker array
     private string emotion; //holds the emotion of the current speaker in a non-philisophical type way
     private dialogueSegment[] dialogueSegments;
+    private InventoryTracker tracker;
     
 
     #endregion
@@ -51,10 +53,10 @@ public class TextBoxScript : MonoBehaviour
     void Awake()
     {
         textbox.text = "";
-
+        // tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         //deactivate all of the visual elements
         DeactivateObjects();
-        
+                
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class TextBoxScript : MonoBehaviour
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
                 if(currentSpeaker.Contains(data.name)){
+                    Debug.Log(emotion);
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
                 }
@@ -194,7 +197,10 @@ public class TextBoxScript : MonoBehaviour
     //Basically let's program know it should start to display
     public void ActivateObjects(){
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerCombatTesting>().CanMove = false;
+        if(player != null){
+            player.GetComponent<PlayerCombatTesting>().CanMove = false;
+        }
+        
 
         textbox.gameObject.SetActive(true);
         namePlate.SetActive(true);
@@ -210,7 +216,9 @@ public class TextBoxScript : MonoBehaviour
     //Turns all visual elements inactive and prevents program from progressing
     public void DeactivateObjects(){
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerCombatTesting>().CanMove = true;
+        if(player != null){
+            player.GetComponent<PlayerCombatTesting>().CanMove = true;
+        }
 
         textbox.gameObject.SetActive(false);
         namePlate.SetActive(false);
@@ -225,6 +233,11 @@ public class TextBoxScript : MonoBehaviour
         successCG.SetActive(false);
 
         activated = false;
+
+        // if(tracker.dialogueProg >= 4){
+            // SceneManager.LoadScene("OutroScene", LoadSceneMode.Single);
+            // Debug.Log("going to new scene");
+        // }
     }
 
     //set dialogue to given TextAsset, resets variables

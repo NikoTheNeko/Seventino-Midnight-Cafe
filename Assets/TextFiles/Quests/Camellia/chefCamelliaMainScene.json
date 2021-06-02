@@ -2,12 +2,10 @@
 	"subject": "Camellia",
 	"dialogueSegments":
 	[
+		 
 		{
-			"text": ""
-		},
-		{
-			"text": "A lion! Hi there, my name is Chef! Welcome to Seventino Midnight Cafe, what can I get for you?",
-			"speaker": "Chef",
+			"text": "A lion! Hi there, my name is <color=#0da0d9>Chef</color>! Welcome to Seventino Midnight Cafe, what can I get for you?",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{
@@ -17,7 +15,7 @@
 		},
 		{
 			"text": "That sure is a mouthful! Does Camellia work with you?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
@@ -32,17 +30,15 @@
 		},
 		{
 			"text": "One café au lait, coming right up! Sit tight Camellia, I won’t be long!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		}
 	],
 	"bestEnding": [
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "Phew! That was a tough one! Here you go Camellia, I hope it’s up to snuff!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{
@@ -52,7 +48,7 @@
 		},
 		{
 			"text": "You surely won’t be! How’s it taste?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
@@ -72,7 +68,7 @@
 		},
 		{
 			"text": "That’s quite high praise! Did you really like it that much?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{	
@@ -82,7 +78,7 @@
 		},		
 		{	
 			"text": "…",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "sad"
 		},		
 		{	
@@ -102,31 +98,29 @@
 		},	
 		{	
 			"text": "Ack! You’re right! Thank you for coming, and I hope to see you again soon!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		}
 	],
 	"goodEnding":[
-		{
-			"text": ""
-		},
+		 
 		{
 			"text": "I hope I didn’t take too long! Here you go Camellia!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Not long at all. Perhaps it could have used a bit more though. It is passable!",
+			"text": "Not long at all. Perhaps it could have used a bit more though. I demand another!",
 			"speaker": "Camellia",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Is that… good? I tried really hard on it!",
-			"speaker": "Chef",
+			"text": "A-another?!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "sad"
 		},
 		{	
-			"text": "It is perfectly… alright! Now, away with you! I must judge your performance with future guests. Begone!",
+			"text": "Indeed! Now begone! I must marinate on your craft. Away with you!",
 			"speaker": "Camellia",
 			"emotion": "angry"
 		}
