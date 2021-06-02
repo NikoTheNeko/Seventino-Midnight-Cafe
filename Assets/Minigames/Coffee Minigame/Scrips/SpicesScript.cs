@@ -42,6 +42,8 @@ public class SpicesScript : MonoBehaviour{
     [Tooltip("This is the minigame Canvas")]
     public GameObject MinigameCanvas;
 
+    public Text LeftText;
+
     #endregion
 
     #region Private Variables
@@ -82,11 +84,13 @@ public class SpicesScript : MonoBehaviour{
         MoveCup();
 
         if(ScoopsLeft > 0){
-            Instructions.text = "Press left and right to select a spice and press add to add!\n" + "Scoops Left: " + ScoopsLeft;
+            Instructions.text = "Press left and right to select a spice and press add to add!";
+            LeftText.text = "Left: " + ScoopsLeft;
             StatManager.GetComponent<FoodStats>().UpdateTexturePreview(0);
             StatManager.GetComponent<FoodStats>().UpdateWarmthPreview(StatManager.GetComponent<FoodStats>().WarmthVal + WarmthValues[SpicesState]);
             StatManager.GetComponent<FoodStats>().UpdateFlavorPreview(StatManager.GetComponent<FoodStats>().FlavorVal + FlavorValues[SpicesState]);
         } else {
+            LeftText.text = "Left: " + ScoopsLeft;
             Instructions.text = "You can't add anymore scoops!";
         }
 
