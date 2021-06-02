@@ -4722,7 +4722,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 561248295182239022}
   volume: 0
   audio: {fileID: 1729907592}
-  allAudio: {fileID: 0}
+  allAudio: {fileID: 24100000, guid: 3b013a69c9ba68c458686d168b08c1c7, type: 2}
   pauseMenuUI: {fileID: 630779684}
 --- !u!1 &2075518089
 GameObject:
