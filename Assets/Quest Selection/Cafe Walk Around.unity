@@ -4478,6 +4478,11 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[10].second.m_TileSpriteIndex
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 5382894962772647487, guid: 27120e20f8700a746acc89b722160f9e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5382894962899222776, guid: 27120e20f8700a746acc89b722160f9e,
         type: 3}
       propertyPath: m_Tiles.Array.size
