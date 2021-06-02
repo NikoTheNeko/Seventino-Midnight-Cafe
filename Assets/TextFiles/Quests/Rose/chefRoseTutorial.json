@@ -4,48 +4,48 @@
 	[
 		 
 		{
-			"text": "<color=#c21e56>Rose!</color> Is that you? I finally opened my own restaurant!",
-			"speaker": "Chef",
+			"text": "<color=#c21e56>Rose</color>! Is that you? I finally opened my own restaurant!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		},
 		{
 			"text": "That you did little guy. You’re all grown up now. Brewing your first coffee as well I see.",
-			"speaker": "Rose",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "smirk"
 		},
 		{
 			"text": "Yeah! Wanna try it? Your restaurant always had the best coffee.",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "sad"
 		},
 		{	
 			"text": "If you insist, little guy. Let’s give this brew a shot.",
-			"speaker": "Rose",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "happy"
 		},
 		{	
-			"text": "Chef! What is this? Did you even filter it?! I can still taste the crust!",
-			"speaker": "Rose",
+			"text": "<color=#0da0d9>Chef</color>! What is this? Did you even filter it?! I can still taste the crust!",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "surprised"
 		},
 		{
 			"text": "Is that not how you brew coffee?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{	
-			"text": "No, Chef. You have to tailor every order to the customer! No two customers are the same, you know.",
-			"speaker": "Rose",
+			"text": "No, <color=#0da0d9>Chef</color>. You have to tailor every order to the customer! No two customers are the same, you know.",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "sad"
 		},
 		{	
 			"text": "I see! So I can’t just use the same technique every time?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
-			"text": "That’s right Chef, you’re a quick learner! Now please, go out and try again! I’ll be waiting!",
-			"speaker": "Rose",
+			"text": "That’s right <color=#0da0d9>Chef</color>, you’re a quick learner! Now please, go out and try again! I’ll be waiting!",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "happy"
 		}
 	],
@@ -53,28 +53,28 @@
 	[
 		 
 		{
-			"text": "Here you go Rose, how I’d do?",
-			"speaker": "Chef",
+			"text": "Here you go <color=#c21e56>Rose</color>, how I’d do?",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "surprised"
 		},
 		{
-			"text": "Hmmm. Much better than last time Chef! But you’ve got a long way to go! Don’t get lazy.",
-			"speaker": "Rose",
+			"text": "Hmmm. Much better than last time <color=#0da0d9>Chef</color>! But you’ve got a long way to go! Don’t get lazy.",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "happy"
 		},
 		{
 			"text": "Of course not! This cafe’ll be in tip-top shape next time you’re here.",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
-			"text": "Careful Chef, I’m gonna hold you to that standard! I’ve got to get back to work, but I’ll be back!",
-			"speaker": "Rose",
+			"text": "Careful <color=#0da0d9>Chef</color>, I’m gonna hold you to that standard! I’ve got to get back to work, but I’ll be back!",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "smirk"
 		},
 		{
-			"text": "I’ll see you around Rose. Thanks again!",
-			"speaker": "Chef",
+			"text": "I’ll see you around <color=#c21e56>Rose</color>. Thanks again!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		}
 	],
@@ -82,38 +82,38 @@
 	[
 		 
 		{
-			"text": "Here you go Rose. How’s this one?",
-			"speaker": "Chef",
+			"text": "Here you go <color=#c21e56>Rose</color>. How’s this one?",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{
-			"text": "It’s… passable I suppose. If you want the Seventino Midnight Cafe to be bustling with people, you’re gonna have to try a little harder Chef.",
-			"speaker": "Rose",
+			"text": "It’s… passable I suppose. If you want the Seventino Midnight Cafe to be bustling with people, you’re gonna have to try a little harder <color=#0da0d9>Chef</color>.",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "sad"
 		},
 		{
 			"text": "How do I do that? I’m trying my hardest already!",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "sad"
 		},
 		{	
 			"text": "I know, little guy. You gotta make each coffee exactly how the customer likes it! Temper it to their expectations, and they’ll be coming back for more!",
-			"speaker": "Rose",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "neutral"
 		},
 		{	
 			"text": "I see. So everyone is going to want their coffee a little differently?",
-			"speaker": "Chef",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "neutral"
 		},
 		{	
-			"text": "Exactly! Keep that attitude up and I’m sure you’ll succeed. Go ahead and give this one another shot! I know you can do it Chef!",
-			"speaker": "Rose",
+			"text": "Exactly! Keep that attitude up and I’m sure you’ll succeed. Go ahead and give this one another shot! I know you can do it <color=#0da0d9>Chef</color>!",
+			"speaker": "<color=#c21e56>Rose</color>",
 			"emotion": "smirk"
 		},
 		{
-			"text": "There's no way I can give up now! Wait right there Rose, I'll be back!",
-			"speaker": "Chef",
+			"text": "There's no way I can give up now! Wait right there <color=#c21e56>Rose</color>, I'll be back!",
+			"speaker": "<color=#0da0d9>Chef</color>",
 			"emotion": "happy"
 		}
 	],
