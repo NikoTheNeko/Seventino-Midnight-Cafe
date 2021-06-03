@@ -282,14 +282,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            if (knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeUp"))
-            {
-                knifeAnim.SetTrigger("goDown");
-            }
-            else if(knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeDown"))
-            {
-                knifeAnim.SetTrigger("goUp");
-            }
+            knifeAnim.SetTrigger("schving");
         }
     }
 
