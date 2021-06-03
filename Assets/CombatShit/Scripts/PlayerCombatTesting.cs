@@ -414,7 +414,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (health <= 0)
         {
-            //playerAnim.SetTrigger("Death");
+            playerAnim.SetTrigger("Death");
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
             tracker.ClearInventory();
             StartCoroutine("LeaveScene", 1.5f);
