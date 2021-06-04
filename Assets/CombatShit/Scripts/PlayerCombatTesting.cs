@@ -380,8 +380,16 @@ public class PlayerCombatTesting : MonoBehaviour{
         StartCoroutine(FlashColor());
 
         health -= amount;
+        triggerCollider.enabled = false;
+        StartCoroutine(iFrames(.5f));
 
         checkDead();
+    }
+
+    IEnumerator iFrames(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        triggerCollider.enabled = true;
     }
 
     IEnumerator ResetToWalk(float delay)
