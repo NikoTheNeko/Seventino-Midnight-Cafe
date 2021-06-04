@@ -13,20 +13,22 @@ public class ShotgunHandler : MonoBehaviour
     public Action<LineRenderer> turnOff;
     public bool canFire = true;
     public Animator animator;
-    public AudioClip shotSound;
-    private AudioSource audio;
-    public AudioMixerGroup mixer;
+    //public AudioClip shotSound;
+    public AudioSource audio;
+    //public AudioMixerGroup mixer;
 
     public GameObject muzzleEffect;
 
     void Start()
     {
+        /**
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
         audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = shotSound;
         audio.loop = false;
         audio.Stop();
+        **/
     }
     public int shotgunDamage = 4;
     //public int maxShotgunDamage = 5;

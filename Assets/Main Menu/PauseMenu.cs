@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         volume = tracker.volume;
         volumeSlider.value = volume;
-        audio.volume = volume;
+        //audio.volume = volume;
         allAudio.SetFloat("Volume", volume);
         pauseMenuUI.SetActive(false);
     }
@@ -42,6 +42,7 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }        
+        ChangeVolume();
     }
 
     public void Resume()
@@ -91,9 +92,10 @@ public class PauseMenu : MonoBehaviour
         volume = volumeSlider.value;
         tracker.volume = volume;
         if(audio != null){
-            audio.volume = volume;
-            allAudio.SetFloat("Volume", Mathf.Log10(volume) * 20);
+            //audio.volume = volume;
+            //allAudio.SetFloat("Volume", Mathf.Log10(volume) * 20);
         }
+        allAudio.SetFloat("Volume", Mathf.Log10(volume) * 20);
         // audio.Play();
     }
 

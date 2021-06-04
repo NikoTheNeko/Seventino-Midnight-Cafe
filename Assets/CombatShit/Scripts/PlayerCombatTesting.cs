@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PlayerCombatTesting : MonoBehaviour{
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -33,6 +34,8 @@ public class PlayerCombatTesting : MonoBehaviour{
 
     public Animator playerAnim;
 
+    public AudioMixerGroup mixer;
+
 
     public int health = 10;
     public SpriteRenderer[] sprites;
@@ -53,6 +56,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     private void Start()
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = walkSound;
         audio.volume = (0.5f);
@@ -282,8 +286,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            knifeAnim.SetTrigger("goDown");
-            knifeAnim.SetTrigger("goUp");
+            knifeAnim.SetTrigger("schving");
         }
     }
 

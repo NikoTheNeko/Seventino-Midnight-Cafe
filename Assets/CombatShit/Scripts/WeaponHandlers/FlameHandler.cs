@@ -15,21 +15,23 @@ public class FlameHandler : MonoBehaviour
 
     public BoxCollider2D flames;
 
-    public AudioClip flameSound;
-    private AudioSource audio;
-    public AudioMixerGroup mixer;
+    //public AudioClip flameSound;
+    public AudioSource audio;
+    //public AudioMixerGroup mixer;
 
     public int interpolationFramesCount = 30;
     private int elapsedFrames = 0;
 
     void Start()
     {
+        /**
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
         audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = flameSound;
         audio.loop = true;
         audio.Stop();
+        **/
     }
 
     private void Update()

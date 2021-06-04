@@ -11853,9 +11853,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1033623123197677165, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033623123197677165, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2272012977711928912, guid: be3bd8a56f75a2241b04fd464c805b1b,
         type: 3}
       propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210424363631388307, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210424363631388307, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210424363631388307, guid: be3bd8a56f75a2241b04fd464c805b1b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12548,7 +12573,7 @@ PrefabInstance:
     - target: {fileID: 6610962762074860552, guid: 13430b773c779e044b26f419b9c11e79,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 111.13965
+      value: 111.140625
       objectReference: {fileID: 0}
     - target: {fileID: 6610962762074860552, guid: 13430b773c779e044b26f419b9c11e79,
         type: 3}
@@ -12624,6 +12649,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610962763274855503, guid: 13430b773c779e044b26f419b9c11e79,
+        type: 3}
+      propertyPath: m_Value
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6610962763681894555, guid: 13430b773c779e044b26f419b9c11e79,
         type: 3}
@@ -41763,12 +41793,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2560, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

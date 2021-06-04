@@ -20,17 +20,19 @@ public class KnifeHandler : MonoBehaviour
         trail.emitting = false;
     }
 
-    public AudioClip knifeSound;
-    private AudioSource audio;
-    public AudioMixerGroup mixer;
+    //public AudioClip knifeSound;
+    public AudioSource audio;
+    //public AudioMixerGroup mixer;
     void Start()
     {
-        audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        //audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        /**
         audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = knifeSound;
         audio.loop = false;
-        audio.Stop();
+        **/
+        //audio.Stop();
     }
     public void Swing(Vector3 attackPoint, float attackRange, LayerMask enemyLayer)
     {

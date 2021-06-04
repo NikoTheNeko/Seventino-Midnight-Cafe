@@ -587,7 +587,7 @@ MonoBehaviour:
   CustomerSoundClip: {fileID: 8300000, guid: a587b902464010244969e725fd4d0838, type: 3}
   ChefSoundClip: {fileID: 8300000, guid: 4b0b6eea374aa7144b7f1d5a69ad03df, type: 3}
   scrollSpeed: 0.0625
-  activated: 0
+  activated: 1
   successCG: {fileID: 1040368736}
   chefAnchor: {fileID: 2103356431}
   customerAnchor: {fileID: 1839915004}
