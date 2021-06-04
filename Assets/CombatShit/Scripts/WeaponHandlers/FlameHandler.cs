@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using static EnemyBH.DamageEnum;
 
 public class FlameHandler : MonoBehaviour
@@ -16,6 +17,7 @@ public class FlameHandler : MonoBehaviour
 
     public AudioClip flameSound;
     private AudioSource audio;
+    public AudioMixerGroup mixer;
 
     public int interpolationFramesCount = 30;
     private int elapsedFrames = 0;
@@ -23,6 +25,7 @@ public class FlameHandler : MonoBehaviour
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = flameSound;
         audio.loop = true;
@@ -43,6 +46,9 @@ public class FlameHandler : MonoBehaviour
         {
             audio.Stop();
         }
+
+        if(Input.GetMouseButtonDown(0))
+            canTakeDamage = true;
     }
 
     private void OnTriggerStay2D(Collider2D enemy)

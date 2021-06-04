@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using CodeMonkey.Utils;
 using static EnemyBH.DamageEnum;
 public class ShotgunHandler : MonoBehaviour
@@ -14,12 +15,14 @@ public class ShotgunHandler : MonoBehaviour
     public Animator animator;
     public AudioClip shotSound;
     private AudioSource audio;
+    public AudioMixerGroup mixer;
 
     public GameObject muzzleEffect;
 
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = shotSound;
         audio.loop = false;
@@ -34,7 +37,7 @@ public class ShotgunHandler : MonoBehaviour
             animator.SetTrigger("Shoot");
             Instantiate(muzzleEffect, transform.position, Quaternion.identity);
             audio.Play();
-            canFire = false;
+            //canFire = false;
             foreach (LineRenderer tracer in tracers)
             {
                 float angle = UnityEngine.Random.Range(-5f, 5f);

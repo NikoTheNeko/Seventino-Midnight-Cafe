@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using static EnemyBH.DamageEnum;
 
 public class KnifeHandler : MonoBehaviour
@@ -16,9 +17,11 @@ public class KnifeHandler : MonoBehaviour
 
     public AudioClip knifeSound;
     private AudioSource audio;
+    public AudioMixerGroup mixer;
     void Start()
     {
         audio = gameObject.AddComponent<AudioSource>(); //adds an AudioSource to the game object this script is attached to
+        audio.outputAudioMixerGroup = mixer;
         audio.playOnAwake = false;
         audio.clip = knifeSound;
         audio.loop = false;
