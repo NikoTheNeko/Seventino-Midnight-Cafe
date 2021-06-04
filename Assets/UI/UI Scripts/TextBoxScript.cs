@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,7 @@ public class TextBoxScript : MonoBehaviour
     public List<CharacterData> characterInformation = new List<CharacterData>(); //note to self put emotions in characterdata
 
     public AudioSource audio;
+    public AudioMixerGroup mixer;
     public AudioClip CustomerSoundClip;
     public AudioClip ChefSoundClip;
 
@@ -52,6 +54,7 @@ public class TextBoxScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        audio.outputAudioMixerGroup = mixer;
         textbox.text = "";
         // tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         //deactivate all of the visual elements

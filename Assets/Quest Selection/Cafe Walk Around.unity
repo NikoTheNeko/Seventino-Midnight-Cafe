@@ -5716,6 +5716,12 @@ PrefabInstance:
       propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].emotion
       value: angry
       objectReference: {fileID: 0}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 3b013a69c9ba68c458686d168b08c1c7,
+        type: 2}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -7293,6 +7299,7 @@ MonoBehaviour:
     - emotion: neutral
       image: {fileID: 21300000, guid: 43ad8ffa671b1774eae01eb3daa32556, type: 3}
   audio: {fileID: 51598906}
+  mixer: {fileID: 0}
   CustomerSoundClip: {fileID: 0}
   ChefSoundClip: {fileID: 0}
   scrollSpeed: 0.0625
@@ -7556,6 +7563,7 @@ MonoBehaviour:
     - emotion: neutral
       image: {fileID: 21300000, guid: 43ad8ffa671b1774eae01eb3daa32556, type: 3}
   audio: {fileID: 51598906}
+  mixer: {fileID: 0}
   CustomerSoundClip: {fileID: 0}
   ChefSoundClip: {fileID: 0}
   scrollSpeed: 0.0625
@@ -8354,6 +8362,7 @@ MonoBehaviour:
     - emotion: neutral
       image: {fileID: 21300000, guid: 43ad8ffa671b1774eae01eb3daa32556, type: 3}
   audio: {fileID: 51598906}
+  mixer: {fileID: 0}
   CustomerSoundClip: {fileID: 0}
   ChefSoundClip: {fileID: 0}
   scrollSpeed: 0.0625
@@ -9779,6 +9788,12 @@ PrefabInstance:
       propertyPath: characterInformation.Array.data[0].emotions.Array.data[4].emotion
       value: surprised
       objectReference: {fileID: 0}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 3b013a69c9ba68c458686d168b08c1c7,
+        type: 2}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -11215,6 +11230,12 @@ PrefabInstance:
       propertyPath: goNext
       value: 
       objectReference: {fileID: 232408850}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 3b013a69c9ba68c458686d168b08c1c7,
+        type: 2}
     - target: {fileID: 8665021985403961539, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Offset.x
@@ -12474,6 +12495,12 @@ PrefabInstance:
       propertyPath: goNext
       value: 
       objectReference: {fileID: 232408850}
+    - target: {fileID: 8665021985403961537, guid: a8d696b0b8d81b94e8c545c285d124b3,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24300002, guid: 3b013a69c9ba68c458686d168b08c1c7,
+        type: 2}
     - target: {fileID: 8665021985403961538, guid: a8d696b0b8d81b94e8c545c285d124b3,
         type: 3}
       propertyPath: m_Enabled
