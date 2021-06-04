@@ -282,7 +282,8 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            knifeAnim.SetTrigger("schving");
+            knifeAnim.SetTrigger("goDown");
+            knifeAnim.SetTrigger("goUp");
         }
     }
 

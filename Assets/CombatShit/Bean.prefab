@@ -1059,7 +1059,8 @@ MonoBehaviour:
   locked: 0
   gunImpactEffect: {fileID: 615240480230451758, guid: 49fa63f183fa80d449fd18425a1234a4,
     type: 3}
-  healthDrop: {fileID: 0}
+  healthDrop: {fileID: 8120919460476588161, guid: 26a69124754a6b64f8347006da633472,
+    type: 3}
 --- !u!114 &7677941295430313341
 MonoBehaviour:
   m_ObjectHideFlags: 0
