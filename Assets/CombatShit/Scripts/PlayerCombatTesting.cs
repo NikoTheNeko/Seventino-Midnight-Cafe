@@ -282,14 +282,7 @@ public class PlayerCombatTesting : MonoBehaviour{
             Vector3 shootPoint = aimGunEndPoint.position;
             knifey.Swing(shootPoint, 0.25f, enemyLayer);
             aimGunEndPoint = gunAnchor.Find("Knife");
-            if (knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeUp"))
-            {
-                knifeAnim.SetTrigger("goDown");
-            }
-            else if(knifeAnim.GetCurrentAnimatorStateInfo(0).IsName("knifeDown"))
-            {
-                knifeAnim.SetTrigger("goUp");
-            }
+            knifeAnim.SetTrigger("schving");
         }
     }
 
@@ -421,7 +414,7 @@ public class PlayerCombatTesting : MonoBehaviour{
     {
         if (health <= 0)
         {
-            //playerAnim.SetTrigger("Death");
+            playerAnim.SetTrigger("Death");
             InventoryTracker tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
             tracker.ClearInventory();
             StartCoroutine("LeaveScene", 1.5f);
