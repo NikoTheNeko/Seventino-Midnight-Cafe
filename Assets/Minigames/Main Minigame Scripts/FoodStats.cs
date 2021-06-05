@@ -150,7 +150,7 @@ public class FoodStats : MonoBehaviour{
     #endregion
 
     private void Update() {
-        if(tracker.inventory.Count == 1)
+        if(tracker.inventory.Count == 0)
             RestartButton.interactable = false;
         //tempDisplay();
         UpdateProgressBars();
