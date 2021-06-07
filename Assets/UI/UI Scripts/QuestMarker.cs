@@ -8,6 +8,7 @@ public class QuestMarker : MonoBehaviour
     public GameObject marker;
     public TextBoxScript textbox;
     public GameObject trigger;
+    public GameObject arrow;
     public GameObject successCG;
     public QuestMarkerController controller;
     bool entered = false;
@@ -28,6 +29,7 @@ public class QuestMarker : MonoBehaviour
         successCG.SetActive(false);
         marker.SetActive(false);
         trigger.SetActive(true);
+        arrow.SetActive(false);
         tracker = GameObject.FindGameObjectWithTag("InventoryTracker").GetComponent<InventoryTracker>();
         talkTo.SetActive(false);
         
@@ -39,8 +41,9 @@ public class QuestMarker : MonoBehaviour
         curQuest = tracker.dialogues[tracker.dialogueProg];
 
         //open door when quest has been picked up
-        if(pickedUp && !textbox.activated){
+        if((pickedUp && !textbox.activated) || tracker.dialogueProg >= 4){
             trigger.SetActive(false);
+            arrow.SetActive(true);
             if(!playedSound){
                 audio.PlayOneShot(doorbell);
                 playedSound = true;
@@ -59,7 +62,7 @@ public class QuestMarker : MonoBehaviour
             if(!textbox.activated){
                 //if NPC is the target of current quest
                 if(!pickedUp && curQuest.subject == subject){
-                    pickedUp = true;
+                    
                     //if player has a dish, choose an ending
                     if(tracker.hasFood){
                         tracker.hasFood = false;
@@ -72,6 +75,7 @@ public class QuestMarker : MonoBehaviour
                         }
                     }
                     else{
+                        pickedUp = true;
                         //give player quest
                         textbox.SetDialogue(curQuest.dialogueSegments);
                     }
@@ -107,7 +111,7 @@ public class QuestMarker : MonoBehaviour
         textbox.SetDialogue(curQuest.bestEnding);
         // textbox.SpeedUp();
         controller.AdvanceProgression();
-        // audio.PlayOneShot(doorbell);
+        audio.PlayOneShot(doorbell);
     }
 
 
