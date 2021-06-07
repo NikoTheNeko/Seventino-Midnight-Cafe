@@ -72,6 +72,7 @@ public class QuestMarker : MonoBehaviour
                         }
                         else{
                             textbox.SetDialogue(curQuest.goodEnding);
+                            pickedUp = true;
                         }
                     }
                     else{

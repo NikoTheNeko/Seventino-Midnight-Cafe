@@ -74,7 +74,6 @@ public class TextBoxScript : MonoBehaviour
             //runs through given list of speaker images, darkens all non current speakers
             foreach(CharacterData data in characterInformation){
                 if(currentSpeaker.Contains(data.name)){
-                    Debug.Log(emotion);
                     Sprite temp = data.getEmotion(emotion);
                     LightenImage(data.image, temp);
                 }
